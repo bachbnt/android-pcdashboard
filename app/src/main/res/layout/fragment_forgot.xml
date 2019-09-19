@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
             style="@style/LoginInput"
-            android:hint="@string/username" />
+            android:hint="@string/account" />
 
 
         <EditText
