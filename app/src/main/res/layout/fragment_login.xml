@@ -25,7 +25,7 @@
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/font_size_18sp" />
+        android:textSize="@dimen/font_size_20sp" />
 
     <ImageView
         android:id="@+id/iv_logo_login"
@@ -74,5 +74,6 @@
         android:layout_below="@id/btn_login_login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/space_20dp"
-        android:text="@string/forgot_password" />
+        android:text="@string/forgot_password"
+        android:textSize="@dimen/font_size_16sp"/>
 </RelativeLayout>
