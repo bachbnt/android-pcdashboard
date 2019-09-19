@@ -1,8 +1,10 @@
-package com.example.pcdashboard;
+package com.example.pcdashboard.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.pcdashboard.R;
 
 public class MainActivity extends AppCompatActivity {
 
