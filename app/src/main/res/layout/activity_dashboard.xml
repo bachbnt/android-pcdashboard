@@ -7,12 +7,20 @@
     android:orientation="vertical"
     tools:context=".Activity.DashboardActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_login"
+        android:src="@drawable/logo" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorOrange"
-        app:tabMode="fixed" />
+        app:tabTextColor="@color/colorOrange"
+        app:tabSelectedTextColor="@color/colorSkyBlue"
+        app:tabIndicatorColor="@color/colorSkyBlue"
+        app:tabMode="scrollable" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_dashboard"
