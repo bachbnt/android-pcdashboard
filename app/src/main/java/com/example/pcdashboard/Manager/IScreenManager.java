@@ -1,6 +1,8 @@
 package com.example.pcdashboard.Manager;
 
+import androidx.fragment.app.Fragment;
+
 public interface IScreenManager {
-    void openLoginScreen(int idScreen);
-    void openDashboardScreen(int idScreen);
+    void openLoginScreen(int screenId);
+    Fragment openDashboardScreen(int screenId);
 }

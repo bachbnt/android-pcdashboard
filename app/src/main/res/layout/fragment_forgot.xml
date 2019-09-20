@@ -48,8 +48,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
             android:hint="@string/account" />
-
-
+        
         <EditText
             android:id="@+id/et_email_forgot"
             style="@style/edittext_login"

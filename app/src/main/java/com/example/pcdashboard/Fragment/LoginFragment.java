@@ -54,6 +54,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
         switch (v.getId()) {
             case R.id.btn_login_login:
                 Toast.makeText(getContext(), "Login", Toast.LENGTH_SHORT).show();
+                screenManager.openLoginScreen(0);
                 break;
             case R.id.tv_forgot_login:
                 Toast.makeText(getContext(), "Forgot", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,7 @@
 package com.example.pcdashboard.Manager;
 
+import androidx.fragment.app.Fragment;
+
 public class ScreenManager {
     private static ScreenManager screenManager;
     private IScreenManager iScreenManager;
@@ -12,13 +14,16 @@ public class ScreenManager {
             screenManager = new ScreenManager();
         return screenManager;
     }
-    public void setScreenListener(IScreenManager iScreenManager){
-        this.iScreenManager=iScreenManager;
+
+    public void setScreenListener(IScreenManager iScreenManager) {
+        this.iScreenManager = iScreenManager;
     }
-    public void openLoginScreen(int idScreen){
-        iScreenManager.openLoginScreen(idScreen);
+
+    public void openLoginScreen(int screenId) {
+        iScreenManager.openLoginScreen(screenId);
     }
-    public void openDashboardScreen(int idScreen){
-        iScreenManager.openDashboardScreen(idScreen);
+
+    public Fragment openDashboardScreen(int screenId) {
+        return iScreenManager.openDashboardScreen(screenId);
     }
 }
