@@ -22,6 +22,11 @@
         app:tabIndicatorColor="@color/colorSkyBlue"
         app:tabMode="scrollable" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_dashboard"
         android:layout_width="match_parent"
