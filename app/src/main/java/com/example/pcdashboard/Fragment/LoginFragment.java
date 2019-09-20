@@ -8,14 +8,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.View.ILoginView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
-
+public class LoginFragment extends Fragment implements ILoginView,View.OnClickListener {
+private EditText etAccount;
+private EditText etPassword;
+private Button btnLogin;
+private TextView tvForgot;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -26,7 +34,29 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View view= inflater.inflate(R.layout.fragment_login, container, false);
+        initialize(view);
+        return view;
     }
 
+    private void initialize(View view){
+        etAccount=view.findViewById(R.id.et_account_login);
+        etPassword=view.findViewById(R.id.et_password_login);
+        btnLogin=view.findViewById(R.id.btn_login_login);
+        tvForgot=view.findViewById(R.id.tv_forgot_login);
+        btnLogin.setOnClickListener(this);
+        tvForgot.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_login_login:
+                Toast.makeText(getContext(), "Login", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tv_forgot_login:
+                Toast.makeText(getContext(), "Forgot", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }
