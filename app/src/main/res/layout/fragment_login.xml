@@ -45,7 +45,7 @@
 
         <EditText
             android:id="@+id/et_account_login"
-            style="@style/LoginInput"
+            style="@style/edittext_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
@@ -54,13 +54,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_5dp"
             app:hintEnabled="false"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/colorOrange">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/LoginInput"
                 android:id="@+id/et_password_login"
+                style="@style/edittext_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_lock_sky_blue_24dp"

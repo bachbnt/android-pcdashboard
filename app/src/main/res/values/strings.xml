@@ -10,4 +10,5 @@
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="email">Email</string>
     <string name="get_password">Lấy lại Mật khẩu</string>
+    <string name="back">Trở về</string>
 </resources>
