@@ -16,9 +16,9 @@ import com.example.pcdashboard.R;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
-    private final int DASHBOARD_ID = 0;
-    private final int CONVERSATION_ID = 3;
-    private final int ACCOUNT_ID = 4;
+    private final int DASHBOARD_ID = -1;
+    private final int CONVERSATION_ID = 0;
+    private final int ACCOUNT_ID = 1;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
 
@@ -31,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     private void initialize() {
         screenManager=ScreenManager.getInstance();
+        screenManager.setScreenListener(this);
         viewPager=findViewById(R.id.view_pager_dashboard);
         pagerAdapter=new com.example.pcdashboard.Adapter.PagerAdapter(getSupportFragmentManager(),screenManager);
         viewPager.setAdapter(pagerAdapter);
@@ -43,13 +44,15 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     @Override
     public Fragment openDashboardScreen(int screenId) {
+        Fragment fragment=null;
         switch (screenId) {
             case CONVERSATION_ID:
-                return new ConversationFragment();
+                fragment= new ConversationFragment();
+                break;
             case ACCOUNT_ID:
-                return new AccountFragment();
-            default:
-                return new DashboardFragment();
+                fragment= new AccountFragment();
+                break;
         }
+        return fragment;
     }
 }
