@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pcdashboard.Manager.IScreenManager;
+import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.ILoginView;
 
@@ -24,6 +26,7 @@ private EditText etAccount;
 private EditText etPassword;
 private Button btnLogin;
 private TextView tvForgot;
+private ScreenManager screenManager;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -40,6 +43,7 @@ private TextView tvForgot;
     }
 
     private void initialize(View view){
+        screenManager=ScreenManager.getInstance();
         etAccount=view.findViewById(R.id.et_account_login);
         etPassword=view.findViewById(R.id.et_password_login);
         btnLogin=view.findViewById(R.id.btn_login_login);
@@ -56,7 +60,13 @@ private TextView tvForgot;
                 break;
             case R.id.tv_forgot_login:
                 Toast.makeText(getContext(), "Forgot", Toast.LENGTH_SHORT).show();
+                screenManager.openLoginScreen(2);
                 break;
         }
+    }
+
+    @Override
+    public void onLogin() {
+
     }
 }
