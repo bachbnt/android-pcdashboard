@@ -34,7 +34,7 @@
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_event_note_orange_32dp"
+            android:drawableLeft="@drawable/ic_schedule_orange_32dp"
             android:text="@string/test_schedule"
             android:textSize="@dimen/font_size_16sp" />
 
@@ -42,7 +42,7 @@
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_event_note_orange_32dp"
+            android:drawableLeft="@drawable/ic_content_paste_orange_32dp"
             android:text="@string/test_score"
             android:textSize="@dimen/font_size_16sp" />
     </LinearLayout>
@@ -69,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_info_orange_24dp"
+            android:paddingLeft="@dimen/space_10dp"
             android:text="@string/guide"
             android:textSize="@dimen/font_size_16sp" />
 
@@ -116,6 +117,13 @@
 
     </LinearLayout>
 
-
+    <TextView
+        style="@style/text_view_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_log_out_orange_32dp"
+        android:text="@string/logout"
+        android:textSize="@dimen/space_20dp"
+        android:textStyle="bold" />
 
 </LinearLayout>
