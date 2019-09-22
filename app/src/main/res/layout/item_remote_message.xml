@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_10dp"
+        android:layout_marginRight="100dp"
+        android:layout_toRightOf="@id/cv_avatar_remote_msg"
+        android:background="@drawable/bg_remote_message"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xin chào"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_16sp" />
+
+        <TextView
+            android:id="@+id/tv_time_remote_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="10:30"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/font_size_12sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_avatar_remote_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_10dp"
+        app:cardCornerRadius="16dp">
+
+        <ImageView
+            android:id="@+id/iv_avatar_remote_msg"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/black"
+            android:src="@drawable/logo" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -24,7 +24,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
 
     public View initTab(int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_tab_layout, null);
         TextView tvTitle = view.findViewById(R.id.tv_title_tablayout);
         ImageView ivIcon = view.findViewById(R.id.iv_icon_tablayout);
         tvTitle.setText(title[position]);
