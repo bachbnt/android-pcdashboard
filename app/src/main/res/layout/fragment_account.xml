@@ -3,37 +3,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.AccountFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_10dp"
+            app:cardCornerRadius="@dimen/space_20dp"
+            app:cardElevation="@dimen/space_5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/space_10dp"
+                android:paddingRight="@dimen/space_20dp"
+                android:paddingLeft="@dimen/space_20dp"
+                android:paddingBottom="@dimen/space_10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_avatar_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="@dimen/space_40dp">
+
+                    <ImageView
+                        android:id="@+id/iv_avatar_account"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/logo"
+                        android:background="@android:color/black"/>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/space_10dp"
+                    android:layout_toRightOf="@id/cv_avatar_account"
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/tv_username_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PC Dashboard Admin cái gì đó... tên quá dài"
+                        android:textSize="@dimen/font_size_20sp"
+                        android:textColor="@color/colorOrange"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_account_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_10dp"
+                        android:text="1613000"
+                        android:textSize="@dimen/font_size_16sp"
+                        android:textColor="@color/colorSkyBlue"
+                        android:drawableLeft="@drawable/ic_person_orange_24dp"/>
+                    </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
         <TextView
+            android:id="@+id/tv_study_account"
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_import_contacts_orange_32dp"
-            android:drawableRight="@drawable/ic_keyboard_arrow_down_orange_32dp"
+            android:drawableLeft="@drawable/ic_study_orange_32dp"
+            android:drawableRight="@drawable/ic_arrow_down_orange_32dp"
             android:text="@string/study"
             android:textSize="@dimen/space_20dp"
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/ll_study_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_timeline_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_event_note_orange_32dp"
+                android:drawableLeft="@drawable/ic_time_line_orange_32dp"
                 android:text="@string/time_line"
                 android:textSize="@dimen/font_size_16sp" />
 
             <TextView
+                android:id="@+id/tv_schedule_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,32 +105,35 @@
                 android:textSize="@dimen/font_size_16sp" />
 
             <TextView
+                android:id="@+id/tv_score_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_content_paste_orange_32dp"
+                android:drawableLeft="@drawable/ic_score_orange_32dp"
                 android:text="@string/test_score"
                 android:textSize="@dimen/font_size_16sp" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_help_account"
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_help_orange_32dp"
-            android:drawableRight="@drawable/ic_keyboard_arrow_down_orange_32dp"
+            android:drawableRight="@drawable/ic_arrow_down_orange_32dp"
             android:text="@string/help"
             android:textSize="@dimen/space_20dp"
             android:textStyle="bold" />
 
-
         <LinearLayout
+            android:id="@+id/ll_help_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_guide_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,6 +143,7 @@
                 android:textSize="@dimen/font_size_16sp" />
 
             <TextView
+                android:id="@+id/tv_feedback_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,22 +154,25 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_setting_account"
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_settings_orange_32dp"
-            android:drawableRight="@drawable/ic_keyboard_arrow_down_orange_32dp"
+            android:drawableRight="@drawable/ic_arrow_down_orange_32dp"
             android:text="@string/setting"
             android:textSize="@dimen/space_20dp"
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/ll_setting_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_info_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +181,7 @@
                 android:textSize="@dimen/font_size_16sp" />
 
             <TextView
+                android:id="@+id/tv_password_account"
                 style="@style/text_view_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,6 +192,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_logout_account"
             style="@style/text_view_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

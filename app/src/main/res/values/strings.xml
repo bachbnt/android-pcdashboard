@@ -19,7 +19,7 @@
     <string name="test_schedule">Lịch thi</string>
     <string name="update_information">Cập nhật Thông tin</string>
     <string name="change_pasword">Thay đổi Mật khẩu</string>
-    <string name="feedback">Gửi hỗ trợ</string>
+    <string name="feedback">Phản hồi</string>
     <string name="guide">Hướng dẫn</string>
     <string name="logout">Đăng xuất</string>
 </resources>
