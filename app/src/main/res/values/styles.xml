@@ -17,7 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="edittext_login">
+    <style name="edit_text_login">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/space_10dp</item>
@@ -27,5 +27,18 @@
         <item name="android:background">@drawable/bg_edittext_login</item>
         <item name="android:drawablePadding">@dimen/space_10dp</item>
         <item name="android:padding">@dimen/space_15dp</item>
+        <item name="android:textColor">@color/colorOrange</item>
+        <item name="android:textColorHint">@color/colorSkyBlue</item>
+    </style>
+
+    <style name="text_view_account">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/space_5dp</item>
+        <item name="android:layout_marginRight">@dimen/space_5dp</item>
+        <item name="android:drawablePadding">@dimen/space_20dp</item>
+        <item name="android:padding">@dimen/space_10dp</item>
+        <item name="android:textColor">@color/colorSkyBlue</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

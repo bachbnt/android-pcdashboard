@@ -43,19 +43,12 @@
 
         <EditText
             android:id="@+id/et_account_forgot"
-            style="@style/edittext_login"
+            style="@style/edit_text_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
+            android:drawableLeft="@drawable/ic_person_orange_24dp"
             android:hint="@string/account" />
-        
-        <EditText
-            android:id="@+id/et_email_forgot"
-            style="@style/edittext_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_email_sky_blue_24dp"
-            android:hint="@string/email" />
+
     </LinearLayout>
 
     <TextView

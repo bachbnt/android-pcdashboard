@@ -8,19 +8,18 @@
     tools:context=".Activity.DashboardActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/bg_login"
+        android:layout_width="@dimen/space_40dp"
+        android:layout_height="@dimen/space_50dp"
+        android:layout_marginLeft="@dimen/space_20dp"
         android:src="@drawable/logo" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@color/colorOrange"
-        app:tabSelectedTextColor="@color/colorSkyBlue"
-        app:tabIndicatorColor="@color/colorSkyBlue"
-        app:tabMode="scrollable" />
+        app:tabSelectedTextColor="@color/colorOrange"
+        app:tabIndicatorColor="@color/colorOrange"
+        app:tabMode="fixed" />
 
     <View
         android:layout_width="match_parent"

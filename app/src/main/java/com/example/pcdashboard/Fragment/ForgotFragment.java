@@ -21,7 +21,6 @@ import com.example.pcdashboard.R;
 public class ForgotFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private EditText etAccount;
-    private EditText etEmail;
     private Button btnGetPassword;
     private TextView tvBack;
 
@@ -42,7 +41,6 @@ public class ForgotFragment extends Fragment implements View.OnClickListener {
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
         etAccount = view.findViewById(R.id.et_account_forgot);
-        etEmail = view.findViewById(R.id.et_email_forgot);
         btnGetPassword = view.findViewById(R.id.btn_get_forgot);
         tvBack = view.findViewById(R.id.tv_back_forgot);
         btnGetPassword.setOnClickListener(this);

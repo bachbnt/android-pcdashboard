@@ -11,4 +11,14 @@
     <string name="email">Email</string>
     <string name="get_password">Lấy lại Mật khẩu</string>
     <string name="back">Trở về</string>
+    <string name="study">Học tập</string>
+    <string name="setting">Cài đặt</string>
+    <string name="help">Hỗ trợ</string>
+    <string name="time_line">Thời khóa biểu</string>
+    <string name="test_score">Điểm thi</string>
+    <string name="test_schedule">Lịch thi</string>
+    <string name="update_information">Cập nhật Thông tin</string>
+    <string name="change_pasword">Thay đổi Mật khẩu</string>
+    <string name="feedback">Gửi hỗ trợ</string>
+    <string name="guide">Hướng dẫn</string>
 </resources>

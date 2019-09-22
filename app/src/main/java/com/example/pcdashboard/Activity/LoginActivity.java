@@ -8,14 +8,9 @@ import com.example.pcdashboard.Fragment.LoginFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
-import android.view.View;
 
 public class LoginActivity extends AppCompatActivity implements IScreenManager {
     private final int DASHBOARD_ID=0;
@@ -31,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
 
     private void initialize(){
         screenManager=ScreenManager.getInstance();
-        screenManager.setScreenListener(this);
+        screenManager.setScreenManager(this);
         screenManager.openLoginScreen(1);
     }
     @Override

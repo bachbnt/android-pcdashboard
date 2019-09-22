@@ -45,10 +45,10 @@
 
         <EditText
             android:id="@+id/et_account_login"
-            style="@style/edittext_login"
+            style="@style/edit_text_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
+            android:drawableLeft="@drawable/ic_person_orange_24dp"
             android:hint="@string/account" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -61,10 +61,10 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password_login"
-                style="@style/edittext_login"
+                style="@style/edit_text_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_lock_sky_blue_24dp"
+                android:drawableStart="@drawable/ic_lock_orange_24dp"
                 android:hint="@string/password"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
