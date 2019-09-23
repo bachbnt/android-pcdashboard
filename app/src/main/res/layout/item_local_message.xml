@@ -19,7 +19,7 @@
             android:id="@+id/tv_content_local_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xin chào"
+            android:text="@string/content_test"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_size_16sp" />
 
@@ -30,7 +30,7 @@
             android:layout_below="@id/tv_content_local_msg"
             android:layout_alignLeft="@id/tv_content_local_msg"
             android:layout_marginTop="@dimen/space_5dp"
-            android:text="10:30"
+            android:text="@string/time_test"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/font_size_12sp" />
     </LinearLayout>
