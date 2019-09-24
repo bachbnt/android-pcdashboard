@@ -28,7 +28,8 @@ public interface AccountService {
     @FormUrlEncoded
     @PUT("user/update-info/{id}")
     Call<BooleanResponse> updateInfo(@Path("id") String id, @Field("email") String email, @Field("phone") String phone);
+
     //User
-    @GET("user/{classId}/{localId}")
-    Call<ArrayList<User>> getAllUsers(@Path("classId") String classId, @Path("localId") String localId);
+    @GET("user/{localId}")
+    Call<ArrayList<User>> getAllUsers(@Path("localId") String localId);
 }
