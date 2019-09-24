@@ -49,12 +49,4 @@ public interface PostService {
     @GET("post/department")
     Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
 
-    //User
-    @GET("user/{classId}/{localId}")
-    Call<ArrayList<User>> getAllUsers(@Path("classId") String classId, @Path("localId") String localId);
-
-    //Chat
-    @GET("chat/{classId}")
-    Call<ArrayList<ChatMessage>> getChatMessages(@Path("classId") String classId, @Field("quantity") int quantity);
-
 }

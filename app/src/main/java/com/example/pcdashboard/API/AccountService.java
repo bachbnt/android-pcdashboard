@@ -2,6 +2,9 @@ package com.example.pcdashboard.API;
 
 import com.example.pcdashboard.Model.BooleanResponse;
 import com.example.pcdashboard.Model.Token;
+import com.example.pcdashboard.Model.User;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -25,5 +28,7 @@ public interface AccountService {
     @FormUrlEncoded
     @PUT("user/update-info/{id}")
     Call<BooleanResponse> updateInfo(@Path("id") String id, @Field("email") String email, @Field("phone") String phone);
-
+    //User
+    @GET("user/{classId}/{localId}")
+    Call<ArrayList<User>> getAllUsers(@Path("classId") String classId, @Path("localId") String localId);
 }
