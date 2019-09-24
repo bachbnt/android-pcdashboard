@@ -2,19 +2,21 @@ package com.example.pcdashboard.Model;
 
 public class ClassPost {
     private String id;
-    private String avatar;
-    private String name;
     private String time;
     private String content;
     private String image;
+    private String userId;
+    private String userName;
+    private String userAvatar;
 
-    public ClassPost(String id, String avatar, String name, String time, String content, String image) {
+    public ClassPost(String id, String time, String content, String image, String userId, String userName, String userAvatar) {
         this.id = id;
-        this.avatar = avatar;
-        this.name = name;
         this.time = time;
         this.content = content;
         this.image = image;
+        this.userId = userId;
+        this.userName = userName;
+        this.userAvatar = userAvatar;
     }
 
     public String getId() {
@@ -23,22 +25,6 @@ public class ClassPost {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTime() {
@@ -63,5 +49,29 @@ public class ClassPost {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
     }
 }
