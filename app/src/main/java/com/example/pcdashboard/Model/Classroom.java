@@ -7,14 +7,16 @@ public class Classroom {
     private String name;
     private String time;
     private String content;
+    private String image;
 
-    public Classroom(String id, String classId, String avatar, String name, String time, String content) {
+    public Classroom(String id, String classId, String avatar, String name, String time, String content, String image) {
         this.id = id;
         this.classId = classId;
         this.avatar = avatar;
         this.name = name;
         this.time = time;
         this.content = content;
+        this.image = image;
     }
 
     public String getId() {
@@ -63,5 +65,13 @@ public class Classroom {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -1,4 +1,67 @@
 package com.example.pcdashboard.Adapter;
 
-public class DepartmentAdapter {
+import android.content.Context;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Model.Department;
+import com.example.pcdashboard.R;
+
+import java.util.ArrayList;
+
+public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.ViewHolder> {
+    private Context context;
+    private ArrayList<Department> departments;
+    private OnItemtClickListener listener;
+
+    public DepartmentAdapter(Context context, ArrayList<Department> departments, OnItemtClickListener listener) {
+        this.context = context;
+        this.departments = departments;
+        this.listener = listener;
+    }
+
+    interface OnItemtClickListener{
+        void onClick(Department department);
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_department_post,parent,false);
+        ViewHolder viewHolder=new ViewHolder(view);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Department department=departments.get(position);
+        holder.tvTitle.setText(department.getTitle());
+        holder.tvTime.setText(department.getTime());
+        holder.tvContent.setText(department.getContent());
+        Glide.with(context).load(Uri.parse(department.getImage())).into(holder.ivImage);
+    }
+
+    @Override
+    public int getItemCount() {
+        return departments.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder{
+        TextView tvTitle,tvTime,tvContent;
+        ImageView ivImage;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitle=itemView.findViewById(R.id.tv_title_department);
+            tvTime=itemView.findViewById(R.id.tv_time_department);
+            tvContent=itemView.findViewById(R.id.tv_content_department);
+            ivImage=itemView.findViewById(R.id.iv_image_department);
+        }
+    }
 }
