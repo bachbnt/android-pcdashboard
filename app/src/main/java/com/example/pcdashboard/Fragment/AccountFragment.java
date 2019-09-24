@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.Presenter.IAccountPresenter;
 import com.example.pcdashboard.R;
@@ -19,7 +21,8 @@ import com.example.pcdashboard.View.IAccountView;
  */
 public class AccountFragment extends Fragment implements IAccountView {
 private IAccountPresenter iAccountPresenter;
-
+private TextView tvLogOut;
+ScreenManager screenManager;
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -30,6 +33,14 @@ private IAccountPresenter iAccountPresenter;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_account, container, false);
+        tvLogOut = view.findViewById(R.id.tv_logout_account);
+        screenManager = ScreenManager.getInstance();
+        tvLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screenManager.openDashboardScreen(4);
+            }
+        });
         IAccountPresenter iAccountPresenter;
         iAccountPresenter=new AccountPresenter(this);
         setPresenter(iAccountPresenter);
