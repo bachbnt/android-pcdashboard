@@ -1,6 +1,6 @@
 package com.example.pcdashboard.Model;
 
-public class Classroom {
+public class ClassPost {
     private String id;
     private String classId;
     private String avatar;
@@ -9,7 +9,7 @@ public class Classroom {
     private String content;
     private String image;
 
-    public Classroom(String id, String classId, String avatar, String name, String time, String content, String image) {
+    public ClassPost(String id, String classId, String avatar, String name, String time, String content, String image) {
         this.id = id;
         this.classId = classId;
         this.avatar = avatar;

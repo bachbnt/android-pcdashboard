@@ -13,24 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.pcdashboard.Model.Classroom;
+import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.R;
 
 import java.util.ArrayList;
 
 public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<Classroom> classrooms;
+    private ArrayList<ClassPost> classPosts;
     private OnItemClickListener listener;
 
-    public ClassroomAdapter(Context context, ArrayList<Classroom> classrooms, OnItemClickListener listener) {
+    public ClassroomAdapter(Context context, ArrayList<ClassPost> classPosts, OnItemClickListener listener) {
         this.context = context;
-        this.classrooms = classrooms;
+        this.classPosts = classPosts;
         this.listener = listener;
     }
 
     interface OnItemClickListener {
-        void onClick(Classroom classroom);
+        void onClick(ClassPost classPost);
     }
 
     @NonNull
@@ -43,17 +43,17 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Classroom classroom=classrooms.get(position);
-        holder.tvName.setText(classroom.getName());
-        holder.tvTime.setText(classroom.getTime());
-        holder.tvContent.setText(classroom.getContent());
-        Glide.with(context).load(Uri.parse(classroom.getAvatar())).into(holder.ivAvatar);
-        Glide.with(context).load(Uri.parse(classroom.getImage())).into(holder.ivImage);
+        ClassPost classPost = classPosts.get(position);
+        holder.tvName.setText(classPost.getName());
+        holder.tvTime.setText(classPost.getTime());
+        holder.tvContent.setText(classPost.getContent());
+        Glide.with(context).load(Uri.parse(classPost.getAvatar())).into(holder.ivAvatar);
+        Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
     }
 
     @Override
     public int getItemCount() {
-        return classrooms.size();
+        return classPosts.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

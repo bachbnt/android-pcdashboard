@@ -12,24 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.pcdashboard.Model.Department;
+import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.R;
 
 import java.util.ArrayList;
 
 public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<Department> departments;
+    private ArrayList<DepartmentPost> departmentPosts;
     private OnItemtClickListener listener;
 
-    public DepartmentAdapter(Context context, ArrayList<Department> departments, OnItemtClickListener listener) {
+    public DepartmentAdapter(Context context, ArrayList<DepartmentPost> departmentPosts, OnItemtClickListener listener) {
         this.context = context;
-        this.departments = departments;
+        this.departmentPosts = departmentPosts;
         this.listener = listener;
     }
 
     interface OnItemtClickListener{
-        void onClick(Department department);
+        void onClick(DepartmentPost departmentPost);
     }
     @NonNull
     @Override
@@ -41,16 +41,16 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Department department=departments.get(position);
-        holder.tvTitle.setText(department.getTitle());
-        holder.tvTime.setText(department.getTime());
-        holder.tvContent.setText(department.getContent());
-        Glide.with(context).load(Uri.parse(department.getImage())).into(holder.ivImage);
+        DepartmentPost departmentPost = departmentPosts.get(position);
+        holder.tvTitle.setText(departmentPost.getTitle());
+        holder.tvTime.setText(departmentPost.getTime());
+        holder.tvContent.setText(departmentPost.getContent());
+        Glide.with(context).load(Uri.parse(departmentPost.getImage())).into(holder.ivImage);
     }
 
     @Override
     public int getItemCount() {
-        return departments.size();
+        return departmentPosts.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

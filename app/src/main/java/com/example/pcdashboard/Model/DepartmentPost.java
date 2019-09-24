@@ -1,13 +1,13 @@
 package com.example.pcdashboard.Model;
 
-public class Department {
+public class DepartmentPost {
     private String id;
     private String title;
     private String time;
     private String content;
     private String image;
 
-    public Department(String id, String title, String time, String content, String image) {
+    public DepartmentPost(String id, String title, String time, String content, String image) {
         this.id = id;
         this.title = title;
         this.time = time;
