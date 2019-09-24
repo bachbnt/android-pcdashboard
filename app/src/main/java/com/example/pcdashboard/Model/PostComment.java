@@ -4,16 +4,14 @@ public class PostComment {
     private String id;
     private String content;
     private String time;
-    private String postId;
     private String userId;
     private String userName;
     private String userAvatar;
 
-    public PostComment(String id, String content, String time,String postId, String userId, String userName, String userAvatar) {
+    public PostComment(String id, String content, String time, String userId, String userName, String userAvatar) {
         this.id = id;
         this.content = content;
         this.time=time;
-        this.postId = postId;
         this.userId = userId;
         this.userName = userName;
         this.userAvatar = userAvatar;
@@ -41,14 +39,6 @@ public class PostComment {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
     }
 
     public String getUserId() {

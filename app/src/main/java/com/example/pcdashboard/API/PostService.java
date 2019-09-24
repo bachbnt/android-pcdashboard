@@ -36,11 +36,11 @@ public interface PostService {
 
     //Comment
     @GET("comment/{postId}")
-    Call<ArrayList<PostComment>> getAllPostComments();
+    Call<ArrayList<PostComment>> getAllPostComments(@Path("postId")String postId);
 
     @FormUrlEncoded
     @POST("comment/{postId}")
-    Call<PostComment> createPostComment(@Path("postId") String postId, @Field("userId") String userId);
+    Call<PostComment> createPostComment(@Path("postId") String postId, @Field("content")String content,@Field("userId") String userId);
 
     @DELETE("comment/{commentId}")
     Call<BooleanResponse> deletePostComment(@Path("commentId") String commentId);
