@@ -1,9 +1,11 @@
 package com.example.pcdashboard.API;
 
 import com.example.pcdashboard.Model.BooleanResponse;
+import com.example.pcdashboard.Model.ChatMessage;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
+import com.example.pcdashboard.Model.User;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,12 @@ public interface PostService {
     @GET("post/department")
     Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
 
-    //Chat
+    //User
+    @GET("user/{classId}/{localId}")
+    Call<ArrayList<User>> getAllUsers(@Path("classId") String classId, @Path("localId") String localId);
 
+    //Chat
+    @GET("chat/{classId}")
+    Call<ArrayList<ChatMessage>> getChatMessages(@Path("classId") String classId, @Field("quantity") int quantity);
 
 }
