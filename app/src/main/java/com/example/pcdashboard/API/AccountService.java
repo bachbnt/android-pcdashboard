@@ -20,90 +20,100 @@ public class AccountService {
     private static AccountService accountService;
     private static IAccountService iAccountService;
     private Context context;
+    private AccountListener listener;
 
-    private AccountService(Context context) {
-        this.context=context;
+    interface AccountListener {
+        void onSuccess();
+
+        void onFailure();
     }
-    public static AccountService getInstance(Context context){
-        if(accountService==null){
-            accountService=new AccountService(context);
-            Retrofit retrofit=new Retrofit.Builder()
+
+    private AccountService(Context context, AccountListener listener) {
+        this.context = context;
+        this.listener = listener;
+    }
+
+    public static AccountService getInstance(Context context, AccountListener listener) {
+        if (accountService == null) {
+            accountService = new AccountService(context, listener);
+            Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(WebService.url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            iAccountService=retrofit.create(IAccountService.class);
+            iAccountService = retrofit.create(IAccountService.class);
         }
         return accountService;
     }
 
-    public void getToken(){
-        Call<Token> call=iAccountService.getToken();
+    public void getToken() {
+        Call<Token> call = iAccountService.getToken();
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                Token token=response.body();
-                SharedPreferences.saveToken(context,token);
+                Token token = response.body();
+                SharedPreferences.saveToken(context, token);
+                listener.onSuccess();
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-
+                listener.onFailure();
             }
         });
     }
 
-    public void forgetPassword(String id){
-        Call<BooleanResponse> call=iAccountService.forgetPassword(id);
+    public void forgetPassword(String id) {
+        Call<BooleanResponse> call = iAccountService.forgetPassword(id);
         call.enqueue(new Callback<BooleanResponse>() {
             @Override
             public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                BooleanResponse booleanResponse=response.body();
-                Log.i("tag","forgetPassword onResponse "+booleanResponse.success);
+                listener.onSuccess();
             }
 
             @Override
             public void onFailure(Call<BooleanResponse> call, Throwable t) {
-                Log.i("tag","forgetPassword onFailure "+t.toString());
+                listener.onFailure();
             }
         });
     }
-    public void changePassword(String id,String oldPassword,String newPassword){
-        Call<BooleanResponse> call=iAccountService.changePassword(id,oldPassword,newPassword);
+
+    public void changePassword(String id, String oldPassword, String newPassword) {
+        Call<BooleanResponse> call = iAccountService.changePassword(id, oldPassword, newPassword);
         call.enqueue(new Callback<BooleanResponse>() {
             @Override
             public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                BooleanResponse booleanResponse=response.body();
-                Log.i("tag","changePassword onResponse "+booleanResponse.success);
+                listener.onSuccess();
             }
 
             @Override
             public void onFailure(Call<BooleanResponse> call, Throwable t) {
-                Log.i("tag","changePassword onFailure "+t.toString());
+                listener.onFailure();
             }
         });
     }
-    public void updateInfo(String id,String email,String phone){
-        Call<BooleanResponse>call=iAccountService.updateInfo(id,email,phone);
+
+    public void updateInfo(String id, String email, String phone) {
+        Call<BooleanResponse> call = iAccountService.updateInfo(id, email, phone);
         call.enqueue(new Callback<BooleanResponse>() {
             @Override
             public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                BooleanResponse booleanResponse=response.body();
-                Log.i("tag","updateInfo onResponse "+booleanResponse.success);
+                listener.onSuccess();
             }
 
             @Override
             public void onFailure(Call<BooleanResponse> call, Throwable t) {
-                Log.i("tag","updateInfo onFailure "+t.toString());
+                listener.onFailure();
             }
         });
     }
 
-    public void getAllUsers(String id){
-        Call<ArrayList<User>> call=iAccountService.getAllUsers(id){
+    public void getAllUsers(String id) {
+        Call<ArrayList<User>> call = iAccountService.getAllUsers(id) {
             call.enqueue(new Callback<ArrayList<User>>() {
                 @Override
                 public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                    ArrayList
+                    ArrayList<User> users=response.body();
+                    //goi sqlite va luu lai
                 }
 
                 @Override
