@@ -118,7 +118,7 @@ public class AccountService {
 
                 @Override
                 public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-
+                    Log.i("tag","getAllUsers onFailure "+t.toString());
                 }
             });
         }
