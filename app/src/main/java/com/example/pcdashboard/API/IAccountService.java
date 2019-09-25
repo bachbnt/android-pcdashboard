@@ -1,6 +1,5 @@
 package com.example.pcdashboard.API;
 
-import com.example.pcdashboard.Model.BooleanResponse;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 
@@ -19,17 +18,20 @@ public interface IAccountService {
 
     @FormUrlEncoded
     @PUT("user/forget-password/{id}")
-    Call<BooleanResponse> forgetPassword(@Path("id") String id);
+    Call<String> forgetPassword(@Path("id") String id);
 
     @FormUrlEncoded
     @PUT("user/change-password/{id}")
-    Call<BooleanResponse> changePassword(@Path("id") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+    Call<Boolean> changePassword(@Path("id") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
 
     @FormUrlEncoded
     @PUT("user/update-info/{id}")
-    Call<BooleanResponse> updateInfo(@Path("id") String id, @Field("email") String email, @Field("phone") String phone);
+    Call<Boolean> updateInfo(@Path("id") String id, @Field("email") String email, @Field("phone") String phone);
 
     //User
-    @GET("user/{id}")
+    @GET("user/id")
+    Call<User> getSelf(@Path("id") String id);
+
+    @GET("user/all/{id}")
     Call<ArrayList<User>> getAllUsers(@Path("id") String id);
 }

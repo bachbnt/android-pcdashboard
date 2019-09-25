@@ -3,12 +3,9 @@ package com.example.pcdashboard.API;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.pcdashboard.Model.BooleanResponse;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferences;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,77 +47,64 @@ public class AccountService {
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                Token token = response.body();
-                SharedPreferences.saveToken(context, token);
-                listener.onSuccess();
+                Token token=response.body();
+                SharedPreferences.saveToken(context,token);
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                listener.onFailure();
+
             }
         });
     }
 
     public void forgetPassword(String id) {
-        Call<BooleanResponse> call = iAccountService.forgetPassword(id);
-        call.enqueue(new Callback<BooleanResponse>() {
+        Call<String>call=iAccountService.forgetPassword(id);
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                listener.onSuccess();
+            public void onResponse(Call<String> call, Response<String> response) {
+                String email=response.body();
             }
 
             @Override
-            public void onFailure(Call<BooleanResponse> call, Throwable t) {
-                listener.onFailure();
+            public void onFailure(Call<String> call, Throwable t) {
+
             }
         });
     }
 
     public void changePassword(String id, String oldPassword, String newPassword) {
-        Call<BooleanResponse> call = iAccountService.changePassword(id, oldPassword, newPassword);
-        call.enqueue(new Callback<BooleanResponse>() {
-            @Override
-            public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                listener.onSuccess();
-            }
+      Call<Boolean>call=iAccountService.changePassword(id,oldPassword,newPassword);
+      call.enqueue(new Callback<Boolean>() {
+          @Override
+          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+              listener.onSuccess();;
+          }
 
-            @Override
-            public void onFailure(Call<BooleanResponse> call, Throwable t) {
-                listener.onFailure();
-            }
-        });
+          @Override
+          public void onFailure(Call<Boolean> call, Throwable t) {
+              listener.onFailure();
+          }
+      });
     }
 
     public void updateInfo(String id, String email, String phone) {
-        Call<BooleanResponse> call = iAccountService.updateInfo(id, email, phone);
-        call.enqueue(new Callback<BooleanResponse>() {
+        Call<Boolean>call=iAccountService.updateInfo(id,email,phone);
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 listener.onSuccess();
             }
 
             @Override
-            public void onFailure(Call<BooleanResponse> call, Throwable t) {
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 listener.onFailure();
             }
         });
     }
 
-    public void getAllUsers(String id) {
-        Call<ArrayList<User>> call = iAccountService.getAllUsers(id) {
-            call.enqueue(new Callback<ArrayList<User>>() {
-                @Override
-                public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                    ArrayList<User> users=response.body();
-                    //goi sqlite va luu lai
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                    Log.i("tag","getAllUsers onFailure "+t.toString());
-                }
-            });
-        }
+    public void getSelf(String id) {
+        Call<User> call = iAccountService.getSelf(id);
+        call.enqueue();
     }
 }

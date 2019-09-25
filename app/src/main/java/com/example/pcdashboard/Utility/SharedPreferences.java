@@ -30,6 +30,7 @@ public class SharedPreferences {
         editor.putString("email",self.getEmail());
         editor.putString("phone",self.getPhone());
         editor.putString("avatar",self.getAvatar());
+        editor.putInt("status",self.getStatus());
         editor.commit();
     }
 
@@ -40,7 +41,7 @@ public class SharedPreferences {
         String email=preferences.getString("email",null);
         String phone=preferences.getString("phone",null);
         String avatar=preferences.getString("avatar",null);
-        int status=1;
+        int status=preferences.getInt("status",0);
         User self=new User(id,name,email,phone,avatar,status);
         return self;
     }

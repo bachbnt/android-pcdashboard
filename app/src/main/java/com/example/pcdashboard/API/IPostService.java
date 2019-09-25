@@ -1,11 +1,8 @@
 package com.example.pcdashboard.API;
 
-import com.example.pcdashboard.Model.BooleanResponse;
-import com.example.pcdashboard.Model.ChatMessage;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
-import com.example.pcdashboard.Model.User;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,7 @@ public interface IPostService {
     Call<ClassPost> updateClassPost(@Path("postId") String postId, @Field("content") String content, @Field("image") String image);
 
     @DELETE("post/class/{postId}")
-    Call<BooleanResponse> deleteClassPost(@Path("postId") String postId);
+    Call<Response> deleteClassPost(@Path("postId") String postId);
 
     //Comment
     @GET("comment/{postId}")
@@ -43,7 +40,7 @@ public interface IPostService {
     Call<PostComment> createPostComment(@Path("postId") String postId, @Field("content")String content,@Field("userId") String userId);
 
     @DELETE("comment/{commentId}")
-    Call<BooleanResponse> deletePostComment(@Path("commentId") String commentId);
+    Call<Response> deletePostComment(@Path("commentId") String commentId);
 
     //DepartmentPost
     @GET("post/department")
