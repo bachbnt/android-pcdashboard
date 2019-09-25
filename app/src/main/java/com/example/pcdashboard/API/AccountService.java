@@ -5,7 +5,10 @@ import android.util.Log;
 
 import com.example.pcdashboard.Model.BooleanResponse;
 import com.example.pcdashboard.Model.Token;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferences;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,5 +96,21 @@ public class AccountService {
                 Log.i("tag","updateInfo onFailure "+t.toString());
             }
         });
+    }
+
+    public void getAllUsers(String id){
+        Call<ArrayList<User>> call=iAccountService.getAllUsers(id){
+            call.enqueue(new Callback<ArrayList<User>>() {
+                @Override
+                public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                    ArrayList
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+
+                }
+            });
+        }
     }
 }

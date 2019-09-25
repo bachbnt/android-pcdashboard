@@ -30,6 +30,6 @@ public interface IAccountService {
     Call<BooleanResponse> updateInfo(@Path("id") String id, @Field("email") String email, @Field("phone") String phone);
 
     //User
-    @GET("user/{localId}")
-    Call<ArrayList<User>> getAllUsers(@Path("localId") String localId);
+    @GET("user/{id}")
+    Call<ArrayList<User>> getAllUsers(@Path("id") String id);
 }
