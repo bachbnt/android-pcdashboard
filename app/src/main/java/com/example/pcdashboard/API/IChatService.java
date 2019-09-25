@@ -9,7 +9,7 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface ChatService {
+public interface IChatService {
     //Chat
     @GET("chat/{classId}")
     Call<ArrayList<ChatMessage>> getChatMessages(@Path("classId") String classId, @Field("quantity") int quantity);

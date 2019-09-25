@@ -6,13 +6,15 @@ public class User {
     private String email;
     private String phone;
     private String avatar;
+    private int online;
 
-    public User(String id, String name, String email, String phone, String avatar) {
+    public User(String id, String name, String email, String phone, String avatar, int online) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.avatar = avatar;
+        this.online = online;
     }
 
     public String getId() {
@@ -53,5 +55,13 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getOnline() {
+        return online;
+    }
+
+    public void setOnline(int online) {
+        this.online = online;
     }
 }

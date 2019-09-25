@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ClassroomFragment;
-import com.example.pcdashboard.Fragment.ConversationFragment;
+import com.example.pcdashboard.Fragment.ChatFragment;
 import com.example.pcdashboard.Fragment.InformationFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
@@ -82,7 +82,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragment = new ClassroomFragment();
                 break;
             case CONVERSATION_ID:
-                fragment = new ConversationFragment();
+                fragment = new ChatFragment();
                 break;
             case ACCOUNT_ID:
                 fragment = new AccountFragment();

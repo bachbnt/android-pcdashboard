@@ -2,19 +2,23 @@ package com.example.pcdashboard.Utility;
 
 import android.content.Context;
 
+import com.example.pcdashboard.Model.Token;
+
 public class SharedPreferences {
-    public static void savePreferences(Context context, boolean login, String id, String email) {
+    public static void saveToken(Context context, Token token) {
         android.content.SharedPreferences preferences = context.getSharedPreferences("caches", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("login", login);
-        editor.putString("myId", id);
-        editor.putString("myEmail", email);
+        editor.putString("accessToken", token.getAccessToken());
+        editor.putString("tokenType", token.getTokenType());
         editor.commit();
     }
 
-    public static boolean loadLoginPreferences(Context context, String key) {
+    public static Token loadToken(Context context) {
         android.content.SharedPreferences preferences = context.getSharedPreferences("caches", Context.MODE_PRIVATE);
-        return preferences.getBoolean(key, false);
+        String accessToken= preferences.getString("accessToken",null);
+        String tokenType=preferences.getString("tokenType",null);
+        Token token=new Token(accessToken,tokenType);
+        return token;
     }
 
     public static String loadIdPreferences(Context context, String key){
