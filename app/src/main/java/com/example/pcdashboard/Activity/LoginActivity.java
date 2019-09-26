@@ -13,9 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class LoginActivity extends AppCompatActivity implements IScreenManager {
-    private final int DASHBOARD_ID=0;
-    private final int LOGIN_ID=1;
-    private final int FORGOT_ID=2;
     private ScreenManager screenManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +29,15 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     @Override
     public void openLoginScreen(int screenId) {
         switch (screenId){
-            case DASHBOARD_ID:
+            case IScreenManager.DASHBOARD_ACTIVITY:
                 Intent intent=new Intent(LoginActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 break;
-            case LOGIN_ID:
+            case IScreenManager.LOGIN_FRAGMENT:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login,new LoginFragment()).commit();
                 break;
-            case FORGOT_ID:
+            case IScreenManager.FORGOT_FRAGMENT:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login,new ForgotFragment()).commit();
                 break;
         }

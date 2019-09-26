@@ -50,6 +50,6 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
 
     @Override
     public void onFailure() {
-        view.onFailuer();
+        view.onFailure();
     }
 }

@@ -94,7 +94,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onFailuer() {
+    public void onFailure() {
         Toast.makeText(getContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
     }
 }

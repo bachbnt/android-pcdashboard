@@ -14,10 +14,10 @@ import com.example.pcdashboard.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InformationFragment extends Fragment {
+public class DepartmentFragment extends Fragment {
 
 
-    public InformationFragment() {
+    public DepartmentFragment() {
         // Required empty public constructor
     }
 
