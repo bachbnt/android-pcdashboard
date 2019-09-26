@@ -1,6 +1,5 @@
 package com.example.pcdashboard.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     private final int CLASSROOM_ID = 1;
     private final int CONVERSATION_ID = 2;
     private final int ACCOUNT_ID = 3;
-    private final int LOGIN_ID = 4;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private TabLayout tabLayout;
@@ -88,11 +86,6 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 break;
             case ACCOUNT_ID:
                 fragment = new AccountFragment();
-                break;
-            case LOGIN_ID:
-                Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
                 break;
         }
         return fragment;

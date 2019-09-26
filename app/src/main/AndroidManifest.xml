@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pcdashboard">
-
+<uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:name=".Manager.MyApp"
+        android:name=".Manager.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
