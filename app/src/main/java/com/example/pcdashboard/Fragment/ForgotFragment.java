@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
+
+import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_FRAGMENT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +58,7 @@ public class ForgotFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_back_forgot:
                 Toast.makeText(getContext(), "Back", Toast.LENGTH_SHORT).show();
-                screenManager.openLoginScreen(1);
+                screenManager.openLoginScreen(LOGIN_FRAGMENT);
                 break;
         }
     }

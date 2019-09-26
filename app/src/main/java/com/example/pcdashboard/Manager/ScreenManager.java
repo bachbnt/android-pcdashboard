@@ -19,11 +19,11 @@ public class ScreenManager {
         this.iScreenManager = iScreenManager;
     }
 
-    public void openLoginScreen(int screenId) {
-        iScreenManager.openLoginScreen(screenId);
+    public void openLoginScreen(String screenName) {
+        iScreenManager.openLoginScreen(screenName);
     }
 
-    public Fragment openDashboardScreen(int screenId) {
-        return iScreenManager.openDashboardScreen(screenId);
+    public Fragment openDashboardScreen(String screenName) {
+        return iScreenManager.openDashboardScreen(screenName);
     }
 }

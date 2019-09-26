@@ -35,12 +35,7 @@ ScreenManager screenManager;
         View view= inflater.inflate(R.layout.fragment_account, container, false);
         tvLogOut = view.findViewById(R.id.tv_logout_account);
         screenManager = ScreenManager.getInstance();
-        tvLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                screenManager.openDashboardScreen(4);
-            }
-        });
+
         IAccountPresenter iAccountPresenter;
         iAccountPresenter=new AccountPresenter(this);
         setPresenter(iAccountPresenter);

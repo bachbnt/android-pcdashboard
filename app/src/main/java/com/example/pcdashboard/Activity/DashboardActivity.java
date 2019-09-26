@@ -63,14 +63,14 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     }
 
     @Override
-    public void openLoginScreen(int screenId) {
+    public void openLoginScreen(String screenName) {
         //NULL
     }
 
     @Override
-    public Fragment openDashboardScreen(int screenId) {
+    public Fragment openDashboardScreen(String screenName) {
         Fragment fragment = null;
-        switch (screenId) {
+        switch (screenName) {
             case DEPARTMENT_FRAGMENT:
                 fragment = new DepartmentFragment();
                 break;

@@ -14,6 +14,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
 
+import static com.example.pcdashboard.Manager.IScreenManager.ACCOUNT_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.CHAT_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.CLASSROOM_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.DEPARTMENT_FRAGMENT;
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private final int NUM_PAGES = 4;
     private String title[] = {"Bộ môn", "Lớp học", "Tin nhắn", "Tài khoản"};
@@ -54,7 +59,18 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return screenManager.openDashboardScreen(position);
+        switch (position) {
+            case 0:
+                return screenManager.openDashboardScreen(DEPARTMENT_FRAGMENT);
+            case 1:
+                return screenManager.openDashboardScreen(CLASSROOM_FRAGMENT);
+            case 2:
+                return screenManager.openDashboardScreen(CHAT_FRAGMENT);
+            case 3:
+                return screenManager.openDashboardScreen(ACCOUNT_FRAGMENT);
+            default:
+                return null;
+        }
     }
 
     @Override

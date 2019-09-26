@@ -24,27 +24,27 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     private void initialize(){
         screenManager=ScreenManager.getInstance();
         screenManager.setScreenManager(this);
-        screenManager.openLoginScreen(1);
+        screenManager.openLoginScreen(LOGIN_FRAGMENT);
     }
     @Override
-    public void openLoginScreen(int screenId) {
-        switch (screenId){
-            case IScreenManager.DASHBOARD_ACTIVITY:
+    public void openLoginScreen(String screenName) {
+        switch (screenName){
+            case DASHBOARD_ACTIVITY:
                 Intent intent=new Intent(LoginActivity.this,DashboardActivity.class);
                 startActivity(intent);
                 finish();
                 break;
-            case IScreenManager.LOGIN_FRAGMENT:
+            case LOGIN_FRAGMENT:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login,new LoginFragment()).commit();
                 break;
-            case IScreenManager.FORGOT_FRAGMENT:
+            case FORGOT_FRAGMENT:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login,new ForgotFragment()).commit();
                 break;
         }
     }
 
     @Override
-    public Fragment openDashboardScreen(int screenId) {
+    public Fragment openDashboardScreen(String screenName) {
         //NULL
         return null;
     }

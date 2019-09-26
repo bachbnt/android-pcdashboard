@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.ILoginView;
+
+import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +93,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     @Override
     public void onUpdate() {
-        screenManager.openLoginScreen(0);
+        screenManager.openLoginScreen(DASHBOARD_ACTIVITY);
     }
 
     @Override
