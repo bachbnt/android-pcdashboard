@@ -5,7 +5,10 @@ import android.util.Log;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.Request.TokenRequest;
 import com.example.pcdashboard.Utility.SharedPreferences;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,22 +22,27 @@ public class AccountService {
     private Context context;
     private AccountListener listener;
 
-    interface AccountListener {
-        void onSuccess();
+    public interface AccountListener {
+        void onTokenSuccess();
+
+        void onSelfSuccess();
 
         void onFailure();
     }
 
-    private AccountService(Context context, AccountListener listener) {
+    private AccountService(Context context) {
         this.context = context;
+    }
+
+    public void setListener(AccountListener listener) {
         this.listener = listener;
     }
 
-    public static AccountService getInstance(Context context, AccountListener listener) {
+    public static AccountService getInstance(Context context) {
         if (accountService == null) {
-            accountService = new AccountService(context, listener);
+            accountService = new AccountService(context);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(WebService.url)
+                    .baseUrl(HttpService.url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             iAccountService = retrofit.create(IAccountService.class);
@@ -42,28 +50,33 @@ public class AccountService {
         return accountService;
     }
 
-    public void getToken() {
-        Call<Token> call = iAccountService.getToken();
+    public void getToken(String userId, String password) {
+        Log.i("tag", "getToken 1" + userId + password);
+        Call<Token> call = iAccountService.getToken(new TokenRequest(userId, password));
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                Token token=response.body();
-                SharedPreferences.saveToken(context,token);
+                Token token = response.body();
+                if (token != null) {
+                    SharedPreferences.saveToken(context, token);
+                    Log.i("tag", "getToken 2 " + token.getAccessToken());
+                    listener.onTokenSuccess();
+                } else listener.onFailure();
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-
+                Log.i("tag", "getToken3 " + t.toString());
             }
         });
     }
 
-    public void forgetPassword(String id) {
-        Call<String>call=iAccountService.forgetPassword(id);
+    public void forgetPassword(String userId) {
+        Call<String> call = iAccountService.forgetPassword(userId);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                String email=response.body();
+                String email = response.body();
             }
 
             @Override
@@ -73,38 +86,67 @@ public class AccountService {
         });
     }
 
-    public void changePassword(String id, String oldPassword, String newPassword) {
-      Call<Boolean>call=iAccountService.changePassword(id,oldPassword,newPassword);
-      call.enqueue(new Callback<Boolean>() {
-          @Override
-          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-              listener.onSuccess();;
-          }
+//    public void changePassword(String userId, String oldPassword, String newPassword) {
+//      Call<Boolean>call=iAccountService.changePassword(userId,oldPassword,newPassword);
+//      call.enqueue(new Callback<Boolean>() {
+//          @Override
+//          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+//              listener.onSuccess();;
+//          }
+//
+//          @Override
+//          public void onFailure(Call<Boolean> call, Throwable t) {
+//              listener.onFailure();
+//          }
+//      });
+//    }
+//
+//    public void updateInfo(String userId, String email, String phone) {
+//        Call<Boolean>call=iAccountService.updateInfo(userId,email,phone);
+//        call.enqueue(new Callback<Boolean>() {
+//            @Override
+//            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+//                listener.onSuccess();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Boolean> call, Throwable t) {
+//                listener.onFailure();
+//            }
+//        });
+//    }
 
-          @Override
-          public void onFailure(Call<Boolean> call, Throwable t) {
-              listener.onFailure();
-          }
-      });
-    }
-
-    public void updateInfo(String id, String email, String phone) {
-        Call<Boolean>call=iAccountService.updateInfo(id,email,phone);
-        call.enqueue(new Callback<Boolean>() {
+    public void getSelf(String userId) {
+        String token = SharedPreferences.loadToken(context).getTokenType() + " " + SharedPreferences.loadToken(context).getAccessToken();
+        Call<User> call = iAccountService.getSelf(token, userId);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                listener.onSuccess();
+            public void onResponse(Call<User> call, Response<User> response) {
+                User self = response.body();
+                Log.i("tag", "getSelf " + self.getName());
+                SharedPreferences.saveSelf(context, self);
+                listener.onSelfSuccess();
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                listener.onFailure();
+            public void onFailure(Call<User> call, Throwable t) {
+
             }
         });
     }
 
-    public void getSelf(String id) {
-        Call<User> call = iAccountService.getSelf(id);
-        call.enqueue();
+    public void getAllUsers(String userId) {
+        Call<ArrayList<User>> call = iAccountService.getAllUsers(userId);
+        call.enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                ArrayList<User> users = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -3,10 +3,12 @@ package com.example.pcdashboard.Model;
 public class Token {
     private String accessToken;
     private String tokenType;
+    private String userId;
 
-    public Token(String accessToken, String tokenType) {
+    public Token(String accessToken, String tokenType, String userId) {
         this.accessToken = accessToken;
         this.tokenType = tokenType;
+        this.userId = userId;
     }
 
     public String getAccessToken() {
@@ -23,5 +25,13 @@ public class Token {
 
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

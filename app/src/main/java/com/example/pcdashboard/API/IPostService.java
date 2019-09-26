@@ -28,22 +28,22 @@ public interface IPostService {
     @PUT("post/class/{postId}")
     Call<ClassPost> updateClassPost(@Path("postId") String postId, @Field("content") String content, @Field("image") String image);
 
-    @DELETE("post/class/{postId}")
-    Call<Response> deleteClassPost(@Path("postId") String postId);
-
-    //Comment
-    @GET("comment/{postId}")
-    Call<ArrayList<PostComment>> getAllPostComments(@Path("postId")String postId);
-
-    @FormUrlEncoded
-    @POST("comment/{postId}")
-    Call<PostComment> createPostComment(@Path("postId") String postId, @Field("content")String content,@Field("userId") String userId);
-
-    @DELETE("comment/{commentId}")
-    Call<Response> deletePostComment(@Path("commentId") String commentId);
-
-    //DepartmentPost
-    @GET("post/department")
-    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
+//    @DELETE("post/class/{postId}")
+//    Call<Response> deleteClassPost(@Path("postId") String postId);
+//
+//    //Comment
+//    @GET("comment/{postId}")
+//    Call<ArrayList<PostComment>> getAllPostComments(@Path("postId")String postId);
+//
+//    @FormUrlEncoded
+//    @POST("comment/{postId}")
+//    Call<PostComment> createPostComment(@Path("postId") String postId, @Field("content")String content,@Field("userId") String userId);
+//
+//    @DELETE("comment/{commentId}")
+//    Call<Response> deletePostComment(@Path("commentId") String commentId);
+//
+//    //DepartmentPost
+//    @GET("post/department")
+//    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
 
 }

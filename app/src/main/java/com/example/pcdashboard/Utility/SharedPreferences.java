@@ -10,15 +10,17 @@ public class SharedPreferences {
         android.content.SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
         editor.putString("accessToken", token.getAccessToken());
-        editor.putString("tokenType", token.getTokenType());
+        editor.putString("tokenType",token.getTokenType());
+        editor.putString("userId",token.getUserId());
         editor.commit();
     }
 
     public static Token loadToken(Context context) {
         android.content.SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
-        String accessToken= preferences.getString("accessToken",null);
+        String accessToken=preferences.getString("accessToken",null);
         String tokenType=preferences.getString("tokenType",null);
-        Token token=new Token(accessToken,tokenType);
+        String userId=preferences.getString("userId",null);
+        Token token=new Token(accessToken,tokenType,userId);
         return token;
     }
 
