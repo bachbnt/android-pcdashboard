@@ -42,8 +42,8 @@ public interface IPostService {
 //    @DELETE("comment/{commentId}")
 //    Call<Response> deletePostComment(@Path("commentId") String commentId);
 //
-//    //DepartmentPost
-//    @GET("post/department")
-//    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
+    //DepartmentPost
+    @GET("post/department")
+    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts();
 
 }
