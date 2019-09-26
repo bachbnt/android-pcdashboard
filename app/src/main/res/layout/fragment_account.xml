@@ -48,19 +48,19 @@
                     android:layout_toRightOf="@id/cv_avatar_account"
                     android:layout_centerVertical="true">
                     <TextView
-                        android:id="@+id/tv_username_account"
+                        android:id="@+id/tv_name_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bùi Ngô Tôn Bách"
+                        android:text="NULL"
                         android:textSize="@dimen/font_size_20sp"
                         android:textColor="@color/colorOrange"
                         android:textStyle="bold"/>
                     <TextView
-                        android:id="@+id/tv_account_account"
+                        android:id="@+id/tv_id_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_10dp"
-                        android:text="1613000"
+                        android:text="null"
                         android:textSize="@dimen/font_size_16sp"
                         android:textColor="@color/colorSkyBlue"
                         android:drawableLeft="@drawable/ic_person_orange_24dp"/>

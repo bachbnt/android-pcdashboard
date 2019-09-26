@@ -24,7 +24,7 @@ public interface IAccountService {
             }
     )
     @POST("auth/signin")
-    Call<Token> getToken(@Body TokenRequest Gson);
+    Call<Token> getToken(@Body TokenRequest tokenRequest);
 
     @FormUrlEncoded
     @PUT("user/forget-password/{userId}")

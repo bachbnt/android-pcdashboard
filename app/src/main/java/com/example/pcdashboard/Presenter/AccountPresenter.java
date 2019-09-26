@@ -1,21 +1,28 @@
 package com.example.pcdashboard.Presenter;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.Utility.SharedPreferences;
 import com.example.pcdashboard.View.IAccountView;
 
 public class AccountPresenter implements IAccountPresenter {
-    private IAccountView iAccountView;
+    private Context context;
+    private IAccountView view;
 
-    public AccountPresenter(IAccountView iAccountView) {
-        this.iAccountView = iAccountView;
+    public AccountPresenter(Context context) {
+        this.context=context;
+    }
+
+    public void setAccountView(IAccountView iAccountView){
+        this.view=iAccountView;
     }
 
     @Override
-    public void onDestroy() {
-        iAccountView=null;
-    }
-
-    @Override
-    public void loadInformation() {
-
+    public void onLoadSelf() {
+        User self= SharedPreferences.loadSelf(context);
+        Log.i("tag","onLoadSelf "+self.getName()+self.getId());
+        view.onShowSelf(self);
     }
 }

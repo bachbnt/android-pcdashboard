@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
-import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferences;
 import com.example.pcdashboard.View.ILoginView;
 
@@ -15,13 +14,13 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     private Context context;
 
     public LoginPresenter(Context context) {
+        this.context=context;
         accountService = AccountService.getInstance(context);
         accountService.setListener(this);
     }
 
-    public void setLoginView(ILoginView iLoginView,Context context) {
+    public void setLoginView(ILoginView iLoginView) {
         this.view = iLoginView;
-        this.context=context;
     }
 
     @Override
@@ -38,14 +37,14 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     @Override
     public void onTokenSuccess() {
         Token token = SharedPreferences.loadToken(context);
-        String userId=token.getUserId();
-        Log.i("tag","onTokenSuccess "+userId);
+        String userId = token.getUserId();
+        Log.i("tag", "onTokenSuccess " + userId);
         accountService.getSelf(userId);
     }
 
     @Override
     public void onSelfSuccess() {
-        view.onUpdate();
+        onResponse();
     }
 
     @Override

@@ -123,7 +123,7 @@ public class AccountService {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User self = response.body();
-                Log.i("tag", "getSelf " + self.getName());
+                Log.i("tag", "getSelf " + self.getName()+self.getId());
                 SharedPreferences.saveSelf(context, self);
                 listener.onSelfSuccess();
             }

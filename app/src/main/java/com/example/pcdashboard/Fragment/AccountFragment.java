@@ -2,15 +2,17 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.Presenter.IAccountPresenter;
 import com.example.pcdashboard.R;
@@ -20,9 +22,13 @@ import com.example.pcdashboard.View.IAccountView;
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment implements IAccountView {
-private IAccountPresenter iAccountPresenter;
-private TextView tvLogOut;
-ScreenManager screenManager;
+    private ScreenManager screenManager;
+    private AccountPresenter presenter;
+    private ImageView ivAvatar;
+    private TextView tvName;
+    private TextView tvId;
+
+
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -32,29 +38,35 @@ ScreenManager screenManager;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_account, container, false);
-        tvLogOut = view.findViewById(R.id.tv_logout_account);
-        screenManager = ScreenManager.getInstance();
-
-        IAccountPresenter iAccountPresenter;
-        iAccountPresenter=new AccountPresenter(this);
-        setPresenter(iAccountPresenter);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        initialize(view);
         return view;
     }
 
     @Override
-    public void setPresenter(IAccountPresenter iAccountPresenter) {
-        this.iAccountPresenter=iAccountPresenter;
+    public void onResume() {
+        presenter.setAccountView(this);
+        presenter.onLoadSelf();
+        super.onResume();
     }
 
     @Override
-    public void onClickRow() {
+    public void onStop() {
+        presenter.setAccountView(null);
+        super.onStop();
+    }
 
+    private void initialize(View view) {
+        screenManager = ScreenManager.getInstance();
+        presenter=new AccountPresenter(getContext());
+        ivAvatar=view.findViewById(R.id.iv_avatar_account);
+        tvName=view.findViewById(R.id.tv_name_account);
+        tvId=view.findViewById(R.id.tv_id_account);
     }
 
     @Override
-    public void onDestroy() {
-        iAccountPresenter.onDestroy();
-        super.onDestroy();
+    public void onShowSelf(User self) {
+        tvName.setText(self.getName());
+        tvId.setText(self.getId());
     }
 }
