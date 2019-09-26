@@ -17,6 +17,8 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     private final int LOGIN_ID=1;
     private final int FORGOT_ID=2;
     private ScreenManager screenManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
