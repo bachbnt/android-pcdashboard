@@ -1,6 +1,9 @@
 package com.example.pcdashboard.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("userId")
     private String id;
     private String name;
     private String email;

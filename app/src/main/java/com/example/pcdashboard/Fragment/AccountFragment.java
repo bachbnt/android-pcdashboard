@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class AccountFragment extends Fragment implements IAccountView {
 
     @Override
     public void onShowSelf(User self) {
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());
     }
