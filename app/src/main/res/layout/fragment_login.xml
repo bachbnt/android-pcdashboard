@@ -9,6 +9,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <RelativeLayout
+        android:background="@drawable/bg_statusbar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+        />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_login_login"
