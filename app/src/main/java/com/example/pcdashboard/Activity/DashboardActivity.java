@@ -8,9 +8,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Fragment.AccountFragment;
+import com.example.pcdashboard.Fragment.ChatFragment;
 import com.example.pcdashboard.Fragment.ClassroomFragment;
-import com.example.pcdashboard.Fragment.ConversationFragment;
-import com.example.pcdashboard.Fragment.InformationFragment;
+import com.example.pcdashboard.Fragment.DepartmentFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
@@ -18,10 +18,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
-    private final int INFORMATION_ID = 0;
-    private final int CLASSROOM_ID = 1;
-    private final int CONVERSATION_ID = 2;
-    private final int ACCOUNT_ID = 3;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private TabLayout tabLayout;
@@ -75,16 +71,16 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     public Fragment openDashboardScreen(int screenId) {
         Fragment fragment = null;
         switch (screenId) {
-            case INFORMATION_ID:
-                fragment = new InformationFragment();
+            case DEPARTMENT_FRAGMENT:
+                fragment = new DepartmentFragment();
                 break;
-            case CLASSROOM_ID:
+            case CLASSROOM_FRAGMENT:
                 fragment = new ClassroomFragment();
                 break;
-            case CONVERSATION_ID:
-                fragment = new ConversationFragment();
+            case CHAT_FRAGMENT:
+                fragment = new ChatFragment();
                 break;
-            case ACCOUNT_ID:
+            case ACCOUNT_FRAGMENT:
                 fragment = new AccountFragment();
                 break;
         }
