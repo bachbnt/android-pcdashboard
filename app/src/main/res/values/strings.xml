@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">P&amp;C Dashboard</string>
-    <string name="title_activity_login">LoginActivity</string>
     <string name="time_test">12:00, 01/12/2019</string>
     <string name="content_test">Đây là nội dung cụ thể, bla...bla...</string>
     <string name="title_test">Đây là tiêu đề</string>
+    <string name="id_test">1613000</string>
+    <string name="phone_test">0123456789</string>
+    <string name="email_test">admin_pcdasboard@gmail.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="account">Tài khoản</string>
@@ -17,9 +19,9 @@
     <string name="setting">Cài đặt</string>
     <string name="help">Hỗ trợ</string>
     <string name="schedule">Thời khóa biểu</string>
-    <string name="test_score">Điểm thi</string>
-    <string name="test_schedule">Lịch thi</string>
-    <string name="update_iaccount">Cập nhật Tài khoản</string>
+    <string name="score">Điểm thi</string>
+    <string name="exam_schedule">Lịch thi</string>
+    <string name="update_info">Cập nhật Thông tin</string>
     <string name="change_pasword">Thay đổi Mật khẩu</string>
     <string name="feedback">Phản hồi</string>
     <string name="guide">Hướng dẫn</string>
