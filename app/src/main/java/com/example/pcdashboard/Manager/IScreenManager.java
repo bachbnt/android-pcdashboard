@@ -10,8 +10,11 @@ public interface IScreenManager {
     String CLASSROOM_FRAGMENT = "CLASSROOM_FRAGMENT";
     String CHAT_FRAGMENT = "CHAT_FRAGMENT";
     String ACCOUNT_FRAGMENT = "ACCOUNT_FRAGMENT";
+    String INFO_DIALOG="INFO_DIALOG";
 
     void openLoginScreen(String screenName);
 
     Fragment openDashboardScreen(String screenName);
+
+    void openDialog(String dialogName);
 }

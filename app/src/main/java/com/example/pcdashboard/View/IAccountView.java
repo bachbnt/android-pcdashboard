@@ -5,4 +5,5 @@ import com.example.pcdashboard.Presenter.IAccountPresenter;
 
 public interface IAccountView {
     void onShowSelf(User self);
+    void showDialog();
 }

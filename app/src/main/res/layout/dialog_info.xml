@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/space_30dp"
+    tools:context=".Dialog.InfoDialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_30dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="80dp">
+
+            <ImageView
+                android:id="@+id/iv_avatar_info_dialog"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/logo" />
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_name_info_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_20dp"
+            android:text="Buì Ngô Tôn Bách"
+            android:textColor="@color/colorOrange"
+            android:textSize="@dimen/font_size_24sp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_id_info_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_person_orange_24dp"
+                android:drawablePadding="@dimen/space_10dp"
+                android:text="1613013"
+                android:textColor="@color/colorSkyBlue"
+                android:textSize="@dimen/space_20dp"/>
+            <TextView
+                android:id="@+id/tv_email_info_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_10dp"
+                android:drawableLeft="@drawable/ic_email_orange_24dp"
+                android:drawablePadding="@dimen/space_10dp"
+                android:text="tonbach18598@gmail.com"
+                android:textSize="@dimen/font_size_16sp"/>
+            <TextView
+                android:id="@+id/tv_phone_info_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_10dp"
+                android:drawableLeft="@drawable/ic_phone_orange_24dp"
+                android:drawablePadding="@dimen/space_10dp"
+                android:text="0384560623"
+                android:textSize="@dimen/font_size_16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

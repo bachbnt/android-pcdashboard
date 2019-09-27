@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
+import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ChatFragment;
 import com.example.pcdashboard.Fragment.ClassroomFragment;
@@ -85,5 +86,15 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 break;
         }
         return fragment;
+    }
+
+    @Override
+    public void openDialog(String dialogName) {
+        switch (dialogName){
+            case INFO_DIALOG:
+                InfoDialog dialog=new InfoDialog();
+                dialog.show(getSupportFragmentManager(),"info dialog");
+                break;
+        }
     }
 }

@@ -26,4 +26,8 @@ public class ScreenManager {
     public Fragment openDashboardScreen(String screenName) {
         return iScreenManager.openDashboardScreen(screenName);
     }
+
+    public void openDialog(String dialogName){
+        iScreenManager.openDialog(dialogName);
+    }
 }

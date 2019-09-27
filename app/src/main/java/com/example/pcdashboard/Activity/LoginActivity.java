@@ -50,4 +50,9 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
         //NULL
         return null;
     }
+
+    @Override
+    public void openDialog(String dialogName) {
+        //NULL
+    }
 }

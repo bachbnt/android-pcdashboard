@@ -16,7 +16,7 @@
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:layout_marginLeft="-10dp"
-            android:src="@drawable/logo_panel" />
+            android:src="@drawable/ic_logo_panel" />
 
     </LinearLayout>
 
