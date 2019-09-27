@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/space_5dp"
-    android:layout_marginTop="2dp"
+    android:layout_marginTop="5dp"
     android:layout_marginRight="@dimen/space_5dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="5dp"
     app:cardCornerRadius="@dimen/space_10dp">
 
     <RelativeLayout
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/ib_more_classroom"
+            android:id="@+id/ib_more_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -24,47 +24,47 @@
             android:src="@drawable/ic_more_horiz_orange_24dp" />
 
         <ImageView
-            android:id="@+id/iv_image_classroom"
+            android:id="@+id/iv_image_class_item"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/tv_content_classroom"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content_class_item"
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/tv_content_classroom"
+            android:id="@+id/tv_content_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cv_avatar_classroom"
+            android:layout_below="@id/cv_avatar_class_item"
             android:layout_margin="@dimen/space_10dp"
             android:text="@string/content_test"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_12sp" />
 
         <TextView
-            android:id="@+id/tv_name_classroom"
+            android:id="@+id/tv_name_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginTop="@dimen/space_10dp"
-            android:layout_toRightOf="@id/cv_avatar_classroom"
+            android:layout_toRightOf="@id/cv_avatar_class_item"
             android:text="@string/app_name"
             android:textColor="@color/colorSlateGray"
             android:textSize="@dimen/font_size_16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_time_classroom"
+            android:id="@+id/tv_time_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/cv_avatar_classroom"
+            android:layout_alignBottom="@id/cv_avatar_class_item"
             android:layout_marginLeft="@dimen/space_10dp"
-            android:layout_toRightOf="@id/cv_avatar_classroom"
+            android:layout_toRightOf="@id/cv_avatar_class_item"
             android:text="@string/time_test"
             android:textColor="@android:color/darker_gray"
             android:textSize="@dimen/font_size_12sp" />
 
         <TextView
-            android:id="@+id/tv_comment_classroom"
+            android:id="@+id/tv_comment_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/view_line_classroom"
@@ -83,14 +83,14 @@
             android:id="@+id/view_line_classroom"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/iv_image_classroom"
+            android:layout_below="@id/iv_image_class_item"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginTop="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:background="@android:color/darker_gray" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_avatar_classroom"
+            android:id="@+id/cv_avatar_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_10dp"
@@ -98,7 +98,7 @@
             app:cardCornerRadius="20dp">
 
             <ImageView
-                android:id="@+id/iv_avatar_classroom"
+                android:id="@+id/iv_avatar_class_item"
                 android:layout_width="@dimen/space_40dp"
                 android:layout_height="@dimen/space_40dp"
                 android:src="@drawable/logo" />

@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/space_5dp"
-    android:layout_marginTop="2dp"
+    android:layout_marginTop="5dp"
     android:layout_marginRight="@dimen/space_5dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="5dp"
     app:cardCornerRadius="@dimen/space_10dp">
 
     <RelativeLayout
@@ -15,14 +15,14 @@
 
 
         <ImageView
-            android:id="@+id/iv_image_department"
+            android:id="@+id/iv_image_department_item"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/tv_content_department"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content_department_item"
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/tv_title_department"
+            android:id="@+id/tv_title_department_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_10dp"
@@ -38,7 +38,7 @@
             android:id="@+id/tv_time_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title_department"
+            android:layout_below="@id/tv_title_department_item"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:text="@string/time_test"
@@ -46,7 +46,7 @@
             android:textSize="@dimen/font_size_12sp" />
 
         <TextView
-            android:id="@+id/tv_content_department"
+            android:id="@+id/tv_content_department_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_time_department"

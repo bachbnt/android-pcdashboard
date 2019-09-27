@@ -18,15 +18,13 @@ import com.example.pcdashboard.R;
 
 import java.util.ArrayList;
 
-public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.ViewHolder> {
+public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> {
     private Context context;
     private ArrayList<ClassPost> classPosts;
-    private OnItemClickListener listener;
 
-    public ClassroomAdapter(Context context, ArrayList<ClassPost> classPosts, OnItemClickListener listener) {
+    public ClassAdapter(Context context, ArrayList<ClassPost> classPosts) {
         this.context = context;
         this.classPosts = classPosts;
-        this.listener = listener;
     }
 
     interface OnItemClickListener {
@@ -36,7 +34,7 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_classroom_post, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_class_post, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -47,7 +45,7 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
         holder.tvName.setText(classPost.getUserName());
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
-        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).into(holder.ivAvatar);
+        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40,40).into(holder.ivAvatar);
         Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
     }
 
@@ -63,13 +61,13 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tv_name_classroom);
-            tvTime = itemView.findViewById(R.id.tv_time_classroom);
-            tvContent = itemView.findViewById(R.id.tv_content_classroom);
-            tvComment = itemView.findViewById(R.id.tv_comment_classroom);
-            ivAvatar = itemView.findViewById(R.id.iv_avatar_classroom);
-            ivImage = itemView.findViewById(R.id.iv_image_classroom);
-            ibMore = itemView.findViewById(R.id.ib_more_classroom);
+            tvName = itemView.findViewById(R.id.tv_name_class_item);
+            tvTime = itemView.findViewById(R.id.tv_time_class_item);
+            tvContent = itemView.findViewById(R.id.tv_content_class_item);
+            tvComment = itemView.findViewById(R.id.tv_comment_class_item);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar_class_item);
+            ivImage = itemView.findViewById(R.id.iv_image_class_item);
+            ibMore = itemView.findViewById(R.id.ib_more_class_item);
         }
     }
 }

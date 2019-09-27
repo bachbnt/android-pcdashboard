@@ -10,7 +10,7 @@ import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ChatFragment;
-import com.example.pcdashboard.Fragment.ClassroomFragment;
+import com.example.pcdashboard.Fragment.ClassFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
@@ -76,7 +76,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragment = new DepartmentFragment();
                 break;
             case CLASSROOM_FRAGMENT:
-                fragment = new ClassroomFragment();
+                fragment = new ClassFragment();
                 break;
             case CHAT_FRAGMENT:
                 fragment = new ChatFragment();

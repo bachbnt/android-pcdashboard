@@ -2,6 +2,7 @@ package com.example.pcdashboard.Adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,10 @@ import java.util.ArrayList;
 public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.ViewHolder> {
     private Context context;
     private ArrayList<DepartmentPost> departmentPosts;
-    private OnItemtClickListener listener;
 
-    public DepartmentAdapter(Context context, ArrayList<DepartmentPost> departmentPosts, OnItemtClickListener listener) {
+    public DepartmentAdapter(Context context, ArrayList<DepartmentPost> departmentPosts) {
         this.context = context;
         this.departmentPosts = departmentPosts;
-        this.listener = listener;
     }
 
     interface OnItemtClickListener{
@@ -44,6 +43,7 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         DepartmentPost departmentPost = departmentPosts.get(position);
         holder.tvTitle.setText(departmentPost.getTitle());
         holder.tvTime.setText(departmentPost.getTime());
+        Log.i("tag","onBindViewHolder "+position);
         holder.tvContent.setText(departmentPost.getContent());
         Glide.with(context).load(Uri.parse(departmentPost.getImage())).into(holder.ivImage);
     }
@@ -58,10 +58,10 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         ImageView ivImage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle=itemView.findViewById(R.id.tv_title_department);
+            tvTitle=itemView.findViewById(R.id.tv_title_department_item);
             tvTime=itemView.findViewById(R.id.tv_time_department);
-            tvContent=itemView.findViewById(R.id.tv_content_department);
-            ivImage=itemView.findViewById(R.id.iv_image_department);
+            tvContent=itemView.findViewById(R.id.tv_content_department_item);
+            ivImage=itemView.findViewById(R.id.iv_image_department_item);
         }
     }
 }

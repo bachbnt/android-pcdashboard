@@ -55,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_person_sky_blue_24dp"
-            android:hint="@string/account" />
+            android:hint="@string/account"
+            android:inputType="textPersonName"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
