@@ -33,7 +33,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         TextView tvTitle = view.findViewById(R.id.tv_title_tablayout);
         ImageView ivIcon = view.findViewById(R.id.iv_icon_tablayout);
         tvTitle.setText(title[position]);
-        tvTitle.setTextColor(context.getResources().getColor(R.color.colorSkyBlue));
+        tvTitle.setTextColor(context.getResources().getColor(R.color.colorCold));
         ivIcon.setImageResource(icon[position]);
         return view;
     }
@@ -42,10 +42,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         TextView tvTitle = view.findViewById(R.id.tv_title_tablayout);
         ImageView ivIcon = view.findViewById(R.id.iv_icon_tablayout);
         if (isSelected) {
-            tvTitle.setTextColor(context.getResources().getColor(R.color.colorOrange));
+            tvTitle.setTextColor(context.getResources().getColor(R.color.colorHot));
             ivIcon.setImageResource(selectedIcon[position]);
         } else {
-            tvTitle.setTextColor(context.getResources().getColor(R.color.colorSkyBlue));
+            tvTitle.setTextColor(context.getResources().getColor(R.color.colorCold));
             ivIcon.setImageResource(icon[position]);
         }
         return view;

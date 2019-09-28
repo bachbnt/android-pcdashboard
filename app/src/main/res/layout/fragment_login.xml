@@ -64,7 +64,7 @@
             android:layout_marginTop="@dimen/space_5dp"
             app:hintEnabled="false"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorOrange">
+            app:passwordToggleTint="@color/colorHot">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password_login"

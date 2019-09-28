@@ -27,5 +27,6 @@
     <string name="guide">Hướng dẫn</string>
     <string name="logout">Đăng xuất</string>
     <string name="comment">Bình luận</string>
+    <string name="write_comment">Viết bình luận...</string>
 
 </resources>

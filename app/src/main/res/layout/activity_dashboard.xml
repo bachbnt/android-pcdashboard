@@ -26,8 +26,8 @@
         android:id="@+id/tab_layout_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabSelectedTextColor="@color/colorOrange"
-        app:tabIndicatorColor="@color/colorOrange"
+        app:tabSelectedTextColor="@color/colorHot"
+        app:tabIndicatorColor="@color/colorHot"
         app:tabMode="fixed" />
 
     <View

@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:text="Bộ môn"
         android:textSize="@dimen/font_size_12sp"
-        android:textColor="@color/colorSkyBlue"/>
+        android:textColor="@color/colorCold"/>
 
 </LinearLayout>

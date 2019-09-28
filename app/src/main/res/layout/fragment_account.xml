@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/app_name"
                         android:textSize="@dimen/font_size_20sp"
-                        android:textColor="@color/colorOrange"
+                        android:textColor="@color/colorHot"
                         android:textStyle="bold"/>
                     <TextView
                         android:id="@+id/tv_id_account"
@@ -62,7 +62,7 @@
                         android:layout_marginTop="@dimen/space_10dp"
                         android:text="@string/id_test"
                         android:textSize="@dimen/font_size_16sp"
-                        android:textColor="@color/colorSkyBlue"
+                        android:textColor="@color/colorCold"
                         android:drawableLeft="@drawable/ic_person_orange_24dp"/>
                     </LinearLayout>
             </RelativeLayout>

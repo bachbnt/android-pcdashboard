@@ -36,7 +36,7 @@
         <item name="android:layout_marginRight">@dimen/space_5dp</item>
         <item name="android:drawablePadding">@dimen/space_20dp</item>
         <item name="android:padding">@dimen/space_10dp</item>
-        <item name="android:textColor">@color/colorSkyBlue</item>
+        <item name="android:textColor">@color/colorCold</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 </resources>
