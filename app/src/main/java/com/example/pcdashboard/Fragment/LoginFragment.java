@@ -71,7 +71,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-                onCheck();
+                onValid();
                 break;
             case R.id.tv_forgot_login:
                 break;
@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onCheck() {
+    public void onValid() {
         if(!TextUtils.isEmpty(etAccount.getText().toString())&&!TextUtils.isEmpty(etPassword.getText().toString())){
             presenter.onRequest(etAccount.getText().toString(),etPassword.getText().toString());
         }else {

@@ -4,6 +4,6 @@ import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.IAccountPresenter;
 
 public interface IAccountView {
-    void onShowSelf(User self);
+    void showSelf(User self);
     void showDialog();
 }

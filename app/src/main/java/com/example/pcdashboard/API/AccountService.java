@@ -42,7 +42,7 @@ public class AccountService {
         if (accountService == null) {
             accountService = new AccountService(context);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(HttpService.url)
+                    .baseUrl(IServiceManager.url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             iAccountService = retrofit.create(IAccountService.class);

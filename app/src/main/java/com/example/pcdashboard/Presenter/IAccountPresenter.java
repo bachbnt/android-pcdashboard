@@ -1,5 +1,5 @@
 package com.example.pcdashboard.Presenter;
 
 public interface IAccountPresenter {
-    void onLoadSelf();
+    void loadSelf();
 }

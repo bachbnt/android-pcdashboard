@@ -13,12 +13,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.pcdashboard.Dialog.InfoDialog;
-import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
-import com.example.pcdashboard.Presenter.IAccountPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IAccountView;
 
@@ -53,14 +50,14 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
     @Override
     public void onResume() {
         presenter.setAccountView(this);
-        presenter.onLoadSelf();
+        presenter.loadSelf();
         super.onResume();
     }
 
     @Override
-    public void onStop() {
+    public void onPause() {
         presenter.setAccountView(null);
-        super.onStop();
+        super.onPause();
     }
 
     private void initialize(View view) {
@@ -74,7 +71,7 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
     }
 
     @Override
-    public void onShowSelf(User self) {
+    public void showSelf(User self) {
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80,80).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());

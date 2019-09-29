@@ -20,9 +20,9 @@ public class AccountPresenter implements IAccountPresenter {
     }
 
     @Override
-    public void onLoadSelf() {
+    public void loadSelf() {
         User self= SharedPreferences.loadSelf(context);
-        Log.i("tag","onLoadSelf "+self.getName()+self.getId());
-        view.onShowSelf(self);
+        Log.i("tag","loadSelf "+self.getName()+self.getId());
+        view.showSelf(self);
     }
 }
