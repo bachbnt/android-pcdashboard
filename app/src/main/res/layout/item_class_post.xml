@@ -67,27 +67,16 @@
             android:id="@+id/tv_comment_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/view_line_class_item"
+            android:layout_below="@id/iv_image_class_item"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/space_5dp"
-            android:layout_marginBottom="@dimen/space_10dp"
             android:drawableLeft="@drawable/ic_comment_hot_24dp"
             android:drawablePadding="@dimen/space_5dp"
+            android:padding="@dimen/space_10dp"
             android:gravity="center_vertical"
             android:text="@string/comment"
             android:textColor="@color/colorCold"
             android:textSize="@dimen/font_size_12sp"
             android:textStyle="bold" />
-
-        <View
-            android:id="@+id/view_line_class_item"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/iv_image_class_item"
-            android:layout_marginLeft="@dimen/space_10dp"
-            android:layout_marginTop="@dimen/space_5dp"
-            android:layout_marginRight="@dimen/space_10dp"
-            android:background="@android:color/darker_gray" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_avatar_class_item"

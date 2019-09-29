@@ -34,13 +34,13 @@
             android:id="@+id/tv_input_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/space_10dp"
-            android:layout_toRightOf="@id/cv_avatar_class"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="6dp"
             android:layout_toLeftOf="@id/ib_photo_class"
+            android:layout_toRightOf="@id/cv_avatar_class"
             android:background="@drawable/bg_edittext_login"
+            android:hint="Chia sẻ điều gì đó với lớp?"
             android:padding="@dimen/space_10dp"
-            android:text="Bạn muốn chia sẻ điều gì với lớp?"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_16sp" />
 

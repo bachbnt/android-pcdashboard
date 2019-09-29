@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="@color/colorMiddle"
+            android:textColor="@color/colorSlateGray"
             android:textSize="@dimen/font_size_16sp"
             android:textStyle="bold" />
 
