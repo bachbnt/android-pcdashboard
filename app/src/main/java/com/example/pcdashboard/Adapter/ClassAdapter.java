@@ -21,13 +21,15 @@ import java.util.ArrayList;
 public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> {
     private Context context;
     private ArrayList<ClassPost> classPosts;
+    private OnItemClickListener listener;
 
-    public ClassAdapter(Context context, ArrayList<ClassPost> classPosts) {
+    public ClassAdapter(Context context, ArrayList<ClassPost> classPosts,OnItemClickListener listener) {
         this.context = context;
         this.classPosts = classPosts;
+        this.listener=listener;
     }
 
-    interface OnItemClickListener {
+    public interface OnItemClickListener {
         void onClick(ClassPost classPost);
     }
 
@@ -41,12 +43,18 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ClassPost classPost = classPosts.get(position);
+        final ClassPost classPost = classPosts.get(position);
         holder.tvName.setText(classPost.getUserName());
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
         Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40,40).into(holder.ivAvatar);
         Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
+        holder.tvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(classPost);
+            }
+        });
     }
 
     @Override

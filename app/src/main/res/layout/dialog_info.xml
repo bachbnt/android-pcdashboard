@@ -44,7 +44,7 @@
                 android:id="@+id/tv_id_info_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_person_orange_24dp"
+                android:drawableLeft="@drawable/ic_user_hot_24dp"
                 android:drawablePadding="@dimen/space_10dp"
                 android:text="@string/id_test"
                 android:textColor="@color/colorCold"
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_10dp"
-                android:drawableLeft="@drawable/ic_email_orange_24dp"
+                android:drawableLeft="@drawable/ic_email_hot_24dp"
                 android:drawablePadding="@dimen/space_10dp"
                 android:text="@string/email_test"
                 android:textSize="@dimen/font_size_16sp"/>
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_10dp"
-                android:drawableLeft="@drawable/ic_phone_orange_24dp"
+                android:drawableLeft="@drawable/ic_phone_hot_24dp"
                 android:drawablePadding="@dimen/space_10dp"
                 android:text="@string/phone_test"
                 android:textSize="@dimen/font_size_16sp" />

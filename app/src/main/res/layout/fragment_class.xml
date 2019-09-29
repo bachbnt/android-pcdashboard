@@ -18,7 +18,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_photo_camera_sky_blue_32dp" />
+            android:src="@drawable/ic_camera_cold_32dp" />
 
         <ImageButton
             android:id="@+id/ib_photo_class"
@@ -28,7 +28,7 @@
             android:layout_marginRight="@dimen/space_10dp"
             android:layout_toLeftOf="@id/ib_camera_class"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_image_sky_blue_32dp" />
+            android:src="@drawable/ic_image_cold_32dp" />
 
         <TextView
             android:id="@+id/tv_input_class"
@@ -37,6 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_toRightOf="@id/cv_avatar_class"
+            android:layout_toLeftOf="@id/ib_photo_class"
             android:background="@drawable/bg_edittext_login"
             android:padding="@dimen/space_10dp"
             android:text="Bạn muốn chia sẻ điều gì với lớp?"

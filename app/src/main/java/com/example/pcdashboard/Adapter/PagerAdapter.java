@@ -22,8 +22,8 @@ import static com.example.pcdashboard.Manager.IScreenManager.DEPARTMENT_FRAGMENT
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private final int NUM_PAGES = 4;
     private String title[] = {"Bộ môn", "Lớp học", "Tin nhắn", "Tài khoản"};
-    private int icon[] = {R.drawable.ic_home_sky_blue_24dp, R.drawable.ic_school_sky_blue_24dp, R.drawable.ic_chat_sky_blue_24dp, R.drawable.ic_account_circle_sky_blue_24dp};
-    private int selectedIcon[] = {R.drawable.ic_home_orange_24dp, R.drawable.ic_school_orange_24dp, R.drawable.ic_chat_orange_24dp, R.drawable.ic_account_circle_orange_24dp};
+    private int icon[] = {R.drawable.ic_department_cold_24dp, R.drawable.ic_class_cold_24dp, R.drawable.ic_chat_cold_24dp, R.drawable.ic_account_cold_24dp};
+    private int selectedIcon[] = {R.drawable.ic_department_hot_24dp, R.drawable.ic_class_hot_24dp, R.drawable.ic_chat_hot_24dp, R.drawable.ic_account_hot_24dp};
     private Context context;
     private ScreenManager screenManager;
 

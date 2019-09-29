@@ -14,7 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/space_10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_cancel_sky_blue_32dp" />
+        android:src="@drawable/ic_close_middle_32dp" />
 
     <RelativeLayout
         android:id="@+id/rl_input_comment_dialog"
@@ -43,7 +43,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_send_yellow_green_32dp" />
+            android:src="@drawable/ic_send_middle_32dp" />
     </RelativeLayout>
 
     <View

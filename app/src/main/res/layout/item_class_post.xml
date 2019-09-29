@@ -21,12 +21,12 @@
             android:layout_marginTop="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_more_horiz_orange_24dp" />
+            android:src="@drawable/ic_more_hot_24dp" />
 
         <ImageView
             android:id="@+id/iv_image_class_item"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_content_class_item"
             android:src="@drawable/logo" />
 
@@ -71,7 +71,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/space_5dp"
             android:layout_marginBottom="@dimen/space_10dp"
-            android:drawableLeft="@drawable/ic_chat_bubble_orange_24dp"
+            android:drawableLeft="@drawable/ic_comment_hot_24dp"
             android:drawablePadding="@dimen/space_5dp"
             android:gravity="center_vertical"
             android:text="@string/comment"
