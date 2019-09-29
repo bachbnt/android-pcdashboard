@@ -22,7 +22,6 @@ public class AccountPresenter implements IAccountPresenter {
     @Override
     public void loadSelf() {
         User self= SharedPreferences.loadSelf(context);
-        Log.i("tag","loadSelf "+self.getName()+self.getId());
         view.showSelf(self);
     }
 }
