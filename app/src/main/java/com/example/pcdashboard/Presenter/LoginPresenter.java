@@ -23,6 +23,16 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
         this.view = iLoginView;
     }
 
+
+    @Override
+    public void onCheck(String userId, String password) {
+        if(userId!=null&&password!=null){
+            onRequest(userId,password);
+        }else {
+            view.onCheckFail();
+        }
+    }
+
     @Override
     public void onRequest(String userId, String password) {
         accountService.getToken(userId, password);
@@ -38,7 +48,6 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     public void onTokenSuccess() {
         Token token = SharedPreferences.loadToken(context);
         String userId = token.getUserId();
-        Log.i("tag", "onTokenSuccess " + userId);
         accountService.getSelf(userId);
     }
 
@@ -48,7 +57,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     }
 
     @Override
-    public void onFailure() {
-        view.onFailure();
+    public void onLoginFail() {
+        view.onLoginFail();
     }
 }

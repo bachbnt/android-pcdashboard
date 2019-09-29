@@ -71,7 +71,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-                onValid();
+                onInput();
                 break;
             case R.id.tv_forgot_login:
                 break;
@@ -79,12 +79,8 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onValid() {
-        if(!TextUtils.isEmpty(etAccount.getText().toString())&&!TextUtils.isEmpty(etPassword.getText().toString())){
-            presenter.onRequest(etAccount.getText().toString(),etPassword.getText().toString());
-        }else {
-            Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
-        }
+    public void onInput() {
+        presenter.onCheck(etAccount.getText().toString(),etPassword.getText().toString());
     }
 
     @Override
@@ -93,7 +89,12 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onFailure() {
-        Toast.makeText(getContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+    public void onCheckFail() {
+        Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoginFail() {
+        Toast.makeText(getContext(), "Đăng nhập thất bại, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
     }
 }

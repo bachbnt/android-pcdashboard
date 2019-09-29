@@ -27,7 +27,7 @@ public class AccountService {
 
         void onSelfSuccess();
 
-        void onFailure();
+        void onLoginFail();
     }
 
     private AccountService(Context context) {
@@ -61,7 +61,7 @@ public class AccountService {
                     SharedPreferences.saveToken(context, token);
                     Log.i("tag", "getToken 2 " + token.getAccessToken());
                     listener.onTokenSuccess();
-                } else listener.onFailure();
+                } else listener.onLoginFail();
             }
 
             @Override
@@ -95,8 +95,8 @@ public class AccountService {
 //          }
 //
 //          @Override
-//          public void onFailure(Call<Boolean> call, Throwable t) {
-//              listener.onFailure();
+//          public void onLoginFail(Call<Boolean> call, Throwable t) {
+//              listener.onLoginFail();
 //          }
 //      });
 //    }
@@ -110,8 +110,8 @@ public class AccountService {
 //            }
 //
 //            @Override
-//            public void onFailure(Call<Boolean> call, Throwable t) {
-//                listener.onFailure();
+//            public void onLoginFail(Call<Boolean> call, Throwable t) {
+//                listener.onLoginFail();
 //            }
 //        });
 //    }
