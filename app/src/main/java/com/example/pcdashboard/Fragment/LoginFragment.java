@@ -3,7 +3,6 @@ package com.example.pcdashboard.Fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.ILoginView;
@@ -74,7 +71,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-                onInput();
+                onCheck();
                 break;
             case R.id.tv_forgot_login:
                 break;
@@ -82,10 +79,9 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onInput() {
+    public void onCheck() {
         if(!TextUtils.isEmpty(etAccount.getText().toString())&&!TextUtils.isEmpty(etPassword.getText().toString())){
             presenter.onRequest(etAccount.getText().toString(),etPassword.getText().toString());
-            Log.i("tag","onInput");
         }else {
             Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
         }
