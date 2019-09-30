@@ -1,6 +1,7 @@
 package com.example.pcdashboard.API;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
@@ -49,6 +50,7 @@ public class PostService {
 
             @Override
             public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
+                Log.e("tag","getDepartmentPosts onFailure"+t.toString());
                 listener.onFailure();
             }
         });
@@ -66,6 +68,7 @@ public class PostService {
 
             @Override
             public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
+                Log.e("tag","getClassPosts onFailure"+t.toString());
                 listener.onFailure();
             }
         });
