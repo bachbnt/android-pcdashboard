@@ -1,9 +1,9 @@
 package com.example.pcdashboard.View;
 
-public interface ILoginView {
+public interface IForgotView {
     void onInput();
     void showLoadingDialog();
-    void onLoginSuccess();
+    void onGetSuccess(String email);
     void onCheckFailure();
-    void onLoginFailure();
+    void onGetFailure();
 }

@@ -41,7 +41,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
 
     @Override
     public void onResponse() {
-        view.onUpdateScreen();
+        view.onLoginSuccess();
     }
 
 
@@ -55,6 +55,11 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     @Override
     public void onSelfSuccess() {
         onResponse();
+    }
+
+    @Override
+    public void onForgotSuccess(String email) {
+        //NULL
     }
 
     @Override

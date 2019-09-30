@@ -27,6 +27,8 @@ public class AccountService {
 
         void onSelfSuccess();
 
+        void onForgotSuccess(String email);
+
         void onLoginFailure();
     }
 
@@ -73,6 +75,7 @@ public class AccountService {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String email = response.body();
+                listener.onForgotSuccess(email);
             }
 
             @Override

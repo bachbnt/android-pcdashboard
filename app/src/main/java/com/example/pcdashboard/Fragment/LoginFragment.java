@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onUpdateScreen() {
+    public void onLoginSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
         screenManager.openLoginScreen(DASHBOARD_ACTIVITY);
     }
