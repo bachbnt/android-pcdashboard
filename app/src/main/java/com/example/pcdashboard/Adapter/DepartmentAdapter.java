@@ -27,10 +27,6 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         this.departmentPosts = departmentPosts;
     }
 
-    interface OnItemtClickListener{
-        void onClick(DepartmentPost departmentPost);
-    }
-
     public void updateList(ArrayList<DepartmentPost> departmentPosts){
         this.departmentPosts=departmentPosts;
     }

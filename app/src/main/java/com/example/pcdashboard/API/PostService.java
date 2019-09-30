@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostService {
     private static PostService postService;
@@ -26,7 +28,11 @@ public class PostService {
 
     public PostService(Context context) {
         this.context = context;
-
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IServiceManager.url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        iPostService = retrofit.create(IPostService.class);
     }
 
     public void setListener(PostListener listener) {

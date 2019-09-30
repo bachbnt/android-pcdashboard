@@ -32,6 +32,11 @@ public class AccountService {
 
     private AccountService(Context context) {
         this.context = context;
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IServiceManager.url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        iAccountService = retrofit.create(IAccountService.class);
     }
 
     public void setListener(AccountListener listener) {
@@ -39,14 +44,8 @@ public class AccountService {
     }
 
     public static AccountService getInstance(Context context) {
-        if (accountService == null) {
+        if (accountService == null)
             accountService = new AccountService(context);
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(IServiceManager.url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            iAccountService = retrofit.create(IAccountService.class);
-        }
         return accountService;
     }
 

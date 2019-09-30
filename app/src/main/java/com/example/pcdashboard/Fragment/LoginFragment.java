@@ -2,7 +2,7 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Dialog.LoadingDialog;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
@@ -71,6 +72,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
+                loading();
                 onInput();
                 break;
             case R.id.tv_forgot_login:
@@ -81,6 +83,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onInput() {
         presenter.onCheck(etAccount.getText().toString(),etPassword.getText().toString());
+        Log.i("tag","onInput"+etAccount.getText().toString());
     }
 
     @Override
@@ -96,5 +99,9 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onLoginFailure() {
         Toast.makeText(getContext(), "Đăng nhập thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+    }
+    private void loading(){
+        LoadingDialog dialog=new LoadingDialog();
+        dialog.show(getFragmentManager(),"dialog");
     }
 }

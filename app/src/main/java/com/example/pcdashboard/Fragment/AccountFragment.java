@@ -3,6 +3,7 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80,80).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());
+        Log.i("tag","showSelf "+self.getClassId());
     }
 
     @Override
