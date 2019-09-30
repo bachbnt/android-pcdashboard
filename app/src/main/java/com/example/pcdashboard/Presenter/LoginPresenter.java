@@ -1,7 +1,6 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
@@ -9,9 +8,9 @@ import com.example.pcdashboard.Utility.SharedPreferences;
 import com.example.pcdashboard.View.ILoginView;
 
 public class LoginPresenter implements ILoginPresenter, AccountService.AccountListener {
+    private Context context;
     private ILoginView view;
     private AccountService accountService;
-    private Context context;
 
     public LoginPresenter(Context context) {
         this.context=context;
@@ -29,7 +28,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
         if(userId!=null&&password!=null){
             onRequest(userId,password);
         }else {
-            view.onCheckFail();
+            view.onCheckFailure();
         }
     }
 
@@ -57,7 +56,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     }
 
     @Override
-    public void onLoginFail() {
-        view.onLoginFail();
+    public void onLoginFailure() {
+        view.onLoginFailure();
     }
 }

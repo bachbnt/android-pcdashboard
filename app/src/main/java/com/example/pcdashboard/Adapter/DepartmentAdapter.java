@@ -30,6 +30,10 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
     interface OnItemtClickListener{
         void onClick(DepartmentPost departmentPost);
     }
+
+    public void updateList(ArrayList<DepartmentPost> departmentPosts){
+        this.departmentPosts=departmentPosts;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

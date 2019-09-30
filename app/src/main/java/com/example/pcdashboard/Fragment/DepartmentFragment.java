@@ -5,21 +5,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.DepartmentAdapter;
+import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.DepartmentPost;
+import com.example.pcdashboard.Presenter.DepartmentPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.View.IDeparmentView;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DepartmentFragment extends Fragment {
+public class DepartmentFragment extends Fragment implements IDeparmentView {
+    private ScreenManager screenManager;
+    private DepartmentPresenter presenter;
     private RecyclerView recyclerView;
     private DepartmentAdapter departmentAdapter;
 
@@ -34,22 +40,41 @@ public class DepartmentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_department, container, false);
-        initiazlie(view);
+        initialize(view);
         return view;
     }
 
-    private void initiazlie(View view) {
+    @Override
+    public void onResume() {
+        presenter.setDepartmentView(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.setDepartmentView(null);
+        super.onPause();
+    }
+
+    private void initialize(View view) {
+        screenManager=ScreenManager.getInstance();
+        presenter=new DepartmentPresenter(getContext());
         recyclerView = view.findViewById(R.id.recycler_view_department);
-        departmentAdapter = new DepartmentAdapter(getContext(),createList());
+        departmentAdapter = new DepartmentAdapter(getContext(),new ArrayList<DepartmentPost>());
         recyclerView.setAdapter(departmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        presenter.onRequest();
     }
-    private ArrayList<DepartmentPost> createList(){
-        ArrayList<DepartmentPost> list=new ArrayList();
-        list.add(new DepartmentPost("111","Thông báo nhập học","10:30, 20/11/2019","Toàn bộ sinh viên sẽ nhập học vào...","https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/17904352_875857065910879_4253602225817849277_n.jpg?_nc_cat=110&_nc_oc=AQm1MrCThCtzjxgxXKxo54CrWFGycLtU51zQ2bW2hfUsNscSrWP4-sKa_kNytJdSl2A&_nc_ht=scontent.fsgn5-3.fna&oh=095cde13bcb5369e30f9218887ed336c&oe=5DF1F8F6"));
-        list.add(new DepartmentPost("111","Thông báo nhập học","10:30, 20/11/2019","Toàn bộ sinh viên sẽ nhập học vào...","https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/17904352_875857065910879_4253602225817849277_n.jpg?_nc_cat=110&_nc_oc=AQm1MrCThCtzjxgxXKxo54CrWFGycLtU51zQ2bW2hfUsNscSrWP4-sKa_kNytJdSl2A&_nc_ht=scontent.fsgn5-3.fna&oh=095cde13bcb5369e30f9218887ed336c&oe=5DF1F8F6"));
-        list.add(new DepartmentPost("111","Thông báo nhập học","10:30, 20/11/2019","Toàn bộ sinh viên sẽ nhập học vào...","https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/17904352_875857065910879_4253602225817849277_n.jpg?_nc_cat=110&_nc_oc=AQm1MrCThCtzjxgxXKxo54CrWFGycLtU51zQ2bW2hfUsNscSrWP4-sKa_kNytJdSl2A&_nc_ht=scontent.fsgn5-3.fna&oh=095cde13bcb5369e30f9218887ed336c&oe=5DF1F8F6"));
-        list.add(new DepartmentPost("111","Thông báo nhập học","10:30, 20/11/2019","Toàn bộ sinh viên sẽ nhập học vào...","https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/17904352_875857065910879_4253602225817849277_n.jpg?_nc_cat=110&_nc_oc=AQm1MrCThCtzjxgxXKxo54CrWFGycLtU51zQ2bW2hfUsNscSrWP4-sKa_kNytJdSl2A&_nc_ht=scontent.fsgn5-3.fna&oh=095cde13bcb5369e30f9218887ed336c&oe=5DF1F8F6"));
-        return list;
+
+
+    @Override
+    public void onUpdate(ArrayList<DepartmentPost> departmentPosts) {
+        departmentAdapter.updateList(departmentPosts);
+        departmentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure() {
+        Toast.makeText(getContext(), "Tải danh sách thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
     }
 }

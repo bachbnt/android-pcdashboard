@@ -89,12 +89,12 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     }
 
     @Override
-    public void onCheckFail() {
-        Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
+    public void onCheckFailure() {
+        Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu\nkhông được để trống", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onLoginFail() {
-        Toast.makeText(getContext(), "Đăng nhập thất bại, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+    public void onLoginFailure() {
+        Toast.makeText(getContext(), "Đăng nhập thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
     }
 }

@@ -27,7 +27,7 @@ public class AccountService {
 
         void onSelfSuccess();
 
-        void onLoginFail();
+        void onLoginFailure();
     }
 
     private AccountService(Context context) {
@@ -51,7 +51,6 @@ public class AccountService {
     }
 
     public void getToken(String userId, String password) {
-        Log.i("tag", "getToken 1" + userId + password);
         Call<Token> call = iAccountService.getToken(new TokenRequest(userId, password));
         call.enqueue(new Callback<Token>() {
             @Override
@@ -59,14 +58,12 @@ public class AccountService {
                 Token token = response.body();
                 if (token != null) {
                     SharedPreferences.saveToken(context, token);
-                    Log.i("tag", "getToken 2 " + token.getAccessToken());
                     listener.onTokenSuccess();
-                } else listener.onLoginFail();
+                } else listener.onLoginFailure();
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                Log.i("tag", "getToken3 " + t.toString());
             }
         });
     }
@@ -91,12 +88,12 @@ public class AccountService {
 //      call.enqueue(new Callback<Boolean>() {
 //          @Override
 //          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//              listener.onSuccess();;
+//              listener.onDepartmentSuccess();;
 //          }
 //
 //          @Override
-//          public void onLoginFail(Call<Boolean> call, Throwable t) {
-//              listener.onLoginFail();
+//          public void onLoginFailure(Call<Boolean> call, Throwable t) {
+//              listener.onLoginFailure();
 //          }
 //      });
 //    }
@@ -106,12 +103,12 @@ public class AccountService {
 //        call.enqueue(new Callback<Boolean>() {
 //            @Override
 //            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//                listener.onSuccess();
+//                listener.onDepartmentSuccess();
 //            }
 //
 //            @Override
-//            public void onLoginFail(Call<Boolean> call, Throwable t) {
-//                listener.onLoginFail();
+//            public void onLoginFailure(Call<Boolean> call, Throwable t) {
+//                listener.onLoginFailure();
 //            }
 //        });
 //    }
