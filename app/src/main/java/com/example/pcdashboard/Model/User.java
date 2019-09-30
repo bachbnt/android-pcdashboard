@@ -9,14 +9,16 @@ public class User {
     private String email;
     private String phone;
     private String avatar;
+    private String classId;
     private int status;
 
-    public User(String id, String name, String email, String phone, String avatar, int status) {
+    public User(String id, String name, String email, String phone, String avatar,String classId, int status) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.avatar = avatar;
+        this.classId=classId;
         this.status = status;
     }
 
@@ -58,6 +60,14 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public int getStatus() {

@@ -2,6 +2,7 @@ package com.example.pcdashboard.API;
 
 import android.content.Context;
 
+import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Utility.SharedPreferences;
 
@@ -18,7 +19,7 @@ public class PostService {
     private PostListener listener;
     public interface PostListener{
         void onDepartmentSuccess(ArrayList<DepartmentPost> departmentPosts);
-        void onClassSuccess();
+        void onClassSuccess(ArrayList<ClassPost> classPosts);
         void onFailure();
     }
 
@@ -48,6 +49,23 @@ public class PostService {
 
             @Override
             public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
+                listener.onFailure();
+            }
+        });
+    }
+    public void getClassPosts(){
+        String token = SharedPreferences.loadToken(context).getTokenType() + " " + SharedPreferences.loadToken(context).getAccessToken();
+        String classId=SharedPreferences.loadSelf(context).getClassId();
+        Call<ArrayList<ClassPost>> call=iPostService.getAllClassPosts(token,classId);
+        call.enqueue(new Callback<ArrayList<ClassPost>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
+                ArrayList<ClassPost> classPosts=response.body();
+                listener.onClassSuccess(classPosts);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
                 listener.onFailure();
             }
         });

@@ -1,5 +1,6 @@
 package com.example.pcdashboard.API;
 
+import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 
 import java.util.ArrayList;
@@ -45,4 +46,11 @@ public interface IPostService {
     @GET("post/department")
     Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token);
 
+    @Headers(
+            {
+                    "Content-Type:application/json",
+            }
+    )
+    @GET("post/class/{classId}")
+    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token,String classId);
 }
