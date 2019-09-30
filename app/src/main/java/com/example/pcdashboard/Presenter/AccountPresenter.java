@@ -1,7 +1,6 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferences;
@@ -22,6 +21,6 @@ public class AccountPresenter implements IAccountPresenter {
     @Override
     public void loadSelf() {
         User self= SharedPreferences.loadSelf(context);
-        view.showSelf(self);
+        view.onUpdate(self);
     }
 }

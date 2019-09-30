@@ -32,7 +32,7 @@ public class LoadingDialog extends DialogFragment {
         // Inflate the layout for this fragment
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        setCancelable(false);
         return inflater.inflate(R.layout.dialog_loading, container, false);
     }
-
 }

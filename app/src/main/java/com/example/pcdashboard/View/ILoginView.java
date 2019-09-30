@@ -2,7 +2,8 @@ package com.example.pcdashboard.View;
 
 public interface ILoginView {
     void onInput();
-    void onUpdate();
+    void showLoadingDialog();
+    void onUpdateScreen();
     void onCheckFailure();
     void onLoginFailure();
 }

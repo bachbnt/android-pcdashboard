@@ -30,4 +30,7 @@ public class ScreenManager {
     public void openDialog(String dialogName){
         iScreenManager.openDialog(dialogName);
     }
+    public void closeDialog(String dialogName){
+        iScreenManager.closeDialog(dialogName);
+    }
 }

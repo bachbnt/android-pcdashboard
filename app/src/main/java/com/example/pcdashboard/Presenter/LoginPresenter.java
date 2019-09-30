@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
@@ -25,7 +26,8 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
 
     @Override
     public void onCheck(String userId, String password) {
-        if(userId!=null&&password!=null){
+        if(!TextUtils.isEmpty(userId)&&!TextUtils.isEmpty(password)){
+            view.showLoadingDialog();
             onRequest(userId,password);
         }else {
             view.onCheckFailure();
@@ -39,7 +41,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
 
     @Override
     public void onResponse() {
-        view.onUpdate();
+        view.onUpdateScreen();
     }
 
 

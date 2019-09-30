@@ -97,4 +97,9 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 break;
         }
     }
+
+    @Override
+    public void closeDialog(String dialogName) {
+        //NULL
+    }
 }

@@ -11,10 +11,12 @@ public interface IScreenManager {
     String CHAT_FRAGMENT = "CHAT_FRAGMENT";
     String ACCOUNT_FRAGMENT = "ACCOUNT_FRAGMENT";
     String INFO_DIALOG="INFO_DIALOG";
+    String LOADING_DIALOG="LOADING_DIALOG";
 
     void openLoginScreen(String screenName);
 
     Fragment openDashboardScreen(String screenName);
 
     void openDialog(String dialogName);
+    void closeDialog(String dialogName);
 }

@@ -3,6 +3,8 @@ package com.example.pcdashboard.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pcdashboard.Dialog.InfoDialog;
+import com.example.pcdashboard.Dialog.LoadingDialog;
 import com.example.pcdashboard.Fragment.ForgotFragment;
 import com.example.pcdashboard.Fragment.LoginFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
@@ -10,9 +12,11 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
 import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 public class LoginActivity extends AppCompatActivity implements IScreenManager {
+    private DialogFragment dialog;
     private ScreenManager screenManager;
 
     @Override
@@ -53,6 +57,21 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
 
     @Override
     public void openDialog(String dialogName) {
-        //NULL
+        switch (dialogName){
+            case LOADING_DIALOG:
+                LoadingDialog dialog=new LoadingDialog();
+                this.dialog=dialog;
+                dialog.show(getSupportFragmentManager(),"loading dialog");
+                break;
+        }
+    }
+
+    @Override
+    public void closeDialog(String dialogName) {
+        switch (dialogName){
+            case LOADING_DIALOG:
+                dialog.dismiss();
+                break;
+        }
     }
 }

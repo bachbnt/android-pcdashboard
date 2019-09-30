@@ -2,7 +2,6 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,13 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.pcdashboard.Dialog.LoadingDialog;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.ILoginView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;
+import static com.example.pcdashboard.Manager.IScreenManager.LOADING_DIALOG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,7 +58,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
-        presenter=new LoginPresenter(getContext());
+        presenter = new LoginPresenter(getContext());
         etAccount = view.findViewById(R.id.et_account_login);
         etPassword = view.findViewById(R.id.et_password_login);
         btnLogin = view.findViewById(R.id.btn_login_login);
@@ -72,7 +71,6 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-                loading();
                 onInput();
                 break;
             case R.id.tv_forgot_login:
@@ -82,12 +80,17 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     @Override
     public void onInput() {
-        presenter.onCheck(etAccount.getText().toString(),etPassword.getText().toString());
-        Log.i("tag","onInput"+etAccount.getText().toString());
+        presenter.onCheck(etAccount.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
-    public void onUpdate() {
+    public void showLoadingDialog() {
+        screenManager.openDialog(LOADING_DIALOG);
+    }
+
+    @Override
+    public void onUpdateScreen() {
+        screenManager.closeDialog(LOADING_DIALOG);
         screenManager.openLoginScreen(DASHBOARD_ACTIVITY);
     }
 
@@ -98,10 +101,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     @Override
     public void onLoginFailure() {
+        screenManager.closeDialog(LOADING_DIALOG);
         Toast.makeText(getContext(), "Đăng nhập thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
-    }
-    private void loading(){
-        LoadingDialog dialog=new LoadingDialog();
-        dialog.show(getFragmentManager(),"dialog");
     }
 }

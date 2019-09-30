@@ -72,15 +72,14 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
     }
 
     @Override
-    public void showSelf(User self) {
+    public void onUpdate(User self) {
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80,80).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());
-        Log.i("tag","showSelf "+self.getClassId());
     }
 
     @Override
-    public void showDialog() {
+    public void showInfoDialog() {
         screenManager.openDialog(INFO_DIALOG);
     }
 
@@ -88,7 +87,7 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_info_account:
-                showDialog();
+                showInfoDialog();
                 break;
         }
     }
