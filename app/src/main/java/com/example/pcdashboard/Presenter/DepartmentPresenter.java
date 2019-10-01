@@ -9,7 +9,7 @@ import com.example.pcdashboard.View.IDeparmentView;
 
 import java.util.ArrayList;
 
-public class DepartmentPresenter implements IDepartmentPresenter,PostService.PostListener {
+public class DepartmentPresenter implements IDepartmentPresenter, PostService.DepartmentListener {
     private Context context;
     private IDeparmentView view;
     private PostService postService;
@@ -17,7 +17,7 @@ public class DepartmentPresenter implements IDepartmentPresenter,PostService.Pos
     public DepartmentPresenter(Context context) {
         this.context = context;
         postService=PostService.getInstance(context);
-        postService.setListener(this);
+        postService.setDepartmentListener(this);
     }
 
     public void setDepartmentView(IDeparmentView iDeparmentView){
@@ -36,11 +36,6 @@ public class DepartmentPresenter implements IDepartmentPresenter,PostService.Pos
     @Override
     public void onDepartmentSuccess(ArrayList<DepartmentPost> departmentPosts) {
         onResponse(departmentPosts);
-    }
-
-    @Override
-    public void onClassSuccess(ArrayList<ClassPost> classPosts) {
-        //NULL
     }
 
 

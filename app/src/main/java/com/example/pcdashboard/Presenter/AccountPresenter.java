@@ -3,7 +3,7 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Utility.SharedPreferences;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 public class AccountPresenter implements IAccountPresenter {
@@ -20,7 +20,7 @@ public class AccountPresenter implements IAccountPresenter {
 
     @Override
     public void loadSelf() {
-        User self= SharedPreferences.loadSelf(context);
+        User self= SharedPreferencesUtil.loadSelf(context);
         view.onUpdate(self);
     }
 }

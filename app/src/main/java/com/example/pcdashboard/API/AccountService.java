@@ -6,9 +6,9 @@ import android.util.Log;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Request.TokenRequest;
-import com.example.pcdashboard.Utility.SharedPreferences;
-
-import java.util.ArrayList;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,16 +27,19 @@ public class AccountService {
 
         void onSelfSuccess();
 
-        void onForgotSuccess(String email);
+        void onForgotSuccess();
+
+        void onForgotFailure();
 
         void onLoginFailure();
     }
 
     private AccountService(Context context) {
         this.context = context;
+        Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(IServiceManager.url)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         iAccountService = retrofit.create(IAccountService.class);
     }
@@ -58,7 +61,7 @@ public class AccountService {
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token token = response.body();
                 if (token != null) {
-                    SharedPreferences.saveToken(context, token);
+                    SharedPreferencesUtil.saveToken(context, token);
                     listener.onTokenSuccess();
                 } else listener.onLoginFailure();
             }
@@ -75,12 +78,16 @@ public class AccountService {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String email = response.body();
-                listener.onForgotSuccess(email);
+                if (email != null) {
+                    SharedPreferencesUtil.saveEmail(context, email);
+                    listener.onForgotSuccess();
+                } else listener.onForgotFailure();
+                Log.i("tag", "forgetPassword " + SharedPreferencesUtil.loadEmail(context));
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                listener.onForgotFailure();
             }
         });
     }
@@ -116,14 +123,14 @@ public class AccountService {
 //    }
 
     public void getSelf(String userId) {
-        String token = SharedPreferences.loadToken(context).getTokenType() + " " + SharedPreferences.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
         Call<User> call = iAccountService.getSelf(token, userId);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User self = response.body();
-                Log.i("tag", "getSelf " + self.getName()+self.getId());
-                SharedPreferences.saveSelf(context, self);
+                Log.i("tag", "getSelf " + self.getName() + self.getId());
+                SharedPreferencesUtil.saveSelf(context, self);
                 listener.onSelfSuccess();
             }
 
@@ -134,18 +141,18 @@ public class AccountService {
         });
     }
 
-    public void getAllUsers(String userId) {
-        Call<ArrayList<User>> call = iAccountService.getAllUsers(userId);
-        call.enqueue(new Callback<ArrayList<User>>() {
-            @Override
-            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                ArrayList<User> users = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void getAllUsers(String userId) {
+//        Call<ArrayList<User>> call = iAccountService.getAllUsers(userId);
+//        call.enqueue(new Callback<ArrayList<User>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+//                ArrayList<User> users = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 }

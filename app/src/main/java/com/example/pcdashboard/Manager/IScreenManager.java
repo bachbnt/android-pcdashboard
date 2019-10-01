@@ -12,6 +12,8 @@ public interface IScreenManager {
     String ACCOUNT_FRAGMENT = "ACCOUNT_FRAGMENT";
     String INFO_DIALOG="INFO_DIALOG";
     String LOADING_DIALOG="LOADING_DIALOG";
+    String EMAIL_DIALOG="EMAIL_DIALOG";
+    String COMMENT_DIALOG="COMMENT_DIALOG";
 
     void openLoginScreen(String screenName);
 

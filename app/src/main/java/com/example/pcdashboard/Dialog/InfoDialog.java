@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferences;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +61,7 @@ public class InfoDialog extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
     private void loadInfo(){
-        User self=SharedPreferences.loadSelf(getContext());
+        User self= SharedPreferencesUtil.loadSelf(getContext());
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(160,160).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());

@@ -26,30 +26,29 @@ public interface IAccountService {
     @POST("auth/signin")
     Call<Token> getToken(@Body TokenRequest tokenRequest);
 
-    @FormUrlEncoded
     @PUT("user/forget-password/{userId}")
     Call<String> forgetPassword(@Path("userId") String id);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
-            }
-    )
+//    @Headers(
+//            {
+//                    "Content-Type:application/json",
+//                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
+//            }
+//    )
+//
+//    @FormUrlEncoded
+//    @PUT("user/change-password/{userId}")
+//    Call<Boolean> changePassword(@Path("userId") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
 
-    @FormUrlEncoded
-    @PUT("user/change-password/{userId}")
-    Call<Boolean> changePassword(@Path("userId") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
-
-    @Headers(
-            {
-                    "Content-Type:application/json",
-                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
-            }
-    )
-    @FormUrlEncoded
-    @PUT("user/update-info/{userId}")
-    Call<Boolean> updateInfo(@Path("userId") String id, @Field("email") String email, @Field("phone") String phone);
+//    @Headers(
+//            {
+//                    "Content-Type:application/json",
+//                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
+//            }
+//    )
+//    @FormUrlEncoded
+//    @PUT("user/update-info/{userId}")
+//    Call<Boolean> updateInfo(@Path("userId") String id, @Field("email") String email, @Field("phone") String phone);
 
     @Headers(
             {
@@ -59,6 +58,6 @@ public interface IAccountService {
     @GET("user/{userId}")
     Call<User> getSelf(@Header("Authorization") String token, @Path("userId") String id);
 
-    @GET("user/all/{userId}")
-    Call<ArrayList<User>> getAllUsers(@Path("userId") String id);
+//    @GET("user/all/{userId}")
+//    Call<ArrayList<User>> getAllUsers(@Path("userId") String id);
 }

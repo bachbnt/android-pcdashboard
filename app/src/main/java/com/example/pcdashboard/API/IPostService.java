@@ -2,13 +2,17 @@ package com.example.pcdashboard.API;
 
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
+import com.example.pcdashboard.Model.PostComment;
+import com.example.pcdashboard.Request.CommentRequest;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 
 public interface IPostService {
     //ClassPost
@@ -52,5 +56,12 @@ public interface IPostService {
             }
     )
     @GET("post/class/{classId}")
-    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token,String classId);
+    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token,@Path("classId") String classId);
+    @Headers(
+            {
+                    "Content-Type:application/json",
+            }
+    )
+    @GET("comment/{postId}")
+    Call<ArrayList<PostComment>> getAllComments(@Header("Authorization") String token, @Path("postId") String postId);
 }

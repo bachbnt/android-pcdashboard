@@ -1,14 +1,17 @@
 package com.example.pcdashboard.Utility;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.pcdashboard.Model.ClassPost;
+import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 
-public class SharedPreferences {
+public class SharedPreferencesUtil {
     public static void saveToken(Context context, Token token) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
-        android.content.SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString("accessToken", token.getAccessToken());
         editor.putString("tokenType",token.getTokenType());
         editor.putString("userId",token.getUserId());
@@ -16,7 +19,7 @@ public class SharedPreferences {
     }
 
     public static Token loadToken(Context context) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         String accessToken=preferences.getString("accessToken",null);
         String tokenType=preferences.getString("tokenType",null);
         String userId=preferences.getString("userId",null);
@@ -25,8 +28,8 @@ public class SharedPreferences {
     }
 
     public static void saveSelf(Context context, User self) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
-        android.content.SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString("id", self.getId());
         editor.putString("name",self.getName());
         editor.putString("email",self.getEmail());
@@ -38,7 +41,7 @@ public class SharedPreferences {
     }
 
     public static User loadSelf(Context context) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
         String id= preferences.getString("id",null);
         String name=preferences.getString("name",null);
         String email=preferences.getString("email",null);
@@ -48,6 +51,32 @@ public class SharedPreferences {
         int status=preferences.getInt("status",0);
         User self=new User(id,name,email,phone,avatar,classId,status);
         return self;
+    }
+
+    public static void saveEmail(Context context,String email){
+        SharedPreferences preferences=context.getSharedPreferences("email",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("email",email);
+        editor.commit();
+    }
+
+    public static String loadEmail(Context context){
+        SharedPreferences preferences=context.getSharedPreferences("email",Context.MODE_PRIVATE);
+        String email=preferences.getString("email",null);
+        return email;
+    }
+
+    public static void savePost(Context context, ClassPost classPost){
+        SharedPreferences preferences=context.getSharedPreferences("post",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("postId",classPost.getId());
+        editor.commit();
+    }
+
+    public static String loadPost(Context context){
+        SharedPreferences preferences=context.getSharedPreferences("post",Context.MODE_PRIVATE);
+        String postId=preferences.getString("postId",null);
+        return postId;
     }
 
     public static String loadIdPreferences(Context context, String key){
@@ -67,8 +96,8 @@ public class SharedPreferences {
         editor.commit();
     }
 
-    public static void clearPreferences(Context context, String key) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("caches", Context.MODE_PRIVATE);
+    public static void clearEmail(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("email", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();

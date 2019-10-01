@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
-import com.example.pcdashboard.Utility.SharedPreferences;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 
 public class LoginPresenter implements ILoginPresenter, AccountService.AccountListener {
@@ -47,7 +47,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
 
     @Override
     public void onTokenSuccess() {
-        Token token = SharedPreferences.loadToken(context);
+        Token token = SharedPreferencesUtil.loadToken(context);
         String userId = token.getUserId();
         accountService.getSelf(userId);
     }
@@ -58,7 +58,12 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     }
 
     @Override
-    public void onForgotSuccess(String email) {
+    public void onForgotSuccess() {
+        //NULL
+    }
+
+    @Override
+    public void onForgotFailure() {
         //NULL
     }
 

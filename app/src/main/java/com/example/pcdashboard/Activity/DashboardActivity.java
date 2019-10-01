@@ -1,12 +1,14 @@
 package com.example.pcdashboard.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
+import com.example.pcdashboard.Dialog.CommentDialog;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ChatFragment;
@@ -94,6 +96,11 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case INFO_DIALOG:
                 InfoDialog dialog=new InfoDialog();
                 dialog.show(getSupportFragmentManager(),"info dialog");
+                break;
+            case COMMENT_DIALOG:
+                Log.i("tag","openDialog");
+                CommentDialog commentDialog=new CommentDialog();
+                commentDialog.show(getSupportFragmentManager(),"comment dialog");
                 break;
         }
     }

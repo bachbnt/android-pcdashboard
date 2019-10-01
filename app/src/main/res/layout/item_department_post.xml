@@ -28,7 +28,6 @@
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginTop="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
-            android:layout_marginBottom="@dimen/space_5dp"
             android:text="@string/title_test"
             android:textColor="@color/colorSlateGray"
             android:textSize="@dimen/font_size_16sp"
@@ -38,12 +37,13 @@
             android:id="@+id/tv_time_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:layout_below="@id/tv_title_department_item"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:text="@string/time_test"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/font_size_12sp" />
+            android:textSize="@dimen/font_size_10sp" />
 
         <TextView
             android:id="@+id/tv_content_department_item"
@@ -56,6 +56,6 @@
             android:layout_marginBottom="@dimen/space_10dp"
             android:text="@string/content_test"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_12sp" />
+            android:textSize="@dimen/font_size_14sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

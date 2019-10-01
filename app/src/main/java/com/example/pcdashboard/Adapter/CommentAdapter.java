@@ -25,6 +25,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         this.context = context;
         this.postComments = postComments;
     }
+    public void updateList(ArrayList<PostComment> postComments){
+        this.postComments=postComments;
+    }
 
     @NonNull
     @Override

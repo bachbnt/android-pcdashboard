@@ -18,6 +18,7 @@ import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.ILoginView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;
+import static com.example.pcdashboard.Manager.IScreenManager.FORGOT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.LOADING_DIALOG;
 
 /**
@@ -74,6 +75,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
                 onInput();
                 break;
             case R.id.tv_forgot_login:
+                screenManager.openLoginScreen(FORGOT_FRAGMENT);
                 break;
         }
     }

@@ -16,7 +16,10 @@
         android:layout_toRightOf="@id/cv_avatar_comment_item"
         android:background="@drawable/bg_item_comment"
         android:orientation="vertical"
-        android:padding="@dimen/space_10dp">
+        android:paddingTop="@dimen/space_5dp"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingBottom="@dimen/space_5dp">
 
         <TextView
             android:id="@+id/tv_name_comment_item"
@@ -24,16 +27,17 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="@color/colorSlateGray"
-            android:textSize="@dimen/font_size_16sp"
+            android:textSize="@dimen/font_size_14sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_content_comment_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text="@string/content_test"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_12sp" />
+            android:textSize="@dimen/font_size_14sp" />
     </LinearLayout>
 
     <TextView
@@ -45,7 +49,7 @@
         android:layout_marginLeft="@dimen/space_10dp"
         android:text="@string/time_test"
         android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/font_size_12sp" />
+        android:textSize="@dimen/font_size_10sp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_avatar_comment_item"

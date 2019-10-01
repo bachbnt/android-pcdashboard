@@ -23,10 +23,14 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     private ArrayList<ClassPost> classPosts;
     private OnItemClickListener listener;
 
-    public ClassAdapter(Context context, ArrayList<ClassPost> classPosts,OnItemClickListener listener) {
+    public ClassAdapter(Context context, ArrayList<ClassPost> classPosts, OnItemClickListener listener) {
         this.context = context;
         this.classPosts = classPosts;
-        this.listener=listener;
+        this.listener = listener;
+    }
+
+    public void updateList(ArrayList<ClassPost> classPosts) {
+        this.classPosts = classPosts;
     }
 
     public interface OnItemClickListener {
@@ -47,7 +51,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         holder.tvName.setText(classPost.getUserName());
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
-        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40,40).into(holder.ivAvatar);
+        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
         Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override

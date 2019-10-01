@@ -2,6 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.View.IForgotView;
@@ -14,6 +15,7 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     public ForgotPresenter(Context context) {
         this.context = context;
         accountService = AccountService.getInstance(context);
+        accountService.setListener(this);
     }
     public void setForgotView(IForgotView iForgotView){
         this.view=iForgotView;
@@ -21,7 +23,7 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
 
     @Override
     public void onCheck(String userId) {
-        if(TextUtils.isEmpty(userId)){
+        if(!TextUtils.isEmpty(userId)){
             view.showLoadingDialog();
             onRequest(userId);
         }else view.onCheckFailure();
@@ -33,8 +35,8 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     }
 
     @Override
-    public void onResponse(String email) {
-        view.onGetSuccess(email);
+    public void onResponse() {
+        view.onGetSuccess();
     }
 
     @Override
@@ -48,8 +50,14 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     }
 
     @Override
-    public void onForgotSuccess(String email) {
-        onResponse(email);
+    public void onForgotSuccess() {
+        onResponse();
+        Log.i("tag","onForgotSuccess");
+    }
+
+    @Override
+    public void onForgotFailure() {
+        view.onGetFailure();
     }
 
     @Override

@@ -4,6 +4,7 @@ package com.example.pcdashboard.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +16,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.CommentAdapter;
+import com.example.pcdashboard.Fragment.ClassFragment;
 import com.example.pcdashboard.Model.PostComment;
+import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.View.ICommentView;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CommentDialog extends DialogFragment {
+public class CommentDialog extends DialogFragment implements ICommentView {
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
+    private CommentPresenter presenter;
 
 
     public CommentDialog() {
@@ -44,21 +50,21 @@ public class CommentDialog extends DialogFragment {
 
     private void initialize(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_comment);
-        commentAdapter = new CommentAdapter(getContext(), createList());
+        commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>());
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        presenter=new CommentPresenter(getContext());
+        presenter.setClassView(this);
+        presenter.onRequest(SharedPreferencesUtil.loadPost(getContext()));
+        Log.i("tag","onRequest comment"+SharedPreferencesUtil.loadPost(getContext()));
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    private ArrayList<PostComment> createList() {
-        ArrayList<PostComment> list = new ArrayList<>();
-        list.add(new PostComment("111", "Tùng chỉ được cái xaolin là giỏi :)", "6:30, 30/9/2019", "1610000", "Nguyễn Hồng Sỹ Nguyên", "https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/69260324_2375901956010113_4743259498271997952_n.jpg?_nc_cat=103&_nc_oc=AQnFrrXJvWb4Bli8RLrdrXQH3GzhnGBh-l6yk7MUpm5EMyV3cij5FLBPxg8-2HaM38c&_nc_ht=scontent.fsgn5-7.fna&oh=911f659f7a33502d1f3a3b7370cd7f2d&oe=5DF47001"));
-        list.add(new PostComment("111", "Tùng chỉ được cái xaolin là giỏi :)", "6:30, 30/9/2019", "1610000", "Nguyễn Hồng Sỹ Nguyên", "https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/69260324_2375901956010113_4743259498271997952_n.jpg?_nc_cat=103&_nc_oc=AQnFrrXJvWb4Bli8RLrdrXQH3GzhnGBh-l6yk7MUpm5EMyV3cij5FLBPxg8-2HaM38c&_nc_ht=scontent.fsgn5-7.fna&oh=911f659f7a33502d1f3a3b7370cd7f2d&oe=5DF47001"));
-        list.add(new PostComment("111", "Tùng chỉ được cái xaolin là giỏi :)", "6:30, 30/9/2019", "1610000", "Nguyễn Hồng Sỹ Nguyên", "https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/69260324_2375901956010113_4743259498271997952_n.jpg?_nc_cat=103&_nc_oc=AQnFrrXJvWb4Bli8RLrdrXQH3GzhnGBh-l6yk7MUpm5EMyV3cij5FLBPxg8-2HaM38c&_nc_ht=scontent.fsgn5-7.fna&oh=911f659f7a33502d1f3a3b7370cd7f2d&oe=5DF47001"));
-        list.add(new PostComment("111", "Tùng chỉ được cái xaolin là giỏi :)", "6:30, 30/9/2019", "1610000", "Nguyễn Hồng Sỹ Nguyên", "https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/69260324_2375901956010113_4743259498271997952_n.jpg?_nc_cat=103&_nc_oc=AQnFrrXJvWb4Bli8RLrdrXQH3GzhnGBh-l6yk7MUpm5EMyV3cij5FLBPxg8-2HaM38c&_nc_ht=scontent.fsgn5-7.fna&oh=911f659f7a33502d1f3a3b7370cd7f2d&oe=5DF47001"));
-        list.add(new PostComment("111", "Tùng chỉ được cái xaolin là giỏi :)", "6:30, 30/9/2019", "1610000", "Nguyễn Hồng Sỹ Nguyên", "https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/69260324_2375901956010113_4743259498271997952_n.jpg?_nc_cat=103&_nc_oc=AQnFrrXJvWb4Bli8RLrdrXQH3GzhnGBh-l6yk7MUpm5EMyV3cij5FLBPxg8-2HaM38c&_nc_ht=scontent.fsgn5-7.fna&oh=911f659f7a33502d1f3a3b7370cd7f2d&oe=5DF47001"));
 
-        return list;
+    @Override
+    public void onUpdate(ArrayList<PostComment> postComments) {
+        commentAdapter.updateList(postComments);
+        commentAdapter.notifyDataSetChanged();
     }
 }

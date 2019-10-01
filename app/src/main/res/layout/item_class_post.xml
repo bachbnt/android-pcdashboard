@@ -38,7 +38,7 @@
             android:layout_margin="@dimen/space_10dp"
             android:text="@string/content_test"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_12sp" />
+            android:textSize="@dimen/font_size_14sp" />
 
         <TextView
             android:id="@+id/tv_name_class_item"
@@ -61,7 +61,7 @@
             android:layout_toRightOf="@id/cv_avatar_class_item"
             android:text="@string/time_test"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/font_size_12sp" />
+            android:textSize="@dimen/font_size_10sp" />
 
         <TextView
             android:id="@+id/tv_comment_class_item"
