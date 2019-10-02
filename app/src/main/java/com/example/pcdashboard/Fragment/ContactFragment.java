@@ -14,10 +14,10 @@ import com.example.pcdashboard.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChatFragment extends Fragment {
+public class ContactFragment extends Fragment {
 
 
-    public ChatFragment() {
+    public ContactFragment() {
         // Required empty public constructor
     }
 
