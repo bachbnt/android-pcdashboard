@@ -21,25 +21,27 @@ public class PostService {
     private static PostService postService;
     private static IPostService iPostService;
     private Context context;
-    private DepartmentListener departmentListener;
     private ClassListener classListener;
+    private DepartmentListener departmentListener;
     private CommentListener commentListener;
-    private ArrayList<DepartmentListener> observer;
-    public interface DepartmentListener {
-        void onDepartmentSuccess(ArrayList<DepartmentPost> departmentPosts);
+
+
+    public interface ClassListener{
+        void onSuccess(ArrayList<ClassPost> classPosts);
         void onFailure();
     }
 
-    public interface ClassListener{
-        void onClassSuccess(ArrayList<ClassPost> classPosts);
+    public interface DepartmentListener{
+        void onSuccess(ArrayList<DepartmentPost> departmentPosts);
         void onFailure();
     }
 
     public interface CommentListener{
-        void onCommentSuccess(ArrayList<PostComment> postComments);
+        void onSuccess(ArrayList<PostComment> postComments);
+        void onFailure();
     }
 
-    public PostService(Context context) {
+    private PostService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(IServiceManager.url)
@@ -48,13 +50,14 @@ public class PostService {
         iPostService = retrofit.create(IPostService.class);
     }
 
-    public void setDepartmentListener(DepartmentListener listener) {
-        this.departmentListener = listener;
+    public void setClassListener(ClassListener classListener){
+        this.classListener=classListener;
     }
-    public void setClassListener(ClassListener listener){this.classListener=listener;}
-
-    public void setCommentListener(CommentListener listener){
-        this.commentListener=listener;
+    public void setDepartmentListener(DepartmentListener departmentListener){
+        this.departmentListener=departmentListener;
+    }
+    public void setCommentListener(CommentListener commentListener){
+        this.commentListener=commentListener;
     }
 
     public static PostService getInstance(Context context){
@@ -69,7 +72,7 @@ public class PostService {
             @Override
             public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
                 ArrayList<DepartmentPost> departmentPosts=response.body();
-                departmentListener.onDepartmentSuccess(departmentPosts);
+                departmentListener.onSuccess(departmentPosts);
             }
 
             @Override
@@ -88,7 +91,7 @@ public class PostService {
             public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
                 ArrayList<ClassPost> classPosts=response.body();
                 Log.i("tag","getClassPosts onResponse");
-                classListener.onClassSuccess(classPosts);
+                classListener.onSuccess(classPosts);
             }
 
             @Override
@@ -106,7 +109,7 @@ public class PostService {
             public void onResponse(Call<ArrayList<PostComment>> call, Response<ArrayList<PostComment>> response) {
                 ArrayList<PostComment> postComments=response.body();
                 Log.i("tag","getPostComments"+postComments.size());
-                commentListener.onCommentSuccess(postComments);
+                commentListener.onSuccess(postComments);
             }
 
             @Override

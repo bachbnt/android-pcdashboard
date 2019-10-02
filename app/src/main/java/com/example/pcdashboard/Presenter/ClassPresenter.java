@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.example.pcdashboard.API.PostService;
 import com.example.pcdashboard.Model.ClassPost;
-import com.example.pcdashboard.Model.DepartmentPost;
-import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.View.IClassView;
 
 import java.util.ArrayList;
@@ -24,6 +22,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
         this.view=iClassView;
     }
 
+
     @Override
     public void onRequest() {
         postService.getClassPosts();
@@ -35,7 +34,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onClassSuccess(ArrayList<ClassPost> classPosts) {
+    public void onSuccess(ArrayList<ClassPost> classPosts) {
         onResponse(classPosts);
     }
 

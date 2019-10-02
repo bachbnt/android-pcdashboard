@@ -23,6 +23,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
     public void setDepartmentView(IDeparmentView iDeparmentView){
         this.view=iDeparmentView;
     }
+
     @Override
     public void onRequest() {
         postService.getDepartmentPosts();
@@ -33,11 +34,11 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         view.onUpdate(departmentPosts);
     }
 
+
     @Override
-    public void onDepartmentSuccess(ArrayList<DepartmentPost> departmentPosts) {
+    public void onSuccess(ArrayList<DepartmentPost> departmentPosts) {
         onResponse(departmentPosts);
     }
-
 
     @Override
     public void onFailure() {

@@ -48,13 +48,24 @@ public class CommentDialog extends DialogFragment implements ICommentView {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.setClassView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.setClassView(null);
+    }
+
     private void initialize(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>());
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter=new CommentPresenter(getContext());
-        presenter.setClassView(this);
         presenter.onRequest(SharedPreferencesUtil.loadPost(getContext()));
         Log.i("tag","onRequest comment"+SharedPreferencesUtil.loadPost(getContext()));
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);

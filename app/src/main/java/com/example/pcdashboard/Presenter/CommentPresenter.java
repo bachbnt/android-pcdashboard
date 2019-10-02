@@ -34,7 +34,12 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
     }
 
     @Override
-    public void onCommentSuccess(ArrayList<PostComment> postComments) {
+    public void onSuccess(ArrayList<PostComment> postComments) {
         onResponse(postComments);
+    }
+
+    @Override
+    public void onFailure() {
+
     }
 }
