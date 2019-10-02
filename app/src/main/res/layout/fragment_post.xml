@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".Fragment.PostFragment">
+
+
+    <LinearLayout
+        android:id="@+id/ll_select_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="right">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_image_cold_32dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_camera_cold_32dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_back_post"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_50dp"
+        android:background="@drawable/bg_panel">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back_cold_32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/space_10dp"
+            android:text="POST"
+            android:textColor="@color/colorCold"
+            android:textSize="@dimen/font_size_20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_select_post"
+        android:layout_below="@id/rl_back_post">
+
+        <RelativeLayout
+            android:id="@+id/rl_input_post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_input_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_avatar_post"
+                android:layout_marginTop="@dimen/space_10dp"
+                android:background="@android:color/white"
+                android:gravity="start"
+                android:hint="ban dang nghi gi"
+                android:padding="@dimen/space_10dp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_20sp" />
+
+            <ImageView
+                android:id="@+id/iv_image_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_input_post"
+                android:layout_marginTop="@dimen/space_10dp"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/tv_name_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cv_avatar_post"
+                android:layout_toRightOf="@id/cv_avatar_post"
+                android:text="Bùi Ngô Tôn bách"
+                android:textColor="@color/colorSlateGray"
+                android:textSize="@dimen/font_size_16sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_avatar_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_10dp"
+                android:layout_marginTop="@dimen/space_10dp"
+                android:layout_marginRight="@dimen/space_10dp"
+                app:cardCornerRadius="25dp">
+
+                <ImageView
+                    android:id="@+id/iv_avatar_post"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo" />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/ll_select_post"
+        android:background="@android:color/darker_gray" />
+
+
+</RelativeLayout>
