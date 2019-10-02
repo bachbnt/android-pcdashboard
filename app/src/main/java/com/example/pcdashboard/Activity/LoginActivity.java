@@ -85,4 +85,9 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
                 break;
         }
     }
+
+    @Override
+    public void openFeatureScreen(String screenName) {
+        //NULL
+    }
 }

@@ -8,7 +8,7 @@ public interface IScreenManager {
     String FORGOT_FRAGMENT = "FORGOT_FRAGMENT";
     String DEPARTMENT_FRAGMENT = "DEPARTMENT_FRAGMENT";
     String CLASSROOM_FRAGMENT = "CLASSROOM_FRAGMENT";
-    String CHAT_FRAGMENT = "CHAT_FRAGMENT";
+    String CONTACT_FRAGMENT = "CONTACT_FRAGMENT";
     String ACCOUNT_FRAGMENT = "ACCOUNT_FRAGMENT";
     String INFO_DIALOG="INFO_DIALOG";
     String LOADING_DIALOG="LOADING_DIALOG";
@@ -18,6 +18,8 @@ public interface IScreenManager {
     void openLoginScreen(String screenName);
 
     Fragment openDashboardScreen(String screenName);
+
+    void openFeatureScreen(String screenName);
 
     void openDialog(String dialogName);
     void closeDialog(String dialogName);

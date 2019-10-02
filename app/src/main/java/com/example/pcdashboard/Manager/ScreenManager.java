@@ -27,6 +27,10 @@ public class ScreenManager {
         return iScreenManager.openDashboardScreen(screenName);
     }
 
+    public void openFeatureScreen(String screenName){
+        iScreenManager.openFeatureScreen(screenName);
+    }
+
     public void openDialog(String dialogName){
         iScreenManager.openDialog(dialogName);
     }

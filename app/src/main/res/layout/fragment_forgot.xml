@@ -12,18 +12,11 @@
         android:id="@+id/btn_get_forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/button_login"
         android:layout_below="@id/ll_input_forgot"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/space_20dp"
-        android:background="@drawable/bg_button_login"
-        android:paddingLeft="@dimen/space_30dp"
-        android:paddingTop="@dimen/space_10dp"
-        android:paddingRight="@dimen/space_30dp"
-        android:paddingBottom="@dimen/space_10dp"
-        android:text="@string/get_password"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/font_size_20sp" />
+        android:text="@string/get_password" />
 
     <ImageView
         android:id="@+id/iv_logo_forgot"

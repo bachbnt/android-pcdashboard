@@ -80,7 +80,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case CLASSROOM_FRAGMENT:
                 fragment = new ClassFragment();
                 break;
-            case CHAT_FRAGMENT:
+            case CONTACT_FRAGMENT:
                 fragment = new ContactFragment();
                 break;
             case ACCOUNT_FRAGMENT:
@@ -107,6 +107,11 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     @Override
     public void closeDialog(String dialogName) {
+        //NULL
+    }
+
+    @Override
+    public void openFeatureScreen(String screenName) {
         //NULL
     }
 }

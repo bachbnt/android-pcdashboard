@@ -11,9 +11,9 @@
     <string name="account">Tài khoản</string>
     <string name="password">Mật khẩu</string>
     <string name="login">Đăng nhập</string>
-    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
     <string name="email">Email</string>
-    <string name="get_password">Lấy lại Mật khẩu</string>
+    <string name="get_password">Lấy lại mật khẩu</string>
     <string name="back">Trở về</string>
     <string name="study">Học tập</string>
     <string name="setting">Cài đặt</string>
@@ -21,12 +21,16 @@
     <string name="schedule">Thời khóa biểu</string>
     <string name="score">Điểm thi</string>
     <string name="exam_schedule">Lịch thi</string>
-    <string name="update_info">Cập nhật Thông tin</string>
-    <string name="change_pasword">Thay đổi Mật khẩu</string>
+    <string name="update_info">Cập nhật thông tin</string>
+    <string name="change_pasword">Thay đổi mật khẩu</string>
     <string name="feedback">Phản hồi</string>
     <string name="guide">Hướng dẫn</string>
     <string name="logout">Đăng xuất</string>
     <string name="comment">Bình luận</string>
     <string name="write_comment">Viết bình luận...</string>
     <string name="confirm">Xác nhận</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="old_password">Mật khẩu cũ</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="re_type_password">Nhập lại mật khẩu mới</string>
 </resources>

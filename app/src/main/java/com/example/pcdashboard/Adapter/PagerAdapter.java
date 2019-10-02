@@ -15,8 +15,8 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
 
 import static com.example.pcdashboard.Manager.IScreenManager.ACCOUNT_FRAGMENT;
-import static com.example.pcdashboard.Manager.IScreenManager.CHAT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.CLASSROOM_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.CONTACT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.DEPARTMENT_FRAGMENT;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -65,7 +65,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return screenManager.openDashboardScreen(CLASSROOM_FRAGMENT);
             case 2:
-                return screenManager.openDashboardScreen(CHAT_FRAGMENT);
+                return screenManager.openDashboardScreen(CONTACT_FRAGMENT);
             case 3:
                 return screenManager.openDashboardScreen(ACCOUNT_FRAGMENT);
             default:
