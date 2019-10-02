@@ -2,6 +2,7 @@ package com.example.pcdashboard.Utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.PostComment;
@@ -36,7 +37,7 @@ public class SharedPreferencesUtil {
         editor.putString("phone",self.getPhone());
         editor.putString("avatar",self.getAvatar());
         editor.putString("classId",self.getClassId());
-        editor.putInt("status",self.getStatus());
+        editor.putString("role",self.getRole());
         editor.commit();
     }
 
@@ -48,8 +49,9 @@ public class SharedPreferencesUtil {
         String phone=preferences.getString("phone",null);
         String avatar=preferences.getString("avatar",null);
         String classId=preferences.getString("classId",null);
-        int status=preferences.getInt("status",0);
-        User self=new User(id,name,email,phone,avatar,classId,status);
+        String role=preferences.getString("role",null);
+        User self=new User(id,name,email,phone,avatar,classId,role);
+        Log.i("tag","loadSelf"+role);
         return self;
     }
 

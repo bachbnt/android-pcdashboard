@@ -18,6 +18,7 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
@@ -45,6 +46,8 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         initialize(view);
+        Log.i("tag","role "+ SharedPreferencesUtil.loadSelf(getContext()).getName());
+        Log.i("tag","role "+ SharedPreferencesUtil.loadSelf(getContext()).getRole());
         return view;
     }
 

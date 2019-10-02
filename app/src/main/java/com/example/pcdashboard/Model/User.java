@@ -10,16 +10,16 @@ public class User {
     private String phone;
     private String avatar;
     private String classId;
-    private int status;
+    private String role;
 
-    public User(String id, String name, String email, String phone, String avatar,String classId, int status) {
+    public User(String id, String name, String email, String phone, String avatar,String classId, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.avatar = avatar;
         this.classId=classId;
-        this.status = status;
+        this.role = role;
     }
 
     public String getId() {
@@ -70,11 +70,11 @@ public class User {
         this.classId = classId;
     }
 
-    public int getStatus() {
-        return status;
+    public String getRole() {
+        return role;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

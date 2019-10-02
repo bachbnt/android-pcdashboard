@@ -15,7 +15,7 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     public ForgotPresenter(Context context) {
         this.context = context;
         accountService = AccountService.getInstance(context);
-        accountService.setListener(this);
+        accountService.setAccountListener(this);
     }
     public void setForgotView(IForgotView iForgotView){
         this.view=iForgotView;

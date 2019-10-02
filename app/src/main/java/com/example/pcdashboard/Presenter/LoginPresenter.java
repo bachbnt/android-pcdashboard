@@ -16,7 +16,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     public LoginPresenter(Context context) {
         this.context=context;
         accountService = AccountService.getInstance(context);
-        accountService.setListener(this);
+        accountService.setAccountListener(this);
     }
 
     public void setLoginView(ILoginView iLoginView) {

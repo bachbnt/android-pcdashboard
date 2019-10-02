@@ -44,7 +44,7 @@ public class AccountService {
         iAccountService = retrofit.create(IAccountService.class);
     }
 
-    public void setListener(AccountListener listener) {
+    public void setAccountListener(AccountListener listener) {
         this.listener = listener;
     }
 
