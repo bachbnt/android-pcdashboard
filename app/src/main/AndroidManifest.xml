@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.FeatureActivity"></activity>
         <activity
             android:name=".Activity.DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.FeatureActivity">
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

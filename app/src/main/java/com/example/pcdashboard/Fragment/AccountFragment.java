@@ -3,11 +3,11 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,7 +18,6 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
@@ -26,13 +25,16 @@ import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountFragment extends Fragment implements IAccountView,View.OnClickListener {
+public class AccountFragment extends Fragment implements IAccountView, View.OnClickListener {
     private ScreenManager screenManager;
     private AccountPresenter presenter;
     private ImageView ivAvatar;
     private TextView tvName;
     private TextView tvId;
     private RelativeLayout rlInfo;
+    private LinearLayout llStudy, llHelp, llSetting;
+    private TextView tvStudy, tvHelp, tvSetting;
+    private boolean isStudy = false, isHelp = false, isSetting = false;
 
 
     public AccountFragment() {
@@ -46,8 +48,6 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         initialize(view);
-        Log.i("tag","role "+ SharedPreferencesUtil.loadSelf(getContext()).getName());
-        Log.i("tag","role "+ SharedPreferencesUtil.loadSelf(getContext()).getRole());
         return view;
     }
 
@@ -66,17 +66,26 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
 
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
-        presenter=new AccountPresenter(getContext());
-        ivAvatar=view.findViewById(R.id.iv_avatar_account);
-        tvName=view.findViewById(R.id.tv_name_account);
-        tvId=view.findViewById(R.id.tv_id_account);
-        rlInfo=view.findViewById(R.id.rl_info_account);
+        presenter = new AccountPresenter(getContext());
+        ivAvatar = view.findViewById(R.id.iv_avatar_account);
+        tvName = view.findViewById(R.id.tv_name_account);
+        tvId = view.findViewById(R.id.tv_id_account);
+        rlInfo = view.findViewById(R.id.rl_info_account);
+        llStudy = view.findViewById(R.id.ll_study_account);
+        llHelp = view.findViewById(R.id.ll_help_account);
+        llSetting = view.findViewById(R.id.ll_setting_account);
+        tvStudy = view.findViewById(R.id.tv_study_account);
+        tvHelp = view.findViewById(R.id.tv_help_account);
+        tvSetting = view.findViewById(R.id.tv_setting_account);
         rlInfo.setOnClickListener(this);
+        tvStudy.setOnClickListener(this);
+        tvHelp.setOnClickListener(this);
+        tvSetting.setOnClickListener(this);
     }
 
     @Override
     public void onUpdate(User self) {
-        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80,80).into(ivAvatar);
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80, 80).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());
     }
@@ -87,10 +96,55 @@ public class AccountFragment extends Fragment implements IAccountView,View.OnCli
     }
 
     @Override
+    public void selectMenu(String layoutName) {
+        switch (layoutName) {
+            case STUDY_LAYOUT:
+                isStudy = !isStudy;
+                if (isStudy) {
+                    llStudy.setVisibility(View.VISIBLE);
+                    tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
+                } else {
+                    llStudy.setVisibility(View.GONE);
+                    tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
+                }
+                break;
+            case HELP_LAYOUT:
+                isHelp = !isHelp;
+                if (isHelp) {
+                    llHelp.setVisibility(View.VISIBLE);
+                    tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
+                } else {
+                    llHelp.setVisibility(View.GONE);
+                    tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
+                }
+                break;
+            case SETTING_LAYOUT:
+                isSetting = !isSetting;
+                if (isSetting) {
+                    llSetting.setVisibility(View.VISIBLE);
+                    tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
+                } else {
+                    llSetting.setVisibility(View.GONE);
+                    tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
+                }
+                break;
+        }
+    }
+
+    @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_info_account:
                 showInfoDialog();
+                break;
+            case R.id.tv_study_account:
+                selectMenu(STUDY_LAYOUT);
+                break;
+            case R.id.tv_help_account:
+                selectMenu(HELP_LAYOUT);
+                break;
+            case R.id.tv_setting_account:
+                selectMenu(SETTING_LAYOUT);
                 break;
         }
     }

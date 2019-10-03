@@ -84,6 +84,7 @@
             android:id="@+id/ll_study_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
@@ -130,6 +131,7 @@
             android:id="@+id/ll_help_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
@@ -169,6 +171,7 @@
             android:id="@+id/ll_setting_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@color/colorWhiteSmoke"
             android:orientation="vertical">
 
