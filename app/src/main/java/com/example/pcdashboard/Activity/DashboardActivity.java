@@ -23,6 +23,7 @@ import com.example.pcdashboard.Fragment.PasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -94,10 +95,10 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     }
 
     @Override
-    public void openDialog(String dialogName) {
+    public void openDialog(String dialogName, User user) {
         switch (dialogName) {
             case INFO_DIALOG:
-                InfoDialog dialog = new InfoDialog();
+                InfoDialog dialog = new InfoDialog(user);
                 dialog.show(getSupportFragmentManager(), "info dialog");
                 break;
             case COMMENT_DIALOG:

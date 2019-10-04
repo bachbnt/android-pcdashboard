@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     private Context context;
     private ArrayList<ClassPost> classPosts;
     private OnItemClickListener listener;
+    private PopupWindow popupWindow;
 
     public ClassAdapter(Context context, ArrayList<ClassPost> classPosts, OnItemClickListener listener) {
         this.context = context;
@@ -34,7 +37,9 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onClick(ClassPost classPost);
+        void onCommentClick(ClassPost classPost);
+        void onEditClick(ClassPost classPost);
+        void onDeleteClick(ClassPost classPost);
     }
 
     @NonNull
@@ -56,9 +61,17 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(classPost);
+                listener.onCommentClick(classPost);
             }
         });
+//        holder.ibMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                View view=LayoutInflater.from(context).inflate(R.layout.popup_class,null);
+//                TextView tvEdit=view.findViewById(R.id.tv_edit_class_popup);
+//                TextView tvDelete=view.findViewById(R.id.tv_delete_class_popup);
+//            }
+//        });
     }
 
     @Override

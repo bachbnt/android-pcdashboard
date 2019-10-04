@@ -2,6 +2,8 @@ package com.example.pcdashboard.Manager;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Model.User;
+
 public interface IScreenManager {
     String LOGIN_ACTIVITY="LOGIN_ACTIVITY";
     String LOGIN_FRAGMENT = "LOGIN_FRAGMENT";
@@ -27,6 +29,6 @@ public interface IScreenManager {
     Fragment openDashboardScreen(String screenName);
 
     void openFeatureScreen(String screenName);
-    void openDialog(String dialogName);
+    void openDialog(String dialogName, User user);
     void closeDialog(String dialogName);
 }

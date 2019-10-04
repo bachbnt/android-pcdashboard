@@ -43,7 +43,7 @@
             android:layout_marginRight="@dimen/space_10dp"
             android:text="@string/time_test"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/font_size_10sp" />
+            android:textSize="@dimen/font_size_12sp" />
 
         <TextView
             android:id="@+id/tv_content_department_item"

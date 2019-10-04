@@ -28,6 +28,7 @@ import com.example.pcdashboard.View.IClassView;
 import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.COMMENT_DIALOG;
+import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 import static com.example.pcdashboard.Manager.IScreenManager.POST_FRAGMENT;
 
 /**
@@ -78,12 +79,23 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter.onRequest();
         tvInput.setOnClickListener(this);
+        ivAvatar.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(ClassPost classPost) {
+    public void onCommentClick(ClassPost classPost) {
         SharedPreferencesUtil.savePost(getContext(),classPost);
-        screenManager.openDialog(COMMENT_DIALOG);
+        screenManager.openDialog(COMMENT_DIALOG,null);
+    }
+
+    @Override
+    public void onEditClick(ClassPost classPost) {
+
+    }
+
+    @Override
+    public void onDeleteClick(ClassPost classPost) {
+
     }
 
     @Override
@@ -102,6 +114,9 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         switch (v.getId()){
             case R.id.tv_input_class:
                 screenManager.openFeatureScreen(POST_FRAGMENT);
+                break;
+            case R.id.iv_avatar_class:
+                screenManager.openDialog(INFO_DIALOG,SharedPreferencesUtil.loadSelf(getContext()));
                 break;
         }
     }

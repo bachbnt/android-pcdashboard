@@ -2,6 +2,8 @@ package com.example.pcdashboard.Manager;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Model.User;
+
 public class ScreenManager {
     private static ScreenManager screenManager;
     private IScreenManager iScreenManager;
@@ -31,8 +33,8 @@ public class ScreenManager {
         iScreenManager.openFeatureScreen(screenName);
     }
 
-    public void openDialog(String dialogName){
-        iScreenManager.openDialog(dialogName);
+    public void openDialog(String dialogName, User user){
+        iScreenManager.openDialog(dialogName,user);
     }
     public void closeDialog(String dialogName){
         iScreenManager.closeDialog(dialogName);

@@ -24,17 +24,16 @@ import com.example.pcdashboard.Utility.SharedPreferencesUtil;
  * A simple {@link Fragment} subclass.
  */
 public class InfoDialog extends DialogFragment {
+    private User user;
     private ImageView ivAvatar;
     private TextView tvName;
     private TextView tvId;
     private TextView tvEmail;
     private TextView tvPhone;
 
-
-    public InfoDialog() {
-        // Required empty public constructor
+    public InfoDialog(User user) {
+        this.user = user;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,11 +60,10 @@ public class InfoDialog extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
     private void loadInfo(){
-        User self= SharedPreferencesUtil.loadSelf(getContext());
-        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(160,160).into(ivAvatar);
-        tvName.setText(self.getName());
-        tvId.setText(self.getId());
-        tvEmail.setText(self.getEmail());
-        tvPhone.setText(self.getPhone());
+        Glide.with(getContext()).load(Uri.parse(user.getAvatar())).centerCrop().override(160,160).into(ivAvatar);
+        tvName.setText(user.getName());
+        tvId.setText(user.getId());
+        tvEmail.setText(user.getEmail());
+        tvPhone.setText(user.getPhone());
     }
 }

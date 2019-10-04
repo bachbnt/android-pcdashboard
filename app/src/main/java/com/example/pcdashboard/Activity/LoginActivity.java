@@ -14,6 +14,7 @@ import com.example.pcdashboard.Fragment.ForgotFragment;
 import com.example.pcdashboard.Fragment.LoginFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
 
 public class LoginActivity extends AppCompatActivity implements IScreenManager {
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     }
 
     @Override
-    public void openDialog(String dialogName) {
+    public void openDialog(String dialogName, User user) {
         switch (dialogName) {
             case LOADING_DIALOG:
                 LoadingDialog loadingDialog = new LoadingDialog();

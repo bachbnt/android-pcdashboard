@@ -115,7 +115,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
 
     @Override
     public void showInfoDialog() {
-        screenManager.openDialog(INFO_DIALOG);
+        screenManager.openDialog(INFO_DIALOG,SharedPreferencesUtil.loadSelf(getContext()));
     }
 
     @Override

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_edit_class_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_edit_hot_24dp"
+        android:drawablePadding="@dimen/space_20dp"
+        android:gravity="center"
+        android:padding="@dimen/space_20dp"
+        android:text="@string/edit"
+        android:textColor="@color/colorCold"
+        android:textSize="@dimen/font_size_16sp" />
+
+    <TextView
+        android:id="@+id/tv_delete_class_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_delete_hot_24dp"
+        android:drawablePadding="@dimen/space_20dp"
+        android:gravity="center"
+        android:padding="@dimen/space_20dp"
+        android:text="@string/delete"
+        android:textColor="@color/colorCold"
+        android:textSize="@dimen/font_size_16sp" />
+</LinearLayout>

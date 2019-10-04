@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     @Override
     public void showLoadingDialog() {
-        screenManager.openDialog(LOADING_DIALOG);
+        screenManager.openDialog(LOADING_DIALOG,null);
     }
 
     @Override

@@ -84,14 +84,14 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
 
     @Override
     public void showLoadingDialog() {
-        screenManager.openDialog(LOADING_DIALOG);
+        screenManager.openDialog(LOADING_DIALOG,null);
     }
 
     @Override
     public void onGetSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
         Log.i("tag","onGetSuccess "+ SharedPreferencesUtil.loadEmail(getContext()));
-        screenManager.openDialog(EMAIL_DIALOG);
+        screenManager.openDialog(EMAIL_DIALOG,null);
     }
 
     @Override
