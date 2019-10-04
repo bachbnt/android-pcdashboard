@@ -33,4 +33,6 @@
     <string name="old_password">Mật khẩu cũ</string>
     <string name="new_password">Mật khẩu mới</string>
     <string name="re_type_password">Nhập lại mật khẩu mới</string>
+    <string name="post">Đăng</string>
+    <string name="whats_on_your_mind">Bạn đang nghĩ gì?</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,16 +28,18 @@ import com.example.pcdashboard.View.IClassView;
 import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.COMMENT_DIALOG;
+import static com.example.pcdashboard.Manager.IScreenManager.POST_FRAGMENT;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickListener, IClassView {
+public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickListener, IClassView,View.OnClickListener {
     private ScreenManager screenManager;
     private RecyclerView recyclerView;
     private ClassAdapter classAdapter;
     private ClassPresenter presenter;
     private ImageView ivAvatar;
+    private TextView tvInput;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -68,11 +71,13 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         presenter=new ClassPresenter(getContext());
         recyclerView = view.findViewById(R.id.recycler_view_class);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
+        tvInput=view.findViewById(R.id.tv_input_class);
         Glide.with(getContext()).load(Uri.parse(SharedPreferencesUtil.loadSelf(getContext()).getAvatar())).centerCrop().override(40,40).into(ivAvatar);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter.onRequest();
+        tvInput.setOnClickListener(this);
     }
 
     @Override
@@ -90,5 +95,14 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     @Override
     public void onFailure() {
         Toast.makeText(getContext(), "Tải danh sách thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_input_class:
+                screenManager.openFeatureScreen(POST_FRAGMENT);
+                break;
+        }
     }
 }

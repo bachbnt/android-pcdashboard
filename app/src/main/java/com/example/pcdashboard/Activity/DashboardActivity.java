@@ -1,5 +1,6 @@
 package com.example.pcdashboard.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,9 +12,15 @@ import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Dialog.CommentDialog;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
-import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.ClassFragment;
+import com.example.pcdashboard.Fragment.ContactFragment;
+import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
+import com.example.pcdashboard.Fragment.ForgotFragment;
+import com.example.pcdashboard.Fragment.InfoFragment;
+import com.example.pcdashboard.Fragment.LoginFragment;
+import com.example.pcdashboard.Fragment.PasswordFragment;
+import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
@@ -21,9 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
-    private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
-    private TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,37 +37,12 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
         initialize();
     }
 
+
     private void initialize() {
         screenManager = ScreenManager.getInstance();
         screenManager.setScreenManager(this);
-        viewPager = findViewById(R.id.view_pager_dashboard);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), this, screenManager);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(0);
-        tabLayout = findViewById(R.id.tab_layout_dashboard);
-        tabLayout.setupWithViewPager(viewPager);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setCustomView(pagerAdapter.initTab(i));
-            tabLayout.getTabAt(0).setCustomView(pagerAdapter.selectTab(tabLayout.getTabAt(0).getCustomView(), tabLayout.getTabAt(0).getPosition(), true));
-        }
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tab.setCustomView(pagerAdapter.selectTab(tab.getCustomView(), tab.getPosition(), true));
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                tab.setCustomView(pagerAdapter.selectTab(tab.getCustomView(), tab.getPosition(), false));
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -91,16 +71,34 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     }
 
     @Override
+    public void openFeatureScreen(String screenName) {
+        switch (screenName) {
+            case DASHBOARD_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new DashboardFragment()).commit();
+                break;
+            case POST_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new PostFragment()).commit();
+                break;
+            case INFO_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new InfoFragment()).commit();
+                break;
+            case PASSWORD_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
+                break;
+        }
+    }
+
+    @Override
     public void openDialog(String dialogName) {
-        switch (dialogName){
+        switch (dialogName) {
             case INFO_DIALOG:
-                InfoDialog dialog=new InfoDialog();
-                dialog.show(getSupportFragmentManager(),"info dialog");
+                InfoDialog dialog = new InfoDialog();
+                dialog.show(getSupportFragmentManager(), "info dialog");
                 break;
             case COMMENT_DIALOG:
-                Log.i("tag","openDialog");
-                CommentDialog commentDialog=new CommentDialog();
-                commentDialog.show(getSupportFragmentManager(),"comment dialog");
+                Log.i("tag", "openDialog");
+                CommentDialog commentDialog = new CommentDialog();
+                commentDialog.show(getSupportFragmentManager(), "comment dialog");
                 break;
         }
     }
@@ -110,8 +108,4 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
         //NULL
     }
 
-    @Override
-    public void openFeatureScreen(String screenName) {
-        //NULL
-    }
 }

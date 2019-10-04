@@ -7,6 +7,7 @@ public interface IScreenManager {
     String FORGOT_FRAGMENT = "FORGOT_FRAGMENT";
 
     String DASHBOARD_ACTIVITY = "DASHBOARD_ACTIVITY";
+    String DASHBOARD_FRAGMENT="DASHBOARD_FRAGMENT";
     String DEPARTMENT_FRAGMENT = "DEPARTMENT_FRAGMENT";
     String CLASSROOM_FRAGMENT = "CLASSROOM_FRAGMENT";
     String CONTACT_FRAGMENT = "CONTACT_FRAGMENT";
@@ -16,6 +17,7 @@ public interface IScreenManager {
     String EMAIL_DIALOG="EMAIL_DIALOG";
     String COMMENT_DIALOG="COMMENT_DIALOG";
 
+    String POST_FRAGMENT="POST_FRAGMENT";
     String INFO_FRAGMENT="INFO_FRAGMENT";
     String PASSWORD_FRAGMENT="PASSWORD_FRAGMENT";
 
@@ -24,7 +26,6 @@ public interface IScreenManager {
     Fragment openDashboardScreen(String screenName);
 
     void openFeatureScreen(String screenName);
-
     void openDialog(String dialogName);
     void closeDialog(String dialogName);
 }

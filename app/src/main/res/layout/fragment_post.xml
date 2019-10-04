@@ -38,6 +38,7 @@
         android:background="@drawable/bg_panel">
 
         <ImageButton
+            android:id="@+id/ib_back_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_10dp"
@@ -45,11 +46,13 @@
             android:src="@drawable/ic_back_cold_32dp" />
 
         <TextView
+            android:id="@+id/tv_post_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/space_10dp"
-            android:text="POST"
+            android:text="@string/post"
+            android:textAllCaps="true"
             android:textColor="@color/colorCold"
             android:textSize="@dimen/font_size_20sp" />
     </RelativeLayout>
@@ -92,10 +95,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/cv_avatar_post"
                 android:layout_toRightOf="@id/cv_avatar_post"
-                android:text="Bùi Ngô Tôn bách"
+                android:text="@string/app_name"
                 android:textColor="@color/colorSlateGray"
                 android:textSize="@dimen/font_size_16sp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_class_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_name_post"
+                android:layout_alignBottom="@id/cv_avatar_post"
+                android:background="@drawable/bg_edittext_login"
+                android:padding="@dimen/space_5dp"
+                android:text="Thành viên của K16"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/font_size_12sp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_avatar_post"

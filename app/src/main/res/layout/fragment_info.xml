@@ -28,12 +28,14 @@
             app:cardCornerRadius="60dp"
             app:cardElevation="@dimen/space_10dp">
             <ImageView
+                android:id="@+id/iv_avatar_info"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:src="@drawable/logo"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_name_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_20dp"
@@ -43,6 +45,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_id_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/edit_text_login"
@@ -53,6 +56,7 @@
             android:textSize="@dimen/font_size_16sp"/>
 
         <TextView
+            android:id="@+id/tv_class_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/edit_text_login"
@@ -62,6 +66,7 @@
             android:textSize="@dimen/font_size_16sp"/>
 
         <EditText
+            android:id="@+id/et_email_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/edit_text_login"
@@ -70,6 +75,7 @@
             android:inputType="textEmailAddress"/>
 
         <EditText
+            android:id="@+id/et_phone_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/edit_text_login"
@@ -78,6 +84,7 @@
             android:inputType="phone"/>
 
         <Button
+            android:id="@+id/btn_update_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_10dp"
