@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 
@@ -44,16 +45,22 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
         view.onLoginSuccess();
     }
 
+    @Override
+    public void changeStatus(boolean status) {
+        SharedPreferencesUtil.saveStatus(context,!status);
+    }
+
 
     @Override
-    public void onTokenSuccess() {
-        Token token = SharedPreferencesUtil.loadToken(context);
+    public void onTokenSuccess(Token token) {
+        SharedPreferencesUtil.saveToken(context, token);
         String userId = token.getUserId();
         accountService.getSelf(userId);
     }
 
     @Override
-    public void onSelfSuccess() {
+    public void onSelfSuccess(User self) {
+        SharedPreferencesUtil.saveSelf(context, self);
         onResponse();
     }
 

@@ -18,10 +18,12 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_ACTIVITY;
 import static com.example.pcdashboard.Manager.IScreenManager.PASSWORD_FRAGMENT;
 
 /**
@@ -59,7 +61,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     @Override
     public void onResume() {
         presenter.setAccountView(this);
-        presenter.loadSelf();
+        presenter.onLogin();
         super.onResume();
     }
 
@@ -184,6 +186,9 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 screenManager.openFeatureScreen(PASSWORD_FRAGMENT);
                 break;
             case R.id.tv_logout_account:
+                presenter.onLogout();
+                presenter.changeStatus(SharedPreferencesUtil.loadStatus(getContext()));
+                screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }
     }

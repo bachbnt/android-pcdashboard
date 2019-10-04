@@ -3,6 +3,7 @@ package com.example.pcdashboard.Manager;
 import androidx.fragment.app.Fragment;
 
 public interface IScreenManager {
+    String LOGIN_ACTIVITY="LOGIN_ACTIVITY";
     String LOGIN_FRAGMENT = "LOGIN_FRAGMENT";
     String FORGOT_FRAGMENT = "FORGOT_FRAGMENT";
 

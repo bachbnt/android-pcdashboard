@@ -47,7 +47,12 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     @Override
     public void openLoginScreen(String screenName) {
-        //NULL
+        switch (screenName){
+            case LOGIN_ACTIVITY:
+                Intent intent=new Intent(DashboardActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+        }
     }
 
     @Override

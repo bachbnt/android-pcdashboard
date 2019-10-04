@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pcdashboard">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".Manager.MyApplication"
         android:allowBackup="true"
@@ -11,10 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.LoginActivity"></activity>
         <activity
             android:name=".Activity.DashboardActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.LoginActivity">
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +28,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

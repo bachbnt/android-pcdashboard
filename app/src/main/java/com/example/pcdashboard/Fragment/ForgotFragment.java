@@ -74,17 +74,12 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_get_forgot:
-                onInput();
+                presenter.onCheck(etAccount.getText().toString());
                 break;
             case R.id.tv_back_forgot:
                 screenManager.openLoginScreen(LOGIN_FRAGMENT);
                 break;
         }
-    }
-
-    @Override
-    public void onInput() {
-        presenter.onCheck(etAccount.getText().toString());
     }
 
     @Override

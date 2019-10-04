@@ -28,6 +28,26 @@ public class SharedPreferencesUtil {
         return token;
     }
 
+    public static void clearToken(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    public static void saveStatus(Context context,boolean status){
+        SharedPreferences preferences=context.getSharedPreferences("status",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putBoolean("status",status);
+        editor.commit();
+    }
+
+    public static boolean loadStatus(Context context){
+        SharedPreferences preferences=context.getSharedPreferences("status",Context.MODE_PRIVATE);
+        boolean status=preferences.getBoolean("status",false);
+        return status;
+    }
+
     public static void saveSelf(Context context, User self) {
         SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -51,8 +71,14 @@ public class SharedPreferencesUtil {
         String classId=preferences.getString("classId",null);
         String role=preferences.getString("role",null);
         User self=new User(id,name,email,phone,avatar,classId,role);
-        Log.i("tag","loadSelf"+role);
         return self;
+    }
+
+    public static void clearSelf(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("self", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
     }
 
     public static void saveEmail(Context context,String email){
@@ -68,6 +94,13 @@ public class SharedPreferencesUtil {
         return email;
     }
 
+    public static void clearEmail(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("email", Context.MODE_PRIVATE);
+        android.content.SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public static void savePost(Context context, ClassPost classPost){
         SharedPreferences preferences=context.getSharedPreferences("post",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
@@ -80,6 +113,12 @@ public class SharedPreferencesUtil {
         String postId=preferences.getString("postId",null);
         return postId;
     }
+
+
+
+
+
+
 
     public static String loadIdPreferences(Context context, String key){
         android.content.SharedPreferences preferences=context.getSharedPreferences("caches",Context.MODE_PRIVATE);
@@ -95,13 +134,6 @@ public class SharedPreferencesUtil {
         android.content.SharedPreferences preferences = context.getSharedPreferences("caches", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
         editor.remove(key);
-        editor.commit();
-    }
-
-    public static void clearEmail(Context context) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("email", Context.MODE_PRIVATE);
-        android.content.SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
         editor.commit();
     }
 }

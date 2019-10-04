@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.pcdashboard.API.AccountService;
+import com.example.pcdashboard.Model.Token;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.View.IForgotView;
 
 public class ForgotPresenter implements IForgotPresenter,AccountService.AccountListener {
@@ -31,7 +33,7 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
 
     @Override
     public void onRequest(String userId) {
-        accountService.forgetPassword(userId);
+        accountService.forgotPassword(userId);
     }
 
     @Override
@@ -40,19 +42,18 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     }
 
     @Override
-    public void onTokenSuccess() {
+    public void onTokenSuccess(Token token) {
         //NULL
     }
 
     @Override
-    public void onSelfSuccess() {
+    public void onSelfSuccess(User self) {
         //NULL
     }
 
     @Override
     public void onForgotSuccess() {
         onResponse();
-        Log.i("tag","onForgotSuccess");
     }
 
     @Override

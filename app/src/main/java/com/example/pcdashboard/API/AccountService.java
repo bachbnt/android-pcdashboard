@@ -23,9 +23,9 @@ public class AccountService {
     private AccountListener listener;
 
     public interface AccountListener {
-        void onTokenSuccess();
+        void onTokenSuccess(Token token);
 
-        void onSelfSuccess();
+        void onSelfSuccess(User self);
 
         void onForgotSuccess();
 
@@ -60,10 +60,9 @@ public class AccountService {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token token = response.body();
-                if (token != null) {
-                    SharedPreferencesUtil.saveToken(context, token);
-                    listener.onTokenSuccess();
-                } else listener.onLoginFailure();
+                if (token != null)
+                    listener.onTokenSuccess(token);
+                else listener.onLoginFailure();
             }
 
             @Override
@@ -72,7 +71,7 @@ public class AccountService {
         });
     }
 
-    public void forgetPassword(String userId) {
+    public void forgotPassword(String userId) {
         Call<String> call = iAccountService.forgetPassword(userId);
         call.enqueue(new Callback<String>() {
             @Override
@@ -82,7 +81,7 @@ public class AccountService {
                     SharedPreferencesUtil.saveEmail(context, email);
                     listener.onForgotSuccess();
                 } else listener.onForgotFailure();
-                Log.i("tag", "forgetPassword " + SharedPreferencesUtil.loadEmail(context));
+                Log.i("tag", "forgotPassword " + SharedPreferencesUtil.loadEmail(context));
             }
 
             @Override
@@ -129,9 +128,9 @@ public class AccountService {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User self = response.body();
-                Log.i("tag", "getSelf " + self.getName() + self.getId());
-                SharedPreferencesUtil.saveSelf(context, self);
-                listener.onSelfSuccess();
+                if (self != null)
+                    listener.onSelfSuccess(self);
+                else listener.onLoginFailure();
             }
 
             @Override

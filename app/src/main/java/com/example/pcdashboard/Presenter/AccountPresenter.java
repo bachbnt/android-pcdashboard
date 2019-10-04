@@ -19,8 +19,19 @@ public class AccountPresenter implements IAccountPresenter {
     }
 
     @Override
-    public void loadSelf() {
+    public void onLogin() {
         User self= SharedPreferencesUtil.loadSelf(context);
         view.onUpdate(self);
+    }
+
+    @Override
+    public void onLogout() {
+        SharedPreferencesUtil.clearSelf(context);
+        SharedPreferencesUtil.clearToken(context);
+    }
+
+    @Override
+    public void changeStatus(boolean status) {
+        SharedPreferencesUtil.saveStatus(context,!status);
     }
 }

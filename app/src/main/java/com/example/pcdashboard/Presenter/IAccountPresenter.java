@@ -1,5 +1,7 @@
 package com.example.pcdashboard.Presenter;
 
 public interface IAccountPresenter {
-    void loadSelf();
+    void onLogin();
+    void onLogout();
+    void changeStatus(boolean status);
 }

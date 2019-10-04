@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;
@@ -72,17 +73,12 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-                onInput();
+                presenter.onCheck(etAccount.getText().toString(), etPassword.getText().toString());
                 break;
             case R.id.tv_forgot_login:
                 screenManager.openLoginScreen(FORGOT_FRAGMENT);
                 break;
         }
-    }
-
-    @Override
-    public void onInput() {
-        presenter.onCheck(etAccount.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
@@ -93,6 +89,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onLoginSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
+        presenter.changeStatus(SharedPreferencesUtil.loadStatus(getContext()));
         screenManager.openDashboardScreen(DASHBOARD_ACTIVITY);
     }
 
