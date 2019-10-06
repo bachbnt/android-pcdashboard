@@ -17,13 +17,19 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
     public DepartmentPresenter(Context context) {
         this.context = context;
         postService=PostService.getInstance(context);
-        postService.setDepartmentListener(this);
     }
 
     public void setDepartmentView(IDeparmentView iDeparmentView){
         this.view=iDeparmentView;
     }
 
+    public void addDepartmentListener(){
+        postService.setDepartmentListener(this);
+    }
+
+    public void removeDepartmentListener(){
+        postService.setDepartmentListener(null);
+    }
     @Override
     public void onRequest() {
         postService.getDepartmentPosts();

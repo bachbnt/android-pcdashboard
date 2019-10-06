@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -50,14 +51,16 @@ public class CommentDialog extends DialogFragment implements ICommentView {
 
     @Override
     public void onResume() {
-        super.onResume();
         presenter.setClassView(this);
+        presenter.addCommentListener();
+        super.onResume();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
         presenter.setClassView(null);
+        presenter.removeCommentListener();
+        super.onPause();
     }
 
     private void initialize(View view) {
@@ -67,7 +70,6 @@ public class CommentDialog extends DialogFragment implements ICommentView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter=new CommentPresenter(getContext());
         presenter.onRequest(SharedPreferencesUtil.loadPost(getContext()));
-        Log.i("tag","onRequest comment"+SharedPreferencesUtil.loadPost(getContext()));
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
@@ -77,5 +79,10 @@ public class CommentDialog extends DialogFragment implements ICommentView {
     public void onUpdate(ArrayList<PostComment> postComments) {
         commentAdapter.updateList(postComments);
         commentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure() {
+        Toast.makeText(getContext(), "Tải bình luận thất bại", Toast.LENGTH_SHORT).show();
     }
 }

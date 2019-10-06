@@ -1,7 +1,6 @@
 package com.example.pcdashboard.API;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
@@ -20,18 +19,36 @@ public class AccountService {
     private static AccountService accountService;
     private static IAccountService iAccountService;
     private Context context;
-    private AccountListener listener;
+    private LoginListener loginListener;
+    private ForgotListener forgotListener;
+    private InfoListener infoListener;
+    private PasswordListener passwordListener;
 
-    public interface AccountListener {
+    public interface LoginListener {
         void onTokenSuccess(Token token);
 
         void onSelfSuccess(User self);
 
-        void onForgotSuccess();
-
-        void onForgotFailure();
-
         void onLoginFailure();
+
+    }
+
+    public interface ForgotListener{
+        void onSuccess();
+
+        void onFailure();
+    }
+
+    public interface InfoListener {
+        void onSuccess();
+
+        void onFailure();
+    }
+
+    public interface PasswordListener {
+        void onSuccess();
+
+        void onFailure();
     }
 
     private AccountService(Context context) {
@@ -44,9 +61,12 @@ public class AccountService {
         iAccountService = retrofit.create(IAccountService.class);
     }
 
-    public void setAccountListener(AccountListener listener) {
-        this.listener = listener;
+    public void setLoginListener(LoginListener listener) {
+        this.loginListener = listener;
     }
+    public void setForgotListener(ForgotListener listener){this.forgotListener=listener;}
+    public void setInfoListener(InfoListener listener){this.infoListener =listener;}
+    public void setPasswordListener(PasswordListener listener){this.passwordListener =listener;}
 
     public static AccountService getInstance(Context context) {
         if (accountService == null)
@@ -61,12 +81,13 @@ public class AccountService {
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token token = response.body();
                 if (token != null)
-                    listener.onTokenSuccess(token);
-                else listener.onLoginFailure();
+                    loginListener.onTokenSuccess(token);
+                else loginListener.onLoginFailure();
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
+                loginListener.onLoginFailure();
             }
         });
     }
@@ -79,47 +100,50 @@ public class AccountService {
                 String email = response.body();
                 if (email != null) {
                     SharedPreferencesUtil.saveEmail(context, email);
-                    listener.onForgotSuccess();
-                } else listener.onForgotFailure();
-                Log.i("tag", "forgotPassword " + SharedPreferencesUtil.loadEmail(context));
+                    forgotListener.onSuccess();
+                } else forgotListener.onFailure();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                listener.onForgotFailure();
+                forgotListener.onFailure();
             }
         });
     }
 
-//    public void changePassword(String userId, String oldPassword, String newPassword) {
-//      Call<Boolean>call=iAccountService.changePassword(userId,oldPassword,newPassword);
-//      call.enqueue(new Callback<Boolean>() {
-//          @Override
-//          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//              listener.onDepartmentSuccess();;
-//          }
-//
-//          @Override
-//          public void onLoginFailure(Call<Boolean> call, Throwable t) {
-//              listener.onLoginFailure();
-//          }
-//      });
-//    }
-//
-//    public void updateInfo(String userId, String email, String phone) {
-//        Call<Boolean>call=iAccountService.updateInfo(userId,email,phone);
-//        call.enqueue(new Callback<Boolean>() {
-//            @Override
-//            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//                listener.onDepartmentSuccess();
-//            }
-//
-//            @Override
-//            public void onLoginFailure(Call<Boolean> call, Throwable t) {
-//                listener.onLoginFailure();
-//            }
-//        });
-//    }
+    public void changePassword(String userId, String oldPassword, String newPassword) {
+      Call<Boolean>call=iAccountService.changePassword(userId,oldPassword,newPassword);
+      call.enqueue(new Callback<Boolean>() {
+          @Override
+          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+              if (response.body())
+                  passwordListener.onSuccess();
+              else passwordListener.onFailure();
+          }
+
+          @Override
+          public void onFailure(Call<Boolean> call, Throwable t) {
+                passwordListener.onFailure();
+          }
+      });
+    }
+
+    public void updateInfo(String email, String phone) {
+        Call<Boolean>call=iAccountService.updateInfo(SharedPreferencesUtil.loadSelf(context).getId(),email,phone);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.body())
+                    infoListener.onSuccess();
+                else infoListener.onFailure();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                infoListener.onFailure();
+            }
+        });
+    }
 
     public void getSelf(String userId) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
@@ -129,13 +153,13 @@ public class AccountService {
             public void onResponse(Call<User> call, Response<User> response) {
                 User self = response.body();
                 if (self != null)
-                    listener.onSelfSuccess(self);
-                else listener.onLoginFailure();
+                    loginListener.onSelfSuccess(self);
+                else loginListener.onLoginFailure();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                loginListener.onLoginFailure();
             }
         });
     }

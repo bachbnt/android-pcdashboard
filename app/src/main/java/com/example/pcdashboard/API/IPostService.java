@@ -3,7 +3,6 @@ package com.example.pcdashboard.API;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
-import com.example.pcdashboard.Request.CommentRequest;
 
 import java.util.ArrayList;
 

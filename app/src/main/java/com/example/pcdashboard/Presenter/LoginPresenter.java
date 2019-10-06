@@ -9,7 +9,7 @@ import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 
-public class LoginPresenter implements ILoginPresenter, AccountService.AccountListener {
+public class LoginPresenter implements ILoginPresenter, AccountService.LoginListener {
     private Context context;
     private ILoginView view;
     private AccountService accountService;
@@ -17,13 +17,19 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     public LoginPresenter(Context context) {
         this.context=context;
         accountService = AccountService.getInstance(context);
-        accountService.setAccountListener(this);
     }
 
     public void setLoginView(ILoginView iLoginView) {
         this.view = iLoginView;
     }
 
+    public void addLoginListener(){
+        accountService.setLoginListener(this);
+    }
+
+    public void removeLoginListener(){
+        accountService.setLoginListener(null);
+    }
 
     @Override
     public void onCheck(String userId, String password) {
@@ -65,17 +71,8 @@ public class LoginPresenter implements ILoginPresenter, AccountService.AccountLi
     }
 
     @Override
-    public void onForgotSuccess() {
-        //NULL
-    }
-
-    @Override
-    public void onForgotFailure() {
-        //NULL
-    }
-
-    @Override
     public void onLoginFailure() {
         view.onLoginFailure();
     }
+
 }

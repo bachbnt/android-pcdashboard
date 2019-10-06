@@ -29,26 +29,13 @@ public interface IAccountService {
     @PUT("user/forget-password/{userId}")
     Call<String> forgetPassword(@Path("userId") String id);
 
-//    @Headers(
-//            {
-//                    "Content-Type:application/json",
-//                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
-//            }
-//    )
-//
-//    @FormUrlEncoded
-//    @PUT("user/change-password/{userId}")
-//    Call<Boolean> changePassword(@Path("userId") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
 
-//    @Headers(
-//            {
-//                    "Content-Type:application/json",
-//                    "Authorization:key=AAAArOvOFOI:APA91bGvSEbjNZBLWyRFlpusgCi438wjcZhonilnyXIW7964K04QQ36iH3RsOkShe3eKg4aVSwQWDjCt1FiJqc7rphh8SSzD7IYRPjmNJK90XRlEkJUQtuvq5UMOyp6eUJ9jV-qb_Qc9"
-//            }
-//    )
-//    @FormUrlEncoded
-//    @PUT("user/update-info/{userId}")
-//    Call<Boolean> updateInfo(@Path("userId") String id, @Field("email") String email, @Field("phone") String phone);
+    @PUT("user/change-password/{userId}")
+    Call<Boolean> changePassword(@Path("userId") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+
+
+    @PUT("user/update-info/{userId}")
+    Call<Boolean> updateInfo(@Path("userId") String id, @Field("email")String email,@Field("phone")String phone);
 
     @Headers(
             {

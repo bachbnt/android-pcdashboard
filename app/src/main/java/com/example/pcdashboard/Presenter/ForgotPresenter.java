@@ -2,14 +2,13 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.pcdashboard.API.AccountService;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.View.IForgotView;
 
-public class ForgotPresenter implements IForgotPresenter,AccountService.AccountListener {
+public class ForgotPresenter implements IForgotPresenter, AccountService.ForgotListener {
     private Context context;
     private IForgotView view;
     private AccountService accountService;
@@ -17,10 +16,16 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
     public ForgotPresenter(Context context) {
         this.context = context;
         accountService = AccountService.getInstance(context);
-        accountService.setAccountListener(this);
     }
     public void setForgotView(IForgotView iForgotView){
         this.view=iForgotView;
+    }
+
+    public void addForgotListener(){
+        accountService.setForgotListener(this);
+    }
+    public void removeForgotListener(){
+        accountService.setForgotListener(null);
     }
 
     @Override
@@ -41,28 +46,16 @@ public class ForgotPresenter implements IForgotPresenter,AccountService.AccountL
         view.onGetSuccess();
     }
 
-    @Override
-    public void onTokenSuccess(Token token) {
-        //NULL
-    }
 
     @Override
-    public void onSelfSuccess(User self) {
-        //NULL
-    }
-
-    @Override
-    public void onForgotSuccess() {
+    public void onSuccess() {
         onResponse();
     }
 
     @Override
-    public void onForgotFailure() {
+    public void onFailure() {
         view.onGetFailure();
     }
 
-    @Override
-    public void onLoginFailure() {
-        //NULL
-    }
+
 }

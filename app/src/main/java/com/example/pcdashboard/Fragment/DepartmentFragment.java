@@ -47,12 +47,14 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
     @Override
     public void onResume() {
         presenter.setDepartmentView(this);
+        presenter.addDepartmentListener();
         super.onResume();
     }
 
     @Override
     public void onPause() {
         presenter.setDepartmentView(null);
+        presenter.removeDepartmentListener();
         super.onPause();
     }
 
@@ -75,6 +77,6 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Tải danh sách thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Tải bảng tin bộ môn thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
     }
 }

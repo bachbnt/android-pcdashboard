@@ -1,12 +1,10 @@
 package com.example.pcdashboard.API;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
-import com.example.pcdashboard.Request.CommentRequest;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -72,12 +70,13 @@ public class PostService {
             @Override
             public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
                 ArrayList<DepartmentPost> departmentPosts=response.body();
-                departmentListener.onSuccess(departmentPosts);
+                if(departmentPosts!=null)
+                    departmentListener.onSuccess(departmentPosts);
+                else departmentListener.onFailure();
             }
 
             @Override
             public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
-                Log.e("tag","getDepartmentPosts onFailure"+t.toString());
                 departmentListener.onFailure();
             }
         });
@@ -90,13 +89,13 @@ public class PostService {
             @Override
             public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
                 ArrayList<ClassPost> classPosts=response.body();
-                Log.i("tag","getClassPosts onResponse");
-                classListener.onSuccess(classPosts);
+                if(classPosts!=null)
+                    classListener.onSuccess(classPosts);
+                else classListener.onFailure();
             }
 
             @Override
             public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
-                Log.i("tag","getClassPosts onFailure"+t.toString());
                 classListener.onFailure();
             }
         });
@@ -108,13 +107,14 @@ public class PostService {
             @Override
             public void onResponse(Call<ArrayList<PostComment>> call, Response<ArrayList<PostComment>> response) {
                 ArrayList<PostComment> postComments=response.body();
-                Log.i("tag","getPostComments"+postComments.size());
-                commentListener.onSuccess(postComments);
+                if(postComments!=null)
+                    commentListener.onSuccess(postComments);
+                else commentListener.onFailure();
             }
 
             @Override
             public void onFailure(Call<ArrayList<PostComment>> call, Throwable t) {
-                Log.i("tag","getPostComments"+t.toString());
+                commentListener.onFailure();
             }
         });
     }

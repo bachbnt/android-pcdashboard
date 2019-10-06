@@ -51,12 +51,14 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
     @Override
     public void onResume() {
         presenter.setForgotView(this);
+        presenter.addForgotListener();
         super.onResume();
     }
 
     @Override
     public void onPause() {
         presenter.setForgotView(null);
+        presenter.removeForgotListener();
         super.onPause();
     }
 

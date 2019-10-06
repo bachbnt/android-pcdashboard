@@ -1,21 +1,39 @@
 package com.example.pcdashboard.Fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.Presenter.InfoPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.View.IInfoView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFragment extends Fragment {
-
+public class InfoFragment extends Fragment implements IInfoView,View.OnClickListener {
+    private ScreenManager screenManager;
+    private InfoPresenter presenter;
+    private ImageView ivAvatar;
+    private TextView tvName;
+    private TextView tvId;
+    private TextView tvClass;
+    private EditText etEmail;
+    private EditText etPhone;
+    private Button btnUpdate;
 
     public InfoFragment() {
         // Required empty public constructor
@@ -26,7 +44,70 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
+        initialize(view);
+        return view;
     }
 
+    @Override
+    public void onResume() {
+        presenter.setInfoView(this);
+        presenter.addInfoListener();
+        presenter.onLoad();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.setInfoView(null);
+        presenter.removeInfoListener();
+        super.onPause();
+    }
+
+    private void initialize(View view) {
+        screenManager = ScreenManager.getInstance();
+        presenter = new InfoPresenter(getContext());
+        ivAvatar = view.findViewById(R.id.iv_avatar_info);
+        tvName = view.findViewById(R.id.tv_name_info);
+        tvId = view.findViewById(R.id.tv_id_info);
+        tvClass = view.findViewById(R.id.tv_class_info);
+        etEmail = view.findViewById(R.id.et_email_info);
+        etPhone = view.findViewById(R.id.et_phone_info);
+        btnUpdate=view.findViewById(R.id.btn_update_info);
+        btnUpdate.setOnClickListener(this);
+    }
+
+    @Override
+    public void onLoad(User self) {
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(120, 120).into(ivAvatar);
+        tvName.setText(self.getName());
+        tvId.setText(self.getId());
+        tvClass.setText(self.getClassId());
+        etEmail.setText(self.getEmail());
+        etPhone.setText(self.getPhone());
+    }
+
+    @Override
+    public void onCheckFailure() {
+        Toast.makeText(getContext(), "Email hoặc số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUpdateSuccess() {
+        Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUpdateFailure() {
+        Toast.makeText(getContext(), "Cập nhật thông tin thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_update_info:
+                presenter.onCheck(etEmail.getText().toString(),etPhone.getText().toString());
+                break;
+        }
+    }
 }

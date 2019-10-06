@@ -16,13 +16,18 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     public ClassPresenter(Context context) {
         this.context = context;
         postService=PostService.getInstance(context);
-        postService.setClassListener(this);
     }
     public void setClassView(IClassView iClassView){
         this.view=iClassView;
     }
 
+    public void addClassListener(){
+        postService.setClassListener(this);
+    }
 
+    public void removeClassListener(){
+        postService.setClassListener(null);
+    }
     @Override
     public void onRequest() {
         postService.getClassPosts();

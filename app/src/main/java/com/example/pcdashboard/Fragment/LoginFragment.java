@@ -49,12 +49,14 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onResume() {
         presenter.setLoginView(this);
+        presenter.addLoginListener();
         super.onResume();
     }
 
     @Override
     public void onPause() {
         presenter.setLoginView(null);
+        presenter.removeLoginListener();
         super.onPause();
     }
 

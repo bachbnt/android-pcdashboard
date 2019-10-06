@@ -58,12 +58,14 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     @Override
     public void onResume() {
         presenter.setClassView(this);
+        presenter.addClassListener();
         super.onResume();
     }
 
     @Override
     public void onPause() {
         presenter.setClassView(null);
+        presenter.removeClassListener();
         super.onPause();
     }
 
@@ -106,7 +108,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Tải danh sách thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Tải bảng tin lớp thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
     }
 
     @Override
