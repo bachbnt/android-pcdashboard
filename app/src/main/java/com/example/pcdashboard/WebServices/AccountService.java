@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Request.TokenRequest;
+import com.example.pcdashboard.ObjectsRequest.TokenRequest;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +55,7 @@ public class AccountService {
         this.context = context;
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IServiceManager.url)
+                .baseUrl(IWebServices.url)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         iAccountService = retrofit.create(IAccountService.class);

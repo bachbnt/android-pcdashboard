@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.example.pcdashboard.Utility.Notifications;
 
-public class MyApplication extends Application {
+public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

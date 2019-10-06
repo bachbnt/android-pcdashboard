@@ -2,7 +2,7 @@ package com.example.pcdashboard.WebServices;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Request.TokenRequest;
+import com.example.pcdashboard.ObjectsRequest.TokenRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

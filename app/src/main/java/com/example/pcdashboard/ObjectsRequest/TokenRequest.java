@@ -1,4 +1,4 @@
-package com.example.pcdashboard.Request;
+package com.example.pcdashboard.ObjectsRequest;
 
 public class TokenRequest {
     private String userId;
