@@ -1,4 +1,4 @@
-package com.example.pcdashboard.API;
+package com.example.pcdashboard.WebServices;
 
 import android.content.Context;
 

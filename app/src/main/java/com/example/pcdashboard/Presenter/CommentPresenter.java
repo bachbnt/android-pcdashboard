@@ -2,11 +2,16 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.API.PostService;
+import com.example.pcdashboard.WebServices.PostService;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.View.ICommentView;
 
 import java.util.ArrayList;
+
+interface ICommentPresenter {
+    void onRequest(String postId);
+    void onResponse(ArrayList<PostComment> postComments);
+}
 
 public class CommentPresenter implements ICommentPresenter,PostService.CommentListener {
     private Context context;

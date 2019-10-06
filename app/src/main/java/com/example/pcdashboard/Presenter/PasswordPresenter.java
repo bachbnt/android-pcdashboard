@@ -2,10 +2,11 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.API.AccountService;
-import com.example.pcdashboard.View.IInfoView;
+import com.example.pcdashboard.WebServices.AccountService;
 import com.example.pcdashboard.View.IPasswordView;
 
+interface IPasswordPresenter {
+}
 public class PasswordPresenter implements IPasswordPresenter,AccountService.PasswordListener {
     private Context context;
     private IPasswordView view;

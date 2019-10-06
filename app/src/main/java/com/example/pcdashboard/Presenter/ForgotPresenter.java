@@ -3,11 +3,13 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.pcdashboard.API.AccountService;
-import com.example.pcdashboard.Model.Token;
-import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.WebServices.AccountService;
 import com.example.pcdashboard.View.IForgotView;
-
+interface IForgotPresenter {
+    void onCheck(String userId);
+    void onRequest(String userId);
+    void onResponse();
+}
 public class ForgotPresenter implements IForgotPresenter, AccountService.ForgotListener {
     private Context context;
     private IForgotView view;

@@ -1,4 +1,4 @@
-package com.example.pcdashboard.API;
+package com.example.pcdashboard.WebServices;
 
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
@@ -7,7 +7,6 @@ import com.example.pcdashboard.Model.PostComment;
 import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;

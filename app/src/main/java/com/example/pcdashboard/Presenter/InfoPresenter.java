@@ -3,10 +3,16 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.pcdashboard.API.AccountService;
+import com.example.pcdashboard.WebServices.AccountService;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IInfoView;
 
+interface IInfoPresenter {
+    void onLoad();
+    void onCheck(String email,String phone);
+    void onRequest(String email,String phone);
+    void onResponse();
+}
 public class InfoPresenter implements IInfoPresenter, AccountService.InfoListener {
     private Context context;
     private IInfoView view;

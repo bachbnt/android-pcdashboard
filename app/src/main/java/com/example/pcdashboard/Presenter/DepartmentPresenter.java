@@ -2,12 +2,16 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.API.PostService;
-import com.example.pcdashboard.Model.ClassPost;
+import com.example.pcdashboard.WebServices.PostService;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.View.IDeparmentView;
 
 import java.util.ArrayList;
+
+interface IDepartmentPresenter {
+    void onRequest();
+    void onResponse(ArrayList<DepartmentPost> departmentPosts);
+}
 
 public class DepartmentPresenter implements IDepartmentPresenter, PostService.DepartmentListener {
     private Context context;
