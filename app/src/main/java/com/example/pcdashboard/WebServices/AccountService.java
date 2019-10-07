@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.ObjectsRequest.InfoRequest;
+import com.example.pcdashboard.ObjectsRequest.PasswordRequest;
 import com.example.pcdashboard.ObjectsRequest.TokenRequest;
 import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 import com.google.gson.Gson;
@@ -23,6 +25,7 @@ public class AccountService {
     private ForgotListener forgotListener;
     private InfoListener infoListener;
     private PasswordListener passwordListener;
+    private String token;
 
     public interface LoginListener {
         void onTokenSuccess(Token token);
@@ -111,8 +114,9 @@ public class AccountService {
         });
     }
 
-    public void changePassword(String userId, String oldPassword, String newPassword) {
-      Call<Boolean>call=iAccountService.changePassword(userId,oldPassword,newPassword);
+    public void changePassword(String oldPassword, String newPassword) {
+        String token=SharedPreferencesUtil.loadToken(context).getTokenType()+" "+SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean>call=iAccountService.changePassword(token,new PasswordRequest(SharedPreferencesUtil.loadSelf(context).getId(),oldPassword,newPassword));
       call.enqueue(new Callback<Boolean>() {
           @Override
           public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -129,7 +133,8 @@ public class AccountService {
     }
 
     public void updateInfo(String email, String phone) {
-        Call<Boolean>call=iAccountService.updateInfo(SharedPreferencesUtil.loadSelf(context).getId(),email,phone);
+        String token=SharedPreferencesUtil.loadToken(context).getTokenType()+" "+SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean>call=iAccountService.updateInfo(token,new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(),email,phone));
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {

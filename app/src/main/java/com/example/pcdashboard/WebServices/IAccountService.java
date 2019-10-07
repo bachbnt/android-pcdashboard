@@ -2,6 +2,8 @@ package com.example.pcdashboard.WebServices;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.ObjectsRequest.InfoRequest;
+import com.example.pcdashboard.ObjectsRequest.PasswordRequest;
 import com.example.pcdashboard.ObjectsRequest.TokenRequest;
 
 import retrofit2.Call;
@@ -27,12 +29,22 @@ public interface IAccountService {
     Call<String> forgetPassword(@Path("userId") String id);
 
 
-    @PUT("user/change-password/{userId}")
-    Call<Boolean> changePassword(@Path("userId") String id, @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+    @Headers(
+            {
+                    "Content-Type:application/json",
+            }
+    )
+    @PUT("user/change-password/")
+    Call<Boolean> changePassword(@Header("Authorization") String token, @Body PasswordRequest passwordRequest);
 
 
-    @PUT("user/update-info/{userId}")
-    Call<Boolean> updateInfo(@Path("userId") String id, @Field("email")String email,@Field("phone")String phone);
+    @Headers(
+            {
+                    "Content-Type:application/json",
+            }
+    )
+    @PUT("user/")
+    Call<Boolean> updateInfo(@Header("Authorization") String token, @Body InfoRequest infoRequest);
 
     @Headers(
             {
