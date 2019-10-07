@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Presenter.PasswordPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IPasswordView;
 
@@ -19,6 +22,8 @@ import com.example.pcdashboard.View.IPasswordView;
  * A simple {@link Fragment} subclass.
  */
 public class PasswordFragment extends Fragment implements IPasswordView, View.OnClickListener, TextWatcher {
+    private ScreenManager screenManager;
+    private PasswordPresenter presenter;
     private EditText etOld;
     private EditText etNew;
     private EditText etRetype;
@@ -40,10 +45,21 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
 
     @Override
     public void onResume() {
+        presenter.setPasswordView(this);
+        presenter.addPasswordListener();
         super.onResume();
     }
 
+    @Override
+    public void onPause() {
+        presenter.setPasswordView(null);
+        presenter.removePasswordListener();
+        super.onPause();
+    }
+
     private void initialize(View view) {
+        screenManager=ScreenManager.getInstance();
+        presenter=new PasswordPresenter(getContext());
         etOld = view.findViewById(R.id.et_old_password);
         etNew = view.findViewById(R.id.et_new_password);
         etRetype = view.findViewById(R.id.et_retype_password);
@@ -56,23 +72,24 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
 
     @Override
     public void onCheckFailure() {
-
+        Toast.makeText(getContext(), "Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onChangeSuccess() {
-
+        Toast.makeText(getContext(), "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onChangeFailure() {
-
+        Toast.makeText(getContext(), "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_password:
+                presenter.onCheck(etOld.getText().toString(),etNew.getText().toString(),etRetype.getText().toString());
                 break;
         }
     }
@@ -90,7 +107,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
     @Override
     public void afterTextChanged(Editable s) {
         if(etRetype.getText().toString().equals(etNew.getText().toString()))
-            etRetype.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_key_cold_24dp,0,R.drawable.ic_check_24dp,0);
-        else etRetype.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_key_cold_24dp,0,0,0);
+            etRetype.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_key_cold_24dp,0,R.drawable.ic_true_24dp,0);
+        else etRetype.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_key_cold_24dp,0,R.drawable.ic_false_24dp,0);
     }
 }

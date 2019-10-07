@@ -1,6 +1,7 @@
 package com.example.pcdashboard.WebServices;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
@@ -36,7 +37,7 @@ public class AccountService {
 
     }
 
-    public interface ForgotListener{
+    public interface ForgotListener {
         void onSuccess();
 
         void onFailure();
@@ -67,9 +68,18 @@ public class AccountService {
     public void setLoginListener(LoginListener listener) {
         this.loginListener = listener;
     }
-    public void setForgotListener(ForgotListener listener){this.forgotListener=listener;}
-    public void setInfoListener(InfoListener listener){this.infoListener =listener;}
-    public void setPasswordListener(PasswordListener listener){this.passwordListener =listener;}
+
+    public void setForgotListener(ForgotListener listener) {
+        this.forgotListener = listener;
+    }
+
+    public void setInfoListener(InfoListener listener) {
+        this.infoListener = listener;
+    }
+
+    public void setPasswordListener(PasswordListener listener) {
+        this.passwordListener = listener;
+    }
 
     public static AccountService getInstance(Context context) {
         if (accountService == null)
@@ -115,39 +125,50 @@ public class AccountService {
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        String token=SharedPreferencesUtil.loadToken(context).getTokenType()+" "+SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean>call=iAccountService.changePassword(token,new PasswordRequest(SharedPreferencesUtil.loadSelf(context).getId(),oldPassword,newPassword));
-      call.enqueue(new Callback<Boolean>() {
-          @Override
-          public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-              if (response.body())
-                  passwordListener.onSuccess();
-              else passwordListener.onFailure();
-          }
+        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean> call = iAccountService.changePassword(token, new PasswordRequest(SharedPreferencesUtil.loadSelf(context).getId(), oldPassword, newPassword));
+        try {
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        passwordListener.onSuccess();
+                    else passwordListener.onFailure();
+                }
 
-          @Override
-          public void onFailure(Call<Boolean> call, Throwable t) {
-                passwordListener.onFailure();
-          }
-      });
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.i("tag", "changePassword onFailure " + t.toString());
+                    passwordListener.onFailure();
+                }
+            });
+        }catch (NullPointerException e){
+            Log.i("tag", "changePassword  NullPointerException " + e.toString());
+        }
+
     }
 
     public void updateInfo(String email, String phone) {
-        String token=SharedPreferencesUtil.loadToken(context).getTokenType()+" "+SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean>call=iAccountService.updateInfo(token,new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(),email,phone));
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if(response.body())
-                    infoListener.onSuccess();
-                else infoListener.onFailure();
-            }
+        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(), email, phone));
+        try {
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        infoListener.onSuccess();
+                    else infoListener.onFailure();
+                }
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.i("tag","updateInfo onFailure "+t.toString());
+                    infoListener.onFailure();
+                }
+            });
+        }catch (NullPointerException e){
+            Log.i("tag","updateInfo NullPointerException "+e.toString());
+        }
 
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                infoListener.onFailure();
-            }
-        });
     }
 
     public void getSelf(String userId) {
