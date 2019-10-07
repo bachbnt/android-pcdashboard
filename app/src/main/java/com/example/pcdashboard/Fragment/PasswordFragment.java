@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,9 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.PasswordPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IPasswordView;
+
+import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_ACTIVITY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +32,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
     private EditText etNew;
     private EditText etRetype;
     private Button btnChange;
+    private ImageButton ibBack;
 
     public PasswordFragment() {
         // Required empty public constructor
@@ -60,6 +65,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
     private void initialize(View view) {
         screenManager=ScreenManager.getInstance();
         presenter=new PasswordPresenter(getContext());
+        ibBack=view.findViewById(R.id.ib_back_password);
         etOld = view.findViewById(R.id.et_old_password);
         etNew = view.findViewById(R.id.et_new_password);
         etRetype = view.findViewById(R.id.et_retype_password);
@@ -67,6 +73,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
         etNew.addTextChangedListener(this);
         etRetype.addTextChangedListener(this);
         btnChange.setOnClickListener(this);
+        ibBack.setOnClickListener(this);
     }
 
 
@@ -77,7 +84,8 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
 
     @Override
     public void onChangeSuccess() {
-        Toast.makeText(getContext(), "Thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Thay đổi mật khẩu thành công\nVui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+        screenManager.openLoginScreen(LOGIN_ACTIVITY);
     }
 
     @Override
@@ -90,6 +98,9 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
         switch (v.getId()) {
             case R.id.btn_change_password:
                 presenter.onCheck(etOld.getText().toString(),etNew.getText().toString(),etRetype.getText().toString());
+                break;
+            case R.id.ib_back_password:
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }

@@ -76,7 +76,7 @@
                 android:layout_marginTop="@dimen/space_10dp"
                 android:background="@android:color/white"
                 android:gravity="start"
-                android:hint="ban dang nghi gi"
+                android:hint="@string/whats_on_your_mind"
                 android:padding="@dimen/space_10dp"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_size_20sp" />

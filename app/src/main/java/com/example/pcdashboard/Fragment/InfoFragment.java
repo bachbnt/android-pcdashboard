@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.InfoPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IInfoView;
+
+import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
     private EditText etEmail;
     private EditText etPhone;
     private Button btnUpdate;
+    private ImageButton ibBack;
 
     public InfoFragment() {
         // Required empty public constructor
@@ -67,6 +71,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
         presenter = new InfoPresenter(getContext());
+        ibBack=view.findViewById(R.id.ib_back_info);
         ivAvatar = view.findViewById(R.id.iv_avatar_info);
         tvName = view.findViewById(R.id.tv_name_info);
         tvId = view.findViewById(R.id.tv_id_info);
@@ -75,6 +80,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
         etPhone = view.findViewById(R.id.et_phone_info);
         btnUpdate=view.findViewById(R.id.btn_update_info);
         btnUpdate.setOnClickListener(this);
+        ibBack.setOnClickListener(this);
     }
 
     @Override
@@ -95,6 +101,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
     @Override
     public void onUpdateSuccess() {
         Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
     @Override
@@ -107,6 +114,9 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
         switch (v.getId()){
             case R.id.btn_update_info:
                 presenter.onCheck(etEmail.getText().toString(),etPhone.getText().toString());
+                break;
+            case R.id.ib_back_info:
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }
