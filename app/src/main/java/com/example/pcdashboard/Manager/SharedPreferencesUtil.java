@@ -1,4 +1,4 @@
-package com.example.pcdashboard.Utility;
+package com.example.pcdashboard.Manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

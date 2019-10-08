@@ -3,7 +3,6 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,9 @@ import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Adapter.ClassAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.ClassPost;
-import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Presenter.ClassPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IClassView;
 
 import java.util.ArrayList;
@@ -59,6 +57,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onResume() {
         presenter.setClassView(this);
         presenter.addClassListener();
+        presenter.onRequest();
         super.onResume();
     }
 
@@ -79,7 +78,6 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenter.onRequest();
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
     }
@@ -92,12 +90,12 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onEditClick(ClassPost classPost) {
-
+        presenter.onEdit(classPost);
     }
 
     @Override
     public void onDeleteClick(ClassPost classPost) {
-
+        presenter.onDelete(classPost);
     }
 
     @Override
@@ -108,7 +106,12 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Tải bảng tin lớp thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        presenter.onRequest();
     }
 
     @Override

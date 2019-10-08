@@ -2,7 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.WebServices.PostService;
+import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.View.IDeparmentView;
 

@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface IClassView {
     void onUpdate(ArrayList<ClassPost> classPosts);
     void onFailure();
+    void onSuccess();
 }

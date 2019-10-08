@@ -17,7 +17,7 @@ public class ScreenManager {
         return screenManager;
     }
 
-    public void setScreenManager(IScreenManager iScreenManager) {
+    public void setIScreenManager(IScreenManager iScreenManager) {
         this.iScreenManager = iScreenManager;
     }
 

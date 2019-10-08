@@ -3,8 +3,9 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.pcdashboard.WebServices.AccountService;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.Services.AccountService;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IInfoView;
 
 interface IInfoPresenter {
@@ -35,7 +36,8 @@ public class InfoPresenter implements IInfoPresenter, AccountService.InfoListene
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(User self) {
+        SharedPreferencesUtil.saveSelf(context,self);
         onResponse();
     }
 

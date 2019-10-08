@@ -1,14 +1,13 @@
-package com.example.pcdashboard.WebServices;
+package com.example.pcdashboard.Services;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.ObjectsRequest.InfoRequest;
-import com.example.pcdashboard.ObjectsRequest.PasswordRequest;
-import com.example.pcdashboard.ObjectsRequest.TokenRequest;
+import com.example.pcdashboard.Request.InfoRequest;
+import com.example.pcdashboard.Request.PasswordRequest;
+import com.example.pcdashboard.Request.TokenRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -44,7 +43,7 @@ public interface IAccountService {
             }
     )
     @PUT("user/")
-    Call<Boolean> updateInfo(@Header("Authorization") String token, @Body InfoRequest infoRequest);
+    Call<User> updateInfo(@Header("Authorization") String token, @Body InfoRequest infoRequest);
 
     @Headers(
             {

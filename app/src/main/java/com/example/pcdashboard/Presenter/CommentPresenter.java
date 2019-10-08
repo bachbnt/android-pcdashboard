@@ -2,7 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.WebServices.PostService;
+import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.View.ICommentView;
 
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 interface ICommentPresenter {
     void onRequest(String postId);
     void onResponse(ArrayList<PostComment> postComments);
+    void onCreate(String content);
+    void onDelete(String commentId);
 }
 
 public class CommentPresenter implements ICommentPresenter,PostService.CommentListener {
@@ -44,8 +46,23 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
     }
 
     @Override
-    public void onSuccess(ArrayList<PostComment> postComments) {
+    public void onCreate(String content) {
+        postService.createPostComment(content);
+    }
+
+    @Override
+    public void onDelete(String commentId) {
+        postService.deletePostComment(commentId);
+    }
+
+    @Override
+    public void onGetSuccess(ArrayList<PostComment> postComments) {
         onResponse(postComments);
+    }
+
+    @Override
+    public void onSuccess() {
+        view.onSuccess();
     }
 
     @Override

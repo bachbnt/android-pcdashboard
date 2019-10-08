@@ -1,4 +1,4 @@
-package com.example.pcdashboard.WebServices;
+package com.example.pcdashboard.Services;
 
 import com.example.pcdashboard.Model.ChatMessage;
 

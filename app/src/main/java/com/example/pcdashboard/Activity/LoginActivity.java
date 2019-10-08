@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     private void initialize() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
         screenManager = ScreenManager.getInstance();
-        screenManager.setScreenManager(this);
+        screenManager.setIScreenManager(this);
         screenManager.openLoginScreen(LOGIN_FRAGMENT);
     }
 

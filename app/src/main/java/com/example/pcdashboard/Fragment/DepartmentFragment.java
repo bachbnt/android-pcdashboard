@@ -48,6 +48,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
     public void onResume() {
         presenter.setDepartmentView(this);
         presenter.addDepartmentListener();
+        presenter.onRequest();
         super.onResume();
     }
 
@@ -65,7 +66,6 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
         departmentAdapter = new DepartmentAdapter(getContext(),new ArrayList<DepartmentPost>());
         recyclerView.setAdapter(departmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenter.onRequest();
     }
 
 

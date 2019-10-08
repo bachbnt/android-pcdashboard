@@ -3,7 +3,7 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 interface IAccountPresenter {

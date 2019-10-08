@@ -1,4 +1,4 @@
-package com.example.pcdashboard.Utility;
+package com.example.pcdashboard.Manager;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

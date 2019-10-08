@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 
 public class SplashActivity extends AppCompatActivity {
 

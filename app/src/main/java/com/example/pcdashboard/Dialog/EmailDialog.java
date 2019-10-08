@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 
 import static com.example.pcdashboard.Manager.IScreenManager.EMAIL_DIALOG;
 

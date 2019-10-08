@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/space_5dp"
-    android:paddingLeft="@dimen/space_5dp"
     android:layout_marginTop="@dimen/space_5dp"
-    android:layout_marginBottom="@dimen/space_5dp">
+    android:layout_marginBottom="@dimen/space_5dp"
+    android:paddingLeft="@dimen/space_5dp"
+    android:paddingRight="@dimen/space_5dp">
+
+    <ImageButton
+        android:id="@+id/ib_delete_comment_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:layout_marginRight="@dimen/space_10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_delete_hot_24dp" />
 
     <LinearLayout
         android:id="@+id/ll_content_comment_item"
@@ -16,8 +26,8 @@
         android:layout_toRightOf="@id/cv_avatar_comment_item"
         android:background="@drawable/bg_item_comment"
         android:orientation="vertical"
-        android:paddingTop="@dimen/space_5dp"
         android:paddingLeft="@dimen/space_10dp"
+        android:paddingTop="@dimen/space_5dp"
         android:paddingRight="@dimen/space_10dp"
         android:paddingBottom="@dimen/space_5dp">
 

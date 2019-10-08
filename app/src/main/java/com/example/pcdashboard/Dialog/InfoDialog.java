@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
 
 /**
  * A simple {@link Fragment} subclass.

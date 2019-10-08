@@ -2,7 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.WebServices.PostService;
+import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.View.IClassView;
 
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 interface IClassPresenter {
     void onRequest();
     void onResponse(ArrayList<ClassPost> classPosts);
+    void onEdit(ClassPost classPost);
+    void onDelete(ClassPost classPost);
 }
 public class ClassPresenter implements IClassPresenter, PostService.ClassListener {
     private Context context;
@@ -32,6 +34,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     public void removeClassListener(){
         postService.setClassListener(null);
     }
+
     @Override
     public void onRequest() {
         postService.getClassPosts();
@@ -43,8 +46,28 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onSuccess(ArrayList<ClassPost> classPosts) {
+    public void onEdit(ClassPost classPost) {
+        postService.updateClassPost(classPost.getId(),classPost.getContent(),classPost.getImage());
+    }
+
+    @Override
+    public void onDelete(ClassPost classPost) {
+        postService.deleteClassPost(classPost.getId());
+    }
+
+    @Override
+    public void onGetSuccess(ArrayList<ClassPost> classPosts) {
         onResponse(classPosts);
+    }
+
+    @Override
+    public void onEditSuccess() {
+        view.onSuccess();
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        view.onSuccess();
     }
 
     @Override

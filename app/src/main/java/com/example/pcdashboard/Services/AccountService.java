@@ -1,14 +1,14 @@
-package com.example.pcdashboard.WebServices;
+package com.example.pcdashboard.Services;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.ObjectsRequest.InfoRequest;
-import com.example.pcdashboard.ObjectsRequest.PasswordRequest;
-import com.example.pcdashboard.ObjectsRequest.TokenRequest;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Request.InfoRequest;
+import com.example.pcdashboard.Request.PasswordRequest;
+import com.example.pcdashboard.Request.TokenRequest;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -26,7 +26,6 @@ public class AccountService {
     private ForgotListener forgotListener;
     private InfoListener infoListener;
     private PasswordListener passwordListener;
-    private String token;
 
     public interface LoginListener {
         void onTokenSuccess(Token token);
@@ -44,7 +43,7 @@ public class AccountService {
     }
 
     public interface InfoListener {
-        void onSuccess();
+        void onSuccess(User self);
 
         void onFailure();
     }
@@ -150,17 +149,18 @@ public class AccountService {
 
     public void updateInfo(String email, String phone) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(), email, phone));
+        Call<User> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(), email, phone));
         try {
-            call.enqueue(new Callback<Boolean>() {
+            call.enqueue(new Callback<User>() {
                 @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    if (response.body())
-                        infoListener.onSuccess();
+                public void onResponse(Call<User> call, Response<User> response) {
+                    User self=response.body();
+                    if (self!=null)
+                        infoListener.onSuccess(self);
                     else infoListener.onFailure();
                 }
                 @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+                public void onFailure(Call<User> call, Throwable t) {
                     Log.i("tag","updateInfo onFailure "+t.toString());
                     infoListener.onFailure();
                 }

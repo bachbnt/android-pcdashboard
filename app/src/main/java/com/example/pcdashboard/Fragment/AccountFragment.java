@@ -18,7 +18,7 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;

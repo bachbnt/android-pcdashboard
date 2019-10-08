@@ -24,7 +24,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     private Context context;
     private ArrayList<ClassPost> classPosts;
     private OnItemClickListener listener;
-    private PopupWindow popupWindow;
 
     public ClassAdapter(Context context, ArrayList<ClassPost> classPosts, OnItemClickListener listener) {
         this.context = context;
@@ -56,22 +55,31 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         holder.tvName.setText(classPost.getUserName());
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
-        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
-        Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
+        try{
+            Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
+            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
+        }catch (NullPointerException e){
+
+        }
+
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onCommentClick(classPost);
             }
         });
-//        holder.ibMore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                View view=LayoutInflater.from(context).inflate(R.layout.popup_class,null);
-//                TextView tvEdit=view.findViewById(R.id.tv_edit_class_popup);
-//                TextView tvDelete=view.findViewById(R.id.tv_delete_class_popup);
-//            }
-//        });
+        holder.ibEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onEditClick(classPost);
+            }
+        });
+        holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDeleteClick(classPost);
+            }
+        });
     }
 
     @Override
@@ -82,7 +90,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvTime, tvContent, tvComment;
         ImageView ivAvatar, ivImage;
-        ImageButton ibMore;
+        ImageButton ibEdit,ibDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,7 +100,8 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
             tvComment = itemView.findViewById(R.id.tv_comment_class_item);
             ivAvatar = itemView.findViewById(R.id.iv_avatar_class_item);
             ivImage = itemView.findViewById(R.id.iv_image_class_item);
-            ibMore = itemView.findViewById(R.id.ib_more_class_item);
+            ibEdit = itemView.findViewById(R.id.ib_edit_class_item);
+            ibDelete=itemView.findViewById(R.id.ib_delete_class_item);
         }
     }
 }

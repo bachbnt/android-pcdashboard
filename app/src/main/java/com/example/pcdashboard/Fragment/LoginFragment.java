@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;

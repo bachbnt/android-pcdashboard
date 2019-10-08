@@ -3,7 +3,7 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.pcdashboard.WebServices.AccountService;
+import com.example.pcdashboard.Services.AccountService;
 import com.example.pcdashboard.View.IForgotView;
 interface IForgotPresenter {
     void onCheck(String userId);

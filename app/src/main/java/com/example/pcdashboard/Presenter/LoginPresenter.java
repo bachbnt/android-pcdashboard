@@ -3,10 +3,10 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.pcdashboard.WebServices.AccountService;
+import com.example.pcdashboard.Services.AccountService;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Utility.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ILoginView;
 interface ILoginPresenter {
     void onCheck(String userId,String password);
