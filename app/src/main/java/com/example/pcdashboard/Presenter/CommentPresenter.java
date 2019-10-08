@@ -12,7 +12,7 @@ interface ICommentPresenter {
     void onRequest(String postId);
     void onResponse(ArrayList<PostComment> postComments);
     void onCreate(String content);
-    void onDelete(String commentId);
+    void onDelete(PostComment postComment);
 }
 
 public class CommentPresenter implements ICommentPresenter,PostService.CommentListener {
@@ -51,8 +51,8 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
     }
 
     @Override
-    public void onDelete(String commentId) {
-        postService.deletePostComment(commentId);
+    public void onDelete(PostComment postComment) {
+        postService.deletePostComment(postComment.getId());
     }
 
     @Override

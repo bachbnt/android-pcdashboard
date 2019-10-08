@@ -59,19 +59,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@id/ll_select_post"
         android:layout_below="@id/rl_back_post">
 
         <RelativeLayout
             android:id="@+id/rl_input_post"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/et_input_post"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_below="@id/cv_avatar_post"
                 android:layout_marginTop="@dimen/space_10dp"
                 android:background="@android:color/white"
@@ -85,6 +85,7 @@
                 android:id="@+id/iv_image_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@id/et_input_post"
                 android:layout_marginTop="@dimen/space_10dp" />
 

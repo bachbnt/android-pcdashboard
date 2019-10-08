@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener {
+public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener,CommentAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
     private CommentPresenter presenter;
@@ -70,7 +70,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         ibSend=view.findViewById(R.id.ib_send_comment_dialog);
         etInput=view.findViewById(R.id.et_input_comment_dialog);
-        commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>());
+        commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(),this);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter=new CommentPresenter(getContext());
@@ -101,7 +101,13 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         switch (v.getId()){
             case R.id.ib_send_comment_dialog:
                 presenter.onCreate(etInput.getText().toString());
+                etInput.setText("");
                 break;
         }
+    }
+
+    @Override
+    public void onDelete(PostComment postComment) {
+        presenter.onDelete(postComment);
     }
 }

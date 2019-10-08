@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +21,15 @@ import java.util.ArrayList;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private Context context;
     private ArrayList<PostComment> postComments;
+    private OnItemClickListener listener;
 
-    public CommentAdapter(Context context, ArrayList<PostComment> postComments) {
+    public interface OnItemClickListener{
+        void onDelete(PostComment postComment);
+    }
+    public CommentAdapter(Context context, ArrayList<PostComment> postComments,OnItemClickListener listener) {
         this.context = context;
         this.postComments = postComments;
+        this.listener=listener;
     }
     public void updateList(ArrayList<PostComment> postComments){
         this.postComments=postComments;
@@ -39,11 +45,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PostComment postComment = postComments.get(position);
+        final PostComment postComment = postComments.get(position);
         Glide.with(context).load(Uri.parse(postComment.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
         holder.tvName.setText(postComment.getUserName());
         holder.tvContent.setText(postComment.getContent());
         holder.tvTime.setText(postComment.getTime());
+        holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDelete(postComment);
+            }
+        });
     }
 
     @Override
@@ -54,6 +66,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAvatar;
         TextView tvName, tvContent, tvTime;
+        ImageButton ibDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +74,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             tvName = itemView.findViewById(R.id.tv_name_comment_item);
             tvContent = itemView.findViewById(R.id.tv_content_comment_item);
             tvTime = itemView.findViewById(R.id.tv_time_comment_item);
+            ibDelete=itemView.findViewById(R.id.ib_delete_comment_item);
         }
     }
 }
