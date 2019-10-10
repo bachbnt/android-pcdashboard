@@ -17,18 +17,14 @@
         android:gravity="right">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_image_cold_32dp" />
-
-        <ImageButton
+            android:id="@+id/ib_photo_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_10dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_camera_cold_32dp" />
+            android:src="@drawable/ic_image_cold_32dp" />
+
+
     </LinearLayout>
 
     <RelativeLayout
@@ -71,7 +67,7 @@
             <EditText
                 android:id="@+id/et_input_post"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/cv_avatar_post"
                 android:layout_marginTop="@dimen/space_10dp"
                 android:background="@android:color/white"
@@ -85,7 +81,6 @@
                 android:id="@+id/iv_image_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_below="@id/et_input_post"
                 android:layout_marginTop="@dimen/space_10dp" />
 

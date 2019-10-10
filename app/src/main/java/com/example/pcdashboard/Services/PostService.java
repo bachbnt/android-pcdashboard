@@ -2,6 +2,8 @@ package com.example.pcdashboard.Services;
 
 import android.content.Context;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Model.ClassPost;
@@ -9,8 +11,12 @@ import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Request.PostRequest;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -159,8 +165,13 @@ public class PostService {
     }
 
     public void createClassPost(String content, String image) {
+        File file = new File(image);
+        // Create a request body with file and image media type
+        RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
+        // Create MultipartBody.Part using file request-body,file name and part name
+        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.createPost(token, new PostRequest(content, image));
+        Call<Boolean> call = iPostService.createPost(token,part,content);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -174,6 +185,14 @@ public class PostService {
                 postListener.onFailure();
             }
         });
+    }
+    public static String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
     public void updateClassPost(final String postId, String content, String image) {
