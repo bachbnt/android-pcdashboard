@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Fragment;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -29,6 +30,8 @@ import com.example.pcdashboard.View.IPostView;
 
 import java.io.IOException;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 import static android.app.Activity.RESULT_OK;
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 
@@ -36,6 +39,8 @@ import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
  * A simple {@link Fragment} subclass.
  */
 public class PostFragment extends Fragment implements View.OnClickListener, IPostView {
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
     private static final int GALLERY_REQUEST_CODE = 100;
     private String imagePath = "";
     private ScreenManager screenManager;
@@ -92,7 +97,12 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_post_post:
-                presenter.onPost(etInput.getText().toString(),imagePath);
+                if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
+                    presenter.onPost(etInput.getText().toString(),imagePath);
+                    Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
+                } else {
+                    EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
+                }
                 break;
             case R.id.ib_back_post:
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);

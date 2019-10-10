@@ -3,7 +3,6 @@ package com.example.pcdashboard.Services;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
-import com.example.pcdashboard.Request.PostRequest;
 
 import java.util.ArrayList;
 
@@ -40,22 +39,17 @@ public interface IPostService {
     @GET("post/class/{classId}")
     Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
     @Multipart
     @POST("post/class/")
     Call<Boolean> createPost(@Header("Authorization") String token, @Part MultipartBody.Part file, @Query("content") String content);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
-    @PUT("post/class/{postId}")
-    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Body PostRequest postRequest);
+//    @Headers(
+//            {
+//                    "Content-Type:application/json",
+//            }
+//    )
+//    @PUT("post/class/{postId}")
+//    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Body PostRequest postRequest);
 
     @Headers(
             {
