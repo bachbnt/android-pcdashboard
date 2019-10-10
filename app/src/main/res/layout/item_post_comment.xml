@@ -5,8 +5,20 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/space_5dp"
     android:layout_marginBottom="@dimen/space_5dp"
+    android:layout_marginRight="@dimen/space_5dp"
+    android:layout_marginLeft="@dimen/space_5dp"
     android:paddingLeft="@dimen/space_5dp"
     android:paddingRight="@dimen/space_5dp">
+
+    <ImageButton
+        android:id="@+id/ib_edit_comment_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:layout_marginRight="@dimen/space_10dp"
+        android:layout_toLeftOf="@id/ib_delete_comment_item"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_edit_hot_24dp" />
 
     <ImageButton
         android:id="@+id/ib_delete_comment_item"
@@ -22,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space_10dp"
+        android:layout_marginRight="70dp"
         android:layout_toRightOf="@id/cv_avatar_comment_item"
         android:background="@drawable/bg_item_comment"
         android:orientation="vertical"

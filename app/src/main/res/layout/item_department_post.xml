@@ -30,7 +30,7 @@
             android:layout_marginRight="@dimen/space_10dp"
             android:text="@string/title_test"
             android:textColor="@color/colorSlateGray"
-            android:textSize="@dimen/font_size_16sp"
+            android:textSize="@dimen/font_size_20sp"
             android:textStyle="bold" />
 
         <TextView

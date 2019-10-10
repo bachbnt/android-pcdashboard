@@ -2,7 +2,6 @@ package com.example.pcdashboard.Adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +26,15 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         this.departmentPosts = departmentPosts;
     }
 
-    public void updateList(ArrayList<DepartmentPost> departmentPosts){
-        this.departmentPosts=departmentPosts;
+    public void updateList(ArrayList<DepartmentPost> departmentPosts) {
+        this.departmentPosts = departmentPosts;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_department_post,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_department_post, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
@@ -43,9 +43,11 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         DepartmentPost departmentPost = departmentPosts.get(position);
         holder.tvTitle.setText(departmentPost.getTitle());
         holder.tvTime.setText(departmentPost.getTime());
-        Log.i("tag","onBindViewHolder "+position);
         holder.tvContent.setText(departmentPost.getContent());
-        Glide.with(context).load(Uri.parse(departmentPost.getImage())).into(holder.ivImage);
+        if (departmentPost.getImage() != null) {
+            holder.ivImage.setVisibility(View.VISIBLE);
+            Glide.with(context).load(Uri.parse(departmentPost.getImage())).into(holder.ivImage);
+        } else holder.ivImage.setVisibility(View.GONE);
     }
 
     @Override
@@ -53,15 +55,16 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         return departmentPosts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTitle,tvTime,tvContent;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvTime, tvContent;
         ImageView ivImage;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle=itemView.findViewById(R.id.tv_title_department_item);
-            tvTime=itemView.findViewById(R.id.tv_time_department);
-            tvContent=itemView.findViewById(R.id.tv_content_department_item);
-            ivImage=itemView.findViewById(R.id.iv_image_department_item);
+            tvTitle = itemView.findViewById(R.id.tv_title_department_item);
+            tvTime = itemView.findViewById(R.id.tv_time_department);
+            tvContent = itemView.findViewById(R.id.tv_content_department_item);
+            ivImage = itemView.findViewById(R.id.iv_image_department_item);
         }
     }
 }

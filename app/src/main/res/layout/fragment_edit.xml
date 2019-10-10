@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/ll_select_post"
+        android:id="@+id/ll_select_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -17,7 +17,7 @@
         android:gravity="right">
 
         <ImageButton
-            android:id="@+id/ib_photo_post"
+            android:id="@+id/ib_photo_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_10dp"
@@ -28,13 +28,13 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_back_post"
+        android:id="@+id/rl_back_edit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_50dp"
         android:background="@drawable/bg_panel">
 
         <ImageButton
-            android:id="@+id/ib_back_post"
+            android:id="@+id/ib_back_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_10dp"
@@ -42,34 +42,34 @@
             android:src="@drawable/ic_back_cold_32dp" />
 
         <TextView
-            android:id="@+id/tv_post_post"
+            android:id="@+id/tv_edit_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/space_10dp"
-            android:text="@string/post"
+            android:text="@string/edit"
             android:textAllCaps="true"
             android:textColor="@color/colorCold"
             android:textSize="@dimen/font_size_20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_select_post"
-        android:layout_below="@id/rl_back_post">
+        android:layout_below="@id/rl_back_edit">
 
         <RelativeLayout
-            android:id="@+id/rl_input_post"
+            android:id="@+id/rl_input_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/et_input_post"
+                android:id="@+id/et_input_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cv_avatar_post"
+                android:layout_below="@id/cv_avatar_edit"
                 android:layout_marginTop="@dimen/space_10dp"
                 android:background="@android:color/white"
                 android:gravity="start"
@@ -78,37 +78,31 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_size_20sp" />
 
-            <ImageView
-                android:id="@+id/iv_image_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/et_input_post"
-                android:layout_marginTop="@dimen/space_10dp" />
-
             <TextView
-                android:id="@+id/tv_name_post"
+                android:id="@+id/tv_name_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/cv_avatar_post"
-                android:layout_toRightOf="@id/cv_avatar_post"
+                android:layout_alignTop="@id/cv_avatar_edit"
+                android:layout_toRightOf="@id/cv_avatar_edit"
                 android:text="@string/app_name"
                 android:textColor="@color/colorSlateGray"
                 android:textSize="@dimen/font_size_16sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:id="@+id/tv_class_post"
+                android:id="@+id/tv_class_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_name_post"
-                android:layout_alignBottom="@id/cv_avatar_post"
+                android:layout_alignLeft="@id/tv_name_edit"
+                android:layout_alignBottom="@id/cv_avatar_edit"
                 android:background="@drawable/bg_edittext_login"
                 android:padding="@dimen/space_5dp"
-                android:text="Thành viên của K16"
+                android:text="Thành viên của "
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/font_size_12sp" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_avatar_post"
+                android:id="@+id/cv_avatar_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_10dp"
@@ -117,7 +111,7 @@
                 app:cardCornerRadius="25dp">
 
                 <ImageView
-                    android:id="@+id/iv_avatar_post"
+                    android:id="@+id/iv_avatar_edit"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/logo" />

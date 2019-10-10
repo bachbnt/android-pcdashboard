@@ -7,10 +7,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MyApp extends Application {
 
+
     @Override
     public void onCreate() {
         super.onCreate();
         Notifications.createChannel(this);
-
     }
 }

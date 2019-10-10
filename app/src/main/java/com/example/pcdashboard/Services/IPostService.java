@@ -41,15 +41,12 @@ public interface IPostService {
 
     @Multipart
     @POST("post/class/")
-    Call<Boolean> createPost(@Header("Authorization") String token, @Part MultipartBody.Part file, @Query("content") String content);
+    Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content, @Part MultipartBody.Part file);
 
-//    @Headers(
-//            {
-//                    "Content-Type:application/json",
-//            }
-//    )
-//    @PUT("post/class/{postId}")
-//    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Body PostRequest postRequest);
+
+    @Multipart
+    @PUT("post/class/{postId}")
+    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Part MultipartBody.Part file);
 
     @Headers(
             {
@@ -75,7 +72,7 @@ public interface IPostService {
             }
     )
     @POST("comment/{postId}")
-    Call<Boolean> createComment(@Header("Authorization") String token, @Path("postId") String postId, @Body String  content);
+    Call<Boolean> createComment(@Header("Authorization") String token, @Path("postId") String postId, @Body String content);
 
     @Headers(
             {

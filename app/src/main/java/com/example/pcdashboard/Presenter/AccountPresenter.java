@@ -7,7 +7,7 @@ import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
 interface IAccountPresenter {
-    void onLogin();
+    void onInit();
 
     void onLogout();
 
@@ -28,9 +28,9 @@ public class AccountPresenter implements IAccountPresenter {
     }
 
     @Override
-    public void onLogin() {
+    public void onInit() {
         User self = SharedPreferencesUtil.loadSelf(context);
-        view.onUpdate(self);
+        view.onInit(self);
     }
 
     @Override

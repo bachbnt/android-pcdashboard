@@ -22,7 +22,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.PostPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.Services.ImageFilePath;
@@ -41,6 +43,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 public class PostFragment extends Fragment implements View.OnClickListener, IPostView {
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
+
     private static final int GALLERY_REQUEST_CODE = 100;
     private String imagePath = "";
     private ScreenManager screenManager;
@@ -50,6 +53,9 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     private ImageButton ibBack;
     private ImageButton ibPhoto;
     private ImageView ivImage;
+    private ImageView ivAvatar;
+    private TextView tvClass;
+    private TextView tvName;
 
 
     public PostFragment() {
@@ -70,6 +76,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     public void onResume() {
         presenter.setPostView(this);
         presenter.addPostListener();
+        presenter.onInit();
         super.onResume();
     }
 
@@ -83,6 +90,9 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
         presenter=new PostPresenter(getContext());
+        tvClass=view.findViewById(R.id.tv_class_post);
+        tvName=view.findViewById(R.id.tv_name_post);
+        ivAvatar=view.findViewById(R.id.iv_avatar_post);
         etInput=view.findViewById(R.id.et_input_post);
         tvPost=view.findViewById(R.id.tv_post_post);
         ibBack=view.findViewById(R.id.ib_back_post);
@@ -99,9 +109,8 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
             case R.id.tv_post_post:
                 if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
                     presenter.onPost(etInput.getText().toString(),imagePath);
-                    Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
                 } else {
-                    EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
+                    EasyPermissions.requestPermissions(this, "Hãy cho phép truy cập bộ nhớ thiết bị", 101, galleryPermissions);
                 }
                 break;
             case R.id.ib_back_post:
@@ -112,6 +121,13 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
                 break;
 
         }
+    }
+
+    @Override
+    public void onInit(User self) {
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(50,50).into(ivAvatar);
+        tvName.setText(self.getName());
+        tvClass.setText("Thành viên của "+self.getClassId());
     }
 
     @Override
@@ -143,7 +159,6 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
             Uri uri = data.getData();
             imagePath = ImageFilePath.getPath(getContext(), data.getData());
-            Log.i("tag","onActivityResult "+imagePath);
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 ivImage.setImageBitmap(bitmap);

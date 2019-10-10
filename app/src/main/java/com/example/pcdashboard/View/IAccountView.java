@@ -6,7 +6,7 @@ public interface IAccountView {
     String STUDY_LAYOUT="STUDY_LAYOUT";
     String HELP_LAYOUT="HELP_LAYOUT";
     String SETTING_LAYOUT="SETTING_LAYOUT";
-    void onUpdate(User self);
+    void onInit(User self);
     void showInfoDialog();
     void selectMenu(String layoutName);
 }

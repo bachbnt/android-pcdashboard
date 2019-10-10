@@ -29,7 +29,7 @@
             android:id="@+id/cv_avatar_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space_10dp"
+            android:layout_marginLeft="@dimen/space_5dp"
             android:layout_centerVertical="true"
             app:cardCornerRadius="@dimen/space_20dp">
 

@@ -7,14 +7,6 @@
     tools:context=".Dialog.CommentDialog">
 
     <!-- TODO: Update blank fragment layout -->
-    <ImageButton
-        android:id="@+id/ib_close_comment_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/space_10dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close_hot_32dp" />
 
     <RelativeLayout
         android:id="@+id/rl_input_comment_dialog"
@@ -47,14 +39,7 @@
     </RelativeLayout>
 
     <View
-        android:id="@+id/view_line1_comment"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/ib_close_comment_dialog"
-        android:background="@android:color/darker_gray" />
-
-    <View
-        android:id="@+id/view_line2_comment"
+        android:id="@+id/view_line_comment"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@id/rl_input_comment_dialog"
@@ -64,6 +49,7 @@
         android:id="@+id/recycler_view_comment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/view_line2_comment"
-        android:layout_below="@id/view_line1_comment" />
+        android:layout_marginTop="@dimen/space_30dp"
+        android:layout_above="@id/view_line_comment"
+        />
 </RelativeLayout>

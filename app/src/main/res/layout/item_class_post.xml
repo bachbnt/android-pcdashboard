@@ -36,8 +36,7 @@
             android:id="@+id/iv_image_class_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_content_class_item"
-            android:src="@drawable/logo" />
+            android:layout_below="@id/tv_content_class_item" />
 
         <TextView
             android:id="@+id/tv_content_class_item"

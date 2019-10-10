@@ -29,6 +29,7 @@ public class PostService {
     private DepartmentListener departmentListener;
     private CommentListener commentListener;
     private PostListener postListener;
+    private EditListener editListener;
 
 
     public interface ClassListener {
@@ -61,6 +62,12 @@ public class PostService {
         void onFailure();
     }
 
+    public interface EditListener {
+        void onSuccess();
+
+        void onFailure();
+    }
+
     private PostService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
@@ -85,6 +92,11 @@ public class PostService {
     public void setPostListener(PostListener postListener) {
         this.postListener = postListener;
     }
+
+    public void setEditListener(EditListener editListener) {
+        this.editListener = editListener;
+    }
+
 
     public static PostService getInstance(Context context) {
         if (postService == null)
@@ -164,15 +176,13 @@ public class PostService {
 
     public void createClassPost(String content, String image) {
         File file = new File(image);
-        Log.i("tag","createClassPost "+image);
-        Log.i("tag","createClassPost file "+file.getPath());
         // Create a request body with file and image media type
         RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
         // Create MultipartBody.Part using file request-body,file name and part name
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         Log.i("tag","createClassPost "+part.body().toString());
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.createPost(token,part,content);
+        Call<Boolean> call = iPostService.createPost(token,content,part);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -188,7 +198,7 @@ public class PostService {
             }
         });
     }
-    public static String getMimeType(String url) {
+    public String getMimeType(String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url);
         if (extension != null) {
@@ -197,23 +207,28 @@ public class PostService {
         return type;
     }
 
-//    public void updateClassPost(final String postId, String content, String image) {
-//        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-//        Call<Boolean> call = iPostService.updatePost(token, postId, new PostRequest(content, image));
-//        call.enqueue(new Callback<Boolean>() {
-//            @Override
-//            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//                if (response.body())
-//                    classListener.onEditSuccess();
-//                else classListener.onFailure();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Boolean> call, Throwable t) {
-//                classListener.onFailure();
-//            }
-//        });
-//    }
+    public void updateClassPost(final String postId, String content, String image) {
+        File file = new File(image);
+        // Create a request body with file and image media type
+        RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
+        // Create MultipartBody.Part using file request-body,file name and part name
+        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
+        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean> call = iPostService.updatePost(token, postId, content,part);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body())
+                    classListener.onEditSuccess();
+                else classListener.onFailure();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                classListener.onFailure();
+            }
+        });
+    }
 
     public void deleteClassPost(String postId) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();

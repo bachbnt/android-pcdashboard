@@ -1,11 +1,15 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.View.IPostView;
 import com.example.pcdashboard.Services.PostService;
 
 interface IPostPresenter{
+    void onInit();
     void onPost(String content,String image);
     void onResponse();
 }
@@ -27,6 +31,12 @@ public class PostPresenter implements IPostPresenter,PostService.PostListener {
     }
     public void removePostListener(){
         postService.setPostListener(null);
+    }
+
+    @Override
+    public void onInit() {
+        User self= SharedPreferencesUtil.loadSelf(context);
+        view.onInit(self);
     }
 
     @Override

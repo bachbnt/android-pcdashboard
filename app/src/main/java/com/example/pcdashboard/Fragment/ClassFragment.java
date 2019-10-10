@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Adapter.ClassAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.ClassPost;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.ClassPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
@@ -57,6 +58,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onResume() {
         presenter.setClassView(this);
         presenter.addClassListener();
+        presenter.onInit();
         presenter.onRequest();
         super.onResume();
     }
@@ -74,7 +76,6 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView = view.findViewById(R.id.recycler_view_class);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
         tvInput=view.findViewById(R.id.tv_input_class);
-        Glide.with(getContext()).load(Uri.parse(SharedPreferencesUtil.loadSelf(getContext()).getAvatar())).centerCrop().override(40,40).into(ivAvatar);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -96,6 +97,11 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     @Override
     public void onDeleteClick(ClassPost classPost) {
         presenter.onDelete(classPost);
+    }
+
+    @Override
+    public void onInit(User self) {
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(40,40).into(ivAvatar);
     }
 
     @Override

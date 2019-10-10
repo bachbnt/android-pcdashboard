@@ -2,6 +2,8 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.View.IClassView;
@@ -9,6 +11,7 @@ import com.example.pcdashboard.View.IClassView;
 import java.util.ArrayList;
 
 interface IClassPresenter {
+    void onInit();
     void onRequest();
     void onResponse(ArrayList<ClassPost> classPosts);
     void onEdit(ClassPost classPost);
@@ -33,6 +36,12 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     public void removeClassListener(){
         postService.setClassListener(null);
+    }
+
+    @Override
+    public void onInit() {
+        User self=SharedPreferencesUtil.loadSelf(context);
+        view.onInit(self);
     }
 
     @Override

@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +35,9 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
 
     public interface OnItemClickListener {
         void onCommentClick(ClassPost classPost);
+
         void onEditClick(ClassPost classPost);
+
         void onDeleteClick(ClassPost classPost);
     }
 
@@ -55,13 +55,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         holder.tvName.setText(classPost.getUserName());
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
-        try{
-            Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
-            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
-        }catch (NullPointerException e){
-
-        }
-
+        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
+        if(classPost.getImage()!=null){
+            holder.ivImage.setVisibility(View.VISIBLE);
+            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);}
+        else holder.ivImage.setVisibility(View.GONE);
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +88,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvTime, tvContent, tvComment;
         ImageView ivAvatar, ivImage;
-        ImageButton ibEdit,ibDelete;
+        ImageButton ibEdit, ibDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,7 +99,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
             ivAvatar = itemView.findViewById(R.id.iv_avatar_class_item);
             ivImage = itemView.findViewById(R.id.iv_image_class_item);
             ibEdit = itemView.findViewById(R.id.ib_edit_class_item);
-            ibDelete=itemView.findViewById(R.id.ib_delete_class_item);
+            ibDelete = itemView.findViewById(R.id.ib_delete_class_item);
         }
     }
 }

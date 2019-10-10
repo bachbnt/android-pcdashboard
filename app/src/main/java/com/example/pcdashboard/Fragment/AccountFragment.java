@@ -61,7 +61,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     @Override
     public void onResume() {
         presenter.setAccountView(this);
-        presenter.onLogin();
+        presenter.onInit();
         super.onResume();
     }
 
@@ -107,7 +107,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     }
 
     @Override
-    public void onUpdate(User self) {
+    public void onInit(User self) {
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(80, 80).into(ivAvatar);
         tvName.setText(self.getName());
         tvId.setText(self.getId());

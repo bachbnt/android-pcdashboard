@@ -1,5 +1,6 @@
 package com.example.pcdashboard.Activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +22,12 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
 
 
     @Override
@@ -37,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
         screenManager = ScreenManager.getInstance();
         screenManager.setIScreenManager(this);
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
-
+        EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
     }
 
     @Override
