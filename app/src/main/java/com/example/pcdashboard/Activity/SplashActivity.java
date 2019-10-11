@@ -1,15 +1,15 @@
 package com.example.pcdashboard.Activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.R;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,12 +17,25 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Intent intent;
-        if (SharedPreferencesUtil.loadStatus(this))
-            intent = new Intent(SplashActivity.this, DashboardActivity.class);
-        else
-            intent = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        initialize();
+    }
+
+    private void initialize() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS );
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (SharedPreferencesUtil.loadStatus(getApplicationContext())) {
+                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        };
+        Handler handler = new Handler();
+        handler.postDelayed(runnable, 1000);
     }
 }
