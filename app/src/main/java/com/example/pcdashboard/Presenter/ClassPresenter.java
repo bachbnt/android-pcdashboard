@@ -56,7 +56,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onEdit(ClassPost classPost) {
-//        postService.updateClassPost(classPost.getId(),classPost.getContent(),classPost.getImage());
+        postService.updateClassPost(classPost.getId(),classPost.getContent(),null);
     }
 
     @Override

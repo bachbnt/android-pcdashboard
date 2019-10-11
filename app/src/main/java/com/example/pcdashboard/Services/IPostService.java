@@ -1,5 +1,7 @@
 package com.example.pcdashboard.Services;
 
+import androidx.annotation.Nullable;
+
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
@@ -39,14 +41,19 @@ public interface IPostService {
     @GET("post/class/{classId}")
     Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId);
 
+    @POST("post/class/")
+    Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content);
+
     @Multipart
     @POST("post/class/")
-    Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content, @Part MultipartBody.Part file);
+    Call<Boolean> createPostImg(@Header("Authorization") String token, @Query("content") String content, @Part MultipartBody.Part file);
 
+    @PUT("post/class/{postId}")
+    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content);
 
     @Multipart
     @PUT("post/class/{postId}")
-    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Part MultipartBody.Part file);
+    Call<Boolean> updatePostImg(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Part MultipartBody.Part file);
 
     @DELETE("post/class/{postId}")
     Call<Boolean> deletePost(@Header("Authorization") String token, @Path("postId") String postId);

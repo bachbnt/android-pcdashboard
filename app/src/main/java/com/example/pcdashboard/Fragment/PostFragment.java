@@ -45,7 +45,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
 
 
     private static final int GALLERY_REQUEST_CODE = 100;
-    private String imagePath = "";
+    private String imagePath;
     private ScreenManager screenManager;
     private PostPresenter presenter;
     private EditText etInput;

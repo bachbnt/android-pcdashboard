@@ -1,61 +1,58 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.View.IPostView;
+import com.example.pcdashboard.Services.PostService;
 
-interface IPostPresenter {
+interface IPostPresenter{
     void onInit();
-
-    void onCheck(String content, String image);
-
-    void onPost(String content, String image);
-
+    void onCheck(String content,String image);
+    void onPost(String content,String image);
     void onResponse();
 }
-
-public class PostPresenter implements IPostPresenter, PostService.PostListener {
+public class PostPresenter implements IPostPresenter,PostService.PostListener {
     private Context context;
     private IPostView view;
     private PostService postService;
 
     public PostPresenter(Context context) {
         this.context = context;
-        postService = PostService.getInstance(context);
+        postService=PostService.getInstance(context);
+    }
+    public void setPostView(IPostView iPostView){
+        this.view=iPostView;
     }
 
-    public void setPostView(IPostView iPostView) {
-        this.view = iPostView;
-    }
-
-    public void addPostListener() {
+    public void addPostListener(){
         postService.setPostListener(this);
     }
-
-    public void removePostListener() {
+    public void removePostListener(){
         postService.setPostListener(null);
     }
 
     @Override
     public void onInit() {
-        User self = SharedPreferencesUtil.loadSelf(context);
+        User self= SharedPreferencesUtil.loadSelf(context);
         view.onInit(self);
     }
 
     @Override
-    public void onCheck(String content, String image) {
-        if (TextUtils.isEmpty(content) && image == null)
-            view.onCheckFailure();
-        else onPost(content, image);
+    public void onCheck(String content,String image) {
+        Log.i("tag","onCheck "+content);
+        if(content!=null||image!=null)
+            onPost(content,image);
+        else view.onCheckFailure();
     }
 
     @Override
-    public void onPost(String content, String image) {
-        postService.createClassPost(content, image);
+    public void onPost(String content,String image) {
+        postService.createClassPost(content,image);
     }
 
     @Override

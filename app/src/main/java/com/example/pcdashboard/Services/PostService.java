@@ -185,21 +185,39 @@ public class PostService {
             part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         }
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.createPost(token, content, part);
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.body())
-                    postListener.onSuccess();
-                else postListener.onFailure();
-            }
+        if (part == null) {
+            Call<Boolean> call = iPostService.createPost(token, content);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        postListener.onSuccess();
+                    else postListener.onFailure();
+                }
 
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                Log.i("tag", "createClassPost " + t.toString());
-                postListener.onFailure();
-            }
-        });
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.i("tag", "createClassPost " + t.toString());
+                    postListener.onFailure();
+                }
+            });
+        } else {
+            Call<Boolean> call = iPostService.createPostImg(token, content, part);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        postListener.onSuccess();
+                    else postListener.onFailure();
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.i("tag", "createClassPost " + t.toString());
+                    postListener.onFailure();
+                }
+            });
+        }
     }
 
     public String getMimeType(String url) {
@@ -212,26 +230,47 @@ public class PostService {
     }
 
     public void updateClassPost(final String postId, String content, String image) {
-        File file = new File(image);
-        // Create a request body with file and image media type
-        RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
-        // Create MultipartBody.Part using file request-body,file name and part name
-        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
+        MultipartBody.Part part = null;
+        if (image != null) {
+            File file = new File(image);
+            // Create a request body with file and image media type
+            RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
+            // Create MultipartBody.Part using file request-body,file name and part name
+            part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
+        }
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.updatePost(token, postId, content, part);
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.body())
-                    classListener.onEditSuccess();
-                else classListener.onFailure();
-            }
+        if (part == null) {
+            Call<Boolean> call = iPostService.updatePost(token, postId, "Da sua");
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        classListener.onEditSuccess();
+                    else classListener.onFailure();
+                }
 
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                classListener.onFailure();
-            }
-        });
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    classListener.onFailure();
+                }
+            });
+        } else {
+            Call<Boolean> call = iPostService.updatePostImg(token, postId, content, part);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.body())
+                        classListener.onEditSuccess();
+                    else classListener.onFailure();
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    classListener.onFailure();
+                }
+            });
+        }
+
     }
 
     public void deleteClassPost(String postId) {
