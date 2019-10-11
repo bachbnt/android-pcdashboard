@@ -176,12 +176,14 @@ public class PostService {
     }
 
     public void createClassPost(String content, String image) {
-        File file = new File(image);
-        // Create a request body with file and image media type
-        RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
-        // Create MultipartBody.Part using file request-body,file name and part name
-        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
-        Log.i("tag", "createClassPost " + part.body().toString());
+        MultipartBody.Part part = null;
+        if (image != null) {
+            File file = new File(image);
+            // Create a request body with file and image media type
+            RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
+            // Create MultipartBody.Part using file request-body,file name and part name
+            part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
+        }
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.createPost(token, content, part);
         call.enqueue(new Callback<Boolean>() {

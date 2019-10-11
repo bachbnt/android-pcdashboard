@@ -108,7 +108,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         switch (v.getId()){
             case R.id.tv_post_post:
                 if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
-                    presenter.onPost(etInput.getText().toString(),imagePath);
+                    presenter.onCheck(etInput.getText().toString(),imagePath);
                 } else {
                     EasyPermissions.requestPermissions(this, "Hãy cho phép truy cập bộ nhớ thiết bị", 101, galleryPermissions);
                 }
@@ -128,6 +128,11 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(50,50).into(ivAvatar);
         tvName.setText(self.getName());
         tvClass.setText("Thành viên của "+self.getClassId());
+    }
+
+    @Override
+    public void onCheckFailure() {
+        Toast.makeText(getContext(), "Nội dung hoặc hình ảnh không được trống", Toast.LENGTH_SHORT).show();
     }
 
     @Override
