@@ -12,6 +12,7 @@ interface ICommentPresenter {
     void onRequest(String postId);
     void onResponse(ArrayList<PostComment> postComments);
     void onCreate(String content);
+    void onEdit(PostComment postComment);
     void onDelete(PostComment postComment);
 }
 
@@ -48,6 +49,11 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
     @Override
     public void onCreate(String content) {
         postService.createPostComment(content);
+    }
+
+    @Override
+    public void onEdit(PostComment postComment) {
+        postService.updatePostComment(postComment.getUserId(),"Da sua");
     }
 
     @Override

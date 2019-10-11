@@ -48,11 +48,6 @@ public interface IPostService {
     @PUT("post/class/{postId}")
     Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Part MultipartBody.Part file);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
     @DELETE("post/class/{postId}")
     Call<Boolean> deletePost(@Header("Authorization") String token, @Path("postId") String postId);
 
@@ -66,19 +61,12 @@ public interface IPostService {
     @GET("comment/{postId}")
     Call<ArrayList<PostComment>> getAllComments(@Header("Authorization") String token, @Path("postId") String postId);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
     @POST("comment/{postId}")
-    Call<Boolean> createComment(@Header("Authorization") String token, @Path("postId") String postId, @Body String content);
+    Call<Boolean> createComment(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
+    @PUT("comment/{commentId}")
+    Call<Boolean> updateComment(@Header("Authorization") String token,@Path("commentId")String commentId,@Query("content") String content);
+
     @DELETE("comment/{commentId}")
     Call<Boolean> deleteComment(@Header("Authorization") String token, @Path("commentId") String commentId);
 

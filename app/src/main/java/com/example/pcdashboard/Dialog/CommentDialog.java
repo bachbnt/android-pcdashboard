@@ -107,6 +107,11 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     }
 
     @Override
+    public void onEdit(PostComment postComment) {
+        presenter.onEdit(postComment);
+    }
+
+    @Override
     public void onDelete(PostComment postComment) {
         presenter.onDelete(postComment);
     }

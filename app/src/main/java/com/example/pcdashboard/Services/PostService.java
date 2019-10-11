@@ -267,6 +267,24 @@ public class PostService {
         });
     }
 
+    public void updatePostComment(String commentId,String content){
+        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        Call<Boolean> call=iPostService.updateComment(token,commentId,content);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body())
+                    commentListener.onSuccess();
+                else commentListener.onSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                commentListener.onSuccess();
+            }
+        });
+    }
+
     public void deletePostComment(String commentId) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.deleteComment(token, commentId);

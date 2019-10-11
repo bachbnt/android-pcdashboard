@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.R;
 
@@ -66,18 +67,25 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                 listener.onCommentClick(classPost);
             }
         });
-        holder.ibEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onEditClick(classPost);
-            }
-        });
-        holder.ibDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onDeleteClick(classPost);
-            }
-        });
+        if (classPost.getUserId().equals(SharedPreferencesUtil.loadSelf(context).getId())) {
+            holder.ibEdit.setVisibility(View.VISIBLE);
+            holder.ibDelete.setVisibility(View.VISIBLE);
+            holder.ibEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onEditClick(classPost);
+                }
+            });
+            holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteClick(classPost);
+                }
+            });
+        }else {
+            holder.ibEdit.setVisibility(View.GONE);
+            holder.ibDelete.setVisibility(View.GONE);
+        }
     }
 
     @Override

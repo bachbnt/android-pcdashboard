@@ -29,6 +29,7 @@ public class InfoDialog extends DialogFragment {
     private TextView tvId;
     private TextView tvEmail;
     private TextView tvPhone;
+    private TextView tvClass;
 
     public InfoDialog(User user) {
         this.user = user;
@@ -45,7 +46,7 @@ public class InfoDialog extends DialogFragment {
 
     @Override
     public void onResume() {
-        loadInfo();
+        onInit();
         super.onResume();
     }
 
@@ -55,14 +56,16 @@ public class InfoDialog extends DialogFragment {
         tvId=view.findViewById(R.id.tv_id_info_dialog);
         tvEmail=view.findViewById(R.id.tv_email_info_dialog);
         tvPhone=view.findViewById(R.id.tv_phone_info_dialog);
+        tvClass=view.findViewById(R.id.tv_class_info_dialog);
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
-    private void loadInfo(){
+    private void onInit(){
         Glide.with(getContext()).load(Uri.parse(user.getAvatar())).centerCrop().override(160,160).into(ivAvatar);
         tvName.setText(user.getName());
         tvId.setText(user.getId());
         tvEmail.setText(user.getEmail());
         tvPhone.setText(user.getPhone());
+        tvClass.setText(user.getClassId());
     }
 }

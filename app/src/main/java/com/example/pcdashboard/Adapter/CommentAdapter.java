@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.R;
 
@@ -23,16 +24,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private ArrayList<PostComment> postComments;
     private OnItemClickListener listener;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
+        void onEdit(PostComment postComment);
+
         void onDelete(PostComment postComment);
     }
-    public CommentAdapter(Context context, ArrayList<PostComment> postComments,OnItemClickListener listener) {
+
+    public CommentAdapter(Context context, ArrayList<PostComment> postComments, OnItemClickListener listener) {
         this.context = context;
         this.postComments = postComments;
-        this.listener=listener;
+        this.listener = listener;
     }
-    public void updateList(ArrayList<PostComment> postComments){
-        this.postComments=postComments;
+
+    public void updateList(ArrayList<PostComment> postComments) {
+        this.postComments = postComments;
     }
 
     @NonNull
@@ -50,12 +55,25 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.tvName.setText(postComment.getUserName());
         holder.tvContent.setText(postComment.getContent());
         holder.tvTime.setText(postComment.getTime());
-        holder.ibDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onDelete(postComment);
-            }
-        });
+        if (postComment.getUserId().equals(SharedPreferencesUtil.loadSelf(context).getId())) {
+            holder.ibEdit.setVisibility(View.VISIBLE);
+            holder.ibDelete.setVisibility(View.VISIBLE);
+            holder.ibEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onEdit(postComment);
+                }
+            });
+            holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDelete(postComment);
+                }
+            });
+        } else {
+            holder.ibEdit.setVisibility(View.GONE);
+            holder.ibDelete.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -66,7 +84,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAvatar;
         TextView tvName, tvContent, tvTime;
-        ImageButton ibDelete;
+        ImageButton ibEdit, ibDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,7 +92,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             tvName = itemView.findViewById(R.id.tv_name_comment_item);
             tvContent = itemView.findViewById(R.id.tv_content_comment_item);
             tvTime = itemView.findViewById(R.id.tv_time_comment_item);
-            ibDelete=itemView.findViewById(R.id.ib_delete_comment_item);
+            ibEdit = itemView.findViewById(R.id.ib_edit_comment_item);
+            ibDelete = itemView.findViewById(R.id.ib_delete_comment_item);
         }
     }
 }
