@@ -53,7 +53,7 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
 
     @Override
     public void onEdit(PostComment postComment) {
-        postService.updatePostComment(postComment.getUserId(),"Da sua");
+        postService.updatePostComment(postComment.getId(),"Da sua");
     }
 
     @Override

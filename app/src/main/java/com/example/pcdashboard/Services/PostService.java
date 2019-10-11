@@ -106,49 +106,50 @@ public class PostService {
 
     public void getDepartmentPosts() {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        try {
-            Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token);
-            call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
-                @Override
-                public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
-                    ArrayList<DepartmentPost> departmentPosts = response.body();
+
+        Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token);
+        call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
+                ArrayList<DepartmentPost> departmentPosts = response.body();
+                try {
                     if (departmentPosts != null)
                         departmentListener.onSuccess(departmentPosts);
                     else departmentListener.onFailure();
+                } catch (NullPointerException e) {
+                    Log.e("tag", "NullPointerException getDepartmentPosts " + e.toString());
                 }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
-                    departmentListener.onFailure();
-                }
-            });
-        } catch (NullPointerException e) {
-            Log.e("tag", "NullPointerException getDepartmentPosts " + e.toString());
-        }
+            @Override
+            public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
+                departmentListener.onFailure();
+            }
+        });
     }
 
     public void getClassPosts() {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtil.loadSelf(context).getClassId();
-        try {
-            Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId);
-            call.enqueue(new Callback<ArrayList<ClassPost>>() {
-                @Override
-                public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
-                    ArrayList<ClassPost> classPosts = response.body();
+        Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId);
+        call.enqueue(new Callback<ArrayList<ClassPost>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
+                ArrayList<ClassPost> classPosts = response.body();
+                try {
                     if (classPosts != null)
                         classListener.onGetSuccess(classPosts);
                     else classListener.onFailure();
+                } catch (NullPointerException e) {
+                    Log.e("tag", "NullPointerException getClassPosts " + e.toString());
                 }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
-                    classListener.onFailure();
-                }
-            });
-        } catch (NullPointerException e) {
-            Log.e("tag", "NullPointerException getClassPosts " + e.toString());
-        }
+            @Override
+            public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
+                classListener.onFailure();
+            }
+        });
     }
 
     public void getPostComments(String postId) {
@@ -169,7 +170,7 @@ public class PostService {
                     commentListener.onFailure();
                 }
             });
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("tag", "NullPointerException getPostComments " + e.toString());
         }
     }
@@ -180,9 +181,9 @@ public class PostService {
         RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
         // Create MultipartBody.Part using file request-body,file name and part name
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
-        Log.i("tag","createClassPost "+part.body().toString());
+        Log.i("tag", "createClassPost " + part.body().toString());
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.createPost(token,content,part);
+        Call<Boolean> call = iPostService.createPost(token, content, part);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -193,11 +194,12 @@ public class PostService {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Log.i("tag","createClassPost "+t.toString());
+                Log.i("tag", "createClassPost " + t.toString());
                 postListener.onFailure();
             }
         });
     }
+
     public String getMimeType(String url) {
         String type = null;
         String extension = MimeTypeMap.getFileExtensionFromUrl(url);
@@ -214,7 +216,7 @@ public class PostService {
         // Create MultipartBody.Part using file request-body,file name and part name
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.updatePost(token, postId, content,part);
+        Call<Boolean> call = iPostService.updatePost(token, postId, content, part);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -267,9 +269,9 @@ public class PostService {
         });
     }
 
-    public void updatePostComment(String commentId,String content){
+    public void updatePostComment(String commentId, String content) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call=iPostService.updateComment(token,commentId,content);
+        Call<Boolean> call = iPostService.updateComment(token, commentId, content);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
