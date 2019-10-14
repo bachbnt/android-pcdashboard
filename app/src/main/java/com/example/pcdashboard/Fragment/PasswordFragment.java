@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.PasswordPresenter;
 import com.example.pcdashboard.R;
@@ -79,18 +79,18 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
 
     @Override
     public void onCheckFailure() {
-        Toast.makeText(getContext(), "Mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Mật khẩu không được để trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
     }
 
     @Override
     public void onChangeSuccess() {
-        Toast.makeText(getContext(), "Thay đổi mật khẩu thành công\nVui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Thay đổi mật khẩu thành công\nVui lòng đăng nhập lại", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         screenManager.openLoginScreen(LOGIN_ACTIVITY);
     }
 
     @Override
     public void onChangeFailure() {
-        Toast.makeText(getContext(), "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Thay đổi mật khẩu thất bại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override

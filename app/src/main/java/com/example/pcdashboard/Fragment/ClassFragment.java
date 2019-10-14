@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Adapter.ClassAdapter;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.User;
@@ -112,7 +112,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(),"Thất bại\nVui lòng kiểm tra lại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
     }
 
     @Override

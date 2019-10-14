@@ -11,11 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.InfoPresenter;
@@ -95,18 +95,18 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
 
     @Override
     public void onCheckFailure() {
-        Toast.makeText(getContext(), "Email hoặc số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Email hoặc số điện thoại không được để trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
     }
 
     @Override
     public void onUpdateSuccess() {
-        Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Cập nhật thông tin thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
     @Override
     public void onUpdateFailure() {
-        Toast.makeText(getContext(), "Cập nhật thông tin thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Cập nhật thông tin thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override

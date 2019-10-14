@@ -11,18 +11,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.PostPresenter;
@@ -132,18 +129,18 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
 
     @Override
     public void onCheckFailure() {
-        Toast.makeText(getContext(), "Nội dung hoặc hình ảnh không được trống", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Nội dung hoặc hình ảnh không được trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
     }
 
     @Override
     public void onSuccess() {
-        Toast.makeText(getContext(), "Thành công", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Thất bại, vui lòng thử lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Thất bại, vui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
     private void pickFromGallery() {
         //Create an Intent with action as ACTION_PICK

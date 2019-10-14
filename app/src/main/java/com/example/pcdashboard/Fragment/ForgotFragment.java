@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.ForgotPresenter;
 import com.example.pcdashboard.R;
@@ -97,12 +97,12 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
 
     @Override
     public void onCheckFailure() {
-        Toast.makeText(getContext(), "Tài khoản không được để trống", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Tài khoản không được để trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
     }
 
     @Override
     public void onGetFailure() {
         screenManager.closeDialog(LOADING_DIALOG);
-        Toast.makeText(getContext(), "Lấy lại mật khẩu thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Lấy lại mật khẩu thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 }

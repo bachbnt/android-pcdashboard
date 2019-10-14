@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.DepartmentAdapter;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Presenter.DepartmentPresenter;
@@ -77,6 +77,6 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Tải bảng tin bộ môn thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Tải bảng tin bộ môn thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 }

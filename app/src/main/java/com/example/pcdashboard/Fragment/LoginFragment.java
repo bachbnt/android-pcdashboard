@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
@@ -97,12 +97,12 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
 
     @Override
     public void onCheckFailure() {
-        Toast.makeText(getContext(), "Tài khoản hoặc Mật khẩu\nkhông được để trống", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Tài khoản hoặc mật khẩu\nkhông được để trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
     }
 
     @Override
     public void onLoginFailure() {
         screenManager.closeDialog(LOADING_DIALOG);
-        Toast.makeText(getContext(), "Đăng nhập thất bại\nVui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Đăng nhập thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 }
