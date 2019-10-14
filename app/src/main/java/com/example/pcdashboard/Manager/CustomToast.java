@@ -40,15 +40,15 @@ public class CustomToast extends Toast {
         switch (type){
             case SUCCESS:
                 ivIcon.setImageResource(R.drawable.ic_success_24dp);
-                llLayout.setBackgroundResource(R.drawable.bg_success_toast);
+                llLayout.setBackgroundResource(R.drawable.bg_toast_success);
                 break;
             case FAILURE:
                 ivIcon.setImageResource(R.drawable.ic_failure_24dp);
-                llLayout.setBackgroundResource(R.drawable.bg_failure_toast);
+                llLayout.setBackgroundResource(R.drawable.bg_toast_failure);
                 break;
             case WARNING:
                 ivIcon.setImageResource(R.drawable.ic_warning_24dp);
-                llLayout.setBackgroundResource(R.drawable.bg_warning_toast);
+                llLayout.setBackgroundResource(R.drawable.bg_toast_warning);
                 break;
         }
         toast.setView(view);
