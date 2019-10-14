@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.CommentAdapter;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
@@ -93,7 +93,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
+        CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override

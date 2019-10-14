@@ -92,6 +92,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onLoginSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
         presenter.changeStatus(SharedPreferencesUtil.loadStatus(getContext()));
+        CustomToast.makeText(getContext(),"Đăng nhập thành công",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS);
         screenManager.openDashboardScreen(DASHBOARD_ACTIVITY);
     }
 

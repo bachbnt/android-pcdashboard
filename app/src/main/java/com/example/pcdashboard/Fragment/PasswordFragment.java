@@ -90,7 +90,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
 
     @Override
     public void onChangeFailure() {
-        CustomToast.makeText(getContext(), "Thay đổi mật khẩu thất bại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Thay đổi mật khẩu thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override

@@ -77,6 +77,6 @@ public class DepartmentFragment extends Fragment implements IDeparmentView {
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(), "Tải bảng tin bộ môn thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Tải thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 }

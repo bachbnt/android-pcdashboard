@@ -140,7 +140,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(), "Thất bại, vui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
     private void pickFromGallery() {
         //Create an Intent with action as ACTION_PICK

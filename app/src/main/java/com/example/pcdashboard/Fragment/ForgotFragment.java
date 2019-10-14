@@ -91,7 +91,6 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
     @Override
     public void onGetSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
-        Log.i("tag","onGetSuccess "+ SharedPreferencesUtil.loadEmail(getContext()));
         screenManager.openDialog(EMAIL_DIALOG,null);
     }
 

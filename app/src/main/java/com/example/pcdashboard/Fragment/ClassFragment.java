@@ -112,7 +112,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(),"Thất bại\nVui lòng kiểm tra lại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
+        CustomToast.makeText(getContext(),"Tải thất bại\nVui lòng kiểm tra lại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
     }
 
     @Override
