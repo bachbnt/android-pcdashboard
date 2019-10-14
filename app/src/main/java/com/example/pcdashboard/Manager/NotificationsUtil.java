@@ -17,7 +17,7 @@ import com.example.pcdashboard.R;
 
 import javax.sql.DataSource;
 
-public class Notifications {
+public class NotificationsUtil {
     static final String CHANNEL_ID = "pc_dashboard_id";
     static final String CHANNEL_NAME = "pc_dasboard_name";
 

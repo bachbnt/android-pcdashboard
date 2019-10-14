@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space_10dp"
+        android:gravity="center"
         android:text="This is Custom Toast"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_size_12sp"/>

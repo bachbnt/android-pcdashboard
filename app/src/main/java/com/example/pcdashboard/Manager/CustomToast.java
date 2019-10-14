@@ -36,7 +36,6 @@ public class CustomToast extends Toast {
         ImageView ivIcon=view.findViewById(R.id.iv_icon_toast);
         LinearLayout llLayout=view.findViewById(R.id.ll_toast_layout);
         tvMsg.setText(msg);
-        tvMsg.setGravity(Gravity.CENTER);
         switch (type){
             case SUCCESS:
                 ivIcon.setImageResource(R.drawable.ic_success_24dp);
