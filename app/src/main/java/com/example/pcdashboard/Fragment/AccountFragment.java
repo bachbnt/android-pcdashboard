@@ -189,7 +189,6 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
             case R.id.tv_logout_account:
                 presenter.onLogout();
                 presenter.changeStatus(SharedPreferencesUtil.loadStatus(getContext()));
-                CustomToast.makeText(getContext(),"Đăng xuất thành công",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS);
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }

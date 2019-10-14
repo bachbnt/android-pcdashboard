@@ -99,6 +99,7 @@ public class AccountService {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
+                Log.i("tag","getToken onFailure "+t.toString());
                 loginListener.onLoginFailure();
             }
         });
@@ -171,9 +172,9 @@ public class AccountService {
 
     }
 
-    public void getSelf(String userId) {
+    public void getSelf() {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<User> call = iAccountService.getSelf(token, userId);
+        Call<User> call = iAccountService.getSelf(token);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -185,6 +186,7 @@ public class AccountService {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                Log.i("tag","getSelf onFailure "+t.toString());
                 loginListener.onLoginFailure();
             }
         });

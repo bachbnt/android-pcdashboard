@@ -65,8 +65,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
     @Override
     public void onTokenSuccess(Token token) {
         SharedPreferencesUtil.saveToken(context, token);
-        String userId = token.getUserId();
-        accountService.getSelf(userId);
+        accountService.getSelf();
     }
 
     @Override

@@ -50,8 +50,8 @@ public interface IAccountService {
                     "Content-Type:application/json",
             }
     )
-    @GET("user/{userId}")
-    Call<User> getSelf(@Header("Authorization") String token, @Path("userId") String id);
+    @GET("user/")
+    Call<User> getSelf(@Header("Authorization") String token);
 
 //    @GET("user/all/{userId}")
 //    Call<ArrayList<User>> getAllUsers(@Path("userId") String id);
