@@ -52,6 +52,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/space_20dp"
         android:text="@string/back"
-        android:textSize="@dimen/font_size_16sp" />
+        android:textSize="@dimen/font_size_16sp"
+        android:textStyle="italic"/>
 
 </RelativeLayout>
