@@ -293,7 +293,7 @@ public class PostService {
 
     public void createPostComment(String content) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        String postId = SharedPreferencesUtil.loadPost(context);
+        String postId = SharedPreferencesUtil.loadPostIdClass(context);
         Call<Boolean> call = iPostService.createComment(token, postId, content);
         call.enqueue(new Callback<Boolean>() {
             @Override

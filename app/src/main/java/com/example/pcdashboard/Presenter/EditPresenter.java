@@ -45,7 +45,7 @@ public class EditPresenter implements IEditPresenter, PostService.EditListener {
 
     @Override
     public void onEdit(String content, String image) {
-        postService.updateClassPost(SharedPreferencesUtil.loadPost(context), content, image);
+        postService.updateClassPost(SharedPreferencesUtil.loadPostIdClass(context), content, image);
     }
 
     @Override

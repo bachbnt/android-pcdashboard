@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (SharedPreferencesUtil.loadStatus(getApplicationContext())) {
+                if (SharedPreferencesUtil.loadStatusLogin(getApplicationContext())) {
                     Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
                     startActivity(intent);
                 } else {

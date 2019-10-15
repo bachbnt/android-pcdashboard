@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.PostPresenter;
 import com.example.pcdashboard.R;
@@ -33,6 +34,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_CLASS;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -113,6 +115,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
                 }
                 break;
             case R.id.ib_back_post:
+                SharedPreferencesUtil.saveTabId(getContext(),TAB_CLASS);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_photo_post:

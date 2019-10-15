@@ -15,12 +15,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.Presenter.PasswordPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IPasswordView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_ACTIVITY;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,6 +102,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
                 presenter.onCheck(etOld.getText().toString(),etNew.getText().toString(),etRetype.getText().toString());
                 break;
             case R.id.ib_back_password:
+                SharedPreferencesUtil.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }

@@ -56,7 +56,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     public void onResume() {
         presenter.setClassView(this);
         presenter.addCommentListener();
-        presenter.onRequest(SharedPreferencesUtil.loadPost(getContext()));
+        presenter.onRequest(SharedPreferencesUtil.loadPostIdClass(getContext()));
         super.onResume();
     }
 
@@ -91,7 +91,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onSuccess() {
-        presenter.onRequest(SharedPreferencesUtil.loadPost(getContext()));
+        presenter.onRequest(SharedPreferencesUtil.loadPostIdClass(getContext()));
     }
 
     @Override

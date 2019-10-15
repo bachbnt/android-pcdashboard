@@ -47,7 +47,7 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
         screenManager=ScreenManager.getInstance();
         tvEmail = view.findViewById(R.id.tv_email_email_dialog);
         btnConfirm=view.findViewById(R.id.btn_confirm_email_dialog);
-        tvEmail.setText(SharedPreferencesUtil.loadEmail(getContext()));
+        tvEmail.setText(SharedPreferencesUtil.loadEmailForgot(getContext()));
         btnConfirm.setOnClickListener(this);
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -59,7 +59,7 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
         switch (v.getId()){
             case R.id.btn_confirm_email_dialog:
                 screenManager.closeDialog(EMAIL_DIALOG);
-                SharedPreferencesUtil.clearEmail(getContext());
+                SharedPreferencesUtil.clearEmailForgot(getContext());
                 break;
         }
     }

@@ -41,6 +41,6 @@ public class AccountPresenter implements IAccountPresenter {
 
     @Override
     public void changeStatus(boolean status) {
-        SharedPreferencesUtil.saveStatus(context, !status);
+        SharedPreferencesUtil.saveStatusLogin(context, !status);
     }
 }

@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment;
 import com.example.pcdashboard.Model.User;
 
 public interface IScreenManager {
+    int TAB_DEPARTMENT=0;
+    int TAB_CLASS=1;
+    int TAB_CONTACT=2;
+    int TAB_ACCOUNT=3;
+
     String LOGIN_ACTIVITY="LOGIN_ACTIVITY";
     String LOGIN_FRAGMENT = "LOGIN_FRAGMENT";
     String FORGOT_FRAGMENT = "FORGOT_FRAGMENT";

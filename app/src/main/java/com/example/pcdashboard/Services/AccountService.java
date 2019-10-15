@@ -112,7 +112,7 @@ public class AccountService {
             public void onResponse(Call<String> call, Response<String> response) {
                 String email = response.body();
                 if (email != null) {
-                    SharedPreferencesUtil.saveEmail(context, email);
+                    SharedPreferencesUtil.saveEmailForgot(context, email);
                     forgotListener.onSuccess();
                 } else forgotListener.onFailure();
             }

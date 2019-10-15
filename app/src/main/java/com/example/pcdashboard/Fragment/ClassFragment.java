@@ -89,7 +89,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onCommentClick(ClassPost classPost) {
-        SharedPreferencesUtil.savePost(getContext(),classPost);
+        SharedPreferencesUtil.savePostIdClass(getContext(),classPost);
         screenManager.openDialog(COMMENT_DIALOG,null);
     }
 

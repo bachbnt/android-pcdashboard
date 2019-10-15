@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
@@ -192,7 +191,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 break;
             case R.id.tv_logout_account:
                 presenter.onLogout();
-                presenter.changeStatus(SharedPreferencesUtil.loadStatus(getContext()));
+                presenter.changeStatus(SharedPreferencesUtil.loadStatusLogin(getContext()));
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }
