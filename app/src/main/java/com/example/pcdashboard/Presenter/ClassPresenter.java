@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 interface IClassPresenter {
     void onInit();
-    void onRequest();
+    void onRequest(int number);
     void onResponse(ArrayList<ClassPost> classPosts);
     void onEdit(ClassPost classPost);
     void onDelete(ClassPost classPost);
@@ -45,8 +45,8 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onRequest() {
-        postService.getClassPosts();
+    public void onRequest(int number) {
+        postService.getClassPosts(number);
     }
 
     @Override

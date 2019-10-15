@@ -61,7 +61,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         presenter.setClassView(this);
         presenter.addClassListener();
         presenter.onInit();
-        presenter.onRequest();
+        presenter.onRequest(10);
         super.onResume();
     }
 
@@ -121,7 +121,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onSuccess() {
-        presenter.onRequest();
+        presenter.onRequest(10);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onRefresh() {
-        presenter.onRequest();
+        presenter.onRequest(10);
         swipeView.setRefreshing(false);
     }
 }

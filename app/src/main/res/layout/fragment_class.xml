@@ -14,13 +14,14 @@
 
         <TextView
             android:id="@+id/tv_input_class"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="6dp"
             android:layout_toRightOf="@id/cv_avatar_class"
             android:background="@drawable/bg_edittext_login"
             android:hint="Bạn muốn chia sẻ điều gì với lớp?"
+            android:gravity="center"
             android:padding="@dimen/space_10dp"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_16sp" />

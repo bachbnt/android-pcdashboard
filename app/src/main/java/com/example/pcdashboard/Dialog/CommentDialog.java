@@ -35,6 +35,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     private CommentPresenter presenter;
     private ImageButton ibSend;
     private EditText etInput;
+    private ImageButton ibEmotion;
 
 
     public CommentDialog() {
@@ -70,6 +71,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         ibSend=view.findViewById(R.id.ib_send_comment_dialog);
         etInput=view.findViewById(R.id.et_input_comment_dialog);
+        ibEmotion=view.findViewById(R.id.ib_emotion_comment_dialog);
         commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(),this);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -77,6 +79,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ibSend.setOnClickListener(this);
+        ibEmotion.setOnClickListener(this);
     }
 
 

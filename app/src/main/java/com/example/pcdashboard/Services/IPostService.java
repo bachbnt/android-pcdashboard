@@ -30,7 +30,7 @@ public interface IPostService {
             }
     )
     @GET("post/department")
-    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token);
+    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token,@Query("number")int number);
 
     //CLASS POST
     @Headers(
@@ -39,7 +39,7 @@ public interface IPostService {
             }
     )
     @GET("post/class/{classId}")
-    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId);
+    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId,@Query("number") int number);
 
     @POST("post/class/")
     Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content);

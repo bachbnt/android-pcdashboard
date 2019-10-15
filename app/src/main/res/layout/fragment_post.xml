@@ -14,16 +14,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
+        android:paddingTop="@dimen/space_10dp"
+        android:paddingBottom="@dimen/space_10dp"
         android:gravity="right">
 
         <ImageButton
             android:id="@+id/ib_photo_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_10dp"
+            android:layout_marginRight="@dimen/space_15dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_image_cold_32dp" />
 
+        <ImageButton
+            android:id="@+id/ib_emotion_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_emotion_cold_32dp" />
 
     </LinearLayout>
 
@@ -51,7 +60,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorCold"
             android:textSize="@dimen/font_size_20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
@@ -95,6 +104,7 @@
                 android:textColor="@color/colorSlateGray"
                 android:textSize="@dimen/font_size_16sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_class_post"
                 android:layout_width="wrap_content"

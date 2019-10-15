@@ -53,6 +53,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     private ImageView ivAvatar;
     private TextView tvClass;
     private TextView tvName;
+    private ImageButton ibEmotion;
 
 
     public PostFragment() {
@@ -95,6 +96,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         ibBack=view.findViewById(R.id.ib_back_post);
         ibPhoto=view.findViewById(R.id.ib_photo_post);
         ivImage=view.findViewById(R.id.iv_image_post);
+        ibEmotion=view.findViewById(R.id.ib_emotion_post);
         ibPhoto.setOnClickListener(this);
         tvPost.setOnClickListener(this);
         ibBack.setOnClickListener(this);

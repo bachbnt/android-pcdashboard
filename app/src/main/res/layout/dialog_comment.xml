@@ -14,14 +14,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="@dimen/space_10dp">
+        <ImageButton
+            android:id="@+id/ib_emotion_comment_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_emotion_hot_32dp"
+            android:background="@android:color/transparent"/>
 
         <EditText
             android:id="@+id/et_input_comment_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:layout_toLeftOf="@id/ib_send_comment_dialog"
+            android:layout_toRightOf="@id/ib_emotion_comment_dialog"
             android:background="@drawable/bg_edittext_login"
             android:hint="@string/write_comment"
             android:maxHeight="100dp"

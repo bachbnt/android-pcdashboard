@@ -50,7 +50,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
     public void onResume() {
         presenter.setDepartmentView(this);
         presenter.addDepartmentListener();
-        presenter.onRequest();
+        presenter.onRequest(10);
         super.onResume();
     }
 
@@ -86,7 +86,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
 
     @Override
     public void onRefresh() {
-        presenter.onRequest();
+        presenter.onRequest(10);
         swipeView.setRefreshing(false);
     }
 }

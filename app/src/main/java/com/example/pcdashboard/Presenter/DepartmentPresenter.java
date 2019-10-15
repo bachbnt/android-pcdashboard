@@ -9,7 +9,7 @@ import com.example.pcdashboard.View.IDeparmentView;
 import java.util.ArrayList;
 
 interface IDepartmentPresenter {
-    void onRequest();
+    void onRequest(int number);
     void onResponse(ArrayList<DepartmentPost> departmentPosts);
 }
 
@@ -35,8 +35,8 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         postService.setDepartmentListener(null);
     }
     @Override
-    public void onRequest() {
-        postService.getDepartmentPosts();
+    public void onRequest(int number) {
+        postService.getDepartmentPosts(number);
     }
 
     @Override

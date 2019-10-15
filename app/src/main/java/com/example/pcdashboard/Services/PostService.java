@@ -104,10 +104,10 @@ public class PostService {
         return postService;
     }
 
-    public void getDepartmentPosts() {
+    public void getDepartmentPosts(int number) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
 
-        Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token);
+        Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token,number);
         call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
             @Override
             public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
@@ -128,10 +128,10 @@ public class PostService {
         });
     }
 
-    public void getClassPosts() {
+    public void getClassPosts(int number) {
         String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtil.loadSelf(context).getClassId();
-        Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId);
+        Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId,number);
         call.enqueue(new Callback<ArrayList<ClassPost>>() {
             @Override
             public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
