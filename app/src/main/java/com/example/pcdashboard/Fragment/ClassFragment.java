@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Adapter.ClassAdapter;
@@ -33,13 +34,14 @@ import static com.example.pcdashboard.Manager.IScreenManager.POST_FRAGMENT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickListener, IClassView,View.OnClickListener {
+public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickListener, IClassView,View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private ScreenManager screenManager;
     private RecyclerView recyclerView;
     private ClassAdapter classAdapter;
     private ClassPresenter presenter;
     private ImageView ivAvatar;
     private TextView tvInput;
+    private SwipeRefreshLayout swipeView;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -74,6 +76,8 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         screenManager=ScreenManager.getInstance();
         presenter=new ClassPresenter(getContext());
         recyclerView = view.findViewById(R.id.recycler_view_class);
+        swipeView=view.findViewById(R.id.swipe_refresh_class);
+        swipeView.setOnRefreshListener(this);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
         tvInput=view.findViewById(R.id.tv_input_class);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
@@ -130,5 +134,11 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
                 screenManager.openDialog(INFO_DIALOG,SharedPreferencesUtil.loadSelf(getContext()));
                 break;
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.onRequest();
+        swipeView.setRefreshing(false);
     }
 }
