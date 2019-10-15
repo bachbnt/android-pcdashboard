@@ -14,9 +14,13 @@ import com.example.pcdashboard.Fragment.ClassFragment;
 import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
+import com.example.pcdashboard.Fragment.ExamFragment;
+import com.example.pcdashboard.Fragment.FeedbackFragment;
+import com.example.pcdashboard.Fragment.GuideFragment;
 import com.example.pcdashboard.Fragment.InfoFragment;
 import com.example.pcdashboard.Fragment.PasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
+import com.example.pcdashboard.Fragment.ScheduleFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
@@ -89,6 +93,18 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 break;
             case PASSWORD_FRAGMENT:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
+                break;
+            case SCHEDULE_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new ScheduleFragment()).commit();
+                break;
+            case EXAM_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new ExamFragment()).commit();
+                break;
+            case GUIDE_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new GuideFragment()).commit();
+                break;
+            case FEEDBACK_FRAGMENT:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
                 break;
         }
     }

@@ -22,10 +22,14 @@ import com.example.pcdashboard.R;
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IAccountView;
 
+import static com.example.pcdashboard.Manager.IScreenManager.EXAM_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.FEEDBACK_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.GUIDE_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_ACTIVITY;
 import static com.example.pcdashboard.Manager.IScreenManager.PASSWORD_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.SCHEDULE_FRAGMENT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +44,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     private LinearLayout llStudy, llHelp, llSetting;
     private TextView tvStudy, tvHelp, tvSetting,tvLogout;
     private boolean isStudy = false, isHelp = false, isSetting = false;
-    private TextView tvSchedule,tvExam,tvScore;
+    private TextView tvSchedule,tvExam;
     private TextView tvGuide,tvFeedback;
     private TextView tvInfo,tvPassword;
 
@@ -87,7 +91,6 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvSetting = view.findViewById(R.id.tv_setting_account);
         tvSchedule=view.findViewById(R.id.tv_schedule_account);
         tvExam=view.findViewById(R.id.tv_exam_account);
-        tvScore=view.findViewById(R.id.tv_score_account);
         tvGuide=view.findViewById(R.id.tv_guide_account);
         tvFeedback=view.findViewById(R.id.tv_feedback_account);
         tvInfo=view.findViewById(R.id.tv_info_account);
@@ -99,7 +102,6 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvSetting.setOnClickListener(this);
         tvSchedule.setOnClickListener(this);
         tvExam.setOnClickListener(this);
-        tvScore.setOnClickListener(this);
         tvGuide.setOnClickListener(this);
         tvFeedback.setOnClickListener(this);
         tvInfo.setOnClickListener(this);
@@ -171,14 +173,16 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 selectMenu(SETTING_LAYOUT);
                 break;
             case R.id.tv_schedule_account:
+                screenManager.openFeatureScreen(SCHEDULE_FRAGMENT);
                 break;
             case R.id.tv_exam_account:
-                break;
-            case R.id.tv_score_account:
+                screenManager.openFeatureScreen(EXAM_FRAGMENT);
                 break;
             case R.id.tv_guide_account:
+                screenManager.openFeatureScreen(GUIDE_FRAGMENT);
                 break;
             case R.id.tv_feedback_account:
+                screenManager.openFeatureScreen(FEEDBACK_FRAGMENT);
                 break;
             case R.id.tv_info_account:
                 screenManager.openFeatureScreen(INFO_FRAGMENT);

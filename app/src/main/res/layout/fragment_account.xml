@@ -107,14 +107,6 @@
                 android:text="@string/exam_schedule"
                 android:textSize="@dimen/font_size_16sp" />
 
-            <TextView
-                android:id="@+id/tv_score_account"
-                style="@style/text_view_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_score_hot_32dp"
-                android:text="@string/score"
-                android:textSize="@dimen/font_size_16sp" />
         </LinearLayout>
 
         <TextView

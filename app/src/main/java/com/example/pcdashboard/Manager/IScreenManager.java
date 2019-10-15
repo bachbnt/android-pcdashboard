@@ -23,6 +23,10 @@ public interface IScreenManager {
     String POST_FRAGMENT="POST_FRAGMENT";
     String INFO_FRAGMENT="INFO_FRAGMENT";
     String PASSWORD_FRAGMENT="PASSWORD_FRAGMENT";
+    String SCHEDULE_FRAGMENT="SCHEDULE_FRAGMENT";
+    String EXAM_FRAGMENT="EXAM_FRAGMENT";
+    String GUIDE_FRAGMENT="GUIDE_FRAGMENT";
+    String FEEDBACK_FRAGMENT="FEEDBACK_FRAGMENT";
 
     void openLoginScreen(String screenName);
 

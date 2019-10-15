@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ScheduleFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/rl_back_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_50dp"
+        android:background="@drawable/bg_panel">
+
+        <ImageButton
+            android:id="@+id/ib_back_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back_cold_32dp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/ib_save_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_5dp"
+        android:layout_marginRight="@dimen/space_15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl_back_schedule"
+        android:src="@drawable/ic_save_cold_32dp"
+        android:background="@android:color/transparent"/>
+    <ImageButton
+        android:id="@+id/ib_reload_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/space_15dp"
+        android:layout_alignTop="@id/ib_save_schedule"
+        android:layout_toLeftOf="@id/ib_save_schedule"
+        android:src="@drawable/ic_reload_cold_32dp"
+        android:background="@android:color/transparent" />
+
+</RelativeLayout>
