@@ -8,7 +8,7 @@ import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Request.InfoRequest;
 import com.example.pcdashboard.Request.PasswordRequest;
 import com.example.pcdashboard.Request.TokenRequest;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -112,7 +112,7 @@ public class AccountService {
             public void onResponse(Call<String> call, Response<String> response) {
                 String email = response.body();
                 if (email != null) {
-                    SharedPreferencesUtil.saveEmailForgot(context, email);
+                    SharedPreferencesUtils.saveEmailForgot(context, email);
                     forgotListener.onSuccess();
                 } else forgotListener.onFailure();
             }
@@ -125,8 +125,8 @@ public class AccountService {
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<Boolean> call = iAccountService.changePassword(token, new PasswordRequest(SharedPreferencesUtil.loadSelf(context).getId(), oldPassword, newPassword));
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        Call<Boolean> call = iAccountService.changePassword(token, new PasswordRequest(SharedPreferencesUtils.loadSelf(context).getId(), oldPassword, newPassword));
         try {
             call.enqueue(new Callback<Boolean>() {
                 @Override
@@ -149,8 +149,8 @@ public class AccountService {
     }
 
     public void updateInfo(String email, String phone) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        Call<User> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtil.loadSelf(context).getId(), email, phone));
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        Call<User> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtils.loadSelf(context).getId(), email, phone));
         try {
             call.enqueue(new Callback<User>() {
                 @Override
@@ -173,7 +173,7 @@ public class AccountService {
     }
 
     public void getSelf() {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<User> call = iAccountService.getSelf(token);
         call.enqueue(new Callback<User>() {
             @Override

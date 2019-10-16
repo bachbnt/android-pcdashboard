@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
@@ -105,7 +105,7 @@ public class PostService {
     }
 
     public void getDepartmentPosts(int number) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
 
         Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token,number);
         call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
@@ -129,8 +129,8 @@ public class PostService {
     }
 
     public void getClassPosts(int number) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        String classId = SharedPreferencesUtil.loadSelf(context).getClassId();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId,number);
         call.enqueue(new Callback<ArrayList<ClassPost>>() {
             @Override
@@ -153,7 +153,7 @@ public class PostService {
     }
 
     public void getPostComments(String postId) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         try {
             Call<ArrayList<PostComment>> call = iPostService.getAllComments(token, postId);
             call.enqueue(new Callback<ArrayList<PostComment>>() {
@@ -184,7 +184,7 @@ public class PostService {
             // Create MultipartBody.Part using file request-body,file name and part name
             part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         }
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         if (part == null) {
             Call<Boolean> call = iPostService.createPost(token, content);
             call.enqueue(new Callback<Boolean>() {
@@ -238,7 +238,7 @@ public class PostService {
             // Create MultipartBody.Part using file request-body,file name and part name
             part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         }
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         if (part == null) {
             Call<Boolean> call = iPostService.updatePost(token, postId, "Da sua");
             call.enqueue(new Callback<Boolean>() {
@@ -274,7 +274,7 @@ public class PostService {
     }
 
     public void deleteClassPost(String postId) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.deletePost(token, postId);
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -292,8 +292,8 @@ public class PostService {
     }
 
     public void createPostComment(String content) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
-        String postId = SharedPreferencesUtil.loadPostIdClass(context);
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        String postId = SharedPreferencesUtils.loadPostIdClass(context);
         Call<Boolean> call = iPostService.createComment(token, postId, content);
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -311,7 +311,7 @@ public class PostService {
     }
 
     public void updatePostComment(String commentId, String content) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.updateComment(token, commentId, content);
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -329,7 +329,7 @@ public class PostService {
     }
 
     public void deletePostComment(String commentId) {
-        String token = SharedPreferencesUtil.loadToken(context).getTokenType() + " " + SharedPreferencesUtil.loadToken(context).getAccessToken();
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.deleteComment(token, commentId);
         call.enqueue(new Callback<Boolean>() {
             @Override

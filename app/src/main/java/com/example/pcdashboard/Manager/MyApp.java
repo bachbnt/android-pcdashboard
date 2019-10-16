@@ -8,6 +8,6 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        NotificationsUtil.createChannel(this);
+        NotificationsUtils.createChannel(this);
     }
 }

@@ -25,7 +25,7 @@ import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.ICommentView;
 
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     public void onResume() {
         presenter.setClassView(this);
         presenter.addCommentListener();
-        presenter.onRequest(SharedPreferencesUtil.loadPostIdClass(getContext()));
+        presenter.onRequest(SharedPreferencesUtils.loadPostIdClass(getContext()));
         super.onResume();
     }
 
@@ -112,7 +112,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onSuccess() {
-        presenter.onRequest(SharedPreferencesUtil.loadPostIdClass(getContext()));
+        presenter.onRequest(SharedPreferencesUtils.loadPostIdClass(getContext()));
     }
 
     @Override

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -41,20 +41,20 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onResume() {
-        viewPager.setCurrentItem(SharedPreferencesUtil.loadTabId(getContext()));
+        viewPager.setCurrentItem(SharedPreferencesUtils.loadTabId(getContext()));
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        SharedPreferencesUtil.clearTabId(getContext());
+        SharedPreferencesUtils.clearTabId(getContext());
         super.onStop();
     }
 
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
         viewPager = view.findViewById(R.id.view_pager_dashboard);
-        pagerAdapter = new PagerAdapter(getFragmentManager(), getContext(), screenManager);
+        pagerAdapter = new PagerAdapter(getChildFragmentManager(), getContext(), screenManager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout = view.findViewById(R.id.tab_layout_dashboard);
         tabLayout.setupWithViewPager(viewPager);

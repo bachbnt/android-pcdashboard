@@ -2,7 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.View.IEditView;
@@ -39,13 +39,13 @@ public class EditPresenter implements IEditPresenter, PostService.EditListener {
 
     @Override
     public void onInit() {
-        User self = SharedPreferencesUtil.loadSelf(context);
+        User self = SharedPreferencesUtils.loadSelf(context);
         view.onInit(self);
     }
 
     @Override
     public void onEdit(String content, String image) {
-        postService.updateClassPost(SharedPreferencesUtil.loadPostIdClass(context), content, image);
+        postService.updateClassPost(SharedPreferencesUtils.loadPostIdClass(context), content, image);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.ForgotPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.IForgotView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.EMAIL_DIALOG;

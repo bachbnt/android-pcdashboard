@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 
 import static com.example.pcdashboard.Manager.IScreenManager.EMAIL_DIALOG;
 
@@ -54,7 +54,7 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
         screenManager=ScreenManager.getInstance();
         tvEmail = view.findViewById(R.id.tv_email_email_dialog);
         btnConfirm=view.findViewById(R.id.btn_confirm_email_dialog);
-        tvEmail.setText(SharedPreferencesUtil.loadEmailForgot(getContext()));
+        tvEmail.setText(SharedPreferencesUtils.loadEmailForgot(getContext()));
         btnConfirm.setOnClickListener(this);
         setCancelable(false);
     }
@@ -64,7 +64,7 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
         switch (v.getId()){
             case R.id.btn_confirm_email_dialog:
                 screenManager.closeDialog(EMAIL_DIALOG);
-                SharedPreferencesUtil.clearEmailForgot(getContext());
+                SharedPreferencesUtils.clearEmailForgot(getContext());
                 break;
         }
     }

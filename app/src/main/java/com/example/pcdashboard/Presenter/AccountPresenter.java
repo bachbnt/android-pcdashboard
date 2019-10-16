@@ -3,7 +3,7 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IAccountView;
 
 interface IAccountPresenter {
@@ -29,18 +29,18 @@ public class AccountPresenter implements IAccountPresenter {
 
     @Override
     public void onInit() {
-        User self = SharedPreferencesUtil.loadSelf(context);
+        User self = SharedPreferencesUtils.loadSelf(context);
         view.onInit(self);
     }
 
     @Override
     public void onLogout() {
-        SharedPreferencesUtil.clearSelf(context);
-        SharedPreferencesUtil.clearToken(context);
+        SharedPreferencesUtils.clearSelf(context);
+        SharedPreferencesUtils.clearToken(context);
     }
 
     @Override
     public void changeStatus(boolean status) {
-        SharedPreferencesUtil.saveStatusLogin(context, !status);
+        SharedPreferencesUtils.saveStatusLogin(context, !status);
     }
 }

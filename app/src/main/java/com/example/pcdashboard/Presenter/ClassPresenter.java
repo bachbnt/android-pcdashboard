@@ -2,7 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Model.ClassPost;
@@ -40,7 +40,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onInit() {
-        User self=SharedPreferencesUtil.loadSelf(context);
+        User self= SharedPreferencesUtils.loadSelf(context);
         view.onInit(self);
     }
 

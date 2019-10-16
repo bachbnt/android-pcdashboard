@@ -7,7 +7,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (SharedPreferencesUtil.loadStatusLogin(getApplicationContext())) {
+                if (SharedPreferencesUtils.loadStatusLogin(getApplicationContext())) {
                     Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
                     startActivity(intent);
                 } else {

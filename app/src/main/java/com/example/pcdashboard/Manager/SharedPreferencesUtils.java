@@ -9,7 +9,7 @@ import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 
-public class SharedPreferencesUtil {
+public class SharedPreferencesUtils {
     public static void saveToken(Context context, Token token) {
         SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

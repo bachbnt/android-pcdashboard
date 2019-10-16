@@ -18,7 +18,7 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.EXAM_FRAGMENT;
@@ -117,7 +117,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
 
     @Override
     public void showInfoDialog() {
-        screenManager.openDialog(INFO_DIALOG,SharedPreferencesUtil.loadSelf(getContext()));
+        screenManager.openDialog(INFO_DIALOG, SharedPreferencesUtils.loadSelf(getContext()));
     }
 
     @Override
@@ -191,7 +191,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 break;
             case R.id.tv_logout_account:
                 presenter.onLogout();
-                presenter.changeStatus(SharedPreferencesUtil.loadStatusLogin(getContext()));
+                presenter.changeStatus(SharedPreferencesUtils.loadStatusLogin(getContext()));
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }

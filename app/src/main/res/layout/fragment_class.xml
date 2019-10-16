@@ -8,8 +8,10 @@
     tools:context=".Fragment.ClassFragment">
 
     <RelativeLayout
+        android:id="@+id/rl_input_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:padding="@dimen/space_10dp">
 
         <TextView
@@ -20,8 +22,8 @@
             android:layout_marginRight="6dp"
             android:layout_toRightOf="@id/cv_avatar_class"
             android:background="@drawable/bg_edittext_login"
-            android:hint="Bạn muốn chia sẻ điều gì với lớp?"
             android:gravity="center"
+            android:hint="Bạn muốn chia sẻ điều gì với lớp?"
             android:padding="@dimen/space_10dp"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_16sp" />
@@ -40,7 +42,13 @@
                 android:layout_height="@dimen/space_40dp"
                 android:src="@drawable/logo" />
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorWhiteSmoke" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_class"

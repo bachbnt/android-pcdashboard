@@ -4,7 +4,6 @@ package com.example.pcdashboard.Fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,7 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.PostPresenter;
 import com.example.pcdashboard.R;
@@ -113,7 +112,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
                 }
                 break;
             case R.id.ib_back_post:
-                SharedPreferencesUtil.saveTabId(getContext(),TAB_CLASS);
+                SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_photo_post:
@@ -138,7 +137,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     @Override
     public void onSuccess() {
         CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
-        SharedPreferencesUtil.saveTabId(getContext(),TAB_CLASS);
+        SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 

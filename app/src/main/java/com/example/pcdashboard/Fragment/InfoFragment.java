@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.InfoPresenter;
 import com.example.pcdashboard.R;
@@ -118,7 +118,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
                 presenter.onCheck(etEmail.getText().toString(),etPhone.getText().toString());
                 break;
             case R.id.ib_back_info:
-                SharedPreferencesUtil.saveTabId(getContext(),TAB_ACCOUNT);
+                SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }

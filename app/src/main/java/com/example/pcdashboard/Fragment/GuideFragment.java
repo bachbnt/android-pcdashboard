@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
@@ -48,7 +48,7 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_guide:
-                SharedPreferencesUtil.saveTabId(getContext(),TAB_ACCOUNT);
+                SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }

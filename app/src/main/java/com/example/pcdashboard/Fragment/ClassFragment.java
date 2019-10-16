@@ -3,12 +3,17 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +27,7 @@ import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.ClassPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IClassView;
 
 import java.util.ArrayList;
@@ -42,6 +47,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     private ImageView ivAvatar;
     private TextView tvInput;
     private SwipeRefreshLayout swipeView;
+    private RelativeLayout rlInput;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -80,17 +86,32 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         swipeView.setOnRefreshListener(this);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
         tvInput=view.findViewById(R.id.tv_input_class);
+        rlInput=view.findViewById(R.id.rl_input_class);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
         swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if(dy>70&&rlInput.getVisibility()==View.VISIBLE){
+                    rlInput.setVisibility(View.GONE);
+                    rlInput.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top));
+                }
+                if(dy<-70&&rlInput.getVisibility()==View.GONE){
+                    rlInput.setVisibility(View.VISIBLE);
+                    rlInput.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top));
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @Override
     public void onCommentClick(ClassPost classPost) {
-        SharedPreferencesUtil.savePostIdClass(getContext(),classPost);
+        SharedPreferencesUtils.savePostIdClass(getContext(),classPost);
         screenManager.openDialog(COMMENT_DIALOG,null);
     }
 
@@ -132,7 +153,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
                 screenManager.openFeatureScreen(POST_FRAGMENT);
                 break;
             case R.id.iv_avatar_class:
-                screenManager.openDialog(INFO_DIALOG,SharedPreferencesUtil.loadSelf(getContext()));
+                screenManager.openDialog(INFO_DIALOG, SharedPreferencesUtils.loadSelf(getContext()));
                 break;
         }
     }

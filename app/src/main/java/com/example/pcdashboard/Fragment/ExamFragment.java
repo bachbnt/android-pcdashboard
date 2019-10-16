@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
@@ -48,7 +48,7 @@ private void initialize(View view){
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ib_back_exam:
-                SharedPreferencesUtil.saveTabId(getContext(),TAB_ACCOUNT);
+                SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }

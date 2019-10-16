@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.example.pcdashboard.Services.AccountService;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.ILoginView;
 interface ILoginPresenter {
     void onCheck(String userId,String password);
@@ -58,19 +58,19 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
 
     @Override
     public void changeStatus(boolean status) {
-        SharedPreferencesUtil.saveStatusLogin(context,!status);
+        SharedPreferencesUtils.saveStatusLogin(context,!status);
     }
 
 
     @Override
     public void onTokenSuccess(Token token) {
-        SharedPreferencesUtil.saveToken(context, token);
+        SharedPreferencesUtils.saveToken(context, token);
         accountService.getSelf();
     }
 
     @Override
     public void onSelfSuccess(User self) {
-        SharedPreferencesUtil.saveSelf(context, self);
+        SharedPreferencesUtils.saveSelf(context, self);
         onResponse();
     }
 

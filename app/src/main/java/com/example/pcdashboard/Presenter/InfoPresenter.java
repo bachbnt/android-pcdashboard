@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.AccountService;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IInfoView;
 
 interface IInfoPresenter {
@@ -37,7 +37,7 @@ public class InfoPresenter implements IInfoPresenter, AccountService.InfoListene
 
     @Override
     public void onSuccess(User self) {
-        SharedPreferencesUtil.saveSelf(context,self);
+        SharedPreferencesUtils.saveSelf(context,self);
         onResponse();
     }
 
@@ -49,7 +49,7 @@ public class InfoPresenter implements IInfoPresenter, AccountService.InfoListene
 
     @Override
     public void onLoad() {
-        view.onLoad(SharedPreferencesUtil.loadSelf(context));
+        view.onLoad(SharedPreferencesUtils.loadSelf(context));
 
     }
 

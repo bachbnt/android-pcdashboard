@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.R;
 
@@ -55,7 +55,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.tvName.setText(postComment.getUserName());
         holder.tvContent.setText(postComment.getContent());
         holder.tvTime.setText(postComment.getTime());
-        if (postComment.getUserId().equals(SharedPreferencesUtil.loadSelf(context).getId())) {
+        if (postComment.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
             holder.ibEdit.setVisibility(View.VISIBLE);
             holder.ibDelete.setVisibility(View.VISIBLE);
             holder.ibEdit.setOnClickListener(new View.OnClickListener() {

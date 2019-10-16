@@ -15,7 +15,7 @@ import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Presenter.LoginPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtil;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.ILoginView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_ACTIVITY;
@@ -91,7 +91,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onLoginSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
-        presenter.changeStatus(SharedPreferencesUtil.loadStatusLogin(getContext()));
+        presenter.changeStatus(SharedPreferencesUtils.loadStatusLogin(getContext()));
         screenManager.openDashboardScreen(DASHBOARD_ACTIVITY);
     }
 
