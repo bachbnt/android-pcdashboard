@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.pcdashboard.Dialog.CommentDialog;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
@@ -38,6 +40,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         initialize();
     }
 
@@ -81,30 +84,32 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     @Override
     public void openFeatureScreen(String screenName) {
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         switch (screenName) {
             case DASHBOARD_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new DashboardFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new DashboardFragment()).commit();
                 break;
             case POST_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new PostFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new PostFragment()).commit();
                 break;
             case INFO_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new InfoFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new InfoFragment()).commit();
                 break;
             case PASSWORD_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
                 break;
             case SCHEDULE_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new ScheduleFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ScheduleFragment()).commit();
                 break;
             case EXAM_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new ExamFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ExamFragment()).commit();
                 break;
             case GUIDE_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new GuideFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new GuideFragment()).commit();
                 break;
             case FEEDBACK_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
                 break;
         }
     }
@@ -117,7 +122,6 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 dialog.show(getFragmentManager(), "info dialog");
                 break;
             case COMMENT_DIALOG:
-                Log.i("tag", "openDialog");
                 CommentDialog commentDialog = new CommentDialog();
                 commentDialog.show(getSupportFragmentManager(), "comment dialog");
                 break;

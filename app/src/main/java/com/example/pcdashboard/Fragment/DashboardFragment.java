@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Fragment;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +10,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Manager.ZoomOutPageTransformer;
 import com.example.pcdashboard.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -56,6 +59,7 @@ public class DashboardFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager_dashboard);
         pagerAdapter = new PagerAdapter(getChildFragmentManager(), getContext(), screenManager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setPageTransformer(true,new ZoomOutPageTransformer());
         tabLayout = view.findViewById(R.id.tab_layout_dashboard);
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -67,6 +71,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.setCustomView(pagerAdapter.selectTab(tab.getCustomView(), tab.getPosition(), true));
+                tab.getCustomView().startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_up));
             }
 
             @Override

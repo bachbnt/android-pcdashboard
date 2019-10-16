@@ -7,6 +7,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pcdashboard.Dialog.EmailDialog;
 import com.example.pcdashboard.Dialog.LoadingDialog;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         initialize();
     }
 
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
 
     @Override
     public void openLoginScreen(String screenName) {
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         switch (screenName) {
             case DASHBOARD_ACTIVITY:
                 Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -44,10 +48,10 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
                 finish();
                 break;
             case LOGIN_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login, new LoginFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_login, new LoginFragment()).commit();
                 break;
             case FORGOT_FRAGMENT:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_login, new ForgotFragment()).addToBackStack(null).commit();
+                fragmentTransaction.replace(R.id.fl_container_login, new ForgotFragment()).commit();
                 break;
         }
     }

@@ -3,7 +3,7 @@
     android:shareInterpolator="@android:interpolator/accelerate_quad">
 
     <translate
-        android:duration="@android:integer/config_shortAnimTime"
+        android:duration="@android:integer/config_mediumAnimTime"
         android:fromYDelta="100%"
         android:toYDelta="0%"/>
 </set>

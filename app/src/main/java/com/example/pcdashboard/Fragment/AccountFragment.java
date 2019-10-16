@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -127,9 +128,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isStudy = !isStudy;
                 if (isStudy) {
                     llStudy.setVisibility(View.VISIBLE);
+                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
                     tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llStudy.setVisibility(View.GONE);
+                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
                     tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
@@ -137,9 +140,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isHelp = !isHelp;
                 if (isHelp) {
                     llHelp.setVisibility(View.VISIBLE);
+                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
                     tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llHelp.setVisibility(View.GONE);
+                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
                     tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
@@ -147,9 +152,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isSetting = !isSetting;
                 if (isSetting) {
                     llSetting.setVisibility(View.VISIBLE);
+                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
                     tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llSetting.setVisibility(View.GONE);
+                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
                     tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
