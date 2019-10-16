@@ -24,8 +24,6 @@ public class DashboardFragment extends Fragment {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private TabLayout tabLayout;
-    private int tabId=0;
-
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -43,8 +41,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onResume() {
-        tabId= SharedPreferencesUtil.loadTabId(getContext());
-        viewPager.setCurrentItem(tabId);
+        viewPager.setCurrentItem(SharedPreferencesUtil.loadTabId(getContext()));
         super.onResume();
     }
 
@@ -59,7 +56,6 @@ public class DashboardFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager_dashboard);
         pagerAdapter = new PagerAdapter(getFragmentManager(), getContext(), screenManager);
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(tabId);
         tabLayout = view.findViewById(R.id.tab_layout_dashboard);
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {

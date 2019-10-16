@@ -85,6 +85,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
+        swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
     }
 
     @Override

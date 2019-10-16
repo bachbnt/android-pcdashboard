@@ -70,6 +70,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
         departmentAdapter = new DepartmentAdapter(getContext(),new ArrayList<DepartmentPost>());
         recyclerView.setAdapter(departmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
     }
 
 
