@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'com.labo.kaji:swipeawaydialog:0.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

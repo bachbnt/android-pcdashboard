@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Dialog;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -18,11 +19,13 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
+import com.labo.kaji.swipeawaydialog.SwipeAwayDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoDialog extends DialogFragment {
+@SuppressLint("ValidFragment")
+public class InfoDialog extends SwipeAwayDialogFragment {
     private User user;
     private ImageView ivAvatar;
     private TextView tvName;
@@ -72,5 +75,11 @@ public class InfoDialog extends DialogFragment {
         tvEmail.setText(user.getEmail());
         tvPhone.setText(user.getPhone());
         tvClass.setText(user.getClassId());
+    }
+
+    @Override
+    public boolean onSwipedAway(boolean toRight) {
+        dismiss();
+        return true;
     }
 }

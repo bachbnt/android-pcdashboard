@@ -11,7 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,7 @@ import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ICommentView;
+import com.google.android.material.behavior.SwipeDismissBehavior;
 
 import java.util.ArrayList;
 
@@ -42,6 +46,11 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().getWindow().getAttributes().windowAnimations=R.style.CommentDialog;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

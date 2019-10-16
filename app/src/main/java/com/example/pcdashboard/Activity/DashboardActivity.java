@@ -114,7 +114,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
         switch (dialogName) {
             case INFO_DIALOG:
                 InfoDialog dialog = new InfoDialog(user);
-                dialog.show(getSupportFragmentManager(), "info dialog");
+                dialog.show(getFragmentManager(), "info dialog");
                 break;
             case COMMENT_DIALOG:
                 Log.i("tag", "openDialog");
