@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,7 +36,6 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     private CommentPresenter presenter;
     private ImageButton ibSend;
     private EditText etInput;
-    private ImageButton ibEmotion;
 
 
     public CommentDialog() {
@@ -50,6 +50,13 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         View view = inflater.inflate(R.layout.dialog_comment, container, false);
         initialize(view);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        super.onStart();
     }
 
     @Override
@@ -71,15 +78,11 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         ibSend=view.findViewById(R.id.ib_send_comment_dialog);
         etInput=view.findViewById(R.id.et_input_comment_dialog);
-        ibEmotion=view.findViewById(R.id.ib_emotion_comment_dialog);
         commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(),this);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter=new CommentPresenter(getContext());
-        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ibSend.setOnClickListener(this);
-        ibEmotion.setOnClickListener(this);
     }
 
 

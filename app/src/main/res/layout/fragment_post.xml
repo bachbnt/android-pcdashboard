@@ -26,14 +26,6 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_image_cold_32dp" />
 
-        <ImageButton
-            android:id="@+id/ib_emotion_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/space_15dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_emotion_cold_32dp" />
-
     </LinearLayout>
 
     <RelativeLayout

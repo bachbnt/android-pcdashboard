@@ -45,6 +45,13 @@ public class InfoDialog extends DialogFragment {
     }
 
     @Override
+    public void onStart() {
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         onInit();
         super.onResume();
@@ -57,8 +64,6 @@ public class InfoDialog extends DialogFragment {
         tvEmail=view.findViewById(R.id.tv_email_info_dialog);
         tvPhone=view.findViewById(R.id.tv_phone_info_dialog);
         tvClass=view.findViewById(R.id.tv_class_info_dialog);
-        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
     private void onInit(){
         Glide.with(getContext()).load(Uri.parse(user.getAvatar())).centerCrop().override(160,160).into(ivAvatar);
