@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/fl_swipe_comment_dialog"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/colorWhiteSmoke" />
 
     <RelativeLayout
         android:id="@+id/rl_input_comment_dialog"
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@id/rl_input_comment_dialog"
-        android:background="@android:color/darker_gray" />
+        android:background="@color/colorWhiteSmoke" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_comment"
