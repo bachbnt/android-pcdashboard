@@ -4,17 +4,17 @@ package com.example.pcdashboard.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,19 +27,20 @@ import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.Manager.SharedPreferencesUtil;
 import com.example.pcdashboard.View.ICommentView;
-import com.google.android.material.behavior.SwipeDismissBehavior;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener,CommentAdapter.OnItemClickListener {
+public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener,CommentAdapter.OnItemClickListener, GestureDetector.OnGestureListener {
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
     private CommentPresenter presenter;
     private ImageButton ibSend;
     private EditText etInput;
+    private FrameLayout flSwipe;
+    private GestureDetector gestureDetector;
 
 
     public CommentDialog() {
@@ -84,14 +85,22 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     }
 
     private void initialize(View view) {
+        gestureDetector=new GestureDetector(this);
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         ibSend=view.findViewById(R.id.ib_send_comment_dialog);
         etInput=view.findViewById(R.id.et_input_comment_dialog);
+        flSwipe=view.findViewById(R.id.fl_swipe_comment_dialog);
         commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(),this);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter=new CommentPresenter(getContext());
         ibSend.setOnClickListener(this);
+        flSwipe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
     }
 
 
@@ -129,5 +138,37 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     @Override
     public void onDelete(PostComment postComment) {
         presenter.onDelete(postComment);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        if(distanceY<-50)
+            dismiss();
+        return true;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
     }
 }

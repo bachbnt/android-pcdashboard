@@ -138,6 +138,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     @Override
     public void onSuccess() {
         CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+        SharedPreferencesUtil.saveTabId(getContext(),TAB_CLASS);
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
