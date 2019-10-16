@@ -33,6 +33,11 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().getWindow().getAttributes().windowAnimations=R.style.InfoDialog;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

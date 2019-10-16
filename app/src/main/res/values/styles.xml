@@ -18,9 +18,9 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bot</item>
     </style>
 
-    <style name="InfotDialog">
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    <style name="InfoDialog">
+        <item name="android:windowEnterAnimation">@anim/scale_up</item>
+        <item name="android:windowExitAnimation">@anim/scale_down</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

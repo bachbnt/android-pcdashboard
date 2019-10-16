@@ -42,7 +42,7 @@ public class InfoDialog extends SwipeAwayDialogFragment implements View.OnClickL
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getDialog().getWindow().getAttributes().windowAnimations=R.style.InfotDialog;
+        getDialog().getWindow().getAttributes().windowAnimations=R.style.InfoDialog;
     }
 
     @Override
