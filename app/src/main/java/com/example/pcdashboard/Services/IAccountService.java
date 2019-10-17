@@ -45,11 +45,6 @@ public interface IAccountService {
     @PUT("user/")
     Call<User> updateInfo(@Header("Authorization") String token, @Body InfoRequest infoRequest);
 
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
     @GET("user/")
     Call<User> getSelf(@Header("Authorization") String token);
 

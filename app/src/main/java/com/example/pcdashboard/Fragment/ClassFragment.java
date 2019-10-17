@@ -96,11 +96,11 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if(dy>70&&rlInput.getVisibility()==View.VISIBLE){
+                if(dy>100&&rlInput.getVisibility()==View.VISIBLE){
                     rlInput.setVisibility(View.GONE);
                     rlInput.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top));
                 }
-                if(dy<-70&&rlInput.getVisibility()==View.GONE){
+                if(dy<-100&&rlInput.getVisibility()==View.GONE){
                     rlInput.setVisibility(View.VISIBLE);
                     rlInput.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top));
                 }
