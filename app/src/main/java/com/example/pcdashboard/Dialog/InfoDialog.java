@@ -42,7 +42,7 @@ public class InfoDialog extends SwipeAwayDialogFragment implements View.OnClickL
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getDialog().getWindow().getAttributes().windowAnimations=R.style.InfoDialog;
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.InfoDialog;
     }
 
     @Override
@@ -97,23 +97,31 @@ public class InfoDialog extends SwipeAwayDialogFragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_email_info_dialog:
-                if (!tvEmail.getText().toString().equals(SharedPreferencesUtils.loadSelf(getContext()).getEmail())) {
-                    dismiss();
-                    Intent emailIntent = new Intent((Intent.ACTION_SEND));
-                    emailIntent.setType("plain/text");
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{tvEmail.getText().toString()});
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P&C Dashboard");
-                    if (emailIntent.resolveActivity(getActivity().getPackageManager()) != null)
-                        startActivity(Intent.createChooser(emailIntent, SharedPreferencesUtils.loadSelf(getContext()).getName() + " gửi email bằng?"));
-                }
+                sendEmail();
                 break;
             case R.id.tv_phone_info_dialog:
-                if (!tvPhone.getText().toString().equals(SharedPreferencesUtils.loadSelf(getContext()).getPhone())) {
-                    dismiss();
-                    Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tvPhone.getText().toString()));
-                    startActivity(Intent.createChooser(phoneIntent, SharedPreferencesUtils.loadSelf(getContext()).getName() + " gọi điện bằng?"));
-                }
+                makeCall();
                 break;
+        }
+    }
+
+    private void sendEmail() {
+        if (!tvEmail.getText().toString().equals(SharedPreferencesUtils.loadSelf(getContext()).getEmail())) {
+            dismiss();
+            Intent emailIntent = new Intent((Intent.ACTION_SEND));
+            emailIntent.setType("plain/text");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{tvEmail.getText().toString()});
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P&C Dashboard");
+            if (emailIntent.resolveActivity(getActivity().getPackageManager()) != null)
+                startActivity(Intent.createChooser(emailIntent, SharedPreferencesUtils.loadSelf(getContext()).getName() + " gửi email bằng?"));
+        }
+    }
+
+    private void makeCall() {
+        if (!tvPhone.getText().toString().equals(SharedPreferencesUtils.loadSelf(getContext()).getPhone())) {
+            dismiss();
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tvPhone.getText().toString()));
+            startActivity(Intent.createChooser(phoneIntent, SharedPreferencesUtils.loadSelf(getContext()).getName() + " gọi điện bằng?"));
         }
     }
 }

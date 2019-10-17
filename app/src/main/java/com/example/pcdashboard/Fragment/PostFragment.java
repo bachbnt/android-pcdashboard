@@ -154,7 +154,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         String[] mimeTypes = {"image/jpeg", "image/png"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
         // Launching the Intent
-        startActivityForResult(intent,GALLERY_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent,SharedPreferencesUtils.loadSelf(getContext()).getName() + " chọn ảnh bằng?"),GALLERY_REQUEST_CODE);
     }
 
     @Override
