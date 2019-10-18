@@ -18,7 +18,7 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Presenter.PasswordPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.View.IPasswordView;
+import com.example.pcdashboard.View.IChangePasswordView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.LOGIN_ACTIVITY;
@@ -27,7 +27,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PasswordFragment extends Fragment implements IPasswordView, View.OnClickListener, TextWatcher {
+public class ChangePasswordFragment extends Fragment implements IChangePasswordView, View.OnClickListener, TextWatcher {
     private ScreenManager screenManager;
     private PasswordPresenter presenter;
     private EditText etOld;
@@ -36,7 +36,7 @@ public class PasswordFragment extends Fragment implements IPasswordView, View.On
     private Button btnChange;
     private ImageButton ibBack;
 
-    public PasswordFragment() {
+    public ChangePasswordFragment() {
         // Required empty public constructor
     }
 

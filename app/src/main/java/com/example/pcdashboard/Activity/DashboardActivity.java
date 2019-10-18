@@ -3,24 +3,25 @@ package com.example.pcdashboard.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pcdashboard.Dialog.CommentDialog;
+import com.example.pcdashboard.Dialog.EditDialog;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ClassFragment;
 import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
+import com.example.pcdashboard.Fragment.EditFragment;
 import com.example.pcdashboard.Fragment.ExamFragment;
 import com.example.pcdashboard.Fragment.FeedbackFragment;
 import com.example.pcdashboard.Fragment.GuideFragment;
-import com.example.pcdashboard.Fragment.InfoFragment;
-import com.example.pcdashboard.Fragment.PasswordFragment;
+import com.example.pcdashboard.Fragment.UpdateInfoFragment;
+import com.example.pcdashboard.Fragment.ChangePasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Fragment.ScheduleFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
@@ -97,11 +98,14 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case POST_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new PostFragment()).commit();
                 break;
+            case EDIT_FRAGMENT:
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new EditFragment()).commit();
+                break;
             case INFO_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new InfoFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new UpdateInfoFragment()).commit();
                 break;
             case PASSWORD_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ChangePasswordFragment()).commit();
                 break;
             case SCHEDULE_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ScheduleFragment()).commit();
@@ -128,6 +132,10 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case COMMENT_DIALOG:
                 CommentDialog commentDialog = new CommentDialog();
                 commentDialog.show(getSupportFragmentManager(), "comment dialog");
+                break;
+            case EDIT_DIALOG:
+                EditDialog editDialog = new EditDialog();
+                editDialog.show(getSupportFragmentManager(), "edit dialog");
                 break;
         }
     }

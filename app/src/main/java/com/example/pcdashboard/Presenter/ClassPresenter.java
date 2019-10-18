@@ -14,7 +14,6 @@ interface IClassPresenter {
     void onInit();
     void onRequest(int number);
     void onResponse(ArrayList<ClassPost> classPosts);
-    void onEdit(ClassPost classPost);
     void onDelete(ClassPost classPost);
 }
 public class ClassPresenter implements IClassPresenter, PostService.ClassListener {
@@ -52,11 +51,6 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     @Override
     public void onResponse(ArrayList<ClassPost> classPosts) {
         view.onUpdate(classPosts);
-    }
-
-    @Override
-    public void onEdit(ClassPost classPost) {
-        postService.updateClassPost(classPost.getId(),classPost.getContent(),null);
     }
 
     @Override

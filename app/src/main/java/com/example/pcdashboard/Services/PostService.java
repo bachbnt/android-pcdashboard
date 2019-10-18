@@ -29,7 +29,8 @@ public class PostService {
     private DepartmentListener departmentListener;
     private CommentListener commentListener;
     private PostListener postListener;
-    private EditListener editListener;
+    private EditPostListener editPostListener;
+    private EditCommentListener editCommentListener;
 
 
     public interface ClassListener {
@@ -62,12 +63,17 @@ public class PostService {
         void onFailure();
     }
 
-    public interface EditListener {
+    public interface EditPostListener {
         void onSuccess();
 
         void onFailure();
     }
 
+    public interface EditCommentListener {
+        void onSuccess();
+
+        void onFailure();
+    }
     private PostService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
@@ -93,10 +99,12 @@ public class PostService {
         this.postListener = postListener;
     }
 
-    public void setEditListener(EditListener editListener) {
-        this.editListener = editListener;
+    public void setEditPostListener(EditPostListener editPostListener) {
+        this.editPostListener = editPostListener;
     }
-
+    public void setEditCommentListener(EditCommentListener editCommetListener) {
+        this.editCommentListener = editCommetListener;
+    }
 
     public static PostService getInstance(Context context) {
         if (postService == null)
@@ -107,7 +115,7 @@ public class PostService {
     public void getDepartmentPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
 
-        Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token,number);
+        Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token, number);
         call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
             @Override
             public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
@@ -131,7 +139,7 @@ public class PostService {
     public void getClassPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
-        Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId,number);
+        Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId, number);
         call.enqueue(new Callback<ArrayList<ClassPost>>() {
             @Override
             public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
@@ -229,48 +237,22 @@ public class PostService {
         return type;
     }
 
-    public void updateClassPost(final String postId, String content, String image) {
-        MultipartBody.Part part = null;
-        if (image != null) {
-            File file = new File(image);
-            // Create a request body with file and image media type
-            RequestBody fileReqBody = RequestBody.create(MediaType.parse(getMimeType(image)), file);
-            // Create MultipartBody.Part using file request-body,file name and part name
-            part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
-        }
+    public void updateClassPost(final String postId, String content) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        if (part == null) {
-            Call<Boolean> call = iPostService.updatePost(token, postId, "Da sua");
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    if (response.body())
-                        classListener.onEditSuccess();
-                    else classListener.onFailure();
-                }
+        Call<Boolean> call = iPostService.updatePost(token, postId, content);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body())
+                    editPostListener.onSuccess();
+                else editPostListener.onFailure();
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-                    classListener.onFailure();
-                }
-            });
-        } else {
-            Call<Boolean> call = iPostService.updatePostImg(token, postId, content, part);
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    if (response.body())
-                        classListener.onEditSuccess();
-                    else classListener.onFailure();
-                }
-
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-                    classListener.onFailure();
-                }
-            });
-        }
-
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                editPostListener.onFailure();
+            }
+        });
     }
 
     public void deleteClassPost(String postId) {
@@ -293,7 +275,7 @@ public class PostService {
 
     public void createPostComment(String content) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        String postId = SharedPreferencesUtils.loadPostIdClass(context);
+        String postId = SharedPreferencesUtils.loadClassPost(context).getId();
         Call<Boolean> call = iPostService.createComment(token, postId, content);
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -317,13 +299,13 @@ public class PostService {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.body())
-                    commentListener.onSuccess();
-                else commentListener.onSuccess();
+                    editCommentListener.onSuccess();
+                else editCommentListener.onSuccess();
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                commentListener.onSuccess();
+                editCommentListener.onSuccess();
             }
         });
     }

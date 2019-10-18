@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.CommentAdapter;
 import com.example.pcdashboard.Manager.CustomToast;
+import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.PostComment;
 import com.example.pcdashboard.Presenter.CommentPresenter;
 import com.example.pcdashboard.R;
@@ -30,10 +31,13 @@ import com.example.pcdashboard.View.ICommentView;
 
 import java.util.ArrayList;
 
+import static com.example.pcdashboard.Manager.IScreenManager.EDIT_DIALOG;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener,CommentAdapter.OnItemClickListener, GestureDetector.OnGestureListener {
+    private ScreenManager screenManager;
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
     private CommentPresenter presenter;
@@ -73,7 +77,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     public void onResume() {
         presenter.setClassView(this);
         presenter.addCommentListener();
-        presenter.onRequest(SharedPreferencesUtils.loadPostIdClass(getContext()));
+        presenter.onRequest(SharedPreferencesUtils.loadClassPost(getContext()).getId());
         super.onResume();
     }
 
@@ -85,6 +89,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     }
 
     private void initialize(View view) {
+        screenManager=ScreenManager.getInstance();
         gestureDetector=new GestureDetector(this);
         recyclerView = view.findViewById(R.id.recycler_view_comment);
         ibSend=view.findViewById(R.id.ib_send_comment_dialog);
@@ -112,7 +117,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onSuccess() {
-        presenter.onRequest(SharedPreferencesUtils.loadPostIdClass(getContext()));
+        presenter.onRequest(SharedPreferencesUtils.loadClassPost(getContext()).getId());
     }
 
     @Override
@@ -124,7 +129,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ib_send_comment_dialog:
-                presenter.onCreate(etInput.getText().toString());
+                presenter.onCreate(etInput.getText().toString().trim());
                 etInput.setText("");
                 break;
         }
@@ -132,7 +137,9 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onEdit(PostComment postComment) {
-        presenter.onEdit(postComment);
+        SharedPreferencesUtils.savePostComment(getContext(),postComment);
+        screenManager.openDialog(EDIT_DIALOG,null);
+        dismiss();
     }
 
     @Override

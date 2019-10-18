@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/space_30dp"
+    tools:context=".Dialog.EditDialog">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space_20dp"
+        android:paddingTop="@dimen/space_30dp"
+        android:paddingRight="@dimen/space_20dp"
+        android:paddingBottom="@dimen/space_30dp">
+
+
+        <EditText
+            android:id="@+id/et_input_edit_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext_login"
+            android:paddingLeft="@dimen/space_20dp"
+            android:paddingTop="@dimen/space_10dp"
+            android:paddingRight="@dimen/space_20dp"
+            android:paddingBottom="@dimen/space_10dp"
+            android:textSize="@dimen/font_size_16sp" />
+
+        <ImageButton
+            android:id="@+id/ib_edit_edit_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_input_edit_dialog"
+            android:layout_marginTop="@dimen/space_20dp"
+            android:layout_marginLeft="@dimen/space_30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_true_56dp" />
+
+        <ImageButton
+            android:id="@+id/ib_cancel_edit_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_30dp"
+            android:layout_alignTop="@id/ib_edit_edit_dialog"
+            android:layout_alignRight="@id/et_input_edit_dialog"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_false_56dp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

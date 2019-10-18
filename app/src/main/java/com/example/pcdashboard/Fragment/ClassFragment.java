@@ -33,6 +33,7 @@ import com.example.pcdashboard.View.IClassView;
 import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.COMMENT_DIALOG;
+import static com.example.pcdashboard.Manager.IScreenManager.EDIT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 import static com.example.pcdashboard.Manager.IScreenManager.POST_FRAGMENT;
 
@@ -111,13 +112,14 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onCommentClick(ClassPost classPost) {
-        SharedPreferencesUtils.savePostIdClass(getContext(),classPost);
+        SharedPreferencesUtils.saveClassPost(getContext(),classPost);
         screenManager.openDialog(COMMENT_DIALOG,null);
     }
 
     @Override
     public void onEditClick(ClassPost classPost) {
-        presenter.onEdit(classPost);
+        SharedPreferencesUtils.saveClassPost(getContext(),classPost);
+        screenManager.openFeatureScreen(EDIT_FRAGMENT);
     }
 
     @Override

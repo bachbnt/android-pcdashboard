@@ -21,7 +21,7 @@ import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.InfoPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.View.IInfoView;
+import com.example.pcdashboard.View.IUpdateInfoView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
@@ -29,7 +29,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFragment extends Fragment implements IInfoView,View.OnClickListener {
+public class UpdateInfoFragment extends Fragment implements IUpdateInfoView,View.OnClickListener {
     private ScreenManager screenManager;
     private InfoPresenter presenter;
     private ImageView ivAvatar;
@@ -41,7 +41,7 @@ public class InfoFragment extends Fragment implements IInfoView,View.OnClickList
     private Button btnUpdate;
     private ImageButton ibBack;
 
-    public InfoFragment() {
+    public UpdateInfoFragment() {
         // Required empty public constructor
     }
 

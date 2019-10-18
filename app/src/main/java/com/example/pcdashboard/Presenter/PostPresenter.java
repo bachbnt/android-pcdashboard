@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
@@ -42,8 +43,7 @@ public class PostPresenter implements IPostPresenter,PostService.PostListener {
 
     @Override
     public void onCheck(String content,String image) {
-        Log.i("tag","onCheck "+content);
-        if(content!=null||image!=null)
+        if(!TextUtils.isEmpty(content) ||image!=null)
             onPost(content,image);
         else view.onCheckFailure();
     }

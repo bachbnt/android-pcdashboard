@@ -1,21 +1,43 @@
 package com.example.pcdashboard.Fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.example.pcdashboard.Manager.CustomToast;
+import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Model.ClassPost;
+import com.example.pcdashboard.Model.User;
+import com.example.pcdashboard.Presenter.EditPostPostPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.View.IEditPostView;
+
+import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_CLASS;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditFragment extends Fragment {
-
+public class EditFragment extends Fragment implements View.OnClickListener, IEditPostView {
+    private ScreenManager screenManager;
+    private EditPostPostPresenter presenter;
+    private EditText etInput;
+    private TextView tvEdit;
+    private ImageButton ibBack;
+    private TextView tvClass;
+    private TextView tvName;
+    private ImageView ivAvatar,ivImage;
 
     public EditFragment() {
         // Required empty public constructor
@@ -26,7 +48,79 @@ public class EditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit, container, false);
+        initialize(view);
+        return view;
     }
 
+    @Override
+    public void onResume() {
+        presenter.setEditView(this);
+        presenter.addEditListener();
+        presenter.onInit();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.setEditView(null);
+        presenter.removeEditListener();
+        super.onPause();
+    }
+
+    private void initialize(View view) {
+        screenManager = ScreenManager.getInstance();
+        presenter = new EditPostPostPresenter(getContext());
+        etInput = view.findViewById(R.id.et_input_edit);
+        ibBack = view.findViewById(R.id.ib_back_edit);
+        tvEdit = view.findViewById(R.id.tv_edit_edit);
+        tvClass = view.findViewById(R.id.tv_class_edit);
+        tvName = view.findViewById(R.id.tv_name_edit);
+        ivAvatar = view.findViewById(R.id.iv_avatar_edit);
+        ivImage=view.findViewById(R.id.iv_image_edit);
+        ibBack.setOnClickListener(this);
+        tvEdit.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ib_back_edit:
+                SharedPreferencesUtils.saveTabId(getContext(), TAB_CLASS);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+                break;
+            case R.id.tv_edit_edit:
+                presenter.onCheck(etInput.getText().toString().trim());
+                break;
+        }
+    }
+
+    @Override
+    public void onInit(User self, ClassPost classPost) {
+        Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(50, 50).into(ivAvatar);
+        tvName.setText(self.getName());
+        tvClass.setText("Thành viên của " + self.getClassId());
+        if (classPost.getImage() != null)
+            Glide.with(getContext()).load(Uri.parse(classPost.getImage())).into(ivImage);
+        etInput.setText(classPost.getContent());
+    }
+
+    @Override
+    public void onCheckFailure() {
+        CustomToast.makeText(getContext(), "Nội dung không được trống", CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+        tvEdit.setEnabled(true);
+        SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+    }
+
+    @Override
+    public void onFailure() {
+        CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        tvEdit.setEnabled(true);
+    }
 }

@@ -1,7 +1,10 @@
 package com.example.pcdashboard.Model;
 
+import java.util.ArrayList;
+
 public class Schedule {
     private String day;
+//    private ArrayList<Subject> subjects;
     private String period;
     private String time;
     private String subject;

@@ -106,7 +106,8 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         switch (v.getId()){
             case R.id.tv_post_post:
                 if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
-                    presenter.onCheck(etInput.getText().toString(),imagePath);
+                    presenter.onCheck(etInput.getText().toString().trim(),imagePath);
+                    tvPost.setEnabled(false);
                 } else {
                     EasyPermissions.requestPermissions(this, "Hãy cho phép truy cập bộ nhớ thiết bị", 101, galleryPermissions);
                 }
@@ -137,6 +138,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     @Override
     public void onSuccess() {
         CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+        tvPost.setEnabled(true);
         SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
@@ -144,6 +146,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     @Override
     public void onFailure() {
         CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        tvPost.setEnabled(true);
     }
     private void pickFromGallery() {
         //Create an Intent with action as ACTION_PICK

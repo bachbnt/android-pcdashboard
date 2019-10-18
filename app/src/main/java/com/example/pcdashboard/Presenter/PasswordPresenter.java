@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.pcdashboard.Services.AccountService;
-import com.example.pcdashboard.View.IPasswordView;
+import com.example.pcdashboard.View.IChangePasswordView;
 
 interface IPasswordPresenter {
     void onCheck(String oldPassword,String newPassword,String retypePassword);
@@ -13,14 +13,14 @@ interface IPasswordPresenter {
 }
 public class PasswordPresenter implements IPasswordPresenter,AccountService.PasswordListener {
     private Context context;
-    private IPasswordView view;
+    private IChangePasswordView view;
     private AccountService accountService;
 
     public PasswordPresenter(Context context) {
         this.context = context;
         accountService=AccountService.getInstance(context);
     }
-    public void setPasswordView(IPasswordView iPasswordView){
+    public void setPasswordView(IChangePasswordView iPasswordView){
         this.view=iPasswordView;
     }
 

@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.AccountService;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
-import com.example.pcdashboard.View.IInfoView;
+import com.example.pcdashboard.View.IUpdateInfoView;
 
 interface IInfoPresenter {
     void onLoad();
@@ -16,14 +16,14 @@ interface IInfoPresenter {
 }
 public class InfoPresenter implements IInfoPresenter, AccountService.InfoListener {
     private Context context;
-    private IInfoView view;
+    private IUpdateInfoView view;
     private AccountService accountService;
 
     public InfoPresenter(Context context) {
         this.context = context;
         accountService=AccountService.getInstance(context);
     }
-    public void setInfoView(IInfoView iInfoView){
+    public void setInfoView(IUpdateInfoView iInfoView){
         this.view=iInfoView;
     }
 
