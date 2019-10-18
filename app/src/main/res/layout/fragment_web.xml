@@ -11,29 +11,19 @@
         android:layout_height="@dimen/space_50dp"
         android:background="@drawable/bg_panel">
 
-        <TextView
-            android:id="@+id/tv_url_web"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/space_5dp"
-            android:background="@drawable/bg_edittext_login"
-            android:layout_toRightOf="@id/ib_back_web"
-            android:layout_toLeftOf="@id/ib_left_web"/>
-
         <ImageButton
             android:id="@+id/ib_back_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back_cold_32dp" />
         <ImageButton
             android:id="@+id/ib_left_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_10dp"
-            android:layout_marginLeft="@dimen/space_10dp"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/ib_right_web"
             android:src="@drawable/ic_left_cold_32dp"
             android:background="@android:color/transparent"/>

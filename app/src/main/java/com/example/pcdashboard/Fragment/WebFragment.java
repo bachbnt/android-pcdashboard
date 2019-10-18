@@ -2,6 +2,7 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_DEPARTMENT;
 public class WebFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private WebView webView;
-    private TextView tvUrl;
-    private ImageButton ibBack,ibLeft,ibRight;
+    private ImageButton ibBack, ibLeft, ibRight;
 
     public WebFragment() {
     }
@@ -44,13 +44,11 @@ public class WebFragment extends Fragment implements View.OnClickListener {
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
         webView = view.findViewById(R.id.wv_home_web);
-        tvUrl=view.findViewById(R.id.tv_url_web);
         ibBack = view.findViewById(R.id.ib_back_web);
         ibLeft = view.findViewById(R.id.ib_left_web);
         ibRight = view.findViewById(R.id.ib_right_web);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(IWebService.urlHome);
-        tvUrl.setText(IWebService.urlHome);
         webView.setWebViewClient(new WebViewController());
         ibBack.setOnClickListener(this);
         ibLeft.setOnClickListener(this);
@@ -65,12 +63,14 @@ public class WebFragment extends Fragment implements View.OnClickListener {
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_left_web:
-                if (webView.canGoBack())
+                if (webView.canGoBack()) {
                     webView.goBack();
+                }
                 break;
             case R.id.ib_right_web:
-                if (webView.canGoForward())
+                if (webView.canGoForward()) {
                     webView.goForward();
+                }
                 break;
         }
     }
@@ -79,7 +79,6 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
-            tvUrl.setText(url);
             return true;
         }
     }
