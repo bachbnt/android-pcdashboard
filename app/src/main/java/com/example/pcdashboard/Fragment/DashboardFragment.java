@@ -1,16 +1,13 @@
 package com.example.pcdashboard.Fragment;
 
-
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.example.pcdashboard.Adapter.PagerAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
@@ -19,14 +16,17 @@ import com.example.pcdashboard.Manager.ZoomOutPageTransformer;
 import com.example.pcdashboard.R;
 import com.google.android.material.tabs.TabLayout;
 
+import static com.example.pcdashboard.Manager.IScreenManager.WEB_FRAGMENT;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private TabLayout tabLayout;
+    private ImageView ivAppName;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -56,6 +56,8 @@ public class DashboardFragment extends Fragment {
 
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
+        ivAppName=view.findViewById(R.id.iv_appname_dashboard);
+        ivAppName.setOnClickListener(this);
         viewPager = view.findViewById(R.id.view_pager_dashboard);
         pagerAdapter = new PagerAdapter(getChildFragmentManager(), getContext(), screenManager);
         viewPager.setAdapter(pagerAdapter);
@@ -84,5 +86,14 @@ public class DashboardFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_appname_dashboard:
+                screenManager.openFeatureScreen(WEB_FRAGMENT);
+                break;
+        }
     }
 }

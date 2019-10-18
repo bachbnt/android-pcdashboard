@@ -58,7 +58,7 @@ public class AccountService {
         this.context = context;
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IWebServices.url)
+                .baseUrl(IWebService.urlServer)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         iAccountService = retrofit.create(IAccountService.class);

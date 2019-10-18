@@ -40,7 +40,7 @@ public class StudyService {
     private StudyService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IWebServices.url)
+                .baseUrl(IWebService.urlServer)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iStudyService = retrofit.create(IStudyService.class);

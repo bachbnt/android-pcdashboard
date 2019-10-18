@@ -71,7 +71,7 @@ public class PostService {
     private PostService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IWebServices.url)
+                .baseUrl(IWebService.urlServer)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iPostService = retrofit.create(IPostService.class);

@@ -23,6 +23,7 @@ import com.example.pcdashboard.Fragment.InfoFragment;
 import com.example.pcdashboard.Fragment.PasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Fragment.ScheduleFragment;
+import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.User;
@@ -89,6 +90,9 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
         switch (screenName) {
             case DASHBOARD_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new DashboardFragment()).commit();
+                break;
+            case WEB_FRAGMENT:
+                fragmentTransaction.replace(R.id.fl_container_dashboard,new WebFragment()).commit();
                 break;
             case POST_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new PostFragment()).commit();

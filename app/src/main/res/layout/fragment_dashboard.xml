@@ -13,9 +13,9 @@
         android:background="@drawable/bg_panel">
 
         <ImageView
+            android:id="@+id/iv_appname_dashboard"
             android:layout_width="220dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="-10dp"
             android:src="@drawable/ic_logo_panel" />
 
     </LinearLayout>
