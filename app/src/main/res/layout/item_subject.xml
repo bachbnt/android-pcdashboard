@@ -1,28 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_item_subject">
+
+    <ImageButton
+        android:id="@+id/ib_delete_subject_item"
+        android:layout_width="@dimen/space_50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/et_name_subject_item"
+        android:layout_alignBottom="@id/et_teacher_subject_item"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorCold"
+        android:src="@drawable/ic_failure_24dp" />
 
     <EditText
         android:id="@+id/et_name_subject_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:layout_toLeftOf="@id/ib_delete_subject_item"
         android:background="@android:color/transparent"
-        android:text="Lap trinh di dong" />
+        android:drawableLeft="@drawable/ic_class_hot_24dp"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:drawablePadding="@dimen/space_10dp"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingTop="@dimen/space_5dp"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingBottom="@dimen/space_5dp"
+        android:hint="Môn học"
+        android:text="Lap trinh di dong"
+        android:textSize="@dimen/font_size_16sp"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/et_time_subject_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:layout_below="@id/et_name_subject_item"
+        android:layout_toLeftOf="@id/ib_delete_subject_item"
         android:background="@android:color/transparent"
-        android:text="8:00-10:00" />
+        android:drawableLeft="@drawable/ic_time_hot_24dp"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:drawablePadding="@dimen/space_10dp"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingTop="@dimen/space_5dp"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingBottom="@dimen/space_5dp"
+        android:hint="Thời gian"
+        android:text="8:00-10:00"
+        android:textSize="@dimen/font_size_16sp" />
+
     <EditText
-        android:id="@+id/et_"
+        android:id="@+id/et_teacher_subject_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:layout_below="@id/et_time_subject_item"
+        android:layout_toLeftOf="@id/ib_delete_subject_item"
         android:background="@android:color/transparent"
-        android:text="Nguyen Anh Thu" />
-</LinearLayout>
+        android:drawableLeft="@drawable/ic_user_hot_24dp"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:drawablePadding="@dimen/space_10dp"
+        android:paddingLeft="@dimen/space_10dp"
+        android:paddingTop="@dimen/space_5dp"
+        android:paddingRight="@dimen/space_10dp"
+        android:paddingBottom="@dimen/space_5dp"
+        android:hint="Giảng viên"
+        android:text="Nguyen Anh Thu"
+        android:textSize="@dimen/font_size_16sp" />
+
+</RelativeLayout>

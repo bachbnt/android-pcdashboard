@@ -7,8 +7,14 @@
     <TextView
         android:id="@+id/tv_day_schedule_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Thu 2" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_10dp"
+        android:drawableRight="@drawable/ic_add_cold_32dp"
+        android:text="Thu 2"
+        android:textAllCaps="true"
+        android:textSize="@dimen/font_size_20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorHot"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_subjects_schedule_item"
