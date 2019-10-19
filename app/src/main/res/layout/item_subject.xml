@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/et_name_subject_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:background="@android:color/transparent"
+        android:text="Lap trinh di dong" />
+    <EditText
+        android:id="@+id/et_time_subject_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:background="@android:color/transparent"
+        android:text="8:00-10:00" />
+    <EditText
+        android:id="@+id/et_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:background="@android:color/transparent"
+        android:text="Nguyen Anh Thu" />
+</LinearLayout>

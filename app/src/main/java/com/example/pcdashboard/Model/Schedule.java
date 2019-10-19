@@ -4,18 +4,11 @@ import java.util.ArrayList;
 
 public class Schedule {
     private String day;
-//    private ArrayList<Subject> subjects;
-    private String period;
-    private String time;
-    private String subject;
-    private String teacher;
+    private ArrayList<Subject> subjects;
 
-    public Schedule(String day, String period, String time, String subject, String teacher) {
+    public Schedule(String day, ArrayList<Subject> subjects) {
         this.day = day;
-        this.period = period;
-        this.time = time;
-        this.subject = subject;
-        this.teacher = teacher;
+        this.subjects = subjects;
     }
 
     public String getDay() {
@@ -26,35 +19,11 @@ public class Schedule {
         this.day = day;
     }
 
-    public String getPeriod() {
-        return period;
+    public ArrayList<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setSubjects(ArrayList<Subject> subjects) {
+        this.subjects = subjects;
     }
 }
