@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/ib_delete_subject_item"
         android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_class_hot_24dp"
+        android:drawableLeft="@drawable/ic_subject_hot_24dp"
         android:drawableRight="@drawable/ic_edit_cold_24dp"
         android:drawablePadding="@dimen/space_10dp"
         android:paddingLeft="@dimen/space_10dp"

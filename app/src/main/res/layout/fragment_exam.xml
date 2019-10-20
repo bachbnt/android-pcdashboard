@@ -20,4 +20,10 @@
             android:src="@drawable/ic_back_cold_32dp" />
     </RelativeLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_back_exam"
+        android:layout_marginTop="@dimen/space_10dp" />
 </RelativeLayout>

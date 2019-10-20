@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_5dp"
+    android:background="@drawable/bg_item_subject">
+
+    <TextView
+        android:id="@+id/tv_name_exam_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_5dp"
+        android:layout_toLeftOf="@id/tv_score_exam_item"
+        android:drawableLeft="@drawable/ic_subject_hot_24dp"
+        android:drawablePadding="@dimen/space_10dp"
+        android:padding="@dimen/space_5dp"
+        android:text="Vật lý chất rắn"
+        android:textSize="@dimen/font_size_20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorCold"/>
+
+    <TextView
+        android:id="@+id/tv_score_exam_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_name_exam_item"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/space_5dp"
+        android:drawableLeft="@drawable/ic_score_hot_24dp"
+        android:drawablePadding="@dimen/space_5dp"
+        android:padding="@dimen/space_5dp"
+        android:text="9.5"
+        android:textSize="@dimen/font_size_20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorCold"/>
+
+    <LinearLayout
+        android:id="@+id/ll_id_exam_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name_exam_item"
+        android:layout_alignLeft="@id/tv_name_exam_item"
+        android:layout_alignRight="@id/tv_score_exam_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_id_exam_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name_exam_item"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_id_hot_24dp"
+            android:drawablePadding="@dimen/space_10dp"
+            android:padding="@dimen/space_5dp"
+            android:text="PHY10010"
+            android:textSize="@dimen/font_size_16sp" />
+
+        <TextView
+            android:id="@+id/tv_class_exam_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_id_exam_item"
+            android:layout_toRightOf="@id/tv_id_exam_item"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_class_hot_24dp"
+            android:drawablePadding="@dimen/space_10dp"
+            android:padding="@dimen/space_5dp"
+            android:text="16VLTH"
+            android:textSize="@dimen/font_size_16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_id_exam_item"
+        android:layout_alignLeft="@id/tv_name_exam_item"
+        android:layout_alignRight="@id/tv_score_exam_item">
+
+        <TextView
+            android:id="@+id/tv_time_exam_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_id_exam_item"
+            android:layout_alignLeft="@id/tv_name_exam_item"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_time_hot_24dp"
+            android:drawablePadding="@dimen/space_10dp"
+            android:padding="@dimen/space_5dp"
+            android:text="02/01/2019	15g40"
+            android:textSize="@dimen/font_size_16sp" />
+
+        <TextView
+            android:id="@+id/tv_place_exam_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_time_exam_item"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_place_hot_24dp"
+            android:drawablePadding="@dimen/space_10dp"
+            android:padding="@dimen/space_5dp"
+            android:text="F301 NVC"
+            android:textSize="@dimen/font_size_16sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
