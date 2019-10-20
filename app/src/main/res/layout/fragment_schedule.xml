@@ -25,8 +25,8 @@
         android:id="@+id/ib_save_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_5dp"
-        android:layout_marginRight="@dimen/space_15dp"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:layout_marginRight="@dimen/space_10dp"
         android:layout_alignParentRight="true"
         android:layout_below="@id/rl_back_schedule"
         android:src="@drawable/ic_save_cold_32dp"
@@ -40,5 +40,19 @@
         android:layout_toLeftOf="@id/ib_save_schedule"
         android:src="@drawable/ic_reload_cold_32dp"
         android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/view_line_schdule"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:background="@color/colorWhiteSmoke"
+        android:layout_below="@id/ib_save_schedule"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_line_schdule"/>
 
 </RelativeLayout>

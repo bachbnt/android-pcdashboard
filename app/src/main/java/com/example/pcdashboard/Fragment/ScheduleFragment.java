@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pcdashboard.Adapter.ScheduleAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Schedule;
+import com.example.pcdashboard.Model.Subject;
 import com.example.pcdashboard.Presenter.SchedulePresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IScheduleView;
@@ -29,6 +33,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
     private ScreenManager screenManager;
     private ImageButton ibBack,ibReload,ibSave;
     private SchedulePresenter presenter;
+    private RecyclerView recyclerView;
+    private ScheduleAdapter scheduleAdapter;
 
 
     public ScheduleFragment() {
@@ -65,9 +71,30 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
         ibBack=view.findViewById(R.id.ib_back_schedule);
         ibReload=view.findViewById(R.id.ib_reload_schedule);
         ibSave=view.findViewById(R.id.ib_save_schedule);
+        scheduleAdapter=new ScheduleAdapter(getContext(),list());
+        recyclerView=view.findViewById(R.id.recycler_view_schedule);
+        recyclerView.setAdapter(scheduleAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ibBack.setOnClickListener(this);
         ibReload.setOnClickListener(this);
         ibSave.setOnClickListener(this);
+    }
+
+    private ArrayList<Schedule> list(){
+        ArrayList<Schedule> schedules=new ArrayList<>();
+        ArrayList<Subject> subjects=new ArrayList<>();
+        subjects.add(new Subject("Lap trinh di dong","8:00-10:10","Nguyen Anh Thu"));
+        subjects.add(new Subject("Lap trinh di dong","8:00-10:10","Nguyen Anh Thu"));
+        subjects.add(new Subject("Lap trinh di dong","8:00-10:10","Nguyen Anh Thu"));
+        subjects.add(new Subject("Lap trinh di dong","8:00-10:10","Nguyen Anh Thu"));
+        schedules.add(new Schedule("Thu 2",subjects));
+        schedules.add(new Schedule("Thu 3",subjects));
+        schedules.add(new Schedule("Thu 4",subjects));
+        schedules.add(new Schedule("Thu 5",subjects));
+        schedules.add(new Schedule("Thu 6",subjects));
+        schedules.add(new Schedule("Thu 7",subjects));
+        schedules.add(new Schedule("Chu nhat",subjects));
+        return schedules;
     }
 
     @Override
@@ -78,7 +105,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_reload_schedule:
-                presenter.onRequest();
+//                presenter.onRequest();
                 break;
             case R.id.ib_save_schedule:
                 break;
@@ -92,11 +119,10 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onSuccess(ArrayList<Schedule> schedules) {
-        Log.i("tag","onSuccess schedules "+schedules.get(1).getSubject());
     }
 
     @Override
     public void onFailure() {
-        Log.i("tag","onFailure schedules");
+
     }
 }

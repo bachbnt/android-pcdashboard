@@ -8,11 +8,12 @@
         android:id="@+id/ib_delete_subject_item"
         android:layout_width="@dimen/space_50dp"
         android:layout_height="wrap_content"
+        android:layout_margin="1dp"
         android:layout_alignTop="@id/et_name_subject_item"
         android:layout_alignBottom="@id/et_teacher_subject_item"
         android:layout_alignParentRight="true"
         android:background="@color/colorCold"
-        android:src="@drawable/ic_failure_24dp" />
+        android:src="@drawable/ic_delete_white_32dp" />
 
     <EditText
         android:id="@+id/et_name_subject_item"
@@ -21,7 +22,7 @@
         android:layout_toLeftOf="@id/ib_delete_subject_item"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_class_hot_24dp"
-        android:drawableRight="@drawable/ic_edit_hot_24dp"
+        android:drawableRight="@drawable/ic_edit_cold_24dp"
         android:drawablePadding="@dimen/space_10dp"
         android:paddingLeft="@dimen/space_10dp"
         android:paddingTop="@dimen/space_5dp"
