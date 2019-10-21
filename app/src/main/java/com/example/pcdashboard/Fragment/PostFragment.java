@@ -24,7 +24,7 @@ import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.PostPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Services.ImageFilePath;
+import com.example.pcdashboard.Manager.ImageFilePath;
 import com.example.pcdashboard.View.IPostView;
 
 import java.io.IOException;

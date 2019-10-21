@@ -1,4 +1,4 @@
-package com.example.pcdashboard.Services;
+package com.example.pcdashboard.Manager;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

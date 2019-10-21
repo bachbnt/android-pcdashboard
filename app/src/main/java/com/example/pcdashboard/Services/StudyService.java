@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Services;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Exam;
@@ -60,37 +61,46 @@ public class StudyService {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<Schedule>> call = iStudyService.getSchedule(token, classId);
-        call.enqueue(new Callback<ArrayList<Schedule>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
-                final ArrayList<Schedule> schedules = response.body();
-                if (schedules != null)
-                    scheduleListener.onSuccess(schedules);
-                else scheduleListener.onFailure();
-            }
+        try {
+            call.enqueue(new Callback<ArrayList<Schedule>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
+                    final ArrayList<Schedule> schedules = response.body();
+                    if (schedules != null)
+                        scheduleListener.onSuccess(schedules);
+                    else scheduleListener.onFailure();
+                }
 
-            @Override
-            public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
-                scheduleListener.onFailure();
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
+                    scheduleListener.onFailure();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception ", "Study Service getSchedule" + e.toString());
+        }
     }
+
     public void getExam() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<Exam>> call = iStudyService.getExam(token);
-        call.enqueue(new Callback<ArrayList<Exam>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
-                final ArrayList<Exam> exams = response.body();
-                if (exams != null)
-                    examListener.onSuccess(exams);
-                else examListener.onFailure();
-            }
+        try {
+            call.enqueue(new Callback<ArrayList<Exam>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
+                    final ArrayList<Exam> exams = response.body();
+                    if (exams != null)
+                        examListener.onSuccess(exams);
+                    else examListener.onFailure();
+                }
 
-            @Override
-            public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
-                examListener.onFailure();
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
+                    examListener.onFailure();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception ", "Study Service getExam" + e.toString());
+        }
     }
 }
