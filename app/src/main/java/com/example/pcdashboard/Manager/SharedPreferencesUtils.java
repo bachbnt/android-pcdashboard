@@ -139,6 +139,13 @@ public class SharedPreferencesUtils {
         return classPost;
     }
 
+    public static void clearClassPost(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("post", Context.MODE_PRIVATE);
+        android.content.SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public static void savePostComment(Context context, PostComment postComment){
         SharedPreferences preferences=context.getSharedPreferences("comment",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
@@ -155,20 +162,10 @@ public class SharedPreferencesUtils {
         return postComment;
     }
 
-//    public static String loadIdPreferences(Context context, String key){
-//        android.content.SharedPreferences preferences=context.getSharedPreferences("caches",Context.MODE_PRIVATE);
-//        return preferences.getString(key,null);
-//    }
-//
-//    public static String loadEmailPreferences(Context context, String key){
-//        android.content.SharedPreferences preferences=context.getSharedPreferences("caches",Context.MODE_PRIVATE);
-//        return preferences.getString(key,null);
-//    }
-//
-//    public static void removePreferences(Context context, String key) {
-//        android.content.SharedPreferences preferences = context.getSharedPreferences("caches", Context.MODE_PRIVATE);
-//        android.content.SharedPreferences.Editor editor = preferences.edit();
-//        editor.remove(key);
-//        editor.commit();
-//    }
+    public static void clearPostComment(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("comment", Context.MODE_PRIVATE);
+        android.content.SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 }

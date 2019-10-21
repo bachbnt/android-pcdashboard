@@ -239,7 +239,8 @@ public class PostService {
 
     public void updateClassPost(final String postId, String content) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        Call<Boolean> call = iPostService.updatePost(token, postId, content);
+        String image=SharedPreferencesUtils.loadClassPost(context).getImage();
+        Call<Boolean> call = iPostService.updatePost(token, postId, content,image);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {

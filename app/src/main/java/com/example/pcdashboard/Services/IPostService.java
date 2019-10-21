@@ -1,7 +1,5 @@
 package com.example.pcdashboard.Services;
 
-import androidx.annotation.Nullable;
-
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.PostComment;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -30,7 +27,7 @@ public interface IPostService {
             }
     )
     @GET("post/department")
-    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token,@Query("number")int number);
+    Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token, @Query("number") int number);
 
     //CLASS POST
     @Headers(
@@ -39,7 +36,7 @@ public interface IPostService {
             }
     )
     @GET("post/class/{classId}")
-    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId,@Query("number") int number);
+    Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId, @Query("number") int number);
 
     @POST("post/class/")
     Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content);
@@ -49,7 +46,7 @@ public interface IPostService {
     Call<Boolean> createPostImg(@Header("Authorization") String token, @Query("content") String content, @Part MultipartBody.Part file);
 
     @PUT("post/class/{postId}")
-    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content);
+    Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Query("image") String image);
 
     @Multipart
     @PUT("post/class/{postId}")
@@ -72,7 +69,7 @@ public interface IPostService {
     Call<Boolean> createComment(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content);
 
     @PUT("comment/{commentId}")
-    Call<Boolean> updateComment(@Header("Authorization") String token,@Path("commentId")String commentId,@Query("content") String content);
+    Call<Boolean> updateComment(@Header("Authorization") String token, @Path("commentId") String commentId, @Query("content") String content);
 
     @DELETE("comment/{commentId}")
     Call<Boolean> deleteComment(@Header("Authorization") String token, @Path("commentId") String commentId);

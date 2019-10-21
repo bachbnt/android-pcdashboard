@@ -68,6 +68,12 @@ public class EditFragment extends Fragment implements View.OnClickListener, IEdi
         super.onPause();
     }
 
+    @Override
+    public void onStop() {
+        SharedPreferencesUtils.clearClassPost(getContext());
+        super.onStop();
+    }
+
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
         presenter = new EditPostPostPresenter(getContext());

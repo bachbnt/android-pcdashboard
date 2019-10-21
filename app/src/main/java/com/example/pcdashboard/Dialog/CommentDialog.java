@@ -88,6 +88,12 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         super.onPause();
     }
 
+    @Override
+    public void onStop() {
+        SharedPreferencesUtils.clearPostComment(getContext());
+        super.onStop();
+    }
+
     private void initialize(View view) {
         screenManager=ScreenManager.getInstance();
         gestureDetector=new GestureDetector(this);
