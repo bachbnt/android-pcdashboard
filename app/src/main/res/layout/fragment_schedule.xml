@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhiteSmoke"
     tools:context=".Fragment.ScheduleFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -25,34 +26,34 @@
         android:id="@+id/ib_save_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_10dp"
-        android:layout_marginRight="@dimen/space_10dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/rl_back_schedule"
-        android:src="@drawable/ic_save_cold_32dp"
-        android:background="@android:color/transparent"/>
+        android:layout_marginTop="@dimen/space_10dp"
+        android:layout_marginRight="@dimen/space_15dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_save_cold_32dp" />
+
     <ImageButton
         android:id="@+id/ib_reload_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/space_15dp"
         android:layout_alignTop="@id/ib_save_schedule"
+        android:layout_marginRight="@dimen/space_15dp"
         android:layout_toLeftOf="@id/ib_save_schedule"
-        android:src="@drawable/ic_reload_cold_32dp"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_reload_cold_32dp" />
 
     <View
         android:id="@+id/view_line_schdule"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/ib_save_schedule"
         android:layout_marginTop="@dimen/space_10dp"
-        android:background="@color/colorWhiteSmoke"
-        android:layout_below="@id/ib_save_schedule"/>
+        android:background="@color/colorWhiteSmoke" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view_line_schdule"/>
+        android:layout_below="@id/view_line_schdule" />
 
 </RelativeLayout>

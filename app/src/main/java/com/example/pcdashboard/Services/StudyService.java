@@ -3,6 +3,7 @@ package com.example.pcdashboard.Services;
 import android.content.Context;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class StudyService {
     private static IStudyService iStudyService;
     private Context context;
     private ScheduleListener scheduleListener;
+    private ExamListener examListener;
 
     public interface ScheduleListener {
         void onSuccess(ArrayList<Schedule> schedules);
@@ -26,7 +28,7 @@ public class StudyService {
     }
 
     public interface ExamListener {
-        void onSuccess();
+        void onSuccess(ArrayList<Exam> exams);
 
         void onFailure();
     }
@@ -50,6 +52,10 @@ public class StudyService {
         this.scheduleListener = scheduleListener;
     }
 
+    public void setExamListener(ExamListener examListener) {
+        this.examListener = examListener;
+    }
+
     public void getSchedule() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
@@ -69,5 +75,22 @@ public class StudyService {
             }
         });
     }
+    public void getExam() {
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        Call<ArrayList<Exam>> call = iStudyService.getExam(token);
+        call.enqueue(new Callback<ArrayList<Exam>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
+                final ArrayList<Exam> exams = response.body();
+                if (exams != null)
+                    examListener.onSuccess(exams);
+                else examListener.onFailure();
+            }
 
+            @Override
+            public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
+                examListener.onFailure();
+            }
+        });
+    }
 }

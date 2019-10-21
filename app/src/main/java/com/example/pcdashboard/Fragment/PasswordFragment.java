@@ -27,7 +27,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChangePasswordFragment extends Fragment implements IChangePasswordView, View.OnClickListener, TextWatcher {
+public class PasswordFragment extends Fragment implements IChangePasswordView, View.OnClickListener, TextWatcher {
     private ScreenManager screenManager;
     private PasswordPresenter presenter;
     private EditText etOld;
@@ -36,7 +36,7 @@ public class ChangePasswordFragment extends Fragment implements IChangePasswordV
     private Button btnChange;
     private ImageButton ibBack;
 
-    public ChangePasswordFragment() {
+    public PasswordFragment() {
         // Required empty public constructor
     }
 

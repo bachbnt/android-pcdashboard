@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_margin="@dimen/space_5dp"
+    app:cardCornerRadius="@dimen/space_10dp">
 
-    <TextView
-        android:id="@+id/tv_day_schedule_item"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/space_5dp"
-        android:paddingTop="@dimen/space_10dp"
-        android:paddingBottom="@dimen/space_10dp"
-        android:paddingRight="@dimen/space_10dp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/ic_down_hot_32dp"
-        android:drawableRight="@drawable/ic_add_hot_32dp"
-        android:text="Thu 2"
-        android:textAllCaps="true"
-        android:textSize="@dimen/font_size_24sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorCold"/>
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_subjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_day_schedule_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_add_hot_32dp"
+            android:gravity="center"
+            android:paddingLeft="@dimen/space_5dp"
+            android:paddingTop="@dimen/space_10dp"
+            android:paddingRight="@dimen/space_10dp"
+            android:paddingBottom="@dimen/space_10dp"
+            android:text="Thu 2"
+            android:textAllCaps="true"
+            android:textColor="@color/colorCold"
+            android:textSize="@dimen/font_size_24sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_subjects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_5dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

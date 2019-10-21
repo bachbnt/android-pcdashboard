@@ -31,6 +31,10 @@ public interface OnItemClickListener{
         this.schedules = schedules;
     }
 
+    public void update(ArrayList<Schedule> schedules){
+    this.schedules=schedules;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

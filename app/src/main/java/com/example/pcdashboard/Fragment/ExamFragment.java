@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Adapter.ExamAdapter;
+import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Exam;
+import com.example.pcdashboard.Presenter.ExamPresenter;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.View.IExamView;
 
 import java.util.ArrayList;
 
@@ -25,11 +28,12 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExamFragment extends Fragment implements View.OnClickListener {
+public class ExamFragment extends Fragment implements View.OnClickListener, IExamView {
     private ScreenManager screenManager;
     private ImageButton ibBack;
     private RecyclerView recyclerView;
     private ExamAdapter examAdapter;
+    private ExamPresenter presenter;
 
 
     public ExamFragment() {
@@ -46,27 +50,30 @@ public class ExamFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        presenter.setExamView(this);
+        presenter.addExamListener();
+        presenter.onRequest();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.setExamView(null);
+        presenter.removeExamListener();
+        super.onPause();
+    }
+
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
-        examAdapter = new ExamAdapter(getContext(), list());
+        presenter = new ExamPresenter(getContext());
+        examAdapter = new ExamAdapter(getContext(), new ArrayList<Exam>());
         recyclerView = view.findViewById(R.id.recycler_view_exam);
         recyclerView.setAdapter(examAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ibBack = view.findViewById(R.id.ib_back_exam);
         ibBack.setOnClickListener(this);
-    }
-
-    private ArrayList<Exam> list() {
-        ArrayList<Exam> exams = new ArrayList<>();
-        exams.add(new Exam("PHY010101", "Cảm biến và đo lường", "16VLTH", "20/10/2019 15:30", "E205 NVC", 8.5));
-        exams.add(new Exam("PHY010101", "Cảm biến và đo lường", "16VLTH", "20/10/2019 15:30", "E205 NVC", 8.5));
-
-        exams.add(new Exam("PHY010101", "Cảm biến và đo lường", "16VLTH", "20/10/2019 15:30", "E205 NVC", 8.5));
-        exams.add(new Exam("PHY010101", "Cảm biến và đo lường", "16VLTH", "20/10/2019 15:30", "E205 NVC", 8.5));
-
-        exams.add(new Exam("PHY010101", "Cảm biến và đo lường", "16VLTH", "20/10/2019 15:30", "E205 NVC", 8.5));
-
-        return exams;
     }
 
     @Override
@@ -77,5 +84,16 @@ public class ExamFragment extends Fragment implements View.OnClickListener {
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess(ArrayList<Exam> exams) {
+        examAdapter.update(exams);
+        examAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure() {
+        CustomToast.makeText(getContext(), "Tải lịch thi thất bại", CustomToast.LENGTH_SHORT, CustomToast.FAILURE).show();
     }
 }

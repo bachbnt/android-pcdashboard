@@ -20,8 +20,8 @@ import com.example.pcdashboard.Fragment.EditFragment;
 import com.example.pcdashboard.Fragment.ExamFragment;
 import com.example.pcdashboard.Fragment.FeedbackFragment;
 import com.example.pcdashboard.Fragment.GuideFragment;
-import com.example.pcdashboard.Fragment.UpdateInfoFragment;
-import com.example.pcdashboard.Fragment.ChangePasswordFragment;
+import com.example.pcdashboard.Fragment.InfoFragment;
+import com.example.pcdashboard.Fragment.PasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Fragment.ScheduleFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
@@ -102,10 +102,10 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new EditFragment()).commit();
                 break;
             case INFO_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new UpdateInfoFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new InfoFragment()).commit();
                 break;
             case PASSWORD_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new ChangePasswordFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new PasswordFragment()).commit();
                 break;
             case SCHEDULE_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ScheduleFragment()).commit();

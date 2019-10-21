@@ -29,7 +29,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateInfoFragment extends Fragment implements IUpdateInfoView,View.OnClickListener {
+public class InfoFragment extends Fragment implements IUpdateInfoView,View.OnClickListener {
     private ScreenManager screenManager;
     private InfoPresenter presenter;
     private ImageView ivAvatar;
@@ -41,7 +41,7 @@ public class UpdateInfoFragment extends Fragment implements IUpdateInfoView,View
     private Button btnUpdate;
     private ImageButton ibBack;
 
-    public UpdateInfoFragment() {
+    public InfoFragment() {
         // Required empty public constructor
     }
 

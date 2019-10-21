@@ -1,29 +1,21 @@
 package com.example.pcdashboard.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Exam {
-    private String subjectId;
+    @SerializedName("name")
     private String subjectName;
-    private String classId;
     private String time;
     private String place;
     private double score;
 
-    public Exam(String subjectId, String subjectName, String classId, String time, String place, double score) {
-        this.subjectId = subjectId;
+    public Exam(String subjectName, String time, String place, double score) {
         this.subjectName = subjectName;
-        this.classId = classId;
         this.time = time;
         this.place = place;
         this.score = score;
     }
 
-    public String getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId;
-    }
 
     public String getSubjectName() {
         return subjectName;
@@ -31,14 +23,6 @@ public class Exam {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
-    }
-
-    public String getClassId() {
-        return classId;
-    }
-
-    public void setClassId(String classId) {
-        this.classId = classId;
     }
 
     public String getTime() {

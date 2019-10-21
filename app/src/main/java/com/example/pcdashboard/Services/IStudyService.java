@@ -1,5 +1,6 @@
 package com.example.pcdashboard.Services;
 
+import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
 import com.example.pcdashboard.Model.User;
 
@@ -13,4 +14,7 @@ import retrofit2.http.Path;
 public interface IStudyService {
     @GET("schedule/{classId}")
     Call<ArrayList<Schedule>> getSchedule (@Header("Authorization") String token, @Path("classId") String classId);
+
+    @GET("exam/")
+    Call<ArrayList<Exam>> getExam (@Header("Authorization") String token);
 }

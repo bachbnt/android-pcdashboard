@@ -22,7 +22,9 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         this.context = context;
         this.exams = exams;
     }
-
+    public void update(ArrayList<Exam> exams){
+        this.exams=exams;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,9 +36,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Exam exam=exams.get(position);
-        holder.tvSubjectId.setText(exam.getSubjectId());
         holder.tvSubjectName.setText(exam.getSubjectName());
-        holder.tvClassId.setText(exam.getClassId());
         holder.tvScore.setText(String.valueOf(exam.getScore()));
         holder.tvTime.setText(exam.getTime());
         holder.tvPlace.setText(exam.getPlace());
@@ -48,18 +48,14 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvSubjectId;
         private TextView tvSubjectName;
-        private TextView tvClassId;
         private TextView tvScore;
         private TextView tvTime;
         private TextView tvPlace;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvSubjectId=itemView.findViewById(R.id.tv_id_exam_item);
             tvSubjectName=itemView.findViewById(R.id.tv_name_exam_item);
-            tvClassId=itemView.findViewById(R.id.tv_class_exam_item);
             tvScore=itemView.findViewById(R.id.tv_score_exam_item);
             tvTime=itemView.findViewById(R.id.tv_time_exam_item);
             tvPlace=itemView.findViewById(R.id.tv_place_exam_item);
