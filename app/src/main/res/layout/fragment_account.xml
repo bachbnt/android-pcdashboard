@@ -148,6 +148,15 @@
                 android:text="@string/feedback"
                 android:textSize="@dimen/font_size_16sp" />
 
+            <TextView
+                android:id="@+id/tv_developer_account"
+                style="@style/text_view_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_android_hot_32dp"
+                android:text="@string/developer"
+                android:textSize="@dimen/font_size_16sp" />
+
         </LinearLayout>
 
         <TextView

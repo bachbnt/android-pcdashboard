@@ -22,6 +22,7 @@ import com.example.pcdashboard.R;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IAccountView;
 
+import static com.example.pcdashboard.Manager.IScreenManager.DEVELOPER_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.EXAM_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.FEEDBACK_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.GUIDE_FRAGMENT;
@@ -45,7 +46,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     private TextView tvStudy, tvHelp, tvSetting,tvLogout;
     private boolean isStudy = false, isHelp = false, isSetting = false;
     private TextView tvSchedule,tvExam;
-    private TextView tvGuide,tvFeedback;
+    private TextView tvGuide,tvFeedback,tvDeveloper;
     private TextView tvInfo,tvPassword;
 
 
@@ -93,6 +94,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvExam=view.findViewById(R.id.tv_exam_account);
         tvGuide=view.findViewById(R.id.tv_guide_account);
         tvFeedback=view.findViewById(R.id.tv_feedback_account);
+        tvDeveloper=view.findViewById(R.id.tv_developer_account);
         tvInfo=view.findViewById(R.id.tv_info_account);
         tvPassword=view.findViewById(R.id.tv_password_account);
         tvLogout=view.findViewById(R.id.tv_logout_account);
@@ -104,6 +106,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvExam.setOnClickListener(this);
         tvGuide.setOnClickListener(this);
         tvFeedback.setOnClickListener(this);
+        tvDeveloper.setOnClickListener(this);
         tvInfo.setOnClickListener(this);
         tvPassword.setOnClickListener(this);
         tvLogout.setOnClickListener(this);
@@ -189,6 +192,9 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 break;
             case R.id.tv_feedback_account:
                 screenManager.openFeatureScreen(FEEDBACK_FRAGMENT);
+                break;
+            case R.id.tv_developer_account:
+                screenManager.openFeatureScreen(DEVELOPER_FRAGMENT);
                 break;
             case R.id.tv_info_account:
                 screenManager.openFeatureScreen(INFO_FRAGMENT);

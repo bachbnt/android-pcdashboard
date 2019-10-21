@@ -36,6 +36,7 @@ public interface IScreenManager {
     String EXAM_FRAGMENT="EXAM_FRAGMENT";
     String GUIDE_FRAGMENT="GUIDE_FRAGMENT";
     String FEEDBACK_FRAGMENT="FEEDBACK_FRAGMENT";
+    String DEVELOPER_FRAGMENT="DEVELOPER_FRAGMENT";
 
     void openLoginScreen(String screenName);
 

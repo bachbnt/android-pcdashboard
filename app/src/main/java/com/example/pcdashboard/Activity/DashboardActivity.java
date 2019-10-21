@@ -16,6 +16,7 @@ import com.example.pcdashboard.Fragment.ClassFragment;
 import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
+import com.example.pcdashboard.Fragment.DeveloperFragment;
 import com.example.pcdashboard.Fragment.EditFragment;
 import com.example.pcdashboard.Fragment.ExamFragment;
 import com.example.pcdashboard.Fragment.FeedbackFragment;
@@ -118,6 +119,9 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 break;
             case FEEDBACK_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
+                break;
+            case DEVELOPER_FRAGMENT:
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new DeveloperFragment()).commit();
                 break;
         }
     }
