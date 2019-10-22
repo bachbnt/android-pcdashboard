@@ -64,11 +64,6 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onEditSuccess() {
-        view.onSuccess();
-    }
-
-    @Override
     public void onDeleteSuccess() {
         view.onSuccess();
     }
