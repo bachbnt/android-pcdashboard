@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ChatMessage;
-import com.example.pcdashboard.Model.DepartmentPost;
 
 import java.util.ArrayList;
 
@@ -15,12 +14,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ChatService {
-    private static ChatService chatService;
+public class ContactService {
+    private static ContactService contactService;
     private static IChatService iChatService;
     private Context context;
     private ChatListener listener;
-    private ChatService(Context context) {
+    private ContactService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(IWebService.urlServer)
@@ -31,10 +30,10 @@ public class ChatService {
 public interface ChatListener{
         void onSuccess(ArrayList<ChatMessage> messages);
 }
-    public static ChatService getInstance(Context context) {
-        if (chatService == null)
-            chatService = new ChatService(context);
-        return chatService;
+    public static ContactService getInstance(Context context) {
+        if (contactService == null)
+            contactService = new ContactService(context);
+        return contactService;
     }
     public void setListener(ChatListener listener){
         this.listener=listener;

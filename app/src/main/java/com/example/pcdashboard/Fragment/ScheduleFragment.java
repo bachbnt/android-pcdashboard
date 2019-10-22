@@ -56,6 +56,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
     public void onResume() {
         presenter.setScheduleView(this);
         presenter.addScheduleListener();
+        presenter.onRequest();
         super.onResume();
     }
 

@@ -13,13 +13,13 @@ import com.example.pcdashboard.Dialog.EditDialog;
 import com.example.pcdashboard.Dialog.InfoDialog;
 import com.example.pcdashboard.Fragment.AccountFragment;
 import com.example.pcdashboard.Fragment.ClassFragment;
+import com.example.pcdashboard.Fragment.ChatFragment;
 import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
 import com.example.pcdashboard.Fragment.DeveloperFragment;
 import com.example.pcdashboard.Fragment.EditFragment;
 import com.example.pcdashboard.Fragment.ExamFragment;
-import com.example.pcdashboard.Fragment.FeedbackFragment;
 import com.example.pcdashboard.Fragment.GuideFragment;
 import com.example.pcdashboard.Fragment.InfoFragment;
 import com.example.pcdashboard.Fragment.PasswordFragment;
@@ -118,7 +118,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new GuideFragment()).commit();
                 break;
             case FEEDBACK_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new ContactFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ChatFragment()).commit();
                 break;
             case DEVELOPER_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new DeveloperFragment()).commit();

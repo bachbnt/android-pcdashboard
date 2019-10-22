@@ -14,10 +14,10 @@ import com.example.pcdashboard.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends Fragment {
+public class UserFragment extends Fragment {
 
 
-    public ContactFragment() {
+    public UserFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class ContactFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        return inflater.inflate(R.layout.fragment_user, container, false);
     }
 
 }
