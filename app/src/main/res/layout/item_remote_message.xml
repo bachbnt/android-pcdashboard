@@ -13,7 +13,7 @@
         android:layout_alignLeft="@id/tv_content_remote_msg"
         android:layout_marginLeft="@dimen/space_10dp"
         android:text="@string/app_name"
-        android:textSize="@dimen/font_size_14sp" />
+        android:textSize="@dimen/font_size_12sp" />
 
 
     <TextView
@@ -24,6 +24,7 @@
         android:layout_marginLeft="@dimen/space_10dp"
         android:layout_marginRight="100dp"
         android:layout_toRightOf="@id/cv_avatar_remote_msg"
+        android:gravity="center_vertical"
         android:background="@drawable/bg_remote_message"
         android:padding="@dimen/space_10dp"
         android:text="@string/content_test"
@@ -46,7 +47,7 @@
         android:id="@+id/cv_avatar_remote_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_name_remote_msg"
+        android:layout_alignBottom="@id/tv_content_remote_msg"
         android:layout_marginLeft="@dimen/space_10dp"
         app:cardCornerRadius="16dp">
 

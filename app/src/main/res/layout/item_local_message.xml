@@ -16,6 +16,7 @@
         android:layout_marginRight="@dimen/space_10dp"
         android:background="@drawable/bg_local_message"
         android:padding="@dimen/space_10dp"
+        android:gravity="center_vertical"
         android:text="@string/content_test"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_size_16sp" />
