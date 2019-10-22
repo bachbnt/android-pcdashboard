@@ -28,24 +28,28 @@
             android:paddingBottom="@dimen/space_10dp"
             android:textSize="@dimen/font_size_16sp" />
 
-        <ImageButton
-            android:id="@+id/ib_edit_edit_dialog"
+        <Button
+            android:id="@+id/btn_edit_edit_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_input_edit_dialog"
             android:layout_marginTop="@dimen/space_20dp"
             android:layout_marginLeft="@dimen/space_30dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_true_56dp" />
+            android:text="@string/edit"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_button_login" />
 
-        <ImageButton
-            android:id="@+id/ib_cancel_edit_dialog"
+        <Button
+            android:id="@+id/btn_cancel_edit_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/space_30dp"
-            android:layout_alignTop="@id/ib_edit_edit_dialog"
+            android:layout_alignTop="@id/btn_edit_edit_dialog"
             android:layout_alignRight="@id/et_input_edit_dialog"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_false_56dp" />
+            android:text="@string/cancel"
+            android:textColor="@color/colorAccent"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_button_cancel" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

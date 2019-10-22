@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -32,8 +31,8 @@ public class EditDialog extends DialogFragment implements IEditCommentView, View
     private ScreenManager screenManager;
     private EditCommentPresenter presenter;
     private EditText etInput;
-    private ImageButton ibEdit;
-    private ImageButton ibCancel;
+    private Button btnEdit;
+    private Button btnCancel;
 
     public EditDialog() {
         // Required empty public constructor
@@ -81,10 +80,10 @@ public class EditDialog extends DialogFragment implements IEditCommentView, View
         screenManager=ScreenManager.getInstance();
         presenter=new EditCommentPresenter(getContext());
         etInput = view.findViewById(R.id.et_input_edit_dialog);
-        ibEdit = view.findViewById(R.id.ib_edit_edit_dialog);
-        ibCancel = view.findViewById(R.id.ib_cancel_edit_dialog);
-        ibEdit.setOnClickListener(this);
-        ibCancel.setOnClickListener(this);
+        btnEdit = view.findViewById(R.id.btn_edit_edit_dialog);
+        btnCancel = view.findViewById(R.id.btn_cancel_edit_dialog);
+        btnEdit.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
     }
 
     @Override
@@ -112,10 +111,10 @@ public class EditDialog extends DialogFragment implements IEditCommentView, View
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ib_edit_edit_dialog:
+            case R.id.btn_edit_edit_dialog:
                 presenter.onCheck(etInput.getText().toString().trim());
                 break;
-            case R.id.ib_cancel_edit_dialog:
+            case R.id.btn_cancel_edit_dialog:
                 screenManager.openDialog(COMMENT_DIALOG,null);
                 dismiss();
                 break;
