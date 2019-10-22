@@ -30,11 +30,7 @@ public interface IPostService {
     Call<ArrayList<DepartmentPost>> getAllDepartmentPosts(@Header("Authorization") String token, @Query("number") int number);
 
     //CLASS POST
-    @Headers(
-            {
-                    "Content-Type:application/json",
-            }
-    )
+
     @GET("post/class/{classId}")
     Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId, @Query("number") int number);
 

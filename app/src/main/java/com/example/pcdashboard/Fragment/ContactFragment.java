@@ -2,6 +2,7 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,20 @@ import com.example.pcdashboard.Adapter.MessageAdapter;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ChatMessage;
+import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Services.ChatService;
+import com.example.pcdashboard.Services.IChatService;
+import com.example.pcdashboard.Services.IPostService;
+import com.example.pcdashboard.Services.IWebService;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
@@ -50,6 +62,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
 
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
+        request();
         messageAdapter = new MessageAdapter(getContext(), list());
         ibBack = view.findViewById(R.id.ib_back_contact);
         recyclerView = view.findViewById(R.id.recycler_view_contact);
@@ -61,6 +74,10 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
         ibBack.setOnClickListener(this);
     }
 
+    private void request(){
+        ChatService chatService=ChatService.getInstance(getContext());
+        chatService.getChatMessages();
+    }
     private ArrayList<ChatMessage> list() {
         ArrayList<ChatMessage> messages = new ArrayList<>();
         messages.add(new ChatMessage("Xin chao đây là test 1dssclsncjsdjcxcn csadicscnsklc csadc", "10:30", "1613013", "Bùi Ngô Tôn Bách", "https://scontent.fsgn3-1.fna.fbcdn.net/v/t1.0-9/31959431_893209754185124_1091169959473577984_n.jpg?_nc_cat=111&_nc_oc=AQnFiRyQaW1_m8dw-Cdy0-iF-djVibSDxjrVg7qRdfbpsTABQZ1ib3DbgnyYKPyVHyA&_nc_ht=scontent.fsgn3-1.fna&oh=23d7bdb8c55c92e0cf651b239151e95a&oe=5E2AAF36"));
