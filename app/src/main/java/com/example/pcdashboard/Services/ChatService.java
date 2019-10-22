@@ -19,6 +19,7 @@ public class ChatService {
     private static ChatService chatService;
     private static IChatService iChatService;
     private Context context;
+    private ChatListener listener;
     private ChatService(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
@@ -27,11 +28,16 @@ public class ChatService {
                 .build();
         iChatService = retrofit.create(IChatService.class);
     }
-
+public interface ChatListener{
+        void onSuccess(ArrayList<ChatMessage> messages);
+}
     public static ChatService getInstance(Context context) {
         if (chatService == null)
             chatService = new ChatService(context);
         return chatService;
+    }
+    public void setListener(ChatListener listener){
+        this.listener=listener;
     }
     public void getChatMessages() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
@@ -42,6 +48,7 @@ public class ChatService {
                 public void onResponse(Call<ArrayList<ChatMessage>> call, Response<ArrayList<ChatMessage>> response) {
                     ArrayList<ChatMessage> chatMessages = response.body();
                     Log.i("tag","getChatMessages "+chatMessages.size());
+                    listener.onSuccess(chatMessages);
                 }
 
                 @Override

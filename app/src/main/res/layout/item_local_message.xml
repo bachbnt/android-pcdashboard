@@ -28,6 +28,7 @@
         android:layout_alignLeft="@id/tv_content_local_msg"
         android:layout_marginRight="@dimen/space_20dp"
         android:layout_marginLeft="100dp"
+        android:visibility="gone"
         android:text="@string/time_test"
         android:textColor="@android:color/darker_gray"
         android:textSize="@dimen/font_size_12sp" />
