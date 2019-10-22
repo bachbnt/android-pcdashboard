@@ -118,7 +118,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new GuideFragment()).commit();
                 break;
             case FEEDBACK_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ContactFragment()).commit();
                 break;
             case DEVELOPER_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new DeveloperFragment()).commit();

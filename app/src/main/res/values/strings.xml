@@ -28,6 +28,7 @@
     <string name="logout">Đăng xuất</string>
     <string name="comment">Bình luận</string>
     <string name="write_comment">Viết bình luận...</string>
+    <string name="write_message">Nhập tin nhắn...</string>
     <string name="confirm">Xác nhận</string>
     <string name="phone_number">Số điện thoại</string>
     <string name="old_password">Mật khẩu cũ</string>
