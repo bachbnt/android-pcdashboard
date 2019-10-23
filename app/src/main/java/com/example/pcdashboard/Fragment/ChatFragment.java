@@ -24,7 +24,6 @@ import com.example.pcdashboard.View.IChatView;
 import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
-import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 import static com.example.pcdashboard.Manager.IScreenManager.TAB_CONTACT;
 
 /**
@@ -57,7 +56,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     public void onResume() {
         presenter.setChatView(this);
         presenter.addChatListener();
-        presenter.onRequest(10);
+        presenter.onRequestDatabase();
         super.onResume();
     }
 
@@ -95,9 +94,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     }
 
     @Override
-    public void onSuccess(ArrayList<ChatMessage> messages) {
-        messageAdapter.update(messages);
+    public void onSuccess(ArrayList<ChatMessage> chatMessages) {
+        messageAdapter.update(chatMessages);
         messageAdapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(chatMessages.size()-1);
     }
 
     @Override

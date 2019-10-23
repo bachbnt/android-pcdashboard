@@ -7,6 +7,9 @@ public class ChatMessage {
     private String userName;
     private String userAvatar;
 
+    public ChatMessage() {
+    }
+
     public ChatMessage(String content, String time, String userId, String userName, String userAvatar) {
         this.content = content;
         this.time = time;

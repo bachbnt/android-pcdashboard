@@ -9,6 +9,9 @@ public class Exam {
     private String place;
     private double score;
 
+    public Exam() {
+    }
+
     public Exam(String subjectName, String time, String place, double score) {
         this.subjectName = subjectName;
         this.time = time;

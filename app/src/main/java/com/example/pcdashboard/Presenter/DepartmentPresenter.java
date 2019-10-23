@@ -14,11 +14,9 @@ import java.util.ArrayList;
 interface IDepartmentPresenter {
     void onRequestDatabase();
 
-    void onResponseDatabase(ArrayList<DepartmentPost> departmentPosts);
-
     void onRequestServer(int number);
 
-    void onResponseServer(ArrayList<DepartmentPost> departmentPosts);
+    void onResponse(ArrayList<DepartmentPost> departmentPosts);
 }
 
 public class DepartmentPresenter implements IDepartmentPresenter, PostService.DepartmentListener {
@@ -35,7 +33,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         protected void onPostExecute(ArrayList<DepartmentPost> departmentPosts) {
             super.onPostExecute(departmentPosts);
             if (departmentPosts != null) {
-                onResponseDatabase(departmentPosts);
+                onResponse(departmentPosts);
             }
             onRequestServer(10);
         }
@@ -70,10 +68,6 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         databaseTask.execute();
     }
 
-    @Override
-    public void onResponseDatabase(ArrayList<DepartmentPost> departmentPosts) {
-        view.onSuccessDatabase(departmentPosts);
-    }
 
     @Override
     public void onRequestServer(int number) {
@@ -81,14 +75,13 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
     }
 
     @Override
-    public void onResponseServer(ArrayList<DepartmentPost> departmentPosts) {
-        view.onSuccessServer(departmentPosts);
+    public void onResponse(ArrayList<DepartmentPost> departmentPosts) {
+        view.onSuccess(departmentPosts);
     }
-
 
     @Override
     public void onSuccess(ArrayList<DepartmentPost> departmentPosts) {
-        onResponseServer(departmentPosts);
+        onResponse(departmentPosts);
     }
 
     @Override

@@ -12,7 +12,10 @@ public class User {
     private String classId;
     private String role;
 
-    public User(String id, String name, String email, String phone, String avatar,String classId, String role) {
+    public User() {
+    }
+
+    public User(String id, String name, String email, String phone, String avatar, String classId, String role) {
         this.id = id;
         this.name = name;
         this.email = email;

@@ -202,8 +202,8 @@ public class AccountService {
         }
     }
 
-//    public void getAllUsers(String userId) {
-//        Call<ArrayList<User>> call = iAccountService.getAllUsers(userId);
+//    public void getUsers(String userId) {
+//        Call<ArrayList<User>> call = iAccountService.getUsers(userId);
 //        call.enqueue(new Callback<ArrayList<User>>() {
 //            @Override
 //            public void onResponseServer(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {

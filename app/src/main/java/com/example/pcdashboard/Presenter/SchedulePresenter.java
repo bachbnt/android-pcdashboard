@@ -3,9 +3,7 @@ package com.example.pcdashboard.Presenter;
 import android.content.Context;
 
 import com.example.pcdashboard.Model.Schedule;
-import com.example.pcdashboard.Services.PostService;
 import com.example.pcdashboard.Services.StudyService;
-import com.example.pcdashboard.View.IPostView;
 import com.example.pcdashboard.View.IScheduleView;
 
 import java.util.ArrayList;
@@ -51,7 +49,7 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
 
     @Override
     public void onRequest() {
-        studyService.getSchedule();
+        studyService.getSchedules();
     }
 
     @Override

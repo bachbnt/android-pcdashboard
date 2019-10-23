@@ -3,6 +3,7 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,31 +133,25 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     }
 
     @Override
-    public void onSuccessDatabase(ArrayList<ClassPost> classPosts) {
-        classAdapter.update(classPosts);
-        classAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onSuccessServer(ArrayList<ClassPost> classPosts) {
+    public void onSuccess(ArrayList<ClassPost> classPosts) {
         classAdapter.update(classPosts);
         classAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(),"Tải thất bại\nVui lòng kiểm tra kết nối",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
+        CustomToast.makeText(getContext(),"Tải bản tin thất bại\nVui lòng kiểm tra kết nối",CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override
     public void onDeleteSuccess() {
-        CustomToast.makeText(getContext(),"Xóa bài thành công",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS);
+        CustomToast.makeText(getContext(),"Xóa bài thành công",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         presenter.onRequestServer(10);
     }
 
     @Override
     public void onDeleteFailure() {
-        CustomToast.makeText(getContext(),"Xóa bài thất bại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
+        CustomToast.makeText(getContext(),"Xóa bài thất bại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override
@@ -173,6 +168,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onRefresh() {
+        Log.i("tag","onRefreshing CLass");
         presenter.onRequestServer(count+=10);
         swipeView.setRefreshing(false);
     }

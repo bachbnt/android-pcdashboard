@@ -49,5 +49,5 @@ public interface IAccountService {
     Call<User> getSelf(@Header("Authorization") String token);
 
 //    @GET("user/all/{userId}")
-//    Call<ArrayList<User>> getAllUsers(@Path("userId") String id);
+//    Call<ArrayList<User>> getUsers(@Path("userId") String id);
 }

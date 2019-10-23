@@ -3,6 +3,7 @@ package com.example.pcdashboard.Services;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ChatMessage;
 import com.example.pcdashboard.Model.User;
@@ -18,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ContactService {
     private static ContactService contactService;
     private static IContactService iContactService;
+    private DatabaseHelper databaseHelper;
     private Context context;
     private ChatListener chatListener;
     private UserListener userListener;
@@ -29,6 +31,7 @@ public class ContactService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iContactService = retrofit.create(IContactService.class);
+        databaseHelper=DatabaseHelper.getInstance(context);
     }
 
     public interface ChatListener {
@@ -66,9 +69,17 @@ public class ContactService {
                 @Override
                 public void onResponse(Call<ArrayList<ChatMessage>> call, Response<ArrayList<ChatMessage>> response) {
                     ArrayList<ChatMessage> chatMessages = response.body();
-                    if (chatMessages != null)
+                    if (chatMessages != null) {
+                        databaseHelper.deleteChatMessages();
+                        if (chatMessages.size() < 20) {
+                            for (int i = 0; i < chatMessages.size(); i++)
+                                databaseHelper.insertChatMessage(chatMessages.get(i));
+                        } else {
+                            for (int i = chatMessages.size() - 20; i < chatMessages.size(); i++)
+                                databaseHelper.insertChatMessage(chatMessages.get(i));
+                        }
                         chatListener.onSuccess(chatMessages);
-                    else chatListener.onFailure();
+                    }else chatListener.onFailure();
                     Log.i("tag","getChatMessages ");
                 }
 
@@ -83,7 +94,7 @@ public class ContactService {
         }
     }
 
-    public void getAllUsers() {
+    public void getUsers() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId=SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<User>> call = iContactService.getAllUsers(token,classId);
@@ -92,15 +103,16 @@ public class ContactService {
                 @Override
                 public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
                     ArrayList<User> users = response.body();
-                    if (users != null)
-                        userListener.onSuccess(users);
+                    if (users != null){
+                        databaseHelper.deleteUserStudents();
+                        for (User user:users)
+                            databaseHelper.insertUserStudent(user);
+                        userListener.onSuccess(users);}
                     else userListener.onFailure();
-                    Log.i("tag","getChatMessages ");
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                    Log.i("tag","getChatMessages "+t.toString());
                     userListener.onFailure();
                 }
             });

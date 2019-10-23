@@ -3,6 +3,7 @@ package com.example.pcdashboard.Services;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
@@ -18,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class StudyService {
     private static StudyService studyService;
     private static IStudyService iStudyService;
+    private DatabaseHelper databaseHelper;
     private Context context;
     private ScheduleListener scheduleListener;
     private ExamListener examListener;
@@ -47,6 +49,7 @@ public class StudyService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iStudyService = retrofit.create(IStudyService.class);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     public void setScheduleListener(ScheduleListener scheduleListener) {
@@ -57,7 +60,7 @@ public class StudyService {
         this.examListener = examListener;
     }
 
-    public void getSchedule() {
+    public void getSchedules() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<Schedule>> call = iStudyService.getSchedule(token, classId);
@@ -77,11 +80,11 @@ public class StudyService {
                 }
             });
         } catch (Exception e) {
-            Log.e("Exception ", "Study Service getSchedule" + e.toString());
+            Log.e("Exception ", "Study Service getSchedules" + e.toString());
         }
     }
 
-    public void getExam() {
+    public void getExams() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<Exam>> call = iStudyService.getExam(token);
         try {
@@ -89,9 +92,12 @@ public class StudyService {
                 @Override
                 public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
                     final ArrayList<Exam> exams = response.body();
-                    if (exams != null)
+                    if (exams != null) {
+                        databaseHelper.deleteExams();
+                        for (Exam exam : exams)
+                            databaseHelper.insertExam(exam);
                         examListener.onSuccess(exams);
-                    else examListener.onFailure();
+                    } else examListener.onFailure();
                 }
 
                 @Override
@@ -100,7 +106,7 @@ public class StudyService {
                 }
             });
         } catch (Exception e) {
-            Log.e("Exception ", "Study Service getExam" + e.toString());
+            Log.e("Exception ", "Study Service getExams" + e.toString());
         }
     }
 }

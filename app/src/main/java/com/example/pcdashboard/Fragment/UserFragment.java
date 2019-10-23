@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
-import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 import static com.example.pcdashboard.Manager.IScreenManager.TAB_CONTACT;
 
 /**
@@ -56,7 +55,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     public void onResume() {
         presenter.setUserView(this);
         presenter.addUserListener();
-        presenter.onRequest();
+        presenter.onRequestDatabase();
         super.onResume();
     }
 

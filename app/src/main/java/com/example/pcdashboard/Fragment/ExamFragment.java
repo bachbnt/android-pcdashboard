@@ -54,7 +54,7 @@ public class ExamFragment extends Fragment implements View.OnClickListener, IExa
     public void onResume() {
         presenter.setExamView(this);
         presenter.addExamListener();
-        presenter.onRequest();
+        presenter.onRequestDatabase();
         super.onResume();
     }
 

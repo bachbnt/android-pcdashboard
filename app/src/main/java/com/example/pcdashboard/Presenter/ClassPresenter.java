@@ -16,9 +16,8 @@ import java.util.ArrayList;
 interface IClassPresenter {
     void onInit();
     void onRequestDatabase();
-    void onResponseDatabase(ArrayList<ClassPost> classPosts);
     void onRequestServer(int number);
-    void onResponseServer(ArrayList<ClassPost> classPosts);
+    void onResponse(ArrayList<ClassPost> classPosts);
     void onDelete(ClassPost classPost);
 }
 public class ClassPresenter implements IClassPresenter, PostService.ClassListener {
@@ -35,7 +34,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
         protected void onPostExecute(ArrayList<ClassPost> classPosts) {
             super.onPostExecute(classPosts);
             if (classPosts != null) {
-                onResponseDatabase(classPosts);
+                onResponse(classPosts);
             }
             onRequestServer(10);
         }
@@ -74,10 +73,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
         classTask.execute();
     }
 
-    @Override
-    public void onResponseDatabase(ArrayList<ClassPost> classPosts) {
-        view.onSuccessDatabase(classPosts);
-    }
+
 
     @Override
     public void onRequestServer(int number) {
@@ -85,8 +81,8 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onResponseServer(ArrayList<ClassPost> classPosts) {
-        view.onSuccessServer(classPosts);
+    public void onResponse(ArrayList<ClassPost> classPosts) {
+        view.onSuccess(classPosts);
     }
 
     @Override
@@ -96,7 +92,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onSuccess(ArrayList<ClassPost> classPosts) {
-        onResponseServer(classPosts);
+        onResponse(classPosts);
     }
 
     @Override

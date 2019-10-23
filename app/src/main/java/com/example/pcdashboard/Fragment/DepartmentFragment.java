@@ -2,6 +2,7 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,25 +77,20 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
 
 
     @Override
-    public void onSuccessDatabase(ArrayList<DepartmentPost> departmentPosts) {
+    public void onSuccess(ArrayList<DepartmentPost> departmentPosts) {
         departmentAdapter.update(departmentPosts);
         departmentAdapter.notifyDataSetChanged();
     }
 
-
-    @Override
-    public void onSuccessServer(ArrayList<DepartmentPost> departmentPosts) {
-        departmentAdapter.update(departmentPosts);
-        departmentAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(), "Tải thất bại\nVui lòng kiểm tra kết nối", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Tải bản tin thất bại\nVui lòng kiểm tra kết nối", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override
     public void onRefresh() {
+        Log.i("tag","onRefreshing Department");
         presenter.onRequestServer(count+=10);
         swipeView.setRefreshing(false);
     }
