@@ -1,8 +1,10 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.pcdashboard.Model.ChatMessage;
+import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.ContactService;
 import com.example.pcdashboard.View.IChatView;
 import com.example.pcdashboard.View.IForgotView;
@@ -10,7 +12,7 @@ import com.example.pcdashboard.View.IForgotView;
 import java.util.ArrayList;
 
 interface IChatPresenter {
-    void onRequest();
+    void onRequest(int number);
 
     void onResponse(ArrayList<ChatMessage> chatMessages);
 }
@@ -46,8 +48,8 @@ public class ChatPresenter implements ContactService.ChatListener,IChatPresenter
     }
 
     @Override
-    public void onRequest() {
-        contactService.getChatMessages();
+    public void onRequest(int number) {
+        contactService.getChatMessages(number);
     }
 
     @Override

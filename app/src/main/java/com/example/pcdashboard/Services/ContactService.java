@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ChatMessage;
+import com.example.pcdashboard.Model.User;
 
 import java.util.ArrayList;
 
@@ -16,9 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ContactService {
     private static ContactService contactService;
-    private static IChatService iChatService;
+    private static IContactService iContactService;
     private Context context;
     private ChatListener chatListener;
+    private UserListener userListener;
 
     private ContactService(Context context) {
         this.context = context;
@@ -26,11 +28,17 @@ public class ContactService {
                 .baseUrl(IWebService.urlServer)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        iChatService = retrofit.create(IChatService.class);
+        iContactService = retrofit.create(IContactService.class);
     }
 
     public interface ChatListener {
         void onSuccess(ArrayList<ChatMessage> chatMessages);
+
+        void onFailure();
+    }
+
+    public interface UserListener {
+        void onSuccess(ArrayList<User> users);
 
         void onFailure();
     }
@@ -45,9 +53,14 @@ public class ContactService {
         this.chatListener = chatListener;
     }
 
-    public void getChatMessages() {
+    public void setUserListener(UserListener userListener) {
+        this.userListener = userListener;
+    }
+
+
+    public void getChatMessages(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        Call<ArrayList<ChatMessage>> call = iChatService.getChatMessages(token);
+        Call<ArrayList<ChatMessage>> call = iContactService.getChatMessages(token,number);
         try {
             call.enqueue(new Callback<ArrayList<ChatMessage>>() {
                 @Override
@@ -70,4 +83,29 @@ public class ContactService {
         }
     }
 
+    public void getAllUsers() {
+        String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
+        String classId=SharedPreferencesUtils.loadSelf(context).getClassId();
+        Call<ArrayList<User>> call = iContactService.getAllUsers(token,classId);
+        try {
+            call.enqueue(new Callback<ArrayList<User>>() {
+                @Override
+                public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                    ArrayList<User> users = response.body();
+                    if (users != null)
+                        userListener.onSuccess(users);
+                    else userListener.onFailure();
+                    Log.i("tag","getChatMessages ");
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                    Log.i("tag","getChatMessages "+t.toString());
+                    userListener.onFailure();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception ", "ContactService getChatMessages" + e.toString());
+        }
+    }
 }

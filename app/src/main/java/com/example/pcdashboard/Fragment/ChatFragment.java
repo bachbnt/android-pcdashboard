@@ -19,7 +19,6 @@ import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ChatMessage;
 import com.example.pcdashboard.Presenter.ChatPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Services.ContactService;
 import com.example.pcdashboard.View.IChatView;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     public void onResume() {
         presenter.setChatView(this);
         presenter.addChatListener();
-        presenter.onRequest();
+        presenter.onRequest(10);
         super.onResume();
     }
 
@@ -71,12 +70,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
         screenManager = ScreenManager.getInstance();
         presenter=new ChatPresenter(getContext());
         messageAdapter = new MessageAdapter(getContext(),new ArrayList<ChatMessage>());
-        ibBack = view.findViewById(R.id.ib_back_contact);
-        recyclerView = view.findViewById(R.id.recycler_view_contact);
+        ibBack = view.findViewById(R.id.ib_back_chat);
+        recyclerView = view.findViewById(R.id.recycler_view_chat);
         recyclerView.setAdapter(messageAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        etInput = view.findViewById(R.id.et_input_contact);
-        ibSend = view.findViewById(R.id.ib_send_contact);
+        etInput = view.findViewById(R.id.et_input_chat);
+        ibSend = view.findViewById(R.id.ib_send_chat);
         ibSend.setOnClickListener(this);
         ibBack.setOnClickListener(this);
     }
@@ -85,11 +84,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ib_back_contact:
+            case R.id.ib_back_chat:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
-            case R.id.ib_send_contact:
+            case R.id.ib_send_chat:
                 break;
         }
     }

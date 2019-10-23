@@ -4,6 +4,7 @@ package com.example.pcdashboard.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,8 @@ public class EditDialog extends DialogFragment implements IEditCommentView, View
 
     @Override
     public void onInit(PostComment postComment) {
+        Log.i("tag","comment commentId "+postComment.getId());
+        Log.i("tag","comment content "+postComment.getContent());
         etInput.setText(postComment.getContent());
     }
 

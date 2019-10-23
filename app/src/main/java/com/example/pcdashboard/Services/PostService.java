@@ -308,6 +308,9 @@ public class PostService {
     }
 
     public void updatePostComment(String commentId, String content) {
+        Log.i("tag","comment commentId "+commentId);
+        Log.i("tag","comment content "+commentId);
+
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.updateComment(token, commentId, content);
         try {
@@ -316,12 +319,13 @@ public class PostService {
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                     if (response.body())
                         editCommentListener.onSuccess();
-                    else editCommentListener.onSuccess();
+                    else editCommentListener.onFailure();
                 }
 
                 @Override
                 public void onFailure(Call<Boolean> call, Throwable t) {
-                    editCommentListener.onSuccess();
+                    Log.i("tag","updatePostComment "+t.toString());
+                    editCommentListener.onFailure();
                 }
             });
         } catch (Exception e) {

@@ -6,13 +6,13 @@
     tools:context=".Fragment.GuideFragment">
 
     <RelativeLayout
-        android:id="@+id/rl_back_contact"
+        android:id="@+id/rl_back_chat"
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_50dp"
         android:background="@drawable/bg_panel">
 
         <ImageButton
-            android:id="@+id/ib_back_contact"
+            android:id="@+id/ib_back_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_10dp"
@@ -21,21 +21,21 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_contact"
+        android:id="@+id/recycler_view_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/view_line_contact"
-        android:layout_below="@id/rl_back_contact" />
+        android:layout_above="@id/view_line_chat"
+        android:layout_below="@id/rl_back_chat" />
 
     <View
-        android:id="@+id/view_line_contact"
+        android:id="@+id/view_line_chat"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/rl_input_contact"
+        android:layout_above="@id/rl_input_chat"
         android:background="@color/colorWhiteSmoke" />
 
     <RelativeLayout
-        android:id="@+id/rl_input_contact"
+        android:id="@+id/rl_input_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -43,12 +43,12 @@
 
 
         <EditText
-            android:id="@+id/et_input_contact"
+            android:id="@+id/et_input_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
-            android:layout_toLeftOf="@id/ib_send_contact"
+            android:layout_toLeftOf="@id/ib_send_chat"
             android:background="@drawable/bg_edittext_login"
             android:hint="@string/write_message"
             android:maxHeight="100dp"
@@ -56,7 +56,7 @@
             android:textSize="@dimen/font_size_16sp" />
 
         <ImageButton
-            android:id="@+id/ib_send_contact"
+            android:id="@+id/ib_send_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

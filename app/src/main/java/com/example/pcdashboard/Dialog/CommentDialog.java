@@ -4,6 +4,7 @@ package com.example.pcdashboard.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -88,12 +89,6 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
         super.onPause();
     }
 
-    @Override
-    public void onStop() {
-        SharedPreferencesUtils.clearPostComment(getContext());
-        super.onStop();
-    }
-
     private void initialize(View view) {
         screenManager=ScreenManager.getInstance();
         gestureDetector=new GestureDetector(this);
@@ -144,6 +139,8 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     @Override
     public void onEdit(PostComment postComment) {
         SharedPreferencesUtils.savePostComment(getContext(),postComment);
+        Log.i("tag","comment commentId "+postComment.getId());
+        Log.i("tag","comment content "+postComment.getContent());
         screenManager.openDialog(EDIT_DIALOG,null);
         dismiss();
     }

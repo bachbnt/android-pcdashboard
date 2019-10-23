@@ -52,6 +52,8 @@ public class EditCommentPresenter implements PostService.EditCommentListener,IEd
 
     @Override
     public void onEdit(String content) {
+        Log.i("tag","comment commentId 1 "+SharedPreferencesUtils.loadPostComment(context).getId());
+        Log.i("tag","comment content 1 "+SharedPreferencesUtils.loadPostComment(context).getContent());
         postService.updatePostComment(SharedPreferencesUtils.loadPostComment(context).getId(), content);
 
     }
