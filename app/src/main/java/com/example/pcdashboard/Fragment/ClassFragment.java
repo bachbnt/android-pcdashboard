@@ -3,9 +3,7 @@ package com.example.pcdashboard.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -49,6 +47,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     private TextView tvInput;
     private SwipeRefreshLayout swipeView;
     private RelativeLayout rlInput;
+    private int count=10;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -68,7 +67,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         presenter.setClassView(this);
         presenter.addClassListener();
         presenter.onInit();
-        presenter.onRequest(10);
+        presenter.onRequestDatabase();
         super.onResume();
     }
 
@@ -133,19 +132,31 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     }
 
     @Override
-    public void onUpdate(ArrayList<ClassPost> classPosts) {
-        classAdapter.updateList(classPosts);
+    public void onSuccessDatabase(ArrayList<ClassPost> classPosts) {
+        classAdapter.update(classPosts);
+        classAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSuccessServer(ArrayList<ClassPost> classPosts) {
+        classAdapter.update(classPosts);
         classAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(),"Tải thất bại\nVui lòng kiểm tra lại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
+        CustomToast.makeText(getContext(),"Tải thất bại\nVui lòng kiểm tra kết nối",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
     }
 
     @Override
-    public void onSuccess() {
-        presenter.onRequest(10);
+    public void onDeleteSuccess() {
+        CustomToast.makeText(getContext(),"Xóa bài thành công",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS);
+        presenter.onRequestServer(10);
+    }
+
+    @Override
+    public void onDeleteFailure() {
+        CustomToast.makeText(getContext(),"Xóa bài thất bại",CustomToast.LENGTH_SHORT,CustomToast.FAILURE);
     }
 
     @Override
@@ -162,7 +173,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onRefresh() {
-        presenter.onRequest(10);
+        presenter.onRequestServer(count+=10);
         swipeView.setRefreshing(false);
     }
 }

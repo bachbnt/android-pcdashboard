@@ -2,6 +2,7 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Model.DepartmentPost;
@@ -26,6 +27,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         @Override
         protected ArrayList<DepartmentPost> doInBackground(String... strings) {
             ArrayList<DepartmentPost> departmentPosts = databaseHelper.loadDepartmentPosts();
+            Log.i("tag","load loadDepartmentPosts "+departmentPosts.size());
             return departmentPosts;
         }
 

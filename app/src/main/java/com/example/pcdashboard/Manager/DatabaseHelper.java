@@ -125,6 +125,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DEPARTMENT, null, null);
     }
+
+    public void deleteClassPosts() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CLASS, null, null);
+    }
     //delete all database
 //    public void deleteDrinkDatabase() {
 //        SQLiteDatabase db = this.getWritableDatabase();

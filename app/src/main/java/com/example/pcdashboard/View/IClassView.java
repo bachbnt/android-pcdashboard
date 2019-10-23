@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 public interface IClassView {
     void onInit(User self);
-    void onUpdate(ArrayList<ClassPost> classPosts);
+    void onSuccessDatabase(ArrayList<ClassPost>classPosts);
+    void onSuccessServer(ArrayList<ClassPost> classPosts);
     void onFailure();
-    void onSuccess();
+    void onDeleteSuccess();
+    void onDeleteFailure();
 }

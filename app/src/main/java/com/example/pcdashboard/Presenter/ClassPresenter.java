@@ -1,7 +1,10 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
+import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.PostService;
@@ -12,18 +15,40 @@ import java.util.ArrayList;
 
 interface IClassPresenter {
     void onInit();
-    void onRequest(int number);
-    void onResponse(ArrayList<ClassPost> classPosts);
+    void onRequestDatabase();
+    void onResponseDatabase(ArrayList<ClassPost> classPosts);
+    void onRequestServer(int number);
+    void onResponseServer(ArrayList<ClassPost> classPosts);
     void onDelete(ClassPost classPost);
 }
 public class ClassPresenter implements IClassPresenter, PostService.ClassListener {
+    class ClassTask extends AsyncTask<String, Void, ArrayList<ClassPost>> {
+
+        @Override
+        protected ArrayList<ClassPost> doInBackground(String... strings) {
+            ArrayList<ClassPost> classPosts = databaseHelper.loadClassPosts();
+            Log.i("tag","loadClassPosts "+classPosts.size());
+            return classPosts;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<ClassPost> classPosts) {
+            super.onPostExecute(classPosts);
+            if (classPosts != null) {
+                onResponseDatabase(classPosts);
+            }
+            onRequestServer(10);
+        }
+    }
     private Context context;
     private IClassView view;
     private PostService postService;
+    private DatabaseHelper databaseHelper;
 
     public ClassPresenter(Context context) {
         this.context = context;
         postService=PostService.getInstance(context);
+        databaseHelper=DatabaseHelper.getInstance(context);
     }
     public void setClassView(IClassView iClassView){
         this.view=iClassView;
@@ -44,13 +69,24 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onRequest(int number) {
+    public void onRequestDatabase() {
+        ClassTask classTask=new ClassTask();
+        classTask.execute();
+    }
+
+    @Override
+    public void onResponseDatabase(ArrayList<ClassPost> classPosts) {
+        view.onSuccessDatabase(classPosts);
+    }
+
+    @Override
+    public void onRequestServer(int number) {
         postService.getClassPosts(number);
     }
 
     @Override
-    public void onResponse(ArrayList<ClassPost> classPosts) {
-        view.onUpdate(classPosts);
+    public void onResponseServer(ArrayList<ClassPost> classPosts) {
+        view.onSuccessServer(classPosts);
     }
 
     @Override
@@ -59,17 +95,22 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
     }
 
     @Override
-    public void onGetSuccess(ArrayList<ClassPost> classPosts) {
-        onResponse(classPosts);
+    public void onSuccess(ArrayList<ClassPost> classPosts) {
+        onResponseServer(classPosts);
     }
 
     @Override
     public void onDeleteSuccess() {
-        view.onSuccess();
+        view.onDeleteSuccess();
     }
 
     @Override
     public void onFailure() {
         view.onFailure();
+    }
+
+    @Override
+    public void onDeleteFailure() {
+        view.onDeleteFailure();
     }
 }

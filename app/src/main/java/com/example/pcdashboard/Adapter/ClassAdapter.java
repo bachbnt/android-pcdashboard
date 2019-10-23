@@ -30,7 +30,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         this.listener = listener;
     }
 
-    public void updateList(ArrayList<ClassPost> classPosts) {
+    public void update(ArrayList<ClassPost> classPosts) {
         this.classPosts = classPosts;
     }
 

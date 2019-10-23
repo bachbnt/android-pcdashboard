@@ -36,11 +36,13 @@ public class PostService {
 
 
     public interface ClassListener {
-        void onGetSuccess(ArrayList<ClassPost> classPosts);
+        void onSuccess(ArrayList<ClassPost> classPosts);
 
         void onDeleteSuccess();
 
         void onFailure();
+
+        void onDeleteFailure();
     }
 
     public interface DepartmentListener {
@@ -155,9 +157,17 @@ public class PostService {
                 @Override
                 public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
                     ArrayList<ClassPost> classPosts = response.body();
-                    if (classPosts != null)
-                        classListener.onGetSuccess(classPosts);
-                    else classListener.onFailure();
+                    if (classPosts != null) {
+                        databaseHelper.deleteClassPosts();
+                        if (classPosts.size() < 10) {
+                            for (int i = 0; i < classPosts.size(); i++)
+                                databaseHelper.insertClassPost(classPosts.get(i));
+                        } else {
+                            for (int i = classPosts.size() - 10; i < classPosts.size(); i++)
+                                databaseHelper.insertClassPost(classPosts.get(i));
+                        }
+                        classListener.onSuccess(classPosts);
+                    }else classListener.onFailure();
                 }
 
                 @Override
@@ -281,12 +291,12 @@ public class PostService {
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                     if (response.body())
                         classListener.onDeleteSuccess();
-                    else classListener.onFailure();
+                    else classListener.onDeleteFailure();
                 }
 
                 @Override
                 public void onFailure(Call<Boolean> call, Throwable t) {
-                    classListener.onFailure();
+                    classListener.onDeleteFailure();
                 }
             });
         } catch (Exception e) {
