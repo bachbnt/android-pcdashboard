@@ -26,6 +26,7 @@ import java.util.ArrayList;
  */
 public class DepartmentFragment extends Fragment implements IDeparmentView, SwipeRefreshLayout.OnRefreshListener {
     private ScreenManager screenManager;
+    private int count=10;
     private DepartmentPresenter presenter;
     private RecyclerView recyclerView;
     private DepartmentAdapter departmentAdapter;
@@ -50,7 +51,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
     public void onResume() {
         presenter.setDepartmentView(this);
         presenter.addDepartmentListener();
-        presenter.onRequest(10);
+        presenter.onRequestDatabase();
         super.onResume();
     }
 
@@ -75,19 +76,26 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
 
 
     @Override
-    public void onUpdate(ArrayList<DepartmentPost> departmentPosts) {
-        departmentAdapter.updateList(departmentPosts);
+    public void onSuccessDatabase(ArrayList<DepartmentPost> departmentPosts) {
+        departmentAdapter.update(departmentPosts);
+        departmentAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onSuccessServer(ArrayList<DepartmentPost> departmentPosts) {
+        departmentAdapter.update(departmentPosts);
         departmentAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(), "Tải thất bại\nVui lòng kiểm tra lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Tải thất bại\nVui lòng kiểm tra kết nối", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
     }
 
     @Override
     public void onRefresh() {
-        presenter.onRequest(10);
+        presenter.onRequestServer(count+=10);
         swipeView.setRefreshing(false);
     }
 }

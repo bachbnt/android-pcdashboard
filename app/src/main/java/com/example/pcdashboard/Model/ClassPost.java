@@ -9,6 +9,9 @@ public class ClassPost {
     private String userName;
     private String userAvatar;
 
+    public ClassPost() {
+    }
+
     public ClassPost(String id, String time, String content, String image, String userId, String userName, String userAvatar) {
         this.id = id;
         this.time = time;

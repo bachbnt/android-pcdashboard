@@ -7,6 +7,9 @@ public class DepartmentPost {
     private String content;
     private String image;
 
+    public DepartmentPost() {
+    }
+
     public DepartmentPost(String id, String title, String time, String content, String image) {
         this.id = id;
         this.title = title;

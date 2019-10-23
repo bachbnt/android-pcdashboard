@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
@@ -24,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostService {
     private static PostService postService;
     private static IPostService iPostService;
+    private DatabaseHelper databaseHelper;
     private Context context;
     private ClassListener classListener;
     private DepartmentListener departmentListener;
@@ -80,6 +82,7 @@ public class PostService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iPostService = retrofit.create(IPostService.class);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     public void setClassListener(ClassListener classListener) {
@@ -120,10 +123,17 @@ public class PostService {
                 @Override
                 public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
                     ArrayList<DepartmentPost> departmentPosts = response.body();
-
-                    if (departmentPosts != null)
+                    if (departmentPosts != null) {
+                        databaseHelper.deleteDepartmentPosts();
+                        if (departmentPosts.size() < 10) {
+                            for (int i = 0; i < departmentPosts.size(); i++)
+                                databaseHelper.insertDepartmentPost(departmentPosts.get(i));
+                        } else {
+                            for (int i = departmentPosts.size() - 10; i < departmentPosts.size(); i++)
+                                databaseHelper.insertDepartmentPost(departmentPosts.get(i));
+                        }
                         departmentListener.onSuccess(departmentPosts);
-                    else departmentListener.onFailure();
+                    } else departmentListener.onFailure();
                 }
 
                 @Override
@@ -308,8 +318,8 @@ public class PostService {
     }
 
     public void updatePostComment(String commentId, String content) {
-        Log.i("tag","comment commentId "+commentId);
-        Log.i("tag","comment content "+commentId);
+        Log.i("tag", "comment commentId " + commentId);
+        Log.i("tag", "comment content " + commentId);
 
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.updateComment(token, commentId, content);
@@ -324,7 +334,7 @@ public class PostService {
 
                 @Override
                 public void onFailure(Call<Boolean> call, Throwable t) {
-                    Log.i("tag","updatePostComment "+t.toString());
+                    Log.i("tag", "updatePostComment " + t.toString());
                     editCommentListener.onFailure();
                 }
             });

@@ -26,7 +26,7 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
         this.departmentPosts = departmentPosts;
     }
 
-    public void updateList(ArrayList<DepartmentPost> departmentPosts) {
+    public void update(ArrayList<DepartmentPost> departmentPosts) {
         this.departmentPosts = departmentPosts;
     }
 
