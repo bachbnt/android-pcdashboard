@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_CONTACT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,7 +86,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_chat:
-                SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
+                SharedPreferencesUtils.saveTabId(getContext(), TAB_CONTACT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_send_chat:

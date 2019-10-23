@@ -33,7 +33,7 @@
             android:layout_marginRight="@dimen/space_15dp"
             android:layout_toRightOf="@id/cv_avatar_user_item"
             android:text="@string/app_name"
-            android:textColor="@color/colorHot"
+            android:textColor="@color/colorSlateGray"
             android:textSize="@dimen/font_size_20sp"
             android:textStyle="bold"/>
 
