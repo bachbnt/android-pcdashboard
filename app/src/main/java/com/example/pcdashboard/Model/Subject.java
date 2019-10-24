@@ -12,7 +12,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String day, String name, String time, String teacher) {
+    public Subject(String name, String time, String teacher,String day) {
         this.name = name;
         this.time = time;
         this.teacher = teacher;

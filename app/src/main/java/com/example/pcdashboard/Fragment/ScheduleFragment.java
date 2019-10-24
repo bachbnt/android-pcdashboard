@@ -98,7 +98,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onSuccess(ArrayList<Schedule> schedules) {
-        Log.i("tag","onSuccessSchedule "+schedules.size());
         scheduleAdapter.update(schedules);
         scheduleAdapter.notifyDataSetChanged();
     }

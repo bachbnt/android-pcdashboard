@@ -78,7 +78,6 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
 
     @Override
     public void onResponse(ArrayList<Schedule> schedules) {
-        Log.i("tag","onSuccessSchedule database"+databaseHelper.loadSchedules().size());
         view.onSuccess(schedules);
     }
 }

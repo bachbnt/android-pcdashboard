@@ -69,11 +69,11 @@ public class StudyService {
                 @Override
                 public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
                     final ArrayList<Schedule> schedules = response.body();
-                    Log.i("tag","onSuccessSchedule onResponse "+databaseHelper.loadSchedules().size());
                     if (schedules != null) {
                         databaseHelper.deleteSchedules();
                         for (Schedule schedule : schedules)
-                            databaseHelper.insertSchedule(schedule);
+                            if (schedule.getSubjects() != null)
+                                databaseHelper.insertSchedule(schedule);
                         scheduleListener.onSuccess(schedules);
                     } else scheduleListener.onFailure();
                 }

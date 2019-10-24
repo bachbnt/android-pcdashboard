@@ -23,27 +23,27 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "DATABASE";
-    public static final String TABLE_DEPARTMENT = "DEPARTMENT";
-    public static final String TABLE_CLASS = "CLASS";
-    public static final String TABLE_CHAT = "CHAT";
-    public static final String TABLE_STUDENT = "STUDENT";
-    public static final String TABLE_TEACHER = "TEACHER";
-    public static final String TABLE_EXAM = "EXAM";
-    public static final String TABLE_SCHEDULE = "SCHEDULE";
+    private static final String TABLE_DEPARTMENT = "DEPARTMENT";
+    private static final String TABLE_CLASS = "CLASS";
+    private static final String TABLE_CHAT = "CHAT";
+    private static final String TABLE_STUDENT = "STUDENT";
+    private static final String TABLE_TEACHER = "TEACHER";
+    private static final String TABLE_EXAM = "EXAM";
+    private static final String TABLE_SCHEDULE = "SCHEDULE";
 
-    public static final String COLUMN_POSTID = "POSTID";
-    public static final String COLUMN_TITLE = "TITLE";
-    public static final String COLUMN_TIME = "TIME";
-    public static final String COLUMN_CONTENT = "CONTENT";
-    public static final String COLUMN_IMAGE = "IMAGE";
-    public static final String COLUMN_AVATAR = "AVATAR";
-    public static final String COLUMN_TEACHER = "TEACHER";
-    public static final String COLUMN_DAY = "DAY";
-    public static final String COLUMN_NAME = "NAME";
-    public static final String COLUMN_USERID = "USERID";
-    public static final String COLUMN_CLASSID = "CLASSID";
-    public static final String COLUMN_EMAIL = "EMAIL";
-    public static final String COLUMN_PHONE = "PHONE";
+    private static final String COLUMN_POSTID = "POSTID";
+    private static final String COLUMN_TITLE = "TITLE";
+    private static final String COLUMN_TIME = "TIME";
+    private static final String COLUMN_CONTENT = "CONTENT";
+    private static final String COLUMN_IMAGE = "IMAGE";
+    private static final String COLUMN_AVATAR = "AVATAR";
+    private static final String COLUMN_TEACHER = "TEACHER";
+    private static final String COLUMN_DAY = "DAY";
+    private static final String COLUMN_NAME = "NAME";
+    private static final String COLUMN_USERID = "USERID";
+    private static final String COLUMN_CLASSID = "CLASSID";
+    private static final String COLUMN_EMAIL = "EMAIL";
+    private static final String COLUMN_PHONE = "PHONE";
     private static final String COLUMN_PLACE = "PLACE";
     private static final String COLUMN_SCORE = "SCORE";
 
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CHAT);
         String CREATE_TABLE_STUDENT = "CREATE TABLE " + TABLE_STUDENT + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_CLASSID + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_STUDENT);
-        String CREATE_TABLE_SCHEDULE = "CREATE TABLE " + TABLE_SCHEDULE + "(" + COLUMN_DAY + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_TEACHER + " TEXT" + ")";
+        String CREATE_TABLE_SCHEDULE = "CREATE TABLE " + TABLE_SCHEDULE + "(" + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_TEACHER + " TEXT," + COLUMN_DAY + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_SCHEDULE);
         String CREATE_TABLE_EXAM = "CREATE TABLE " + TABLE_EXAM + "(" + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_PLACE + " TEXT," + COLUMN_SCORE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_EXAM);
@@ -232,45 +232,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertSchedule(Schedule schedule) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        Log.i("tag","onSuccess insert "+schedule.getSubjects().size());
-        for (int i=0;i<schedule.getSubjects().size();i++) {
-            values.put(COLUMN_DAY, schedule.getDay());
-            values.put(COLUMN_NAME, schedule.getSubjects().get(i).getName());
-            values.put(COLUMN_TIME, schedule.getSubjects().get(i).getTime());
-            values.put(COLUMN_TEACHER, schedule.getSubjects().get(i).getTeacher());
-            Log.i("tag","onSuccess insert subject "+schedule.getSubjects().get(i).getName());
-            //Anh vẫn chưa hiểu, mấy đứa khóa sau chú ý bug này nhé :))
+        for (Subject subject:schedule.getSubjects()) {
+            values.put(COLUMN_NAME, subject.getName());
+            values.put(COLUMN_TIME, subject.getTime());
+            values.put(COLUMN_TEACHER, subject.getTeacher());
+            values.put(COLUMN_DAY, subject.getDay());
+            db.insert(TABLE_SCHEDULE, null, values);
         }
-        db.insert(TABLE_CLASS, null, values);
-        Log.i("tag","onSuccess insert schedule "+schedule.getDay());
     }
 
     public ArrayList<Schedule> loadSchedules() {
         List<String> days = Arrays.asList("Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy");
         String query = "Select * FROM " + TABLE_SCHEDULE;
-        ArrayList<Subject> subjects = new ArrayList<>();
-        ArrayList<Schedule> schedules = new ArrayList<>();
+        ArrayList<Subject> allSubjects = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            Subject subject = new Subject(cursor.getString(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getString(3));
-            Log.i("tag","cursor.getString(1) "+cursor.getString(1));
-            subjects.add(subject);
+            Subject subject = new Subject();
+            subject.setName(cursor.getString(0));
+            subject.setTime(cursor.getString(1));
+            subject.setTeacher(cursor.getString(2));
+            subject.setDay(cursor.getString(3));
+            allSubjects.add(subject);
         }
-        for (String s : days) {
-            ArrayList<Subject> subjects1 = new ArrayList<>();
-            Log.i("tag","onSuccessSchedule string ");
-            for (Subject subject : subjects) {
-                Log.i("tag","onSuccessSchedule subject "+subject.getDay());
-                if (subject.getDay().equals(s)) {
-                    subjects1.add(subject);
-                    Log.i("tag","onSuccessSchedule subject");
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        for (String day : days) {
+            ArrayList<Subject> currentSubjects = new ArrayList<>();
+            for (Subject subject : allSubjects) {
+                if (subject.getDay().equals(day)) {
+                    currentSubjects.add(subject);
                 }
             }
-            schedules.add(new Schedule(s, subjects1));
+            schedules.add(new Schedule(day, currentSubjects));
         }
-        Log.i("tag","onSuccessSchedule load "+schedules.size());
         cursor.close();
         return schedules;
     }
