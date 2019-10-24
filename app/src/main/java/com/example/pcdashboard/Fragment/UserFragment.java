@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     public void onSuccess(ArrayList<User> users) {
         userAdapter.update(users);
         userAdapter.notifyDataSetChanged();
+        Log.i("tag","onSuccess "+users.size());
     }
 
     @Override

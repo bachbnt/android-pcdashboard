@@ -7,11 +7,16 @@ public class Subject {
     private String name;
     private String time;
     private String teacher;
+    private String day;
 
-    public Subject(String name, String time, String teacher) {
+    public Subject() {
+    }
+
+    public Subject(String day, String name, String time, String teacher) {
         this.name = name;
         this.time = time;
         this.teacher = teacher;
+        this.day=day;
     }
 
     public String getName() {
@@ -36,5 +41,13 @@ public class Subject {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 }

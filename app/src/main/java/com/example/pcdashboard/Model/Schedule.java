@@ -6,6 +6,9 @@ public class Schedule {
     private String day;
     private ArrayList<Subject> subjects;
 
+    public Schedule() {
+    }
+
     public Schedule(String day, ArrayList<Subject> subjects) {
         this.day = day;
         this.subjects = subjects;

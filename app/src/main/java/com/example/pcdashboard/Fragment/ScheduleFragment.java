@@ -17,7 +17,6 @@ import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Schedule;
-import com.example.pcdashboard.Model.Subject;
 import com.example.pcdashboard.Presenter.SchedulePresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IScheduleView;
@@ -56,7 +55,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
     public void onResume() {
         presenter.setScheduleView(this);
         presenter.addScheduleListener();
-        presenter.onRequest();
+        presenter.onRequestDatabase();
         super.onResume();
     }
 
@@ -90,7 +89,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_reload_schedule:
-                presenter.onRequest();
+                presenter.onRequestServer();
                 break;
             case R.id.ib_save_schedule:
                 break;
@@ -99,6 +98,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onSuccess(ArrayList<Schedule> schedules) {
+        Log.i("tag","onSuccessSchedule "+schedules.size());
         scheduleAdapter.update(schedules);
         scheduleAdapter.notifyDataSetChanged();
     }

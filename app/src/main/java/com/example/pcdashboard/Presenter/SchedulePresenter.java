@@ -1,7 +1,11 @@
 package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
+import com.example.pcdashboard.Manager.DatabaseHelper;
+import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
 import com.example.pcdashboard.Services.StudyService;
 import com.example.pcdashboard.View.IScheduleView;
@@ -9,17 +13,36 @@ import com.example.pcdashboard.View.IScheduleView;
 import java.util.ArrayList;
 
 interface ISchedulePresenter{
-    void onInit();
-    void onRequest();
+    void onRequestDatabase();
+    void onRequestServer();
     void onResponse(ArrayList<Schedule> schedules);
 }
 public class SchedulePresenter implements StudyService.ScheduleListener,ISchedulePresenter {
+    class ScheduleTask extends AsyncTask<String, Void, ArrayList<Schedule>> {
+
+        @Override
+        protected ArrayList<Schedule> doInBackground(String... strings) {
+            ArrayList<Schedule> schedules = databaseHelper.loadSchedules();
+            return schedules;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Schedule> schedules) {
+            super.onPostExecute(schedules);
+            if (schedules != null) {
+                onResponse(schedules);
+            }
+            onRequestServer();
+        }
+    }
     private Context context;
     private IScheduleView view;
     private StudyService studyService;
+    private DatabaseHelper databaseHelper;
     public SchedulePresenter(Context context) {
         this.context = context;
         studyService=StudyService.getInstance(context);
+        databaseHelper=DatabaseHelper.getInstance(context);
     }
     public void setScheduleView(IScheduleView iScheduleView){
         this.view=iScheduleView;
@@ -43,17 +66,19 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
     }
 
     @Override
-    public void onInit() {
-
+    public void onRequestDatabase() {
+        ScheduleTask scheduleTask=new ScheduleTask();
+        scheduleTask.execute();
     }
 
     @Override
-    public void onRequest() {
+    public void onRequestServer() {
         studyService.getSchedules();
     }
 
     @Override
     public void onResponse(ArrayList<Schedule> schedules) {
+        Log.i("tag","onSuccessSchedule database"+databaseHelper.loadSchedules().size());
         view.onSuccess(schedules);
     }
 }

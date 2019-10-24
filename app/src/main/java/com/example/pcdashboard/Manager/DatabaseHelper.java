@@ -11,9 +11,14 @@ import com.example.pcdashboard.Model.ChatMessage;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Model.Exam;
+import com.example.pcdashboard.Model.Schedule;
+import com.example.pcdashboard.Model.Subject;
 import com.example.pcdashboard.Model.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -32,12 +37,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CONTENT = "CONTENT";
     public static final String COLUMN_IMAGE = "IMAGE";
     public static final String COLUMN_AVATAR = "AVATAR";
+    public static final String COLUMN_TEACHER = "TEACHER";
+    public static final String COLUMN_DAY = "DAY";
     public static final String COLUMN_NAME = "NAME";
     public static final String COLUMN_USERID = "USERID";
-    public static final String COLUMN_EMAIL="EMAIL";
-    public static final String COLUMN_PHONE="PHONE";
-    private static final String COLUMN_PLACE="PLACE";
-    private static final String COLUMN_SCORE="SCORE";
+    public static final String COLUMN_CLASSID = "CLASSID";
+    public static final String COLUMN_EMAIL = "EMAIL";
+    public static final String COLUMN_PHONE = "PHONE";
+    private static final String COLUMN_PLACE = "PLACE";
+    private static final String COLUMN_SCORE = "SCORE";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,8 +67,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CLASS);
         String CREATE_TABLE_CHAT = "CREATE TABLE " + TABLE_CHAT + "(" + COLUMN_CONTENT + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_CHAT);
-        String CREATE_TABLE_STUDENT = "CREATE TABLE " + TABLE_STUDENT + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
+        String CREATE_TABLE_STUDENT = "CREATE TABLE " + TABLE_STUDENT + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_CLASSID + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_STUDENT);
+        String CREATE_TABLE_SCHEDULE = "CREATE TABLE " + TABLE_SCHEDULE + "(" + COLUMN_DAY + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_TEACHER + " TEXT" + ")";
+        db.execSQL(CREATE_TABLE_SCHEDULE);
         String CREATE_TABLE_EXAM = "CREATE TABLE " + TABLE_EXAM + "(" + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_PLACE + " TEXT," + COLUMN_SCORE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_EXAM);
     }
@@ -71,6 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHAT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXAM);
         onCreate(db);
     }
@@ -86,6 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TIME, departmentPost.getTime());
         db.insert(TABLE_DEPARTMENT, null, values);
     }
+
     public ArrayList<DepartmentPost> loadDepartmentPosts() {
         String query = "Select * FROM " + TABLE_DEPARTMENT;
         ArrayList<DepartmentPost> departmentPosts = new ArrayList<>();
@@ -187,6 +199,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USERID, user.getId());
         values.put(COLUMN_NAME, user.getName());
         values.put(COLUMN_AVATAR, user.getAvatar());
+        values.put(COLUMN_CLASSID, user.getClassId());
         values.put(COLUMN_EMAIL, user.getEmail());
         values.put(COLUMN_PHONE, user.getPhone());
         db.insert(TABLE_STUDENT, null, values);
@@ -202,8 +215,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setId(cursor.getString(0));
             user.setName(cursor.getString(1));
             user.setAvatar(cursor.getString(2));
-            user.setEmail(cursor.getString(3));
-            user.setPhone(cursor.getString(4));
+            user.setClassId(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
             users.add(user);
         }
         cursor.close();
@@ -213,6 +227,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteUserStudents() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_STUDENT, null, null);
+    }
+
+    public void insertSchedule(Schedule schedule) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        Log.i("tag","onSuccess insert "+schedule.getSubjects().size());
+        for (int i=0;i<schedule.getSubjects().size();i++) {
+            values.put(COLUMN_DAY, schedule.getDay());
+            values.put(COLUMN_NAME, schedule.getSubjects().get(i).getName());
+            values.put(COLUMN_TIME, schedule.getSubjects().get(i).getTime());
+            values.put(COLUMN_TEACHER, schedule.getSubjects().get(i).getTeacher());
+            Log.i("tag","onSuccess insert subject "+schedule.getSubjects().get(i).getName());
+            //Anh vẫn chưa hiểu, mấy đứa khóa sau chú ý bug này nhé :))
+        }
+        db.insert(TABLE_CLASS, null, values);
+        Log.i("tag","onSuccess insert schedule "+schedule.getDay());
+    }
+
+    public ArrayList<Schedule> loadSchedules() {
+        List<String> days = Arrays.asList("Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy");
+        String query = "Select * FROM " + TABLE_SCHEDULE;
+        ArrayList<Subject> subjects = new ArrayList<>();
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            Subject subject = new Subject(cursor.getString(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getString(3));
+            Log.i("tag","cursor.getString(1) "+cursor.getString(1));
+            subjects.add(subject);
+        }
+        for (String s : days) {
+            ArrayList<Subject> subjects1 = new ArrayList<>();
+            Log.i("tag","onSuccessSchedule string ");
+            for (Subject subject : subjects) {
+                Log.i("tag","onSuccessSchedule subject "+subject.getDay());
+                if (subject.getDay().equals(s)) {
+                    subjects1.add(subject);
+                    Log.i("tag","onSuccessSchedule subject");
+                }
+            }
+            schedules.add(new Schedule(s, subjects1));
+        }
+        Log.i("tag","onSuccessSchedule load "+schedules.size());
+        cursor.close();
+        return schedules;
+    }
+
+    public void deleteSchedules() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_SCHEDULE, null, null);
     }
 
     public void insertExam(Exam exam) {
