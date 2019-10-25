@@ -100,6 +100,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
             case R.id.ib_save_schedule:
                 presenter.onCustomDatabase(schedules);
                 CustomToast.makeText(getContext(), "Đã lưu", CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                presenter.onRequestDatabase();
                 break;
         }
     }
