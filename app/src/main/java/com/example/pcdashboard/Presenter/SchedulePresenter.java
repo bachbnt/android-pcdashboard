@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
 import com.example.pcdashboard.Services.StudyService;
@@ -16,6 +17,8 @@ interface ISchedulePresenter{
     void onRequestDatabase();
     void onRequestServer();
     void onResponse(ArrayList<Schedule> schedules);
+    void onCustomDatabase(ArrayList<Schedule> schedules);
+    void changeFirstRequest();
 }
 public class SchedulePresenter implements StudyService.ScheduleListener,ISchedulePresenter {
     class ScheduleTask extends AsyncTask<String, Void, ArrayList<Schedule>> {
@@ -32,7 +35,6 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
             if (schedules != null) {
                 onResponse(schedules);
             }
-            onRequestServer();
         }
     }
     private Context context;
@@ -79,5 +81,17 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
     @Override
     public void onResponse(ArrayList<Schedule> schedules) {
         view.onSuccess(schedules);
+    }
+
+    @Override
+    public void onCustomDatabase(ArrayList<Schedule> schedules) {
+        databaseHelper.deleteSchedules();
+        for(Schedule schedule:schedules)
+            databaseHelper.insertSchedule(schedule);
+    }
+
+    @Override
+    public void changeFirstRequest() {
+        SharedPreferencesUtils.saveFirstRequest(context,false);
     }
 }

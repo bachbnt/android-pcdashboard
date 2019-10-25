@@ -48,6 +48,19 @@ public class SharedPreferencesUtils {
         return status;
     }
 
+    public static void saveFirstRequest(Context context, boolean first){
+        SharedPreferences preferences=context.getSharedPreferences("first",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putBoolean("first",first);
+        editor.commit();
+    }
+
+    public static boolean loadFirstRequest(Context context){
+        SharedPreferences preferences=context.getSharedPreferences("first",Context.MODE_PRIVATE);
+        boolean first=preferences.getBoolean("first",true);
+        return first;
+    }
+
     public static void saveTabId(Context context,int tabId){
         SharedPreferences preferences=context.getSharedPreferences("tab",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();

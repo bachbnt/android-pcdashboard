@@ -12,6 +12,8 @@ interface IAccountPresenter {
     void onLogout();
 
     void changeStatus(boolean status);
+
+    void changeFirstSchedule();
 }
 
 public class AccountPresenter implements IAccountPresenter {
@@ -41,6 +43,11 @@ public class AccountPresenter implements IAccountPresenter {
 
     @Override
     public void changeStatus(boolean status) {
-        SharedPreferencesUtils.saveStatusLogin(context, !status);
+        SharedPreferencesUtils.saveStatusLogin(context, status);
+    }
+
+    @Override
+    public void changeFirstSchedule() {
+        SharedPreferencesUtils.saveFirstRequest(context,true);
     }
 }

@@ -91,7 +91,7 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     @Override
     public void onLoginSuccess() {
         screenManager.closeDialog(LOADING_DIALOG);
-        presenter.changeStatus(SharedPreferencesUtils.loadStatusLogin(getContext()));
+        presenter.changeStatus(true);
         screenManager.openDashboardScreen(DASHBOARD_ACTIVITY);
     }
 

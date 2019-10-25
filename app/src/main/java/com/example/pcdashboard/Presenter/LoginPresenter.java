@@ -58,7 +58,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
 
     @Override
     public void changeStatus(boolean status) {
-        SharedPreferencesUtils.saveStatusLogin(context,!status);
+        SharedPreferencesUtils.saveStatusLogin(context,status);
     }
 
 

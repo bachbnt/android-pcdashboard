@@ -23,6 +23,7 @@
 
 
             <ImageButton
+                android:id="@+id/ib_edit_subject_item"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -47,7 +48,6 @@
             android:drawableLeft="@drawable/ic_subject_hot_24dp"
             android:drawablePadding="@dimen/space_10dp"
             android:hint="Môn học"
-            android:inputType="textNoSuggestions"
             android:paddingLeft="@dimen/space_10dp"
             android:paddingTop="@dimen/space_5dp"
             android:paddingRight="@dimen/space_10dp"
@@ -66,7 +66,6 @@
             android:drawableLeft="@drawable/ic_time_hot_24dp"
             android:drawablePadding="@dimen/space_10dp"
             android:hint="Thời gian"
-            android:inputType="textNoSuggestions"
             android:paddingLeft="@dimen/space_10dp"
             android:paddingTop="@dimen/space_5dp"
             android:paddingRight="@dimen/space_10dp"
@@ -84,7 +83,6 @@
             android:drawableLeft="@drawable/ic_user_hot_24dp"
             android:drawablePadding="@dimen/space_10dp"
             android:hint="Giảng viên"
-            android:inputType="textNoSuggestions"
             android:paddingLeft="@dimen/space_10dp"
             android:paddingTop="@dimen/space_5dp"
             android:paddingRight="@dimen/space_10dp"

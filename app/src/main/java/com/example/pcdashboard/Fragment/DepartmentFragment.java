@@ -91,7 +91,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
     @Override
     public void onRefresh() {
         Log.i("tag","onRefreshing Department");
-        presenter.onRequestServer(count+=10);
+        presenter.onRequestServer(10);
         swipeView.setRefreshing(false);
     }
 }

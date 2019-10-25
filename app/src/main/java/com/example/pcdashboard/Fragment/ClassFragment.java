@@ -168,8 +168,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
 
     @Override
     public void onRefresh() {
-        Log.i("tag","onRefreshing CLass");
-        presenter.onRequestServer(count+=10);
+        presenter.onRequestServer(10);
         swipeView.setRefreshing(false);
     }
 }

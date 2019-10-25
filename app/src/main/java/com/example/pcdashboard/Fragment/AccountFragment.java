@@ -205,6 +205,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
             case R.id.tv_logout_account:
                 presenter.onLogout();
                 presenter.changeStatus(SharedPreferencesUtils.loadStatusLogin(getContext()));
+                presenter.changeFirstSchedule();
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }

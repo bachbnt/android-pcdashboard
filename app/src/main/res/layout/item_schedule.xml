@@ -6,10 +6,9 @@
     android:layout_margin="@dimen/space_5dp"
     app:cardCornerRadius="@dimen/space_10dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/colorFog">
 
 
@@ -17,7 +16,7 @@
             android:id="@+id/tv_day_schedule_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_add_hot_32dp"
+            android:layout_toLeftOf="@id/ib_add_schedule_item"
             android:gravity="center"
             android:paddingLeft="@dimen/space_5dp"
             android:paddingTop="@dimen/space_10dp"
@@ -29,10 +28,22 @@
             android:textSize="@dimen/font_size_24sp"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/ib_add_schedule_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_day_schedule_item"
+            android:layout_alignBottom="@id/tv_day_schedule_item"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="@dimen/space_10dp"
+            android:src="@drawable/ic_add_hot_32dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_subjects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_day_schedule_item"
             android:layout_marginBottom="@dimen/space_5dp" />
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
