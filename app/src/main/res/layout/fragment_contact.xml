@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/iv_chat_contact"
+        android:id="@+id/iv_one_contact"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/space_10dp"
@@ -18,7 +18,7 @@
         android:src="@drawable/chat_room" />
 
     <ImageView
-        android:id="@+id/iv_student_contact"
+        android:id="@+id/iv_two_contact"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/space_10dp"
@@ -27,7 +27,7 @@
         android:src="@drawable/class_members" />
 
     <ImageView
-        android:id="@+id/iv_teacher_contact"
+        android:id="@+id/iv_three_contact"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/space_10dp"

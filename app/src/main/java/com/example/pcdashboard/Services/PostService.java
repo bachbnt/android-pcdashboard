@@ -1,7 +1,6 @@
 package com.example.pcdashboard.Services;
 
 import android.content.Context;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
@@ -120,11 +119,11 @@ public class PostService {
     public void getDepartmentPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<DepartmentPost>> call = iPostService.getAllDepartmentPosts(token, number);
-        try {
-            call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
-                @Override
-                public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
-                    ArrayList<DepartmentPost> departmentPosts = response.body();
+        call.enqueue(new Callback<ArrayList<DepartmentPost>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DepartmentPost>> call, Response<ArrayList<DepartmentPost>> response) {
+                ArrayList<DepartmentPost> departmentPosts = response.body();
+                if (departmentListener != null)
                     if (departmentPosts != null) {
                         databaseHelper.deleteDepartmentPosts();
                         if (departmentPosts.size() < 10) {
@@ -136,27 +135,26 @@ public class PostService {
                         }
                         departmentListener.onSuccess(departmentPosts);
                     } else departmentListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ArrayList<DepartmentPost>> call, Throwable t) {
+                if (departmentListener != null)
                     departmentListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service getDepartmentPosts" + e.toString());
-        }
+            }
+        });
+
     }
 
     public void getClassPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId, number);
-        try {
-            call.enqueue(new Callback<ArrayList<ClassPost>>() {
-                @Override
-                public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
-                    ArrayList<ClassPost> classPosts = response.body();
+        call.enqueue(new Callback<ArrayList<ClassPost>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ClassPost>> call, Response<ArrayList<ClassPost>> response) {
+                ArrayList<ClassPost> classPosts = response.body();
+                if (classListener != null)
                     if (classPosts != null) {
                         databaseHelper.deleteClassPosts();
                         if (classPosts.size() < 10) {
@@ -167,40 +165,37 @@ public class PostService {
                                 databaseHelper.insertClassPost(classPosts.get(i));
                         }
                         classListener.onSuccess(classPosts);
-                    }else classListener.onFailure();
-                }
+                    } else classListener.onFailure();
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ArrayList<ClassPost>> call, Throwable t) {
+                if (classListener != null)
                     classListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service getClassPosts" + e.toString());
-        }
+            }
+        });
     }
 
     public void getPostComments(String postId) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<PostComment>> call = iPostService.getAllComments(token, postId);
-        try {
-            call.enqueue(new Callback<ArrayList<PostComment>>() {
-                @Override
-                public void onResponse(Call<ArrayList<PostComment>> call, Response<ArrayList<PostComment>> response) {
-                    ArrayList<PostComment> postComments = response.body();
+
+        call.enqueue(new Callback<ArrayList<PostComment>>() {
+            @Override
+            public void onResponse(Call<ArrayList<PostComment>> call, Response<ArrayList<PostComment>> response) {
+                ArrayList<PostComment> postComments = response.body();
+                if (commentListener != null)
                     if (postComments != null)
                         commentListener.onGetSuccess(postComments);
                     else commentListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<PostComment>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ArrayList<PostComment>> call, Throwable t) {
+                if (commentListener != null)
                     commentListener.onFailure();
-                }
-            });
-        } catch (NullPointerException e) {
-            Log.e("Exception ", "Post Service getPostComments" + e.toString());
-        }
+            }
+        });
     }
 
     public void createClassPost(String content, String image) {
@@ -213,41 +208,42 @@ public class PostService {
             part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         }
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        try {
-            if (part == null) {
-                Call<Boolean> call = iPostService.createPost(token, content);
-                call.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+        if (part == null) {
+            Call<Boolean> call = iPostService.createPost(token, content);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (postListener != null)
                         if (response.body())
                             postListener.onSuccess();
                         else postListener.onFailure();
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    if (postListener != null)
                         postListener.onFailure();
-                    }
-                });
-            } else {
-                Call<Boolean> call = iPostService.createPostImg(token, content, part);
-                call.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                }
+            });
+        } else {
+            Call<Boolean> call = iPostService.createPostImg(token, content, part);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (postListener != null)
                         if (response.body())
                             postListener.onSuccess();
                         else postListener.onFailure();
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    if (postListener != null)
                         postListener.onFailure();
-                    }
-                });
-            }
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service createClassPost" + e.toString());
+                }
+            });
         }
+
     }
 
     private String getMimeType(String url) {
@@ -263,115 +259,106 @@ public class PostService {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String image = SharedPreferencesUtils.loadClassPost(context).getImage();
         Call<Boolean> call = iPostService.updatePost(token, postId, content, image);
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (editPostListener != null)
                     if (response.body())
                         editPostListener.onSuccess();
                     else editPostListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (editPostListener != null)
                     editPostListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service updateClassPost" + e.toString());
-        }
+            }
+        });
     }
 
     public void deleteClassPost(String postId) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.deletePost(token, postId);
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (classListener != null)
                     if (response.body())
                         classListener.onDeleteSuccess();
                     else classListener.onDeleteFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (classListener != null)
                     classListener.onDeleteFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service deleteClassPost" + e.toString());
-        }
+            }
+        });
+
     }
 
     public void createPostComment(String content) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String postId = SharedPreferencesUtils.loadClassPost(context).getId();
         Call<Boolean> call = iPostService.createComment(token, postId, content);
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (commentListener != null)
                     if (response.body())
                         commentListener.onSuccess();
                     else commentListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (commentListener != null)
                     commentListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service createPostComment" + e.toString());
-        }
+            }
+        });
+
     }
 
     public void updatePostComment(String commentId, String content) {
-        Log.i("tag", "comment commentId " + commentId);
-        Log.i("tag", "comment content " + commentId);
-
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.updateComment(token, commentId, content);
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (editCommentListener != null)
                     if (response.body())
                         editCommentListener.onSuccess();
                     else editCommentListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-                    Log.i("tag", "updatePostComment " + t.toString());
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (editCommentListener != null)
                     editCommentListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service updatePostComment" + e.toString());
-        }
+            }
+        });
     }
 
     public void deletePostComment(String commentId) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iPostService.deleteComment(token, commentId);
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (commentListener != null)
                     if (response.body())
                         commentListener.onSuccess();
                     else commentListener.onSuccess();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (commentListener != null)
                     commentListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Post Service deletePostComment" + e.toString());
-        }
+            }
+        });
     }
 }

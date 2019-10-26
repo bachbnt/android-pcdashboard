@@ -82,7 +82,6 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     public void onSuccess(ArrayList<User> users) {
         userAdapter.update(users);
         userAdapter.notifyDataSetChanged();
-        Log.i("tag","onSuccess "+users.size());
     }
 
     @Override

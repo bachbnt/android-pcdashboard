@@ -64,11 +64,11 @@ public class StudyService {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<Schedule>> call = iStudyService.getSchedule(token, classId);
-        try {
-            call.enqueue(new Callback<ArrayList<Schedule>>() {
-                @Override
-                public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
-                    final ArrayList<Schedule> schedules = response.body();
+        call.enqueue(new Callback<ArrayList<Schedule>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Schedule>> call, Response<ArrayList<Schedule>> response) {
+                final ArrayList<Schedule> schedules = response.body();
+                if (scheduleListener != null)
                     if (schedules != null) {
                         databaseHelper.deleteSchedules();
                         for (Schedule schedule : schedules)
@@ -76,26 +76,24 @@ public class StudyService {
                                 databaseHelper.insertSchedule(schedule);
                         scheduleListener.onSuccess(schedules);
                     } else scheduleListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
-                    scheduleListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Study Service getSchedules" + e.toString());
-        }
+            @Override
+            public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
+                if(scheduleListener!=null)
+                scheduleListener.onFailure();
+            }
+        });
     }
 
     public void getExams() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<Exam>> call = iStudyService.getExam(token);
-        try {
             call.enqueue(new Callback<ArrayList<Exam>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
                     final ArrayList<Exam> exams = response.body();
+                    if(examListener!=null)
                     if (exams != null) {
                         databaseHelper.deleteExams();
                         for (Exam exam : exams)
@@ -106,11 +104,9 @@ public class StudyService {
 
                 @Override
                 public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
+                    if(examListener!=null)
                     examListener.onFailure();
                 }
             });
-        } catch (Exception e) {
-            Log.e("Exception ", "Study Service getExams" + e.toString());
-        }
     }
 }

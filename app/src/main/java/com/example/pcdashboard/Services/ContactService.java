@@ -1,7 +1,6 @@
 package com.example.pcdashboard.Services;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
@@ -31,7 +30,7 @@ public class ContactService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iContactService = retrofit.create(IContactService.class);
-        databaseHelper=DatabaseHelper.getInstance(context);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     public interface ChatListener {
@@ -63,12 +62,12 @@ public class ContactService {
 
     public void getChatMessages(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        Call<ArrayList<ChatMessage>> call = iContactService.getChatMessages(token,number);
-        try {
-            call.enqueue(new Callback<ArrayList<ChatMessage>>() {
-                @Override
-                public void onResponse(Call<ArrayList<ChatMessage>> call, Response<ArrayList<ChatMessage>> response) {
-                    ArrayList<ChatMessage> chatMessages = response.body();
+        Call<ArrayList<ChatMessage>> call = iContactService.getChatMessages(token, number);
+        call.enqueue(new Callback<ArrayList<ChatMessage>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ChatMessage>> call, Response<ArrayList<ChatMessage>> response) {
+                ArrayList<ChatMessage> chatMessages = response.body();
+                if (chatListener != null)
                     if (chatMessages != null) {
                         databaseHelper.deleteChatMessages();
                         if (chatMessages.size() < 20) {
@@ -79,45 +78,40 @@ public class ContactService {
                                 databaseHelper.insertChatMessage(chatMessages.get(i));
                         }
                         chatListener.onSuccess(chatMessages);
-                    }else chatListener.onFailure();
-                    Log.i("tag","getChatMessages ");
-                }
+                    } else chatListener.onFailure();
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<ChatMessage>> call, Throwable t) {
-                    Log.i("tag","getChatMessages "+t.toString());
+            @Override
+            public void onFailure(Call<ArrayList<ChatMessage>> call, Throwable t) {
+                if (chatListener != null)
                     chatListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "ContactService getChatMessages" + e.toString());
-        }
+            }
+        });
     }
 
     public void getUsers() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        String classId=SharedPreferencesUtils.loadSelf(context).getClassId();
-        Call<ArrayList<User>> call = iContactService.getAllUsers(token,classId);
-        try {
-            call.enqueue(new Callback<ArrayList<User>>() {
-                @Override
-                public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                    ArrayList<User> users = response.body();
-                    if (users != null){
+        String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
+        Call<ArrayList<User>> call = iContactService.getAllUsers(token, classId);
+        call.enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                ArrayList<User> users = response.body();
+                if (userListener != null)
+                    if (users != null) {
                         databaseHelper.deleteUserStudents();
-                        for (User user:users)
+                        for (User user : users)
                             databaseHelper.insertUserStudent(user);
-                        userListener.onSuccess(users);}
-                    else userListener.onFailure();
-                }
+                        userListener.onSuccess(users);
+                    } else userListener.onFailure();
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                if (userListener != null)
                     userListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "ContactService getChatMessages" + e.toString());
-        }
+            }
+        });
+
     }
 }

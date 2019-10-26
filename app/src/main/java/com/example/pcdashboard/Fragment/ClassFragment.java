@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Adapter.ClassAdapter;
 import com.example.pcdashboard.Manager.CustomToast;
+import com.example.pcdashboard.Manager.EndlessRecyclerViewScrollListener;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.ClassPost;
 import com.example.pcdashboard.Model.User;
@@ -48,7 +49,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     private TextView tvInput;
     private SwipeRefreshLayout swipeView;
     private RelativeLayout rlInput;
-    private int count=10;
+    private int numberOfPosts=10;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -90,7 +91,8 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         rlInput=view.findViewById(R.id.rl_input_class);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
         swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
@@ -106,6 +108,12 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
                     rlInput.startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top));
                 }
                 super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+        recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onRequestServer(numberOfPosts+=10);
             }
         });
     }

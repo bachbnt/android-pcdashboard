@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pcdashboard.Adapter.DepartmentAdapter;
 import com.example.pcdashboard.Manager.CustomToast;
+import com.example.pcdashboard.Manager.EndlessRecyclerViewScrollListener;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Presenter.DepartmentPresenter;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
  */
 public class DepartmentFragment extends Fragment implements IDeparmentView, SwipeRefreshLayout.OnRefreshListener {
     private ScreenManager screenManager;
-    private int count=10;
+    private int numberOfPosts=10;
     private DepartmentPresenter presenter;
     private RecyclerView recyclerView;
     private DepartmentAdapter departmentAdapter;
@@ -71,8 +73,16 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
         swipeView.setOnRefreshListener(this);
         departmentAdapter = new DepartmentAdapter(getContext(),new ArrayList<DepartmentPost>());
         recyclerView.setAdapter(departmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
+
+        recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onRequestServer(numberOfPosts+=10);
+            }
+        });
     }
 
 

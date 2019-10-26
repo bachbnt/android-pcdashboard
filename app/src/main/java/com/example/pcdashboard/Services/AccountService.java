@@ -1,7 +1,6 @@
 package com.example.pcdashboard.Services;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Token;
@@ -88,132 +87,104 @@ public class AccountService {
 
     public void getToken(String userId, String password) {
         Call<Token> call = iAccountService.getToken(new TokenRequest(userId, password));
-        try {
-            call.enqueue(new Callback<Token>() {
-                @Override
-                public void onResponse(Call<Token> call, Response<Token> response) {
-                    Token token = response.body();
+        call.enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                Token token = response.body();
+                if (loginListener != null)
                     if (token != null)
                         loginListener.onTokenSuccess(token);
                     else loginListener.onLoginFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Token> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                if (loginListener != null)
                     loginListener.onLoginFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Account Service getToken" + e.toString());
-        }
+            }
+        });
     }
 
     public void forgotPassword(String userId) {
         Call<String> call = iAccountService.forgetPassword(userId);
-        try {
-            call.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    String email = response.body();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String email = response.body();
+                if (forgotListener != null)
                     if (email != null) {
                         SharedPreferencesUtils.saveEmailForgot(context, email);
                         forgotListener.onSuccess();
                     } else forgotListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                if (forgotListener != null)
                     forgotListener.onFailure();
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception ", "Account Service forgotPassword" + e.toString());
-        }
+            }
+        });
     }
 
     public void changePassword(String oldPassword, String newPassword) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<Boolean> call = iAccountService.changePassword(token, new PasswordRequest(SharedPreferencesUtils.loadSelf(context).getId(), oldPassword, newPassword));
-        try {
-            call.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (passwordListener != null)
                     if (response.body())
                         passwordListener.onSuccess();
                     else passwordListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if (passwordListener != null)
                     passwordListener.onFailure();
-                }
-            });
-        } catch (NullPointerException e) {
-            Log.e("Exception ", "Account Service changePassword" + e.toString());
-        }
-
+            }
+        });
     }
 
     public void updateInfo(String email, String phone) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<User> call = iAccountService.updateInfo(token, new InfoRequest(SharedPreferencesUtils.loadSelf(context).getId(), email, phone));
-        try {
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    User self = response.body();
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User self = response.body();
+                if (infoListener != null)
                     if (self != null)
                         infoListener.onSuccess(self);
                     else infoListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                if (infoListener != null)
                     infoListener.onFailure();
-                }
-            });
-        } catch (NullPointerException e) {
-            Log.e("Exception ", "Account Service updateInfo" + e.toString());
-        }
-
+            }
+        });
     }
 
     public void getSelf() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<User> call = iAccountService.getSelf(token);
-        try {
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    User self = response.body();
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User self = response.body();
+                if (loginListener != null)
                     if (self != null)
                         loginListener.onSelfSuccess(self);
                     else loginListener.onLoginFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Log.i("tag", "getSelf onFailure " + t.toString());
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                if (loginListener != null)
                     loginListener.onLoginFailure();
-                }
-            });
-        }catch (Exception e){
-            Log.e("Exception ", "Account Service getSelf" + e.toString());
-        }
+            }
+        });
     }
-
-//    public void getUsers(String userId) {
-//        Call<ArrayList<User>> call = iAccountService.getUsers(userId);
-//        call.enqueue(new Callback<ArrayList<User>>() {
-//            @Override
-//            public void onResponseServer(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-//                ArrayList<User> users = response.body();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 }

@@ -20,9 +20,9 @@ import static com.example.pcdashboard.Manager.IScreenManager.USER_FRAGMENT;
  */
 public class ContactFragment extends Fragment implements View.OnClickListener{
     private ScreenManager screenManager;
-    private ImageView ivChat;
-    private ImageView ivStudent;
-    private ImageView ivTeacher;
+    private ImageView ivOne;
+    private ImageView ivTwo;
+    private ImageView ivThree;
 
 
     public ContactFragment() {
@@ -41,24 +41,24 @@ public class ContactFragment extends Fragment implements View.OnClickListener{
 
     private void initialize(View view) {
         screenManager=ScreenManager.getInstance();
-        ivChat = view.findViewById(R.id.iv_chat_contact);
-        ivStudent = view.findViewById(R.id.iv_student_contact);
-        ivTeacher = view.findViewById(R.id.iv_teacher_contact);
-        ivChat.setOnClickListener(this);
-        ivStudent.setOnClickListener(this);
-        ivTeacher.setOnClickListener(this);
+        ivOne = view.findViewById(R.id.iv_one_contact);
+        ivTwo = view.findViewById(R.id.iv_two_contact);
+        ivThree = view.findViewById(R.id.iv_three_contact);
+        ivOne.setOnClickListener(this);
+        ivTwo.setOnClickListener(this);
+        ivThree.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.iv_chat_contact:
+            case R.id.iv_one_contact:
                 screenManager.openFeatureScreen(CHAT_FRAGMENT);
                 break;
-            case R.id.iv_student_contact:
+            case R.id.iv_two_contact:
                 screenManager.openFeatureScreen(USER_FRAGMENT);
                 break;
-            case R.id.iv_teacher_contact:
+            case R.id.iv_three_contact:
                 break;
         }
     }

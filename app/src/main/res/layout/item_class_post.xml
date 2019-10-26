@@ -31,9 +31,10 @@
 
         <ImageView
             android:id="@+id/iv_image_class_item"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_content_class_item" />
+            android:layout_below="@id/tv_content_class_item"
+            android:src="@drawable/logo"/>
 
         <TextView
             android:id="@+id/tv_content_class_item"
@@ -71,7 +72,7 @@
             android:id="@+id/view_line_class_item"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/space_10dp"
+            android:layout_marginTop="@dimen/space_5dp"
             android:layout_marginLeft="@dimen/space_10dp"
             android:layout_marginRight="@dimen/space_10dp"
             android:layout_below="@id/iv_image_class_item"
