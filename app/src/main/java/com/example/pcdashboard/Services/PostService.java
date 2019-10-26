@@ -125,12 +125,9 @@ public class PostService {
                 ArrayList<DepartmentPost> departmentPosts = response.body();
                 if (departmentListener != null)
                     if (departmentPosts != null) {
-                        databaseHelper.deleteDepartmentPosts();
                         if (departmentPosts.size() < 10) {
+                            databaseHelper.deleteDepartmentPosts();
                             for (int i = 0; i < departmentPosts.size(); i++)
-                                databaseHelper.insertDepartmentPost(departmentPosts.get(i));
-                        } else {
-                            for (int i = departmentPosts.size() - 10; i < departmentPosts.size(); i++)
                                 databaseHelper.insertDepartmentPost(departmentPosts.get(i));
                         }
                         departmentListener.onSuccess(departmentPosts);
@@ -156,12 +153,9 @@ public class PostService {
                 ArrayList<ClassPost> classPosts = response.body();
                 if (classListener != null)
                     if (classPosts != null) {
-                        databaseHelper.deleteClassPosts();
                         if (classPosts.size() < 10) {
+                            databaseHelper.deleteClassPosts();
                             for (int i = 0; i < classPosts.size(); i++)
-                                databaseHelper.insertClassPost(classPosts.get(i));
-                        } else {
-                            for (int i = classPosts.size() - 10; i < classPosts.size(); i++)
                                 databaseHelper.insertClassPost(classPosts.get(i));
                         }
                         classListener.onSuccess(classPosts);
