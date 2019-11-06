@@ -12,16 +12,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/space_20dp"
-        android:paddingTop="@dimen/space_30dp"
         android:paddingRight="@dimen/space_20dp"
         android:paddingBottom="@dimen/space_30dp">
+        <TextView
+            android:id="@+id/tv_title_edit_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Chỉnh sửa bình luận"
+            android:padding="@dimen/font_size_10sp"
+            android:textSize="@dimen/font_size_16sp"/>
 
 
         <EditText
             android:id="@+id/et_input_edit_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="100dp"
             android:background="@drawable/bg_edittext_login"
+            android:layout_marginTop="@dimen/space_30dp"
+            android:layout_below="@id/tv_title_edit_dialog"
             android:paddingLeft="@dimen/space_20dp"
             android:paddingTop="@dimen/space_10dp"
             android:paddingRight="@dimen/space_20dp"
@@ -50,6 +60,6 @@
             android:text="@string/cancel"
             android:textColor="@color/colorAccent"
             android:textAllCaps="false"
-            android:background="@drawable/bg_button_cancel" />
+            android:background="@drawable/bg_edittext_login" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

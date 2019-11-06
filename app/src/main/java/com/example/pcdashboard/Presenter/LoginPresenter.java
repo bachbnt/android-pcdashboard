@@ -12,7 +12,7 @@ interface ILoginPresenter {
     void onCheck(String userId,String password);
     void onRequest(String userId,String password);
     void onResponse();
-    void changeStatus(boolean status);
+    void changeLoginStatus(boolean status);
 }
 public class LoginPresenter implements ILoginPresenter, AccountService.LoginListener {
     private Context context;
@@ -57,7 +57,7 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
     }
 
     @Override
-    public void changeStatus(boolean status) {
+    public void changeLoginStatus(boolean status) {
         SharedPreferencesUtils.saveStatusLogin(context,status);
     }
 
