@@ -2,11 +2,9 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
-import com.example.pcdashboard.Model.Exam;
 import com.example.pcdashboard.Model.Schedule;
 import com.example.pcdashboard.Services.StudyService;
 import com.example.pcdashboard.View.IScheduleView;
@@ -92,6 +90,6 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
 
     @Override
     public void changeFirstRequest() {
-        SharedPreferencesUtils.saveFirstRequest(context,false);
+        SharedPreferencesUtils.saveFirstRequestSchedule(context,false);
     }
 }

@@ -48,14 +48,14 @@ public class SharedPreferencesUtils {
         return status;
     }
 
-    public static void saveFirstRequest(Context context, boolean first){
+    public static void saveFirstRequestSchedule(Context context, boolean first){
         SharedPreferences preferences=context.getSharedPreferences("first",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         editor.putBoolean("first",first);
         editor.commit();
     }
 
-    public static boolean loadFirstRequest(Context context){
+    public static boolean loadFirstRequestSchedule(Context context){
         SharedPreferences preferences=context.getSharedPreferences("first",Context.MODE_PRIVATE);
         boolean first=preferences.getBoolean("first",true);
         return first;

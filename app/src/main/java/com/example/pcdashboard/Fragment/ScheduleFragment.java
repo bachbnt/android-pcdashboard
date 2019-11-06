@@ -57,7 +57,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
     public void onResume() {
         presenter.setScheduleView(this);
         presenter.addScheduleListener();
-        if (SharedPreferencesUtils.loadFirstRequest(getContext())) {
+        if (SharedPreferencesUtils.loadFirstRequestSchedule(getContext())) {
             presenter.onRequestServer();
             presenter.changeFirstRequest();
         } else presenter.onRequestDatabase();
