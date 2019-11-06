@@ -59,6 +59,8 @@
             android:layout_marginTop="2dp"
             android:text="@string/content_test"
             android:textColor="@android:color/black"
+            android:autoLink="all"
+            android:linksClickable="true"
             android:textSize="@dimen/font_size_14sp" />
     </LinearLayout>
 

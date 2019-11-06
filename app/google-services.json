@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "729190300872",
+    "firebase_url": "https://pc-dashboard.firebaseio.com",
+    "project_id": "pc-dashboard",
+    "storage_bucket": "pc-dashboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729190300872:android:bf15ea82a37e0a43e479fd",
+        "android_client_info": {
+          "package_name": "com.example.pcdashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729190300872-6u2g1q4hm090gunm72343e0a53dsts4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu5Ep5VPGRICTJ_JNlu8TMROkA-pJEZIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729190300872-6u2g1q4hm090gunm72343e0a53dsts4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

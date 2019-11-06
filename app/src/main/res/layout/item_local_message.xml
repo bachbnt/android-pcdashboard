@@ -15,6 +15,8 @@
         android:layout_marginRight="@dimen/space_10dp"
         android:background="@drawable/bg_local_message"
         android:padding="@dimen/space_10dp"
+        android:autoLink="all"
+        android:linksClickable="true"
         android:gravity="center_vertical"
         android:text="@string/content_test"
         android:textColor="@android:color/white"

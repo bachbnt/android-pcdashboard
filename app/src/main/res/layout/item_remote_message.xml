@@ -23,6 +23,8 @@
         android:layout_below="@id/tv_name_remote_msg"
         android:layout_marginLeft="@dimen/space_10dp"
         android:layout_marginRight="100dp"
+        android:autoLink="all"
+        android:linksClickable="true"
         android:layout_toRightOf="@id/cv_avatar_remote_msg"
         android:gravity="center_vertical"
         android:background="@drawable/bg_remote_message"

@@ -3,6 +3,7 @@ package com.example.pcdashboard.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -31,12 +32,25 @@ import com.example.pcdashboard.Fragment.UserFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Request.TokenRequest;
+import com.example.pcdashboard.Services.IAccountService;
+import com.example.pcdashboard.Services.IWebService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
+    private IWebService iWebService;
     private ScreenManager screenManager;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -160,5 +174,4 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     public void closeDialog(String dialogName) {
         //NULL
     }
-
 }

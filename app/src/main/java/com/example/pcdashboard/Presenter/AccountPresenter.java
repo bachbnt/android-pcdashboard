@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.pcdashboard.Manager.DatabaseHelper;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Services.WebService;
 import com.example.pcdashboard.View.IAccountView;
 
 interface IAccountPresenter {
@@ -17,17 +18,21 @@ interface IAccountPresenter {
     void deleteDatabase();
 
     void clearSharedPreferences();
+
+    void blockNotifications();
 }
 
 public class AccountPresenter implements IAccountPresenter {
     private Context context;
     private IAccountView view;
     private DatabaseHelper databaseHelper;
+    private WebService webService;
 
 
     public AccountPresenter(Context context) {
         this.context = context;
         databaseHelper = DatabaseHelper.getInstance(context);
+        webService=WebService.getInstance(context);
     }
 
     public void setAccountView(IAccountView iAccountView) {
@@ -69,5 +74,10 @@ public class AccountPresenter implements IAccountPresenter {
         SharedPreferencesUtils.clearPostComment(context);
         SharedPreferencesUtils.clearClassPost(context);
         SharedPreferencesUtils.clearEmailForgot(context);
+    }
+
+    @Override
+    public void blockNotifications() {
+        webService.sendFCMToken("");
     }
 }

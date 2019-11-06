@@ -28,6 +28,19 @@ public class SharedPreferencesUtils {
         return token;
     }
 
+    public static void saveFCMToken(Context context, String fcmToken) {
+        SharedPreferences preferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("fcmToken", fcmToken);
+        editor.commit();
+    }
+
+    public static String loadFCMToken(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE);
+        String fcmToken=preferences.getString("fcmToken",null);
+        return fcmToken;
+    }
+
     public static void clearToken(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

@@ -49,7 +49,6 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     private TextView tvGuide, tvFeedback, tvDeveloper;
     private TextView tvInfo, tvPassword;
 
-
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -211,6 +210,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 presenter.changeFirstRequestSchedule();
                 presenter.deleteDatabase();
                 presenter.clearSharedPreferences();
+                presenter.blockNotifications();
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }
