@@ -114,7 +114,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
                 break;
             case R.id.ib_back_post:
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
                 break;
             case R.id.ib_photo_post:
                 pickFromGallery();
@@ -140,7 +140,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         tvPost.setEnabled(true);
         SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
-        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
     }
 
     @Override

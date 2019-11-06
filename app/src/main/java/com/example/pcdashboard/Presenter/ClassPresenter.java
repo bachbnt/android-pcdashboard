@@ -82,6 +82,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onResponse(ArrayList<ClassPost> classPosts) {
+        if(view!=null)
         view.onSuccess(classPosts);
     }
 

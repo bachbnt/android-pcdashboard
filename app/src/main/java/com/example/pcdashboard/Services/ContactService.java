@@ -89,9 +89,8 @@ public class ContactService {
         });
     }
 
-    public void getUsers() {
+    public void getUsers(final String classId) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<User>> call = iContactService.getAllUsers(token, classId);
         call.enqueue(new Callback<ArrayList<User>>() {
             @Override
@@ -99,9 +98,15 @@ public class ContactService {
                 ArrayList<User> users = response.body();
                 if (userListener != null)
                     if (users != null) {
-                        databaseHelper.deleteUserStudents();
-                        for (User user : users)
-                            databaseHelper.insertUserStudent(user);
+                        if (classId.equals("GV")) {
+                            databaseHelper.deleteUserTeachers();
+                            for (User user : users)
+                                databaseHelper.insertUserTeacher(user);
+                        } else {
+                            databaseHelper.deleteUserStudents();
+                            for (User user : users)
+                                databaseHelper.insertUserStudent(user);
+                        }
                         userListener.onSuccess(users);
                     } else userListener.onFailure();
             }

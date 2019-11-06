@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements IScreenManager {
     }
 
     @Override
-    public void openFeatureScreen(String screenName) {
+    public void openFeatureScreen(String screenName,String classId) {
         //NULL
     }
 

@@ -12,12 +12,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 
 import static com.example.pcdashboard.Manager.IScreenManager.ACCOUNT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.CLASS_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.CONTACT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.DEPARTMENT_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.SELECT_CLASS_FRAGMENT;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private final int NUM_PAGES = 4;
@@ -63,7 +65,12 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return screenManager.openDashboardScreen(DEPARTMENT_FRAGMENT);
             case 1:
-                return screenManager.openDashboardScreen(CLASS_FRAGMENT);
+                if (SharedPreferencesUtils.loadSelf(context) != null) {
+                    if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER"))
+                        return screenManager.openDashboardScreen(SELECT_CLASS_FRAGMENT);
+                    else
+                        return screenManager.openDashboardScreen(CLASS_FRAGMENT);
+                } else return screenManager.openDashboardScreen(CLASS_FRAGMENT);
             case 2:
                 return screenManager.openDashboardScreen(CONTACT_FRAGMENT);
             case 3:

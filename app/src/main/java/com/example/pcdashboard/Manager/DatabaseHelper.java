@@ -69,6 +69,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CHAT);
         String CREATE_TABLE_STUDENT = "CREATE TABLE " + TABLE_STUDENT + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_CLASSID + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_STUDENT);
+        String CREATE_TABLE_TEACHER = "CREATE TABLE " + TABLE_TEACHER + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_CLASSID + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
+        db.execSQL(CREATE_TABLE_TEACHER);
         String CREATE_TABLE_SCHEDULE = "CREATE TABLE " + TABLE_SCHEDULE + "(" + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_TEACHER + " TEXT," + COLUMN_DAY + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_SCHEDULE);
         String CREATE_TABLE_EXAM = "CREATE TABLE " + TABLE_EXAM + "(" + COLUMN_NAME + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_PLACE + " TEXT," + COLUMN_SCORE + " TEXT" + ")";
@@ -81,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHAT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXAM);
         onCreate(db);
@@ -205,8 +208,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_STUDENT, null, values);
     }
 
+    public void insertUserTeacher(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERID, user.getId());
+        values.put(COLUMN_NAME, user.getName());
+        values.put(COLUMN_AVATAR, user.getAvatar());
+        values.put(COLUMN_CLASSID, user.getClassId());
+        values.put(COLUMN_EMAIL, user.getEmail());
+        values.put(COLUMN_PHONE, user.getPhone());
+        db.insert(TABLE_TEACHER, null, values);
+    }
     public ArrayList<User> loadUserStudents() {
         String query = "Select * FROM " + TABLE_STUDENT;
+        ArrayList<User> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            User user = new User();
+            user.setId(cursor.getString(0));
+            user.setName(cursor.getString(1));
+            user.setAvatar(cursor.getString(2));
+            user.setClassId(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
+            users.add(user);
+        }
+        cursor.close();
+        return users;
+    }
+
+    public ArrayList<User> loadUserTeachers() {
+        String query = "Select * FROM " + TABLE_TEACHER;
         ArrayList<User> users = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -227,6 +260,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteUserStudents() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_STUDENT, null, null);
+    }
+
+    public void deleteUserTeachers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_TEACHER, null, null);
     }
 
     public void insertSchedule(Schedule schedule) {

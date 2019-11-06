@@ -54,6 +54,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
     public void onResume() {
         presenter.setDepartmentView(this);
         presenter.addDepartmentListener();
+        Log.i("tag","setDepartmentView ");
         presenter.onRequestDatabase();
         super.onResume();
     }

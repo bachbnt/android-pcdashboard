@@ -49,7 +49,7 @@ public class DeveloperFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()){
             case R.id.ib_back_developer:
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
                 break;
         }
     }

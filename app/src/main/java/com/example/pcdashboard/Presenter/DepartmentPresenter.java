@@ -25,7 +25,6 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
         @Override
         protected ArrayList<DepartmentPost> doInBackground(String... strings) {
             ArrayList<DepartmentPost> departmentPosts = databaseHelper.loadDepartmentPosts();
-            Log.i("tag","load loadDepartmentPosts "+departmentPosts.size());
             return departmentPosts;
         }
 
@@ -76,6 +75,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
 
     @Override
     public void onResponse(ArrayList<DepartmentPost> departmentPosts) {
+        if(view!=null)
         view.onSuccess(departmentPosts);
     }
 

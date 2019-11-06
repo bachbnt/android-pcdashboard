@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
 
 import static com.example.pcdashboard.Manager.IScreenManager.CHAT_FRAGMENT;
@@ -18,7 +19,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.USER_FRAGMENT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends Fragment implements View.OnClickListener{
+public class ContactFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private ImageView ivOne;
     private ImageView ivTwo;
@@ -40,7 +41,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initialize(View view) {
-        screenManager=ScreenManager.getInstance();
+        screenManager = ScreenManager.getInstance();
         ivOne = view.findViewById(R.id.iv_one_contact);
         ivTwo = view.findViewById(R.id.iv_two_contact);
         ivThree = view.findViewById(R.id.iv_three_contact);
@@ -51,14 +52,24 @@ public class ContactFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_one_contact:
-                screenManager.openFeatureScreen(CHAT_FRAGMENT);
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+                    screenManager.openFeatureScreen(USER_FRAGMENT, SharedPreferencesUtils.loadSelf(getContext()).getClassId());
+                else
+                    screenManager.openFeatureScreen(CHAT_FRAGMENT, null);
                 break;
             case R.id.iv_two_contact:
-                screenManager.openFeatureScreen(USER_FRAGMENT);
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+                    screenManager.openFeatureScreen(USER_FRAGMENT, "N3");
+                else
+                    screenManager.openFeatureScreen(USER_FRAGMENT, SharedPreferencesUtils.loadSelf(getContext()).getClassId());
                 break;
             case R.id.iv_three_contact:
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+                    screenManager.openFeatureScreen(USER_FRAGMENT, "N4");
+                else
+                    screenManager.openFeatureScreen(USER_FRAGMENT, "GV");
                 break;
         }
     }

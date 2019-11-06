@@ -26,6 +26,7 @@ import com.example.pcdashboard.Fragment.InfoFragment;
 import com.example.pcdashboard.Fragment.PasswordFragment;
 import com.example.pcdashboard.Fragment.PostFragment;
 import com.example.pcdashboard.Fragment.ScheduleFragment;
+import com.example.pcdashboard.Fragment.SelectClassFragment;
 import com.example.pcdashboard.Fragment.UserFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
@@ -53,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     private void initialize() {
         screenManager = ScreenManager.getInstance();
         screenManager.setIScreenManager(this);
-        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
         EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
     }
 
@@ -77,6 +78,9 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case CLASS_FRAGMENT:
                 fragment = new ClassFragment();
                 break;
+            case SELECT_CLASS_FRAGMENT:
+                fragment=new SelectClassFragment();
+                break;
             case CONTACT_FRAGMENT:
                 fragment = new ContactFragment();
                 break;
@@ -88,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     }
 
     @Override
-    public void openFeatureScreen(String screenName) {
+    public void openFeatureScreen(String screenName,String classId) {
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         switch (screenName) {
@@ -129,7 +133,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ChatFragment()).commit();
                 break;
             case USER_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new UserFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new UserFragment(classId)).commit();
                 break;
         }
     }

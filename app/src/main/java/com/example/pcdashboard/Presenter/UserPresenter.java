@@ -12,16 +12,22 @@ import java.util.ArrayList;
 
 interface IUserPresenter {
     void onRequestDatabase();
+
     void onRequestServer();
 
     void onResponse(ArrayList<User> users);
 }
+
 public class UserPresenter implements IUserPresenter, ContactService.UserListener {
     class UserTask extends AsyncTask<String, Void, ArrayList<User>> {
 
         @Override
         protected ArrayList<User> doInBackground(String... strings) {
-            ArrayList<User> users = databaseHelper.loadUserStudents();
+            ArrayList<User> users;
+            if (classId.equals("GV"))
+                users = databaseHelper.loadUserTeachers();
+            else
+                users = databaseHelper.loadUserStudents();
             return users;
         }
 
@@ -34,35 +40,41 @@ public class UserPresenter implements IUserPresenter, ContactService.UserListene
             onRequestServer();
         }
     }
+
+    private String classId;
     private Context context;
     private IUserView view;
     private ContactService contactService;
     private DatabaseHelper databaseHelper;
-    public UserPresenter(Context context) {
+
+    public UserPresenter(Context context, String classId) {
         this.context = context;
+        this.classId = classId;
         contactService = ContactService.getInstance(context);
-        databaseHelper=DatabaseHelper.getInstance(context);
-    }
-    public void setUserView(IUserView iUserView){
-        this.view=iUserView;
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
-    public void addUserListener(){
+    public void setUserView(IUserView iUserView) {
+        this.view = iUserView;
+    }
+
+    public void addUserListener() {
         contactService.setUserListener(this);
     }
-    public void removeUserListener(){
+
+    public void removeUserListener() {
         contactService.setUserListener(null);
     }
 
     @Override
     public void onRequestDatabase() {
-        UserTask userTask=new UserTask();
+        UserTask userTask = new UserTask();
         userTask.execute();
     }
 
     @Override
     public void onRequestServer() {
-        contactService.getUsers();
+        contactService.getUsers(classId);
     }
 
     @Override

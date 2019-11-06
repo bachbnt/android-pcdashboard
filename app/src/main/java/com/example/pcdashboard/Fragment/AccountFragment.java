@@ -16,10 +16,10 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Presenter.AccountPresenter;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.View.IAccountView;
 
 import static com.example.pcdashboard.Manager.IScreenManager.DEVELOPER_FRAGMENT;
@@ -43,11 +43,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     private TextView tvId;
     private RelativeLayout rlInfo;
     private LinearLayout llStudy, llHelp, llSetting;
-    private TextView tvStudy, tvHelp, tvSetting,tvLogout;
+    private TextView tvStudy, tvHelp, tvSetting, tvLogout;
     private boolean isStudy = false, isHelp = false, isSetting = false;
-    private TextView tvSchedule,tvExam;
-    private TextView tvGuide,tvFeedback,tvDeveloper;
-    private TextView tvInfo,tvPassword;
+    private TextView tvSchedule, tvExam;
+    private TextView tvGuide, tvFeedback, tvDeveloper;
+    private TextView tvInfo, tvPassword;
 
 
     public AccountFragment() {
@@ -90,14 +90,18 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvStudy = view.findViewById(R.id.tv_study_account);
         tvHelp = view.findViewById(R.id.tv_help_account);
         tvSetting = view.findViewById(R.id.tv_setting_account);
-        tvSchedule=view.findViewById(R.id.tv_schedule_account);
-        tvExam=view.findViewById(R.id.tv_exam_account);
-        tvGuide=view.findViewById(R.id.tv_guide_account);
-        tvFeedback=view.findViewById(R.id.tv_feedback_account);
-        tvDeveloper=view.findViewById(R.id.tv_developer_account);
-        tvInfo=view.findViewById(R.id.tv_info_account);
-        tvPassword=view.findViewById(R.id.tv_password_account);
-        tvLogout=view.findViewById(R.id.tv_logout_account);
+        tvSchedule = view.findViewById(R.id.tv_schedule_account);
+        tvExam = view.findViewById(R.id.tv_exam_account);
+        tvGuide = view.findViewById(R.id.tv_guide_account);
+        tvFeedback = view.findViewById(R.id.tv_feedback_account);
+        tvDeveloper = view.findViewById(R.id.tv_developer_account);
+        tvInfo = view.findViewById(R.id.tv_info_account);
+        tvPassword = view.findViewById(R.id.tv_password_account);
+        tvLogout = view.findViewById(R.id.tv_logout_account);
+        if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")) {
+            tvStudy.setText("Giảng dạy");
+            tvExam.setText("Lịch dạy");
+        }
         rlInfo.setOnClickListener(this);
         tvStudy.setOnClickListener(this);
         tvHelp.setOnClickListener(this);
@@ -131,11 +135,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isStudy = !isStudy;
                 if (isStudy) {
                     llStudy.setVisibility(View.VISIBLE);
-                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
+                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_top_fade_in));
                     tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llStudy.setVisibility(View.GONE);
-                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
+                    llStudy.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_top_fade_out));
                     tvStudy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_study_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
@@ -143,11 +147,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isHelp = !isHelp;
                 if (isHelp) {
                     llHelp.setVisibility(View.VISIBLE);
-                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
+                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_top_fade_in));
                     tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llHelp.setVisibility(View.GONE);
-                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
+                    llHelp.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_top_fade_out));
                     tvHelp.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_help_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
@@ -155,11 +159,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 isSetting = !isSetting;
                 if (isSetting) {
                     llSetting.setVisibility(View.VISIBLE);
-                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_top_fade_in));
+                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_top_fade_in));
                     tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_up_hot_32dp, 0);
                 } else {
                     llSetting.setVisibility(View.GONE);
-                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.slide_out_top_fade_out));
+                    llSetting.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_top_fade_out));
                     tvSetting.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_settings_hot_32dp, 0, R.drawable.ic_down_hot_32dp, 0);
                 }
                 break;
@@ -182,25 +186,25 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 selectMenu(SETTING_LAYOUT);
                 break;
             case R.id.tv_schedule_account:
-                screenManager.openFeatureScreen(SCHEDULE_FRAGMENT);
+                screenManager.openFeatureScreen(SCHEDULE_FRAGMENT,null);
                 break;
             case R.id.tv_exam_account:
-                screenManager.openFeatureScreen(EXAM_FRAGMENT);
+                screenManager.openFeatureScreen(EXAM_FRAGMENT,null);
                 break;
             case R.id.tv_guide_account:
-                screenManager.openFeatureScreen(GUIDE_FRAGMENT);
+                screenManager.openFeatureScreen(GUIDE_FRAGMENT,null);
                 break;
             case R.id.tv_feedback_account:
-                screenManager.openFeatureScreen(FEEDBACK_FRAGMENT);
+                screenManager.openFeatureScreen(FEEDBACK_FRAGMENT,null);
                 break;
             case R.id.tv_developer_account:
-                screenManager.openFeatureScreen(DEVELOPER_FRAGMENT);
+                screenManager.openFeatureScreen(DEVELOPER_FRAGMENT,null);
                 break;
             case R.id.tv_info_account:
-                screenManager.openFeatureScreen(INFO_FRAGMENT);
+                screenManager.openFeatureScreen(INFO_FRAGMENT,null);
                 break;
             case R.id.tv_password_account:
-                screenManager.openFeatureScreen(PASSWORD_FRAGMENT);
+                screenManager.openFeatureScreen(PASSWORD_FRAGMENT,null);
                 break;
             case R.id.tv_logout_account:
                 presenter.onLogout();

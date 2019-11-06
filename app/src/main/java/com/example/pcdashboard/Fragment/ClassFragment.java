@@ -127,7 +127,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     @Override
     public void onEditClick(ClassPost classPost) {
         SharedPreferencesUtils.saveClassPost(getContext(),classPost);
-        screenManager.openFeatureScreen(EDIT_FRAGMENT);
+        screenManager.openFeatureScreen(EDIT_FRAGMENT,null);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_input_class:
-                screenManager.openFeatureScreen(POST_FRAGMENT);
+                screenManager.openFeatureScreen(POST_FRAGMENT,null);
                 break;
             case R.id.iv_avatar_class:
                 screenManager.openDialog(INFO_DIALOG, SharedPreferencesUtils.loadSelf(getContext()));

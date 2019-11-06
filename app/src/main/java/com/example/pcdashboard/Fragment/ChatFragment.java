@@ -86,7 +86,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
         switch (v.getId()) {
             case R.id.ib_back_chat:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CONTACT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
                 break;
             case R.id.ib_send_chat:
                 break;
