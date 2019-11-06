@@ -22,6 +22,11 @@
             android:text="Chỉnh sửa bình luận"
             android:padding="@dimen/font_size_10sp"
             android:textSize="@dimen/font_size_16sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_title_edit_dialog"
+            android:background="@android:color/darker_gray"/>
 
 
         <EditText
