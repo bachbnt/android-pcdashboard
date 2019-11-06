@@ -65,12 +65,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return screenManager.openDashboardScreen(DEPARTMENT_FRAGMENT);
             case 1:
-                if (SharedPreferencesUtils.loadSelf(context) != null) {
-                    if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER"))
-                        return screenManager.openDashboardScreen(SELECT_CLASS_FRAGMENT);
-                    else
-                        return screenManager.openDashboardScreen(CLASS_FRAGMENT);
-                } else return screenManager.openDashboardScreen(CLASS_FRAGMENT);
+                return screenManager.openDashboardScreen(CLASS_FRAGMENT);
             case 2:
                 return screenManager.openDashboardScreen(CONTACT_FRAGMENT);
             case 3:
