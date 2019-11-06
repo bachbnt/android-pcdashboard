@@ -13,9 +13,14 @@ import android.os.Build;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.pcdashboard.R;
 
-import javax.sql.DataSource;
+import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
 public class NotificationsUtils {
     static final String CHANNEL_ID = "pc_dashboard_id";
@@ -32,35 +37,53 @@ public class NotificationsUtils {
         }
     }
 
-//    public static void createNotification(Context context) {
-//        NotificationCompat.Builder builder;
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-//                    .setSmallIcon(R.drawable.logo)
-//                    .setColor(context.getResources().getColor(R.color.colorOrange))
-//                    .setContentTitle(title)
-//                    .setContentText(body)
-//                    .setLargeIcon(avatar)
-//                    .setPriority(PRIORITY_HIGH)
-//                    .setVibrate(new long[]{500, 500})
-//                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-//                    .setAutoCancel(true)
-//                    .setContentIntent(pendingIntent);
-//        } else {
-//            builder = new NotificationCompat.Builder(context)
-//                    .setSmallIcon(R.drawable.ic_belicoffee_small)
-//                    .setColor(context.getResources().getColor(R.color.colorDarkCyan))
-//                    .setContentTitle(title)
-//                    .setContentText(body)
-//                    .setLargeIcon(avatar)
-//                    .setPriority(PRIORITY_HIGH)
-//                    .setVibrate(new long[]{500, 500})
-//                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-//                    .setAutoCancel(true)
-//                    .setContentIntent(pendingIntent);
-//        }
-//        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        manager.notify(notificationId, builder.build());
-//    }
+    public static void createNotification(Context context, String title, String name, String content, Bitmap avatar) {
+        NotificationCompat.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.logo)
+                    .setContentTitle(title)
+                    .setContentText(name != null ? name + " : " + content : content)
+                    .setLargeIcon(avatar)
+                    .setPriority(PRIORITY_HIGH)
+                    .setVibrate(new long[]{500, 500})
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                    .setAutoCancel(true);
+        } else {
+            builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.logo)
+                    .setContentTitle(title)
+                    .setContentText(name != null ? name + " : " + content : content)
+                    .setLargeIcon(avatar)
+                    .setPriority(PRIORITY_HIGH)
+                    .setVibrate(new long[]{500, 500})
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                    .setAutoCancel(true);
+        }
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(00010001, builder.build());
+    }
+
+    public static void getNotificationAvatar(final Context context, final String title, final String name, final String content, String avatar) {
+        if (avatar != null) {
+            Glide.with(context)
+                    .asBitmap().load(Uri.parse(avatar))
+                    .listener(new RequestListener<Bitmap>() {
+                                  @Override
+                                  public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                                      createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
+                                      return false;
+                                  }
+
+                                  @Override
+                                  public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                                      createNotification(context, title, name, content, resource);
+                                      return false;
+                                  }
+                              }
+                    ).submit();
+        } else
+            createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
+    }
 }

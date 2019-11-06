@@ -39,6 +39,7 @@ import com.example.pcdashboard.R;
 import com.example.pcdashboard.Request.TokenRequest;
 import com.example.pcdashboard.Services.IAccountService;
 import com.example.pcdashboard.Services.IWebService;
+import com.example.pcdashboard.Services.WebService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -50,7 +51,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
-    private IWebService iWebService;
     private ScreenManager screenManager;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -174,4 +174,5 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     public void closeDialog(String dialogName) {
         //NULL
     }
+
 }

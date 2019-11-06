@@ -18,6 +18,7 @@ public class WebService {
     private Context context;
 
     private WebService(Context context) {
+        this.context=context;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(IWebService.urlServer)
                 .addConverterFactory(GsonConverterFactory.create())

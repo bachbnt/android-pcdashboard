@@ -206,11 +206,11 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 screenManager.openFeatureScreen(PASSWORD_FRAGMENT,null);
                 break;
             case R.id.tv_logout_account:
+                presenter.blockNotifications();
                 presenter.changeLoginStatus(false);
                 presenter.changeFirstRequestSchedule();
                 presenter.deleteDatabase();
                 presenter.clearSharedPreferences();
-                presenter.blockNotifications();
                 screenManager.openLoginScreen(LOGIN_ACTIVITY);
                 break;
         }

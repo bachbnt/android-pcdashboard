@@ -2,11 +2,14 @@ package com.example.pcdashboard.Presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Services.AccountService;
 import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
+import com.example.pcdashboard.Services.WebService;
 import com.example.pcdashboard.View.ILoginView;
 interface ILoginPresenter {
     void onCheck(String userId,String password);
@@ -18,10 +21,12 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
     private Context context;
     private ILoginView view;
     private AccountService accountService;
+    private WebService webService;
 
     public LoginPresenter(Context context) {
         this.context=context;
         accountService = AccountService.getInstance(context);
+        webService=WebService.getInstance(context);
     }
 
     public void setLoginView(ILoginView iLoginView) {
@@ -71,6 +76,8 @@ public class LoginPresenter implements ILoginPresenter, AccountService.LoginList
     @Override
     public void onSelfSuccess(User self) {
         SharedPreferencesUtils.saveSelf(context, self);
+        webService.sendFCMToken(SharedPreferencesUtils.loadFCMToken(context));
+        Log.i("tag", "sendFCMToken "+SharedPreferencesUtils.loadFCMToken(context));
         onResponse();
     }
 

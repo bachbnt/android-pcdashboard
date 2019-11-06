@@ -37,7 +37,7 @@ public class SharedPreferencesUtils {
 
     public static String loadFCMToken(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE);
-        String fcmToken=preferences.getString("fcmToken",null);
+        String fcmToken=preferences.getString("fcmToken","");
         return fcmToken;
     }
 
