@@ -54,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     private void initialize() {
         screenManager = ScreenManager.getInstance();
         screenManager.setIScreenManager(this);
-        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
         EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
     }
 
@@ -92,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     }
 
     @Override
-    public void openFeatureScreen(String screenName,String classId) {
+    public void openFeatureScreen(String screenName) {
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         switch (screenName) {
@@ -133,9 +133,12 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ChatFragment()).commit();
                 break;
             case USER_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new UserFragment(classId)).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new UserFragment()).commit();
                 break;
-        }
+            case CLASS_FRAGMENT_TEACHER:
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new ClassFragment()).commit();
+                break;
+    }
     }
 
     @Override

@@ -49,7 +49,7 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.ib_back_guide:
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }

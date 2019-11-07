@@ -34,15 +34,9 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_CONTACT;
 public class UserFragment extends Fragment implements IUserView,UserAdapter.OnItemCLickListener,View.OnClickListener {
     private ScreenManager screenManager;
     private UserPresenter presenter;
-    private String classId;
     private UserAdapter userAdapter;
     private RecyclerView recyclerView;
     private ImageButton ibBack;
-
-    public UserFragment(String classId) {
-        this.classId=classId;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +63,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
 
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
-        presenter=new UserPresenter(getContext(),classId);
+        presenter=new UserPresenter(getContext(),SharedPreferencesUtils.loadClassId(getContext()));
         recyclerView=view.findViewById(R.id.recycler_view_user);
         ibBack=view.findViewById(R.id.ib_back_user);
         userAdapter=new UserAdapter(getContext(),new ArrayList<User>(),this);
@@ -99,7 +93,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
         switch (v.getId()) {
             case R.id.ib_back_user:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CONTACT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }

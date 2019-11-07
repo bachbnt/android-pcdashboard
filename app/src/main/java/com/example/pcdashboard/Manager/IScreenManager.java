@@ -21,6 +21,7 @@ public interface IScreenManager {
     String SELECT_CLASS_FRAGMENT="SELECT_CLASS_FRAGMENT";
     String CONTACT_FRAGMENT = "CONTACT_FRAGMENT";
     String ACCOUNT_FRAGMENT = "ACCOUNT_FRAGMENT";
+    String CLASS_FRAGMENT_TEACHER="CLASS_FRAGMENT_TEACHER";
 
     String INFO_DIALOG="INFO_DIALOG";
     String LOADING_DIALOG="LOADING_DIALOG";
@@ -45,7 +46,7 @@ public interface IScreenManager {
 
     Fragment openDashboardScreen(String screenName);
 
-    void openFeatureScreen(String screenName,String classId);
+    void openFeatureScreen(String screenName);
     void openDialog(String dialogName, User user);
     void closeDialog(String dialogName);
 }

@@ -92,7 +92,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_appname_dashboard:
-                screenManager.openFeatureScreen(WEB_FRAGMENT,null);
+                screenManager.openFeatureScreen(WEB_FRAGMENT);
                 break;
         }
     }

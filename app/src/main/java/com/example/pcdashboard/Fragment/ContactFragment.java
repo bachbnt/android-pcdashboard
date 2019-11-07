@@ -48,8 +48,8 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
         if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
         {
          ivOne.setImageResource(R.drawable.teachers_information);
-         ivTwo.setImageResource(R.drawable.tab_3);
-         ivThree.setImageResource(R.drawable.tab_4);
+         ivTwo.setImageResource(R.drawable.students_3rd_information);
+         ivThree.setImageResource(R.drawable.students_4th_information);
         }
         ivOne.setOnClickListener(this);
         ivTwo.setOnClickListener(this);
@@ -60,26 +60,32 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_one_contact:
-                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
-                    screenManager.openFeatureScreen(USER_FRAGMENT, SharedPreferencesUtils.loadSelf(getContext()).getClassId());
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
+                    SharedPreferencesUtils.saveClassId(getContext(),SharedPreferencesUtils.loadSelf(getContext()).getClassId());
+                    screenManager.openFeatureScreen(USER_FRAGMENT);
+                }
                 else
-                    screenManager.openFeatureScreen(CHAT_FRAGMENT, null);
+                    screenManager.openFeatureScreen(CHAT_FRAGMENT);
                 break;
             case R.id.iv_two_contact:
                 if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
-                    screenManager.openFeatureScreen(USER_FRAGMENT, "3Y");
-                    SharedPreferencesUtils.saveStudentYear(getContext(), 3);
+                    screenManager.openFeatureScreen(USER_FRAGMENT);
+                    SharedPreferencesUtils.saveClassId(getContext(),"3Y");
                 }
-                else
-                    screenManager.openFeatureScreen(USER_FRAGMENT, SharedPreferencesUtils.loadSelf(getContext()).getClassId());
+                else{
+                    SharedPreferencesUtils.saveClassId(getContext(),SharedPreferencesUtils.loadSelf(getContext()).getClassId());
+                    screenManager.openFeatureScreen(USER_FRAGMENT);
+                }
                 break;
             case R.id.iv_three_contact:
                 if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
-                    screenManager.openFeatureScreen(USER_FRAGMENT, "4Y");
-                    SharedPreferencesUtils.saveStudentYear(getContext(), 4);
+                    SharedPreferencesUtils.saveClassId(getContext(), "4Y");
+                    screenManager.openFeatureScreen(USER_FRAGMENT);
                 }
-                else
-                    screenManager.openFeatureScreen(USER_FRAGMENT, "GV");
+                else {
+                    SharedPreferencesUtils.saveClassId(getContext(), "GV");
+                    screenManager.openFeatureScreen(USER_FRAGMENT);
+                }
                 break;
         }
     }

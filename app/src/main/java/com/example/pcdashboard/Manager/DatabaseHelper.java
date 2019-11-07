@@ -32,6 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_SCHEDULE = "SCHEDULE";
     private static final String TABLE_THIRD_STUDENT = "THIRDSTUDENT";
     private static final String TABLE_FOURTH_STUDENT = "FOURTHSTUDENT";
+    private static final String TABLE_THIRD_POST = "THIRDPOST";
+    private static final String TABLE_FOURTH_POST = "FOURTHPOST";
+
 
     private static final String COLUMN_POSTID = "POSTID";
     private static final String COLUMN_TITLE = "TITLE";
@@ -81,6 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_THIRD_STUDENT);
         String CREATE_TABLE_FOURTH_STUDENT = "CREATE TABLE " + TABLE_FOURTH_STUDENT + "(" + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT," + COLUMN_CLASSID + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
         db.execSQL(CREATE_TABLE_FOURTH_STUDENT);
+        String CREATE_TABLE_THIRD_POST = "CREATE TABLE " + TABLE_THIRD_POST + "(" + COLUMN_POSTID + " TEXT," + COLUMN_CONTENT + " TEXT," + COLUMN_IMAGE + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT" + ")";
+        db.execSQL(CREATE_TABLE_THIRD_POST);
+        String CREATE_TABLE_FOURTH_POST = "CREATE TABLE " + TABLE_FOURTH_POST + "(" + COLUMN_POSTID + " TEXT," + COLUMN_CONTENT + " TEXT," + COLUMN_IMAGE + " TEXT," + COLUMN_TIME + " TEXT," + COLUMN_USERID + " TEXT," + COLUMN_NAME + " TEXT," + COLUMN_AVATAR + " TEXT" + ")";
+        db.execSQL(CREATE_TABLE_FOURTH_POST);
     }
 
     @Override
@@ -94,6 +101,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXAM);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_THIRD_STUDENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FOURTH_STUDENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_THIRD_POST);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FOURTH_POST);
         onCreate(db);
     }
 
@@ -170,9 +179,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_CLASS, null, null);
     }
 
-    public void deleteChatMessages() {
+    public void insertYearClassPost(ClassPost classPost, int year) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CHAT, null, null);
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_POSTID, classPost.getId());
+        values.put(COLUMN_CONTENT, classPost.getContent());
+        values.put(COLUMN_IMAGE, classPost.getImage());
+        values.put(COLUMN_TIME, classPost.getTime());
+        values.put(COLUMN_USERID, classPost.getUserId());
+        values.put(COLUMN_NAME, classPost.getUserName());
+        values.put(COLUMN_AVATAR, classPost.getUserAvatar());
+        if (year == 3)
+            db.insert(TABLE_THIRD_POST, null, values);
+        else if (year == 4)
+            db.insert(TABLE_FOURTH_POST, null, values);
+
+    }
+
+    public ArrayList<ClassPost> loadYearClassPosts(int year) {
+        String query = null;
+        if (year == 3)
+            query = "Select * FROM " + TABLE_THIRD_POST;
+        else if (year == 4)
+            query = "Select * FROM " + TABLE_FOURTH_POST;
+        ArrayList<ClassPost> classPosts = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            ClassPost classPost = new ClassPost();
+            classPost.setId(cursor.getString(0));
+            classPost.setContent(cursor.getString(1));
+            classPost.setImage(cursor.getString(2));
+            classPost.setTime(cursor.getString(3));
+            classPost.setUserId(cursor.getString(4));
+            classPost.setUserName(cursor.getString(5));
+            classPost.setUserAvatar(cursor.getString(6));
+            classPosts.add(classPost);
+        }
+        cursor.close();
+        return classPosts;
+    }
+
+    public void deleteYearClassPosts(int year) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (year == 3)
+            db.delete(TABLE_THIRD_POST, null, null);
+        else if (year == 4)
+            db.delete(TABLE_FOURTH_POST, null, null);
     }
 
     public void insertChatMessage(ChatMessage chatMessage) {
@@ -203,6 +256,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return chatMessages;
     }
+
+    public void deleteChatMessages() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CHAT, null, null);
+    }
+
 
     public void insertUserStudent(User user) {
         SQLiteDatabase db = this.getWritableDatabase();

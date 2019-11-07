@@ -94,21 +94,21 @@ public class SharedPreferencesUtils {
         editor.commit();
     }
 
-    public static void saveStudentYear(Context context, int year) {
-        SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
+    public static void saveClassId(Context context, String classId) {
+        SharedPreferences preferences = context.getSharedPreferences("classId", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("year", year);
+        editor.putString("classId", classId);
         editor.commit();
     }
 
-    public static int loadStudentYear(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
-        int year=preferences.getInt("year",0);
-        return year;
+    public static String loadClassId(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("classId", Context.MODE_PRIVATE);
+        String classId=preferences.getString("classId",null);
+        return classId;
     }
 
-    public static void clearStudentYear(Context context) {
-        android.content.SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
+    public static void clearClassId(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("classId", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();

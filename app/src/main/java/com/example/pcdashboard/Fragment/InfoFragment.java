@@ -103,7 +103,7 @@ public class InfoFragment extends Fragment implements IUpdateInfoView,View.OnCli
     @Override
     public void onUpdateSuccess() {
         CustomToast.makeText(getContext(), "Cập nhật thông tin thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
-        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class InfoFragment extends Fragment implements IUpdateInfoView,View.OnCli
                 break;
             case R.id.ib_back_info:
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }

@@ -27,9 +27,9 @@ public class UserPresenter implements IUserPresenter, ContactService.UserListene
             ArrayList<User> users;
             if (classId.equals("GV"))
                 users = databaseHelper.loadUserTeachers();
-            else if(SharedPreferencesUtils.loadStudentYear(context) ==3)
+            else if(SharedPreferencesUtils.loadClassId(context).equals("3Y"))
                 users=databaseHelper.loadYearStudents(3);
-            else if(SharedPreferencesUtils.loadStudentYear(context) ==4)
+            else if(SharedPreferencesUtils.loadClassId(context).equals("4Y"))
                 users=databaseHelper.loadYearStudents(4);
             else
                 users = databaseHelper.loadUserStudents();

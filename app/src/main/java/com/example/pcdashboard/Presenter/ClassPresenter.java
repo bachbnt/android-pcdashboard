@@ -15,18 +15,27 @@ import java.util.ArrayList;
 
 interface IClassPresenter {
     void onInit();
+
     void onRequestDatabase();
+
     void onRequestServer(int number);
+
     void onResponse(ArrayList<ClassPost> classPosts);
+
     void onDelete(ClassPost classPost);
 }
+
 public class ClassPresenter implements IClassPresenter, PostService.ClassListener {
     class ClassTask extends AsyncTask<String, Void, ArrayList<ClassPost>> {
 
         @Override
         protected ArrayList<ClassPost> doInBackground(String... strings) {
-            ArrayList<ClassPost> classPosts = databaseHelper.loadClassPosts();
-            Log.i("tag","loadClassPosts "+classPosts.size());
+            ArrayList<ClassPost> classPosts = null;
+            if (SharedPreferencesUtils.loadClassId(context).equals("3Y"))
+                databaseHelper.loadYearClassPosts(3);
+            else if (SharedPreferencesUtils.loadClassId(context).equals("4Y"))
+                databaseHelper.loadYearClassPosts(4);
+            else databaseHelper.loadClassPosts();
             return classPosts;
         }
 
@@ -39,6 +48,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
             onRequestServer(10);
         }
     }
+
     private Context context;
     private IClassView view;
     private PostService postService;
@@ -46,33 +56,33 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     public ClassPresenter(Context context) {
         this.context = context;
-        postService=PostService.getInstance(context);
-        databaseHelper=DatabaseHelper.getInstance(context);
-    }
-    public void setClassView(IClassView iClassView){
-        this.view=iClassView;
+        postService = PostService.getInstance(context);
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
-    public void addClassListener(){
+    public void setClassView(IClassView iClassView) {
+        this.view = iClassView;
+    }
+
+    public void addClassListener() {
         postService.setClassListener(this);
     }
 
-    public void removeClassListener(){
+    public void removeClassListener() {
         postService.setClassListener(null);
     }
 
     @Override
     public void onInit() {
-        User self= SharedPreferencesUtils.loadSelf(context);
+        User self = SharedPreferencesUtils.loadSelf(context);
         view.onInit(self);
     }
 
     @Override
     public void onRequestDatabase() {
-        ClassTask classTask=new ClassTask();
+        ClassTask classTask = new ClassTask();
         classTask.execute();
     }
-
 
 
     @Override
@@ -82,8 +92,8 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onResponse(ArrayList<ClassPost> classPosts) {
-        if(view!=null)
-        view.onSuccess(classPosts);
+        if (view != null)
+            view.onSuccess(classPosts);
     }
 
     @Override

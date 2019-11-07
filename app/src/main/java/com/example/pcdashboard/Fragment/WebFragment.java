@@ -60,7 +60,7 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.ib_back_web:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_DEPARTMENT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_left_web:
                 if (webView.canGoBack()) {

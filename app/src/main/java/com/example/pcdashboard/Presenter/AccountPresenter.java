@@ -64,6 +64,8 @@ public class AccountPresenter implements IAccountPresenter {
         databaseHelper.deleteChatMessages();
         databaseHelper.deleteSchedules();
         databaseHelper.deleteExams();
+        databaseHelper.deleteYearStudents(3);
+        databaseHelper.deleteYearStudents(4);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class AccountPresenter implements IAccountPresenter {
         SharedPreferencesUtils.clearPostComment(context);
         SharedPreferencesUtils.clearClassPost(context);
         SharedPreferencesUtils.clearEmailForgot(context);
-        SharedPreferencesUtils.clearStudentYear(context);
+        SharedPreferencesUtils.clearClassId(context);
     }
 
     @Override

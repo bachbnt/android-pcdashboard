@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/space_10dp"
-        android:layout_marginRight="@dimen/space_10dp"        android:layout_weight="1"
+        android:layout_marginRight="@dimen/space_20dp"
+        android:layout_weight="1"
         android:src="@drawable/chat_room" />
 
     <ImageView
@@ -31,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/space_10dp"
-        android:layout_marginRight="@dimen/space_10dp"        android:layout_weight="1"
+        android:layout_marginRight="@dimen/space_10dp"
+        android:layout_weight="1"
         android:src="@drawable/teachers_information" />
 </LinearLayout>

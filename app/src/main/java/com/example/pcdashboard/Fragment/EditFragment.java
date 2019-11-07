@@ -93,7 +93,7 @@ public class EditFragment extends Fragment implements View.OnClickListener, IEdi
         switch (v.getId()) {
             case R.id.ib_back_edit:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CLASS);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.tv_edit_edit:
                 presenter.onCheck(etInput.getText().toString().trim());
@@ -121,7 +121,7 @@ public class EditFragment extends Fragment implements View.OnClickListener, IEdi
         CustomToast.makeText(getContext(), "Thành công", CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
         tvEdit.setEnabled(true);
         SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
-        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+        screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
     }
 
     @Override

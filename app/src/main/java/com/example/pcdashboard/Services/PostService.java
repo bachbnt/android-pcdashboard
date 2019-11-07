@@ -145,7 +145,14 @@ public class PostService {
 
     public void getClassPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        String classId = SharedPreferencesUtils.loadSelf(context).getClassId();
+        String classId = null;
+        if (SharedPreferencesUtils.loadClassId(context) != null) {
+            if (SharedPreferencesUtils.loadClassId(context).equals("3Y"))
+                classId = "3Y";
+            else if (SharedPreferencesUtils.loadClassId(context).equals("4Y"))
+                classId = "4Y";
+            else classId = SharedPreferencesUtils.loadSelf(context).getClassId();
+        } else classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId, number);
         call.enqueue(new Callback<ArrayList<ClassPost>>() {
             @Override
@@ -154,9 +161,20 @@ public class PostService {
                 if (classListener != null)
                     if (classPosts != null) {
                         if (classPosts.size() < 10) {
-                            databaseHelper.deleteClassPosts();
-                            for (int i = 0; i < classPosts.size(); i++)
-                                databaseHelper.insertClassPost(classPosts.get(i));
+                            if (SharedPreferencesUtils.loadClassId(context).equals("3Y")) {
+                                databaseHelper.deleteYearClassPosts(3);
+                                for (int i = 0; i < classPosts.size(); i++)
+                                    databaseHelper.insertYearClassPost(classPosts.get(i), 3);
+                                ;
+                            } else if (SharedPreferencesUtils.loadClassId(context).equals("4Y")) {
+                                databaseHelper.deleteYearClassPosts(4);
+                                for (int i = 0; i < classPosts.size(); i++)
+                                    databaseHelper.insertYearClassPost(classPosts.get(i), 4);
+                            } else {
+                                databaseHelper.deleteClassPosts();
+                                for (int i = 0; i < classPosts.size(); i++)
+                                    databaseHelper.insertClassPost(classPosts.get(i));
+                            }
                         }
                         classListener.onSuccess(classPosts);
                     } else classListener.onFailure();

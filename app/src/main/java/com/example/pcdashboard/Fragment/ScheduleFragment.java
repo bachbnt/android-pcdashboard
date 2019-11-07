@@ -91,7 +91,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.ib_back_schedule:
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
-                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_reload_schedule:
                 presenter.onRequestServer();

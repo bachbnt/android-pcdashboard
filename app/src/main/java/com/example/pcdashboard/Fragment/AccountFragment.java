@@ -185,25 +185,25 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
                 selectMenu(SETTING_LAYOUT);
                 break;
             case R.id.tv_schedule_account:
-                screenManager.openFeatureScreen(SCHEDULE_FRAGMENT,null);
+                screenManager.openFeatureScreen(SCHEDULE_FRAGMENT);
                 break;
             case R.id.tv_exam_account:
-                screenManager.openFeatureScreen(EXAM_FRAGMENT,null);
+                screenManager.openFeatureScreen(EXAM_FRAGMENT);
                 break;
             case R.id.tv_guide_account:
-                screenManager.openFeatureScreen(GUIDE_FRAGMENT,null);
+                screenManager.openFeatureScreen(GUIDE_FRAGMENT);
                 break;
             case R.id.tv_feedback_account:
-                screenManager.openFeatureScreen(FEEDBACK_FRAGMENT,null);
+                screenManager.openFeatureScreen(FEEDBACK_FRAGMENT);
                 break;
             case R.id.tv_developer_account:
-                screenManager.openFeatureScreen(DEVELOPER_FRAGMENT,null);
+                screenManager.openFeatureScreen(DEVELOPER_FRAGMENT);
                 break;
             case R.id.tv_info_account:
-                screenManager.openFeatureScreen(INFO_FRAGMENT,null);
+                screenManager.openFeatureScreen(INFO_FRAGMENT);
                 break;
             case R.id.tv_password_account:
-                screenManager.openFeatureScreen(PASSWORD_FRAGMENT,null);
+                screenManager.openFeatureScreen(PASSWORD_FRAGMENT);
                 break;
             case R.id.tv_logout_account:
                 presenter.blockNotifications();

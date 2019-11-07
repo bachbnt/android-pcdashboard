@@ -17,12 +17,15 @@ import com.example.pcdashboard.Adapter.DepartmentAdapter;
 import com.example.pcdashboard.Manager.CustomToast;
 import com.example.pcdashboard.Manager.EndlessRecyclerViewScrollListener;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.DepartmentPost;
 import com.example.pcdashboard.Presenter.DepartmentPresenter;
 import com.example.pcdashboard.R;
 import com.example.pcdashboard.View.IDeparmentView;
 
 import java.util.ArrayList;
+
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_DEPARTMENT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +59,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
         presenter.addDepartmentListener();
         Log.i("tag","setDepartmentView ");
         presenter.onRequestDatabase();
+        SharedPreferencesUtils.saveTabId(getContext(),TAB_DEPARTMENT);
         super.onResume();
     }
 

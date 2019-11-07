@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,9 +35,13 @@ import com.example.pcdashboard.View.IClassView;
 import java.util.ArrayList;
 
 import static com.example.pcdashboard.Manager.IScreenManager.COMMENT_DIALOG;
+import static com.example.pcdashboard.Manager.IScreenManager.DASHBOARD_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.EDIT_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.INFO_DIALOG;
 import static com.example.pcdashboard.Manager.IScreenManager.POST_FRAGMENT;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_CLASS;
+import static com.example.pcdashboard.Manager.IScreenManager.TAB_DEPARTMENT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +52,8 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     private ClassAdapter classAdapter;
     private ClassPresenter presenter;
     private ImageView ivAvatar;
+    private CardView cvAvatar;
+    private ImageButton ibBack;
     private TextView tvInput;
     private SwipeRefreshLayout swipeView;
     private RelativeLayout rlInput;
@@ -86,7 +94,14 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView = view.findViewById(R.id.recycler_view_class);
         swipeView=view.findViewById(R.id.swipe_refresh_class);
         swipeView.setOnRefreshListener(this);
+        cvAvatar=view.findViewById(R.id.cv_avatar_class);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
+        ibBack=view.findViewById(R.id.ib_back_class);
+        if(SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+        {
+            cvAvatar.setVisibility(View.GONE);
+            ibBack.setVisibility(View.VISIBLE);
+        }
         tvInput=view.findViewById(R.id.tv_input_class);
         rlInput=view.findViewById(R.id.rl_input_class);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
@@ -95,6 +110,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView.setLayoutManager(linearLayoutManager);
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
+        ibBack.setOnClickListener(this);
         swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -127,7 +143,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     @Override
     public void onEditClick(ClassPost classPost) {
         SharedPreferencesUtils.saveClassPost(getContext(),classPost);
-        screenManager.openFeatureScreen(EDIT_FRAGMENT,null);
+        screenManager.openFeatureScreen(EDIT_FRAGMENT);
     }
 
     @Override
@@ -166,10 +182,14 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_input_class:
-                screenManager.openFeatureScreen(POST_FRAGMENT,null);
+                screenManager.openFeatureScreen(POST_FRAGMENT);
                 break;
             case R.id.iv_avatar_class:
                 screenManager.openDialog(INFO_DIALOG, SharedPreferencesUtils.loadSelf(getContext()));
+                break;
+            case R.id.ib_back_class:
+                SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
+                screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
         }
     }
