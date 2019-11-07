@@ -66,6 +66,8 @@ public class AccountPresenter implements IAccountPresenter {
         databaseHelper.deleteExams();
         databaseHelper.deleteYearStudents(3);
         databaseHelper.deleteYearStudents(4);
+        databaseHelper.deleteYearClassPosts(3);
+        databaseHelper.deleteYearClassPosts(4);
     }
 
     @Override

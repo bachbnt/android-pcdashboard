@@ -147,11 +147,7 @@ public class PostService {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         String classId = null;
         if (SharedPreferencesUtils.loadClassId(context) != null) {
-            if (SharedPreferencesUtils.loadClassId(context).equals("3Y"))
-                classId = "3Y";
-            else if (SharedPreferencesUtils.loadClassId(context).equals("4Y"))
-                classId = "4Y";
-            else classId = SharedPreferencesUtils.loadSelf(context).getClassId();
+           classId=SharedPreferencesUtils.loadClassId(context);
         } else classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId, number);
         call.enqueue(new Callback<ArrayList<ClassPost>>() {
@@ -165,7 +161,6 @@ public class PostService {
                                 databaseHelper.deleteYearClassPosts(3);
                                 for (int i = 0; i < classPosts.size(); i++)
                                     databaseHelper.insertYearClassPost(classPosts.get(i), 3);
-                                ;
                             } else if (SharedPreferencesUtils.loadClassId(context).equals("4Y")) {
                                 databaseHelper.deleteYearClassPosts(4);
                                 for (int i = 0; i < classPosts.size(); i++)

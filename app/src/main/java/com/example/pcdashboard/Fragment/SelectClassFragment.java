@@ -52,12 +52,12 @@ public class SelectClassFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_third_select:
-                screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 SharedPreferencesUtils.saveClassId(getContext(), "3Y");
+                screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 break;
             case R.id.iv_fourth_select:
-                screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 SharedPreferencesUtils.saveClassId(getContext(), "4Y");
+                screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 break;
         }
     }

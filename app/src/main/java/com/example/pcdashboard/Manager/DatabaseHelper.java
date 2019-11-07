@@ -217,6 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             classPosts.add(classPost);
         }
         cursor.close();
+        Log.i("tag", "database teacher " +classPosts.size());
         return classPosts;
     }
 
