@@ -45,6 +45,12 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
         ivOne = view.findViewById(R.id.iv_one_contact);
         ivTwo = view.findViewById(R.id.iv_two_contact);
         ivThree = view.findViewById(R.id.iv_three_contact);
+        if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+        {
+         ivOne.setImageResource(R.drawable.teachers_information);
+         ivTwo.setImageResource(R.drawable.tab_3);
+         ivThree.setImageResource(R.drawable.tab_4);
+        }
         ivOne.setOnClickListener(this);
         ivTwo.setOnClickListener(this);
         ivThree.setOnClickListener(this);
@@ -60,14 +66,18 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
                     screenManager.openFeatureScreen(CHAT_FRAGMENT, null);
                 break;
             case R.id.iv_two_contact:
-                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
-                    screenManager.openFeatureScreen(USER_FRAGMENT, "N3");
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
+                    screenManager.openFeatureScreen(USER_FRAGMENT, "3Y");
+                    SharedPreferencesUtils.saveStudentYear(getContext(), 3);
+                }
                 else
                     screenManager.openFeatureScreen(USER_FRAGMENT, SharedPreferencesUtils.loadSelf(getContext()).getClassId());
                 break;
             case R.id.iv_three_contact:
-                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
-                    screenManager.openFeatureScreen(USER_FRAGMENT, "N4");
+                if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
+                    screenManager.openFeatureScreen(USER_FRAGMENT, "4Y");
+                    SharedPreferencesUtils.saveStudentYear(getContext(), 4);
+                }
                 else
                     screenManager.openFeatureScreen(USER_FRAGMENT, "GV");
                 break;

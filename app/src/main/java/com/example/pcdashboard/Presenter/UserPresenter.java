@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.Services.ContactService;
 import com.example.pcdashboard.View.IUserView;
@@ -26,6 +27,10 @@ public class UserPresenter implements IUserPresenter, ContactService.UserListene
             ArrayList<User> users;
             if (classId.equals("GV"))
                 users = databaseHelper.loadUserTeachers();
+            else if(SharedPreferencesUtils.loadStudentYear(context) ==3)
+                users=databaseHelper.loadYearStudents(3);
+            else if(SharedPreferencesUtils.loadStudentYear(context) ==4)
+                users=databaseHelper.loadYearStudents(4);
             else
                 users = databaseHelper.loadUserStudents();
             return users;

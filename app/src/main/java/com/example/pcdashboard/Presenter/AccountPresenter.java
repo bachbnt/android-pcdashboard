@@ -74,6 +74,7 @@ public class AccountPresenter implements IAccountPresenter {
         SharedPreferencesUtils.clearPostComment(context);
         SharedPreferencesUtils.clearClassPost(context);
         SharedPreferencesUtils.clearEmailForgot(context);
+        SharedPreferencesUtils.clearStudentYear(context);
     }
 
     @Override

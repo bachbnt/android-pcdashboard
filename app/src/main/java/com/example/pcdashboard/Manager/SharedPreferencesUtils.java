@@ -28,6 +28,13 @@ public class SharedPreferencesUtils {
         return token;
     }
 
+    public static void clearToken(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public static void saveFCMToken(Context context, String fcmToken) {
         SharedPreferences preferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -39,13 +46,6 @@ public class SharedPreferencesUtils {
         SharedPreferences preferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE);
         String fcmToken=preferences.getString("fcmToken","");
         return fcmToken;
-    }
-
-    public static void clearToken(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.commit();
     }
 
     public static void saveStatusLogin(Context context, boolean status){
@@ -89,6 +89,26 @@ public class SharedPreferencesUtils {
 
     public static void clearTabId(Context context) {
         android.content.SharedPreferences preferences = context.getSharedPreferences("tab", Context.MODE_PRIVATE);
+        android.content.SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    public static void saveStudentYear(Context context, int year) {
+        SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("year", year);
+        editor.commit();
+    }
+
+    public static int loadStudentYear(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
+        int year=preferences.getInt("year",0);
+        return year;
+    }
+
+    public static void clearStudentYear(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("year", Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();

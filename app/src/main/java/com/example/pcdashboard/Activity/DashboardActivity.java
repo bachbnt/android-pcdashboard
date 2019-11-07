@@ -3,7 +3,6 @@ package com.example.pcdashboard.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -18,7 +17,7 @@ import com.example.pcdashboard.Fragment.ChatFragment;
 import com.example.pcdashboard.Fragment.ContactFragment;
 import com.example.pcdashboard.Fragment.DashboardFragment;
 import com.example.pcdashboard.Fragment.DepartmentFragment;
-import com.example.pcdashboard.Fragment.DeveloperFragment;
+import com.example.pcdashboard.Fragment.AppInfoFragment;
 import com.example.pcdashboard.Fragment.EditFragment;
 import com.example.pcdashboard.Fragment.ExamFragment;
 import com.example.pcdashboard.Fragment.FeedbackFragment;
@@ -32,23 +31,10 @@ import com.example.pcdashboard.Fragment.UserFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
-import com.example.pcdashboard.Manager.SharedPreferencesUtils;
-import com.example.pcdashboard.Model.Token;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
-import com.example.pcdashboard.Request.TokenRequest;
-import com.example.pcdashboard.Services.IAccountService;
-import com.example.pcdashboard.Services.IWebService;
-import com.example.pcdashboard.Services.WebService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import pub.devrel.easypermissions.EasyPermissions;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
@@ -141,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new FeedbackFragment()).commit();
                 break;
             case DEVELOPER_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard, new DeveloperFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new AppInfoFragment()).commit();
                 break;
             case CHAT_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ChatFragment()).commit();

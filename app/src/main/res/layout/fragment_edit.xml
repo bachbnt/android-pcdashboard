@@ -64,7 +64,7 @@
                 android:layout_alignTop="@id/cv_avatar_edit"
                 android:layout_toRightOf="@id/cv_avatar_edit"
                 android:text="@string/app_name"
-                android:textColor="@color/colorSlateGray"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_size_16sp"
                 android:textStyle="bold" />
 

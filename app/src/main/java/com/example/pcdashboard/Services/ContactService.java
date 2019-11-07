@@ -102,7 +102,17 @@ public class ContactService {
                             databaseHelper.deleteUserTeachers();
                             for (User user : users)
                                 databaseHelper.insertUserTeacher(user);
-                        } else {
+                        } else if( SharedPreferencesUtils.loadStudentYear(context)==3){
+                            databaseHelper.deleteYearStudents(3);
+                            for (User user : users)
+                                databaseHelper.insertYearStudent(user,3);
+                        }
+                        else  if(SharedPreferencesUtils.loadStudentYear(context)==4){
+                            databaseHelper.deleteYearStudents(4);
+                            for (User user : users)
+                                databaseHelper.insertYearStudent(user,4);
+                        }
+                        else {
                             databaseHelper.deleteUserStudents();
                             for (User user : users)
                                 databaseHelper.insertUserStudent(user);

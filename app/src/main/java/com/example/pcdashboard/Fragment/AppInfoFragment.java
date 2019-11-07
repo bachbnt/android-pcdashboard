@@ -20,11 +20,11 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DeveloperFragment extends Fragment implements View.OnClickListener {
+public class AppInfoFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private ImageButton ibBack;
 
-    public DeveloperFragment() {
+    public AppInfoFragment() {
         // Required empty public constructor
     }
 
@@ -33,21 +33,21 @@ public class DeveloperFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_developer, container, false);
+        View view= inflater.inflate(R.layout.fragment_app_info, container, false);
         initialize(view);
         return view;
     }
 
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
-        ibBack=view.findViewById(R.id.ib_back_developer);
+        ibBack=view.findViewById(R.id.ib_back_app_info);
         ibBack.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.ib_back_developer:
+            case R.id.ib_back_app_info:
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT,null);
                 break;
