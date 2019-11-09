@@ -35,11 +35,11 @@ public interface IPostService {
     Call<ArrayList<ClassPost>> getAllClassPosts(@Header("Authorization") String token, @Path("classId") String classId, @Query("number") int number);
 
     @POST("post/class/")
-    Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content);
+    Call<Boolean> createPost(@Header("Authorization") String token, @Query("content") String content,@Query("classId")String classId);
 
     @Multipart
     @POST("post/class/")
-    Call<Boolean> createPostImg(@Header("Authorization") String token, @Query("content") String content, @Part MultipartBody.Part file);
+    Call<Boolean> createPostImg(@Header("Authorization") String token, @Query("content") String content,@Query("classId")String classId, @Part MultipartBody.Part file);
 
     @PUT("post/class/{postId}")
     Call<Boolean> updatePost(@Header("Authorization") String token, @Path("postId") String postId, @Query("content") String content, @Query("image") String image);

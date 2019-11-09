@@ -31,17 +31,17 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
         @Override
         protected ArrayList<ClassPost> doInBackground(String... strings) {
             ArrayList<ClassPost> classPosts = null;
-            if (SharedPreferencesUtils.loadClassId(context).equals("3Y")){
-                classPosts=databaseHelper.loadYearClassPosts(3);
-                Log.i("tag", "database teacher 3");
+            if (SharedPreferencesUtils.loadClassId(context) != null) {
+                if (SharedPreferencesUtils.loadClassId(context).equals("3Y")) {
+                    classPosts = databaseHelper.loadYearClassPosts(3);
+                    Log.i("tag", "database teacher 3");
 
-            }
-            else if (SharedPreferencesUtils.loadClassId(context).equals("4Y")){
-                classPosts=databaseHelper.loadYearClassPosts(4);
-                Log.i("tag", "database teacher 4");
-            }
-            else classPosts=databaseHelper.loadClassPosts();
-            Log.i("tag", "database teacher success "+classPosts.size());
+                } else if (SharedPreferencesUtils.loadClassId(context).equals("4Y")) {
+                    classPosts = databaseHelper.loadYearClassPosts(4);
+                    Log.i("tag", "database teacher 4");
+                } else classPosts = databaseHelper.loadClassPosts();
+            } else classPosts = databaseHelper.loadClassPosts();
+            Log.i("tag", "database teacher success " + classPosts.size());
             return classPosts;
         }
 

@@ -11,6 +11,7 @@ import com.example.pcdashboard.Model.PostComment;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.SocketHandler;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -145,8 +146,8 @@ public class PostService {
 
     public void getClassPosts(int number) {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
-        String classId = null;
-        if (SharedPreferencesUtils.loadClassId(context) != null) {
+        String classId;
+        if (!SharedPreferencesUtils.loadClassId(context).equals("")) {
            classId=SharedPreferencesUtils.loadClassId(context);
         } else classId = SharedPreferencesUtils.loadSelf(context).getClassId();
         Call<ArrayList<ClassPost>> call = iPostService.getAllClassPosts(token, classId, number);
@@ -206,6 +207,10 @@ public class PostService {
     }
 
     public void createClassPost(String content, String image) {
+        String classId;
+        if(SharedPreferencesUtils.loadClassId(context)!=null)
+            classId=SharedPreferencesUtils.loadClassId(context);
+        else classId=SharedPreferencesUtils.loadSelf(context).getClassId();
         MultipartBody.Part part = null;
         if (image != null) {
             File file = new File(image);
@@ -216,7 +221,7 @@ public class PostService {
         }
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         if (part == null) {
-            Call<Boolean> call = iPostService.createPost(token, content);
+            Call<Boolean> call = iPostService.createPost(token, content,classId);
             call.enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -233,7 +238,7 @@ public class PostService {
                 }
             });
         } else {
-            Call<Boolean> call = iPostService.createPostImg(token, content, part);
+            Call<Boolean> call = iPostService.createPostImg(token, content,classId, part);
             call.enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {

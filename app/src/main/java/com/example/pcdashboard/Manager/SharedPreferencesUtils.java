@@ -103,7 +103,7 @@ public class SharedPreferencesUtils {
 
     public static String loadClassId(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("classId", Context.MODE_PRIVATE);
-        String classId=preferences.getString("classId",null);
+        String classId=preferences.getString("classId","");
         return classId;
     }
 
