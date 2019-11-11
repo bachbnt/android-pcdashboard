@@ -67,7 +67,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                 listener.onCommentClick(classPost);
             }
         });
-        if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
+        if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())||SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")) {
             holder.ibEdit.setVisibility(View.VISIBLE);
             holder.ibDelete.setVisibility(View.VISIBLE);
             holder.ibEdit.setOnClickListener(new View.OnClickListener() {
