@@ -2,6 +2,8 @@ package com.example.pcdashboard.Fragment;
 
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     }
 
     @Override
+    public void onStart() {
+        presenter.connectSocket();
+        presenter.listenSocket();
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         presenter.setChatView(this);
         presenter.addChatListener();
@@ -66,9 +75,16 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
         presenter.removeChatListener();
         super.onPause();
     }
+
+    @Override
+    public void onStop() {
+        presenter.disconnectSocket();
+        super.onStop();
+    }
+
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
-        presenter=new ChatPresenter(getContext());
+        presenter=new ChatPresenter(getActivity());
         messageAdapter = new MessageAdapter(getContext(),new ArrayList<ChatMessage>());
         ibBack = view.findViewById(R.id.ib_back_chat);
         recyclerView = view.findViewById(R.id.recycler_view_chat);
@@ -89,6 +105,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_send_chat:
+                if(!TextUtils.isEmpty(etInput.getText().toString())){
+                    presenter.sendMessage(etInput.getText().toString().trim());
+                etInput.setText("");
+                }
                 break;
         }
     }
@@ -98,6 +118,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
         messageAdapter.update(chatMessages);
         messageAdapter.notifyDataSetChanged();
         recyclerView.scrollToPosition(chatMessages.size()-1);
+
     }
 
     @Override
