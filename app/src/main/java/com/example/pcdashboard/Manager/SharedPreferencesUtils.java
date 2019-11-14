@@ -94,6 +94,26 @@ public class SharedPreferencesUtils {
         editor.commit();
     }
 
+    public static void saveNotificationTitle(Context context, String title) {
+        SharedPreferences preferences = context.getSharedPreferences("title", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("title", title);
+        editor.commit();
+    }
+
+    public static String loadNotificationTitle(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("title", Context.MODE_PRIVATE);
+        String classId=preferences.getString("title","");
+        return classId;
+    }
+
+    public static void clearNotificationTitle(Context context) {
+        android.content.SharedPreferences preferences = context.getSharedPreferences("title", Context.MODE_PRIVATE);
+        android.content.SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public static void saveClassId(Context context, String classId) {
         SharedPreferences preferences = context.getSharedPreferences("classId", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

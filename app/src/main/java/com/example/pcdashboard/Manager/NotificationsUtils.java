@@ -24,7 +24,7 @@ import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
 public class NotificationsUtils {
     static final String CHANNEL_ID = "pc_dashboard_id";
-    static final String CHANNEL_NAME = "pc_dasboard_name";
+    static final String CHANNEL_NAME = "pc_dashboard_name";
 
     public static void createChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -37,7 +37,7 @@ public class NotificationsUtils {
         }
     }
 
-    public static void createNotification(Context context, String title, String name, String content, Bitmap avatar) {
+    public static void createNotification(Context context, String title, String name, String content, Bitmap avatar, PendingIntent pendingIntent) {
         NotificationCompat.Builder builder;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -50,7 +50,8 @@ public class NotificationsUtils {
                     .setPriority(PRIORITY_HIGH)
                     .setVibrate(new long[]{500, 500})
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                    .setAutoCancel(true);
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
         } else {
             builder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.logo)
@@ -61,31 +62,45 @@ public class NotificationsUtils {
                     .setPriority(PRIORITY_HIGH)
                     .setVibrate(new long[]{500, 500})
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                    .setAutoCancel(true);
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
         }
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(00010001, builder.build());
+        switch (title){
+            case "Bộ môn":
+                manager.notify(1613013, builder.build());
+                break;
+            case "Lớp học":
+                manager.notify(1613124, builder.build());
+                break;
+            case "Lịch thi":
+                manager.notify(1613024, builder.build());
+                break;
+            case "Điểm thi":
+                manager.notify(2558,builder.build());
+                break;
+        }
     }
 
-    public static void getNotificationAvatar(final Context context, final String title, final String name, final String content, String avatar) {
+    public static void getNotificationAvatar(final Context context, final String title, final String name, final String content, String avatar, final PendingIntent pendingIntent) {
         if (avatar != null) {
             Glide.with(context)
                     .asBitmap().load(Uri.parse(avatar))
                     .listener(new RequestListener<Bitmap>() {
                                   @Override
                                   public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                                      createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
+                                      createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo), pendingIntent);
                                       return false;
                                   }
 
                                   @Override
                                   public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                                      createNotification(context, title, name, content, resource);
+                                      createNotification(context, title, name, content, resource, pendingIntent);
                                       return false;
                                   }
                               }
                     ).submit();
         } else
-            createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
+            createNotification(context, title, name, content, BitmapFactory.decodeResource(context.getResources(), R.drawable.logo), pendingIntent);
     }
 }

@@ -31,6 +31,7 @@ import com.example.pcdashboard.Fragment.UserFragment;
 import com.example.pcdashboard.Fragment.WebFragment;
 import com.example.pcdashboard.Manager.IScreenManager;
 import com.example.pcdashboard.Manager.ScreenManager;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
 
@@ -41,28 +42,28 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         initialize();
     }
-
 
     private void initialize() {
         screenManager = ScreenManager.getInstance();
         screenManager.setIScreenManager(this);
+        if (getIntent().getExtras() != null)
+            SharedPreferencesUtils.saveNotificationTitle(this,getIntent().getExtras().getString("title", null));
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
         EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
     }
 
     @Override
     public void openLoginScreen(String screenName) {
-        switch (screenName){
+        switch (screenName) {
             case LOGIN_ACTIVITY:
-                Intent intent=new Intent(DashboardActivity.this,LoginActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
         }
@@ -79,7 +80,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
                 fragment = new ClassFragment();
                 break;
             case SELECT_CLASS_FRAGMENT:
-                fragment=new SelectClassFragment();
+                fragment = new SelectClassFragment();
                 break;
             case CONTACT_FRAGMENT:
                 fragment = new ContactFragment();
@@ -93,14 +94,14 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
 
     @Override
     public void openFeatureScreen(String screenName) {
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         switch (screenName) {
             case DASHBOARD_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new DashboardFragment()).commit();
                 break;
             case WEB_FRAGMENT:
-                fragmentTransaction.replace(R.id.fl_container_dashboard,new WebFragment()).commit();
+                fragmentTransaction.replace(R.id.fl_container_dashboard, new WebFragment()).commit();
                 break;
             case POST_FRAGMENT:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new PostFragment()).commit();
@@ -138,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             case CLASS_FRAGMENT_TEACHER:
                 fragmentTransaction.replace(R.id.fl_container_dashboard, new ClassFragment()).commit();
                 break;
-    }
+        }
     }
 
     @Override
@@ -163,5 +164,4 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
     public void closeDialog(String dialogName) {
         //NULL
     }
-
 }

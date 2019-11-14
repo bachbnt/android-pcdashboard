@@ -25,14 +25,14 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_20dp"
             app:cardCornerRadius="60dp"
             app:cardElevation="@dimen/space_10dp">
+
             <ImageView
                 android:id="@+id/iv_avatar_info"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -88,7 +88,6 @@
             android:id="@+id/btn_update_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_10dp"
             style="@style/button_login"
             android:layout_marginTop="@dimen/space_10dp"
             android:text="@string/update_info" />

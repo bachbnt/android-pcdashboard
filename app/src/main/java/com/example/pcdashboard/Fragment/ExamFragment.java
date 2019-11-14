@@ -80,6 +80,7 @@ public class ExamFragment extends Fragment implements View.OnClickListener, IExa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_exam:
+                SharedPreferencesUtils.clearNotificationTitle(getContext());
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;

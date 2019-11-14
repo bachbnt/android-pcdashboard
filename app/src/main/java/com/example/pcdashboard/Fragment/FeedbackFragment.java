@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.pcdashboard.BuildConfig;
 import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.R;
@@ -23,6 +25,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.TAB_ACCOUNT;
 public class FeedbackFragment extends Fragment implements View.OnClickListener {
     private ScreenManager screenManager;
     private ImageButton ibBack;
+    private TextView tvVersion;
 
 
     public FeedbackFragment() {
@@ -40,6 +43,8 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     }
     private void initialize(View view){
         screenManager=ScreenManager.getInstance();
+        tvVersion=view.findViewById(R.id.tv_version_feedback);
+        tvVersion.setText("Phiên bản "+BuildConfig.VERSION_NAME);
         ibBack=view.findViewById(R.id.ib_back_feedback);
         ibBack.setOnClickListener(this);
     }

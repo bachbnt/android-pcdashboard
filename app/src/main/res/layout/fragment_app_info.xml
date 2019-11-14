@@ -20,10 +20,33 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back_cold_32dp" />
     </RelativeLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/rl_back_app_info"
-            android:src="@drawable/info_app"/>
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@id/rl_back_app_info">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
+               <ImageView
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:src="@drawable/info_app_top"/>
+               <TextView
+                   android:id="@+id/tv_version_app_info"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:paddingBottom="@dimen/space_10dp"
+                   android:textSize="@dimen/font_size_20sp"
+                   android:textColor="@android:color/white"
+                   android:textStyle="bold" />
+
+               <ImageView
+                   android:layout_width="match_parent"
+                   android:layout_height="400dp"
+                   android:src="@drawable/infor_app_bottom" />
+           </LinearLayout>
+       </ScrollView>
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.pcdashboard.Fragment;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.example.pcdashboard.Manager.ZoomOutPageTransformer;
 import com.example.pcdashboard.R;
 import com.google.android.material.tabs.TabLayout;
 
+import static com.example.pcdashboard.Manager.IScreenManager.EXAM_FRAGMENT;
 import static com.example.pcdashboard.Manager.IScreenManager.WEB_FRAGMENT;
 
 /**
@@ -45,6 +48,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onResume() {
         viewPager.setCurrentItem(SharedPreferencesUtils.loadTabId(getContext()));
+        Log.i("tag","openScreenFromNotifications "+SharedPreferencesUtils.loadTabId(getContext()));
+        if(SharedPreferencesUtils.loadNotificationTitle(getContext())!=null){
+            openScreenFromNotifications();
+        }
         super.onResume();
     }
 
@@ -93,6 +100,21 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()){
             case R.id.iv_appname_dashboard:
                 screenManager.openFeatureScreen(WEB_FRAGMENT);
+                break;
+        }
+    }
+    private void openScreenFromNotifications() {
+        switch (SharedPreferencesUtils.loadNotificationTitle(getContext())) {
+            case "Lớp học":
+                viewPager.setCurrentItem(1);
+                break;
+            case "Lịch thi":
+                viewPager.setCurrentItem(3);
+                screenManager.openFeatureScreen(EXAM_FRAGMENT);
+                break;
+            case "Điểm thi":
+                viewPager.setCurrentItem(3);
+                screenManager.openFeatureScreen(EXAM_FRAGMENT);
                 break;
         }
     }
