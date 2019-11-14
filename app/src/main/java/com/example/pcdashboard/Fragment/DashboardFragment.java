@@ -46,13 +46,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         viewPager.setCurrentItem(SharedPreferencesUtils.loadTabId(getContext()));
-        Log.i("tag","openScreenFromNotifications "+SharedPreferencesUtils.loadTabId(getContext()));
-        if(SharedPreferencesUtils.loadNotificationTitle(getContext())!=null){
+        if(SharedPreferencesUtils.loadNotificationTitle(getContext())!=null)
             openScreenFromNotifications();
-        }
-        super.onResume();
+        super.onStart();
     }
 
     @Override

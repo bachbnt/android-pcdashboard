@@ -1,8 +1,13 @@
 package com.example.pcdashboard.Manager;
 
+import android.app.ActivityManager;
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 
 import com.example.pcdashboard.Model.User;
+
+import java.util.List;
 
 public class ScreenManager {
     private static ScreenManager screenManager;

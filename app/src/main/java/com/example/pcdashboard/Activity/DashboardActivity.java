@@ -3,6 +3,7 @@ package com.example.pcdashboard.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -34,13 +35,14 @@ import com.example.pcdashboard.Manager.ScreenManager;
 import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.User;
 import com.example.pcdashboard.R;
+import com.example.pcdashboard.Services.WebService;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class DashboardActivity extends AppCompatActivity implements IScreenManager {
     private ScreenManager screenManager;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
+    private WebService webService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,22 @@ public class DashboardActivity extends AppCompatActivity implements IScreenManag
             SharedPreferencesUtils.saveNotificationTitle(this,getIntent().getExtras().getString("title", null));
         screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
         EasyPermissions.requestPermissions(this, "Access for storage", 101, galleryPermissions);
+        webService=WebService.getInstance(this);
+        webService.sendFCMToken("");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("tag", "onStart");
+        webService.sendFCMToken("");
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i("tag", "onStop");
+        webService.sendFCMToken(SharedPreferencesUtils.loadFCMToken(this));
+        super.onStop();
     }
 
     @Override
