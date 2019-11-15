@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
@@ -81,6 +83,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
         recyclerView = view.findViewById(R.id.recycler_view_schedule);
         recyclerView.setAdapter(scheduleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_left_to_right);
+        recyclerView.setLayoutAnimation(animation);
         ibBack.setOnClickListener(this);
         ibReload.setOnClickListener(this);
         ibSave.setOnClickListener(this);
@@ -110,6 +114,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
         this.schedules = schedules;
         scheduleAdapter.update(schedules);
         scheduleAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -80,6 +82,8 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
         recyclerView.setAdapter(departmentAdapter);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_fall_down);
+        recyclerView.setLayoutAnimation(animation);
         swipeView.setColorSchemeColors(getActivity().getResources().getColor(R.color.colorCold),getActivity().getResources().getColor(R.color.colorHot),getActivity().getResources().getColor(R.color.colorCold));
 
         recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
@@ -95,6 +99,7 @@ public class DepartmentFragment extends Fragment implements IDeparmentView, Swip
     public void onSuccess(ArrayList<DepartmentPost> departmentPosts) {
         departmentAdapter.update(departmentPosts);
         departmentAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
 

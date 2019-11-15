@@ -7,10 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageButton;
 
 import com.example.pcdashboard.Adapter.UserAdapter;
@@ -69,6 +70,8 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
         userAdapter=new UserAdapter(getContext(),new ArrayList<User>(),this);
         recyclerView.setAdapter(userAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_fall_down);
+        recyclerView.setLayoutAnimation(animation);
         ibBack.setOnClickListener(this);
     }
 
@@ -76,6 +79,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     public void onSuccess(ArrayList<User> users) {
         userAdapter.update(users);
         userAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override

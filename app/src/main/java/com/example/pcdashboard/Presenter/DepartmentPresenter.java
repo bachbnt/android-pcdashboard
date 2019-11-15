@@ -33,6 +33,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
             super.onPostExecute(departmentPosts);
             if (departmentPosts != null) {
                 onResponse(departmentPosts);
+                Log.i("tag", "departmentPosts "+departmentPosts.size());
             }
             onRequestServer(10);
         }
@@ -76,7 +77,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
     @Override
     public void onResponse(ArrayList<DepartmentPost> departmentPosts) {
         if(view!=null)
-        view.onSuccess(departmentPosts);
+            view.onSuccess(departmentPosts);
     }
 
     @Override

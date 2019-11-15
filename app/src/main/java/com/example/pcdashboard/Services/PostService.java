@@ -1,6 +1,7 @@
 package com.example.pcdashboard.Services;
 
 import android.content.Context;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.example.pcdashboard.Manager.DatabaseHelper;
@@ -126,9 +127,13 @@ public class PostService {
                 ArrayList<DepartmentPost> departmentPosts = response.body();
                 if (departmentListener != null)
                     if (departmentPosts != null) {
+                        databaseHelper.deleteDepartmentPosts();
                         if (departmentPosts.size() < 10) {
-                            databaseHelper.deleteDepartmentPosts();
                             for (int i = 0; i < departmentPosts.size(); i++)
+                                databaseHelper.insertDepartmentPost(departmentPosts.get(i));
+                            Log.i("tag", "departmentPosts insert");
+                        }else {
+                            for (int i = departmentPosts.size()-10; i < departmentPosts.size(); i++)
                                 databaseHelper.insertDepartmentPost(departmentPosts.get(i));
                         }
                         departmentListener.onSuccess(departmentPosts);
@@ -169,6 +174,20 @@ public class PostService {
                             } else {
                                 databaseHelper.deleteClassPosts();
                                 for (int i = 0; i < classPosts.size(); i++)
+                                    databaseHelper.insertClassPost(classPosts.get(i));
+                            }
+                        }else {
+                            if (SharedPreferencesUtils.loadClassId(context).equals("3Y")) {
+                                databaseHelper.deleteYearClassPosts(3);
+                                for (int i = classPosts.size()-10; i < classPosts.size(); i++)
+                                    databaseHelper.insertYearClassPost(classPosts.get(i), 3);
+                            } else if (SharedPreferencesUtils.loadClassId(context).equals("4Y")) {
+                                databaseHelper.deleteYearClassPosts(4);
+                                for (int i = classPosts.size()-10; i < classPosts.size(); i++)
+                                    databaseHelper.insertYearClassPost(classPosts.get(i), 4);
+                            } else {
+                                databaseHelper.deleteClassPosts();
+                                for (int i = classPosts.size()-10; i < classPosts.size(); i++)
                                     databaseHelper.insertClassPost(classPosts.get(i));
                             }
                         }

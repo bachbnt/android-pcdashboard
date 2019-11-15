@@ -68,7 +68,8 @@
             android:id="@+id/recycler_view_class"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhiteSmoke" />
+            android:background="@color/colorWhiteSmoke"
+            android:layoutAnimation="@anim/layout_fall_down"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

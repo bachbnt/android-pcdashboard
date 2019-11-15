@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -108,6 +109,8 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         recyclerView.setAdapter(classAdapter);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_fall_down);
+        recyclerView.setLayoutAnimation(animation);
         tvInput.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
         ibBack.setOnClickListener(this);
@@ -160,6 +163,7 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onSuccess(ArrayList<ClassPost> classPosts) {
         classAdapter.update(classPosts);
         classAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
@@ -72,6 +74,8 @@ public class ExamFragment extends Fragment implements View.OnClickListener, IExa
         recyclerView = view.findViewById(R.id.recycler_view_exam);
         recyclerView.setAdapter(examAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_right_to_left);
+        recyclerView.setLayoutAnimation(animation);
         ibBack = view.findViewById(R.id.ib_back_exam);
         ibBack.setOnClickListener(this);
     }
@@ -91,6 +95,7 @@ public class ExamFragment extends Fragment implements View.OnClickListener, IExa
     public void onSuccess(ArrayList<Exam> exams) {
         examAdapter.update(exams);
         examAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override
