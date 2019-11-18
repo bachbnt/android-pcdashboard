@@ -70,18 +70,20 @@ public class StudyService {
                 final ArrayList<Schedule> schedules = response.body();
                 if (scheduleListener != null)
                     if (schedules != null) {
-                        databaseHelper.deleteSchedules();
-                        for (Schedule schedule : schedules)
-                            if (schedule.getSubjects() != null)
-                                databaseHelper.insertSchedule(schedule);
+                        if (SharedPreferencesUtils.loadFirstRequestSchedule(context)) {
+                            databaseHelper.deleteSchedules();
+                            for (Schedule schedule : schedules)
+                                if (schedule.getSubjects() != null)
+                                    databaseHelper.insertSchedule(schedule);
+                        }
                         scheduleListener.onSuccess(schedules);
                     } else scheduleListener.onFailure();
             }
 
             @Override
             public void onFailure(Call<ArrayList<Schedule>> call, Throwable t) {
-                if(scheduleListener!=null)
-                scheduleListener.onFailure();
+                if (scheduleListener != null)
+                    scheduleListener.onFailure();
             }
         });
     }
@@ -89,24 +91,24 @@ public class StudyService {
     public void getExams() {
         String token = SharedPreferencesUtils.loadToken(context).getTokenType() + " " + SharedPreferencesUtils.loadToken(context).getAccessToken();
         Call<ArrayList<Exam>> call = iStudyService.getExam(token);
-            call.enqueue(new Callback<ArrayList<Exam>>() {
-                @Override
-                public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
-                    final ArrayList<Exam> exams = response.body();
-                    if(examListener!=null)
+        call.enqueue(new Callback<ArrayList<Exam>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Exam>> call, Response<ArrayList<Exam>> response) {
+                final ArrayList<Exam> exams = response.body();
+                if (examListener != null)
                     if (exams != null) {
                         databaseHelper.deleteExams();
                         for (Exam exam : exams)
                             databaseHelper.insertExam(exam);
                         examListener.onSuccess(exams);
                     } else examListener.onFailure();
-                }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
-                    if(examListener!=null)
+            @Override
+            public void onFailure(Call<ArrayList<Exam>> call, Throwable t) {
+                if (examListener != null)
                     examListener.onFailure();
-                }
-            });
+            }
+        });
     }
 }
