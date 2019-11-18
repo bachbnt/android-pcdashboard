@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.pcdashboard.Adapter.UserAdapter;
 import com.example.pcdashboard.Manager.CustomToast;
@@ -38,6 +39,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     private UserAdapter userAdapter;
     private RecyclerView recyclerView;
     private ImageButton ibBack;
+    private TextView tvTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +75,21 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_fall_down);
         recyclerView.setLayoutAnimation(animation);
         ibBack.setOnClickListener(this);
+        tvTitle=view.findViewById(R.id.tv_title_user);
+        switch (SharedPreferencesUtils.loadClassId(getContext())){
+            case "3Y":
+                tvTitle.setText("Danh sách năm 3");
+                break;
+            case "4Y":
+                tvTitle.setText("Danh sách năm 4");
+                break;
+            case "GV":
+                tvTitle.setText("Danh sách giảng viên");
+                break;
+            default:
+                tvTitle.setText("Danh sách lớp");
+                break;
+        }
     }
 
     @Override

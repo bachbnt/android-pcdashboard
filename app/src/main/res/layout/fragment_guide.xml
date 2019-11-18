@@ -18,6 +18,7 @@
             android:layout_margin="@dimen/space_10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back_cold_32dp" />
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -20,8 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Chỉnh sửa bình luận"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:padding="@dimen/font_size_10sp"
-            android:textSize="@dimen/font_size_16sp"/>
+            android:textSize="@dimen/font_size_20sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

@@ -99,7 +99,7 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
         tvLogout = view.findViewById(R.id.tv_logout_account);
         if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")) {
             tvStudy.setText("Giảng dạy");
-            tvExam.setText("Lịch dạy");
+            tvExam.setVisibility(View.GONE);
         }
         rlInfo.setOnClickListener(this);
         tvStudy.setOnClickListener(this);

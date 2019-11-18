@@ -18,6 +18,15 @@
             android:layout_margin="@dimen/space_10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back_cold_32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Trò chuyện"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_20sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
