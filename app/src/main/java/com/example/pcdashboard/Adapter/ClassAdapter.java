@@ -57,10 +57,10 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
         holder.tvTime.setText(classPost.getTime());
         holder.tvContent.setText(classPost.getContent());
         Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
-        if(classPost.getImage()!=null){
+        if (classPost.getImage() != null) {
             holder.ivImage.setVisibility(View.VISIBLE);
-            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);}
-        else holder.ivImage.setVisibility(View.GONE);
+            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
+        } else holder.ivImage.setVisibility(View.GONE);
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,21 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                     listener.onDeleteClick(classPost);
                 }
             });
-        }else if(SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")||SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")){
+        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")&&classPost.getUserRole()!=null) {
+            if (classPost.getUserRole().equals("ROLE_TEACHER")) {
+                holder.ibEdit.setVisibility(View.GONE);
+                holder.ibDelete.setVisibility(View.GONE);
+            } else {
+                holder.ibEdit.setVisibility(View.GONE);
+                holder.ibDelete.setVisibility(View.VISIBLE);
+                holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onDeleteClick(classPost);
+                    }
+                });
+            }
+        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")) {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.VISIBLE);
             holder.ibDelete.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +105,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                     listener.onDeleteClick(classPost);
                 }
             });
-        }
-        else {
+        } else {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.GONE);
         }

@@ -201,7 +201,7 @@ public class SharedPreferencesUtils {
         String postId=preferences.getString("postId",null);
         String content=preferences.getString("content",null);
         String image=preferences.getString("image",null);
-        ClassPost classPost=new ClassPost(postId,null,content,image,null,null,null);
+        ClassPost classPost=new ClassPost(postId,null,content,image,null,null,null,null);
         return classPost;
     }
 

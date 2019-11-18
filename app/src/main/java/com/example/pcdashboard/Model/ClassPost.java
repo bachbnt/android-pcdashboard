@@ -8,11 +8,12 @@ public class ClassPost {
     private String userId;
     private String userName;
     private String userAvatar;
+    private String userRole;
 
     public ClassPost() {
     }
 
-    public ClassPost(String id, String time, String content, String image, String userId, String userName, String userAvatar) {
+    public ClassPost(String id, String time, String content, String image, String userId, String userName, String userAvatar,String userRole) {
         this.id = id;
         this.time = time;
         this.content = content;
@@ -20,6 +21,7 @@ public class ClassPost {
         this.userId = userId;
         this.userName = userName;
         this.userAvatar = userAvatar;
+        this.userRole=userRole;
     }
 
     public String getId() {
@@ -76,5 +78,13 @@ public class ClassPost {
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }
