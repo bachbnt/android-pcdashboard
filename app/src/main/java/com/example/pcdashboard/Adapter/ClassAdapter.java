@@ -67,7 +67,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                 listener.onCommentClick(classPost);
             }
         });
-        if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())||SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")) {
+        if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
             holder.ibEdit.setVisibility(View.VISIBLE);
             holder.ibDelete.setVisibility(View.VISIBLE);
             holder.ibEdit.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,17 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
                     listener.onDeleteClick(classPost);
                 }
             });
-        }else {
+        }else if(SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")||SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")){
+            holder.ibEdit.setVisibility(View.GONE);
+            holder.ibDelete.setVisibility(View.VISIBLE);
+            holder.ibDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteClick(classPost);
+                }
+            });
+        }
+        else {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.GONE);
         }

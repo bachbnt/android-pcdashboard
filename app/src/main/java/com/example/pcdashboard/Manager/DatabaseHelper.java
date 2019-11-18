@@ -15,7 +15,6 @@ import com.example.pcdashboard.Model.Schedule;
 import com.example.pcdashboard.Model.Subject;
 import com.example.pcdashboard.Model.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -389,7 +388,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (Subject subject : schedule.getSubjects()) {
             values.put(COLUMN_NAME, subject.getName());
             values.put(COLUMN_TIME, subject.getTime());
-            values.put(COLUMN_TEACHER, subject.getTeacher());
+            values.put(COLUMN_TEACHER, subject.getTeacherOrClass());
             values.put(COLUMN_DAY, subject.getDay());
             db.insert(TABLE_SCHEDULE, null, values);
         }
@@ -405,7 +404,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Subject subject = new Subject();
             subject.setName(cursor.getString(0));
             subject.setTime(cursor.getString(1));
-            subject.setTeacher(cursor.getString(2));
+            subject.setTeacherOrClass(cursor.getString(2));
             subject.setDay(cursor.getString(3));
             allSubjects.add(subject);
         }

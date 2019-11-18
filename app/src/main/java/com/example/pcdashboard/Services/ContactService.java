@@ -118,6 +118,7 @@ public class ContactService {
                                 databaseHelper.insertUserStudent(user);
                         }
                         userListener.onSuccess(users);
+                        SharedPreferencesUtils.saveClassId(context, "");
                     } else userListener.onFailure();
             }
 

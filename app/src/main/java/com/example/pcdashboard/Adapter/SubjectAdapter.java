@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pcdashboard.Manager.CustomToast;
+import com.example.pcdashboard.Manager.SharedPreferencesUtils;
 import com.example.pcdashboard.Model.Subject;
 import com.example.pcdashboard.R;
 
@@ -47,10 +47,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         final Subject subject = subjects.get(position);
         holder.etName.setText(subject.getName());
         holder.etTime.setText(subject.getTime());
-        holder.etTeacher.setText(subject.getTeacher());
+        holder.etTeacher.setText(subject.getTeacherOrClass());
         holder.etName.setInputType(InputType.TYPE_NULL);
         holder.etTime.setInputType(InputType.TYPE_NULL);
         holder.etTeacher.setInputType(InputType.TYPE_NULL);
+        if(SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER"))
+            holder.etTeacher.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_class_hot_24dp, 0, 0, 0);
         holder.ibEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

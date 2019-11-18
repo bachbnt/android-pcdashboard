@@ -6,16 +6,16 @@ public class Subject {
     @SerializedName("subject")
     private String name;
     private String time;
-    private String teacher;
+    private String teacherOrClass;
     private String day;
 
     public Subject() {
     }
 
-    public Subject(String name, String time, String teacher,String day) {
+    public Subject(String name, String time, String teacherOrClass, String day) {
         this.name = name;
         this.time = time;
-        this.teacher = teacher;
+        this.teacherOrClass = teacherOrClass;
         this.day=day;
     }
 
@@ -35,12 +35,12 @@ public class Subject {
         this.time = time;
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getTeacherOrClass() {
+        return teacherOrClass;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setTeacherOrClass(String teacherOrClass) {
+        this.teacherOrClass = teacherOrClass;
     }
 
     public String getDay() {

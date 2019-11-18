@@ -135,7 +135,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
             if (schedule.getDay().equals(subject.getDay())) {
                 schedule.getSubjects().get(position).setName(name);
                 schedule.getSubjects().get(position).setTime(time);
-                schedule.getSubjects().get(position).setTeacher(teacher);
+                schedule.getSubjects().get(position).setTeacherOrClass(teacher);
             }
         }
         scheduleAdapter.update(schedules);
