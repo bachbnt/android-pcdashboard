@@ -61,27 +61,12 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
             holder.ivImage.setVisibility(View.VISIBLE);
             Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
         } else holder.ivImage.setVisibility(View.GONE);
-        holder.tvComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onCommentClick(classPost);
-            }
-        });
+        holder.tvComment.setOnClickListener(v -> listener.onCommentClick(classPost));
         if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
             holder.ibEdit.setVisibility(View.VISIBLE);
             holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onEditClick(classPost);
-                }
-            });
-            holder.ibDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onDeleteClick(classPost);
-                }
-            });
+            holder.ibEdit.setOnClickListener(v -> listener.onEditClick(classPost));
+            holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
         } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")&&classPost.getUserRole()!=null) {
             if (classPost.getUserRole().equals("ROLE_TEACHER")) {
                 holder.ibEdit.setVisibility(View.GONE);
@@ -89,23 +74,14 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
             } else {
                 holder.ibEdit.setVisibility(View.GONE);
                 holder.ibDelete.setVisibility(View.VISIBLE);
-                holder.ibDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onDeleteClick(classPost);
-                    }
-                });
+                holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
             }
-        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")) {
+        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")&&!classPost.getUserRole().equals("ROLE_TEACHER")) {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onDeleteClick(classPost);
-                }
-            });
-        } else {
+            holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
+        }
+        else {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.GONE);
         }

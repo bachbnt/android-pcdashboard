@@ -111,7 +111,7 @@ public class InfoDialog extends SwipeAwayDialogFragment implements View.OnClickL
             Intent emailIntent = new Intent((Intent.ACTION_SEND));
             emailIntent.setType("plain/text");
             emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{tvEmail.getText().toString()});
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P&C Dashboard");
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Được gửi từ P&C Dashboard");
             if (emailIntent.resolveActivity(getActivity().getPackageManager()) != null)
                 startActivity(Intent.createChooser(emailIntent, SharedPreferencesUtils.loadSelf(getContext()).getName() + " gửi email bằng?"));
         }
