@@ -107,12 +107,10 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
         switch (v.getId()){
             case R.id.tv_post_post:
                 tvPost.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
-                if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
+                if (EasyPermissions.hasPermissions(getContext(), galleryPermissions))
                     presenter.onCheck(etInput.getText().toString().trim(),imagePath);
-                    tvPost.setEnabled(false);
-                } else {
+                 else
                     EasyPermissions.requestPermissions(this, "Hãy cho phép truy cập bộ nhớ thiết bị", 101, galleryPermissions);
-                }
                 break;
             case R.id.ib_back_post:
                 ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
