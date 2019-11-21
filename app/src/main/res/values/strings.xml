@@ -7,7 +7,6 @@
     <string name="phone_test">0123456789</string>
     <string name="email_test">admin_pcdasboard@gmail.com</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="account">Tài khoản</string>
     <string name="password">Mật khẩu</string>
     <string name="login">Đăng nhập</string>
@@ -19,7 +18,6 @@
     <string name="setting">Cài đặt</string>
     <string name="help">Hỗ trợ</string>
     <string name="schedule">Thời khóa biểu</string>
-    <string name="score">Điểm thi</string>
     <string name="exam_schedule">Lịch thi</string>
     <string name="update_info">Cập nhật thông tin</string>
     <string name="change_pasword">Thay đổi mật khẩu</string>
@@ -37,7 +35,6 @@
     <string name="post">Đăng</string>
     <string name="whats_on_your_mind">Bạn đang nghĩ gì?</string>
     <string name="edit">Sửa</string>
-    <string name="delete">Xóa</string>
     <string name="cancel">Hủy</string>
     <string name="developer">Nhà phát triển</string>
 </resources>
