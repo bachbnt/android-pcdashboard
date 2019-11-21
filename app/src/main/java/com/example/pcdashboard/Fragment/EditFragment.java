@@ -108,7 +108,9 @@ public class EditFragment extends Fragment implements View.OnClickListener, IEdi
     public void onInit(User self, ClassPost classPost) {
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(50, 50).into(ivAvatar);
         tvName.setText(self.getName());
-        tvClass.setText("Thành viên của " + self.getClassId());
+        if(SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+            tvClass.setText("Giảng viên");
+        else tvClass.setText("Thành viên của " + self.getClassId());
         if (classPost.getImage() != null)
             Glide.with(getContext()).load(Uri.parse(classPost.getImage())).into(ivImage);
         etInput.setText(classPost.getContent());

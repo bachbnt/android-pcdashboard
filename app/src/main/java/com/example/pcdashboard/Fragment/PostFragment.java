@@ -131,6 +131,9 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     public void onInit(User self) {
         Glide.with(getContext()).load(Uri.parse(self.getAvatar())).centerCrop().override(50,50).into(ivAvatar);
         tvName.setText(self.getName());
+        if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
+            tvClass.setText("Giảng viên");
+        else
         tvClass.setText("Thành viên của "+self.getClassId());
     }
 

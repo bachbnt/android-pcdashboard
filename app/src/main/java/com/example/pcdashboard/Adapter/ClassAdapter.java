@@ -2,6 +2,7 @@ package com.example.pcdashboard.Adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,53 +54,57 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ClassPost classPost = classPosts.get(position);
-        holder.tvName.setText(classPost.getUserName());
-        holder.tvTime.setText(classPost.getTime());
-        holder.tvContent.setText(classPost.getContent());
-        Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
-        if (classPost.getImage() != null) {
-            holder.ivImage.setVisibility(View.VISIBLE);
-            Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
-        } else holder.ivImage.setVisibility(View.GONE);
-        holder.tvComment.setOnClickListener(v -> {
-            holder.tvComment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-            listener.onCommentClick(classPost);
-        });
-        if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
-            holder.ibEdit.setVisibility(View.VISIBLE);
-            holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibEdit.setOnClickListener(v -> {
-                holder.ibEdit.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-                listener.onEditClick(classPost);
+        try {
+            final ClassPost classPost = classPosts.get(position);
+            holder.tvName.setText(classPost.getUserName());
+            holder.tvTime.setText(classPost.getTime());
+            holder.tvContent.setText(classPost.getContent());
+            Glide.with(context).load(Uri.parse(classPost.getUserAvatar())).centerCrop().override(40, 40).into(holder.ivAvatar);
+            if (classPost.getImage() != null) {
+                holder.ivImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
+            } else holder.ivImage.setVisibility(View.GONE);
+            holder.tvComment.setOnClickListener(v -> {
+                holder.tvComment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                listener.onCommentClick(classPost);
             });
-            holder.ibDelete.setOnClickListener(v -> {
-                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-                listener.onDeleteClick(classPost);
-            });
-        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR") && classPost.getUserRole() != null) {
-            if (classPost.getUserRole().equals("ROLE_TEACHER")) {
-                holder.ibEdit.setVisibility(View.GONE);
-                holder.ibDelete.setVisibility(View.GONE);
-            } else {
+            if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
+                holder.ibEdit.setVisibility(View.VISIBLE);
+                holder.ibDelete.setVisibility(View.VISIBLE);
+                holder.ibEdit.setOnClickListener(v -> {
+                    holder.ibEdit.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                    listener.onEditClick(classPost);
+                });
+                holder.ibDelete.setOnClickListener(v -> {
+                    holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                    listener.onDeleteClick(classPost);
+                });
+            } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR") && classPost.getUserRole() != null) {
+                if (classPost.getUserRole().equals("ROLE_TEACHER")) {
+                    holder.ibEdit.setVisibility(View.GONE);
+                    holder.ibDelete.setVisibility(View.GONE);
+                } else {
+                    holder.ibEdit.setVisibility(View.GONE);
+                    holder.ibDelete.setVisibility(View.VISIBLE);
+                    holder.ibDelete.setOnClickListener(v -> {
+                                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                                listener.onDeleteClick(classPost);
+                            }
+                    );
+                }
+            } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER") && !classPost.getUserRole().equals("ROLE_TEACHER")) {
                 holder.ibEdit.setVisibility(View.GONE);
                 holder.ibDelete.setVisibility(View.VISIBLE);
                 holder.ibDelete.setOnClickListener(v -> {
-                            holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-                            listener.onDeleteClick(classPost);
-                        }
-                );
+                    holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                    listener.onDeleteClick(classPost);
+                });
+            } else {
+                holder.ibEdit.setVisibility(View.GONE);
+                holder.ibDelete.setVisibility(View.GONE);
             }
-        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER") && !classPost.getUserRole().equals("ROLE_TEACHER")) {
-            holder.ibEdit.setVisibility(View.GONE);
-            holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibDelete.setOnClickListener(v -> {
-                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-                listener.onDeleteClick(classPost);
-            });
-        } else {
-            holder.ibEdit.setVisibility(View.GONE);
-            holder.ibDelete.setVisibility(View.GONE);
+        }catch (NullPointerException e){
+            Log.i("tag", "NULL ClassAdapter "+e.toString());
         }
     }
 
