@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -115,9 +116,11 @@ public class InfoFragment extends Fragment implements IUpdateInfoView,View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_update_info:
+                btnUpdate.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etEmail.getText().toString(),etPhone.getText().toString());
                 break;
             case R.id.ib_back_info:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;

@@ -94,14 +94,17 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_schedule:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_reload_schedule:
+                ibReload.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onRequestServer();
                 CustomToast.makeText(getContext(), "Đã tải", CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
                 break;
             case R.id.ib_save_schedule:
+                ibSave.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCustomDatabase(schedules);
                 CustomToast.makeText(getContext(), "Đã lưu", CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
                 presenter.onRequestDatabase();

@@ -5,6 +5,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -56,6 +57,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         holder.ibEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.ibEdit.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 if (holder.etName.getInputType()==InputType.TYPE_NULL) {
                     holder.etName.setInputType(InputType.TYPE_CLASS_TEXT);
                     holder.etTime.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -77,6 +79,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         holder.ibDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 listener.onDelete(subject);
             }
         });

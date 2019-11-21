@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -84,8 +85,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
 
     private void initialize(View view) {
         screenManager = ScreenManager.getInstance();
-        presenter=new ChatPresenter(getActivity());
-        messageAdapter = new MessageAdapter(getContext(),new ArrayList<ChatMessage>());
+        presenter = new ChatPresenter(getActivity());
+        messageAdapter = new MessageAdapter(getContext(), new ArrayList<ChatMessage>());
         ibBack = view.findViewById(R.id.ib_back_chat);
         recyclerView = view.findViewById(R.id.recycler_view_chat);
         recyclerView.setAdapter(messageAdapter);
@@ -101,14 +102,17 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_chat:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CONTACT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_send_chat:
-                if(!TextUtils.isEmpty(etInput.getText().toString())){
+                ibSend.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+                if (!TextUtils.isEmpty(etInput.getText())) {
                     presenter.sendMessage(etInput.getText().toString().trim());
-                etInput.setText("");
-                }
+                    etInput.setText("");
+                } else
+                    CustomToast.makeText(getContext(), "Tin nhắn không được trống", CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
                 break;
         }
     }
@@ -117,7 +121,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, ICha
     public void onSuccess(ArrayList<ChatMessage> chatMessages) {
         messageAdapter.update(chatMessages);
         messageAdapter.notifyDataSetChanged();
-        recyclerView.scrollToPosition(chatMessages.size()-1);
+        recyclerView.scrollToPosition(chatMessages.size() - 1);
 
     }
 

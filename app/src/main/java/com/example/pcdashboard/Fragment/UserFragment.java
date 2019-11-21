@@ -113,6 +113,7 @@ public class UserFragment extends Fragment implements IUserView,UserAdapter.OnIt
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_user:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CONTACT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;

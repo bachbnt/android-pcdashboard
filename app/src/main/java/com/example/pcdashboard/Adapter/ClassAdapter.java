@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,27 +62,42 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
             holder.ivImage.setVisibility(View.VISIBLE);
             Glide.with(context).load(Uri.parse(classPost.getImage())).into(holder.ivImage);
         } else holder.ivImage.setVisibility(View.GONE);
-        holder.tvComment.setOnClickListener(v -> listener.onCommentClick(classPost));
+        holder.tvComment.setOnClickListener(v -> {
+            holder.tvComment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+            listener.onCommentClick(classPost);
+        });
         if (classPost.getUserId().equals(SharedPreferencesUtils.loadSelf(context).getId())) {
             holder.ibEdit.setVisibility(View.VISIBLE);
             holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibEdit.setOnClickListener(v -> listener.onEditClick(classPost));
-            holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
-        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR")&&classPost.getUserRole()!=null) {
+            holder.ibEdit.setOnClickListener(v -> {
+                holder.ibEdit.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                listener.onEditClick(classPost);
+            });
+            holder.ibDelete.setOnClickListener(v -> {
+                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                listener.onDeleteClick(classPost);
+            });
+        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_MONITOR") && classPost.getUserRole() != null) {
             if (classPost.getUserRole().equals("ROLE_TEACHER")) {
                 holder.ibEdit.setVisibility(View.GONE);
                 holder.ibDelete.setVisibility(View.GONE);
             } else {
                 holder.ibEdit.setVisibility(View.GONE);
                 holder.ibDelete.setVisibility(View.VISIBLE);
-                holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
+                holder.ibDelete.setOnClickListener(v -> {
+                            holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                            listener.onDeleteClick(classPost);
+                        }
+                );
             }
-        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER")&&!classPost.getUserRole().equals("ROLE_TEACHER")) {
+        } else if (SharedPreferencesUtils.loadSelf(context).getRole().equals("ROLE_TEACHER") && !classPost.getUserRole().equals("ROLE_TEACHER")) {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.VISIBLE);
-            holder.ibDelete.setOnClickListener(v -> listener.onDeleteClick(classPost));
-        }
-        else {
+            holder.ibDelete.setOnClickListener(v -> {
+                holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+                listener.onDeleteClick(classPost);
+            });
+        } else {
             holder.ibEdit.setVisibility(View.GONE);
             holder.ibDelete.setVisibility(View.GONE);
         }

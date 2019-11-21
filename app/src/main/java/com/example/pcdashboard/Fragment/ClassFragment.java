@@ -99,13 +99,13 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
         cvAvatar=view.findViewById(R.id.cv_avatar_class);
         ivAvatar=view.findViewById(R.id.iv_avatar_class);
         ibBack=view.findViewById(R.id.ib_back_class);
+        tvInput=view.findViewById(R.id.tv_input_class);
+        rlInput=view.findViewById(R.id.rl_input_class);
         if(SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER"))
         {
             cvAvatar.setVisibility(View.GONE);
             ibBack.setVisibility(View.VISIBLE);
         }
-        tvInput=view.findViewById(R.id.tv_input_class);
-        rlInput=view.findViewById(R.id.rl_input_class);
         classAdapter = new ClassAdapter(getContext(),new ArrayList<ClassPost>(),this);
         recyclerView.setAdapter(classAdapter);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
@@ -187,12 +187,15 @@ public class ClassFragment extends Fragment implements ClassAdapter.OnItemClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_input_class:
+                tvInput.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(POST_FRAGMENT);
                 break;
             case R.id.iv_avatar_class:
+                ivAvatar.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openDialog(INFO_DIALOG, SharedPreferencesUtils.loadSelf(getContext()));
                 break;
             case R.id.ib_back_class:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;

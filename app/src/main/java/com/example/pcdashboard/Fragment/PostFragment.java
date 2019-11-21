@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -105,6 +106,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_post_post:
+                tvPost.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (EasyPermissions.hasPermissions(getContext(), galleryPermissions)) {
                     presenter.onCheck(etInput.getText().toString().trim(),imagePath);
                     tvPost.setEnabled(false);
@@ -113,10 +115,12 @@ public class PostFragment extends Fragment implements View.OnClickListener, IPos
                 }
                 break;
             case R.id.ib_back_post:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_CLASS);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_photo_post:
+                ibPhoto.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 pickFromGallery();
                 break;
 

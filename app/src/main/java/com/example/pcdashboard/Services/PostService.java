@@ -337,7 +337,7 @@ public class PostService {
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (commentListener != null)
+                if (commentListener != null&&response.body()!=null)
                     if (response.body())
                         commentListener.onSuccess();
                     else commentListener.onFailure();

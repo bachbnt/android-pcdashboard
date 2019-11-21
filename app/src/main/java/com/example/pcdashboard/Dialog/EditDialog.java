@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -115,9 +116,11 @@ public class EditDialog extends DialogFragment implements IEditCommentView, View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_edit_edit_dialog:
+                btnEdit.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etInput.getText().toString().trim());
                 break;
             case R.id.btn_cancel_edit_dialog:
+                btnCancel.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openDialog(COMMENT_DIALOG,null);
                 dismiss();
                 break;

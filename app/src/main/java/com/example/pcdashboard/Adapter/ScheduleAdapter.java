@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -71,6 +72,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         holder.ibAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.ibAdd.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 listener.onAdd(schedule, position);
             }
         });

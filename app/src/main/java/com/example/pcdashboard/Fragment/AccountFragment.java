@@ -173,39 +173,51 @@ public class AccountFragment extends Fragment implements IAccountView, View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_info_account:
+                rlInfo.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 showInfoDialog();
                 break;
             case R.id.tv_study_account:
+                tvStudy.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 selectMenu(STUDY_LAYOUT);
                 break;
             case R.id.tv_help_account:
+                tvHelp.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 selectMenu(HELP_LAYOUT);
                 break;
             case R.id.tv_setting_account:
+                tvSetting.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 selectMenu(SETTING_LAYOUT);
                 break;
             case R.id.tv_schedule_account:
+                tvSchedule.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(SCHEDULE_FRAGMENT);
                 break;
             case R.id.tv_exam_account:
+                tvExam.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(EXAM_FRAGMENT);
                 break;
             case R.id.tv_guide_account:
+                tvGuide.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(GUIDE_FRAGMENT);
                 break;
             case R.id.tv_feedback_account:
+                tvFeedback.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(FEEDBACK_FRAGMENT);
                 break;
             case R.id.tv_developer_account:
+                tvDeveloper.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(DEVELOPER_FRAGMENT);
                 break;
             case R.id.tv_info_account:
+                tvInfo.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(INFO_FRAGMENT);
                 break;
             case R.id.tv_password_account:
+                tvPassword.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openFeatureScreen(PASSWORD_FRAGMENT);
                 break;
             case R.id.tv_logout_account:
+                tvLogout.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.blockNotifications();
                 presenter.changeLoginStatus(false);
                 presenter.changeFirstRequestSchedule();

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,9 +74,11 @@ public class ForgotFragment extends Fragment implements View.OnClickListener, IF
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_get_forgot:
+                btnGetPassword.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etAccount.getText().toString());
                 break;
             case R.id.tv_back_forgot:
+                tvBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openLoginScreen(LOGIN_FRAGMENT);
                 break;
         }

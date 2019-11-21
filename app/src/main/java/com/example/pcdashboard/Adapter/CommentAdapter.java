@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,12 +62,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             holder.ibEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    holder.ibEdit.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                     listener.onEdit(postComment);
                 }
             });
             holder.ibDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    holder.ibDelete.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                     listener.onDelete(postComment);
                 }
             });

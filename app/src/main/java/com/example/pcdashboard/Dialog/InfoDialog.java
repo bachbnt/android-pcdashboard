@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -97,9 +98,11 @@ public class InfoDialog extends SwipeAwayDialogFragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_email_info_dialog:
+                tvEmail.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 sendEmail();
                 break;
             case R.id.tv_phone_info_dialog:
+                tvPhone.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 makeCall();
                 break;
         }

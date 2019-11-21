@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((LocalHolder) holder).tvContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ((LocalHolder) holder).tvContent.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                     if (((LocalHolder) holder).tvTime.getVisibility() == View.GONE) {
                         ((LocalHolder) holder).tvTime.setVisibility(View.VISIBLE);
                         ((LocalHolder) holder).tvTime.setText(message.getTime());
@@ -91,6 +93,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((RemoteHolder) holder).tvContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ((RemoteHolder) holder).tvContent.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                     if (((RemoteHolder) holder).tvTime.getVisibility() == View.GONE) {
                         ((RemoteHolder) holder).tvTime.setVisibility(View.VISIBLE);
                         ((RemoteHolder) holder).tvTime.setText(message.getTime());

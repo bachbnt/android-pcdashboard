@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -59,15 +60,18 @@ public class WebFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_web:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_DEPARTMENT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.ib_left_web:
+                ibLeft.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (webView.canGoBack()) {
                     webView.goBack();
                 }
                 break;
             case R.id.ib_right_web:
+                ibRight.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (webView.canGoForward()) {
                     webView.goForward();
                 }

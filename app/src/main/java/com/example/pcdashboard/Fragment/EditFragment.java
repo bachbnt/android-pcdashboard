@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -92,10 +93,12 @@ public class EditFragment extends Fragment implements View.OnClickListener, IEdi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_edit:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_CLASS);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
             case R.id.tv_edit_edit:
+                tvEdit.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etInput.getText().toString().trim());
                 break;
         }

@@ -4,6 +4,7 @@ package com.example.pcdashboard.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -37,7 +39,7 @@ import static com.example.pcdashboard.Manager.IScreenManager.EDIT_DIALOG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CommentDialog extends DialogFragment implements ICommentView,View.OnClickListener,CommentAdapter.OnItemClickListener, GestureDetector.OnGestureListener {
+public class CommentDialog extends DialogFragment implements ICommentView, View.OnClickListener, CommentAdapter.OnItemClickListener, GestureDetector.OnGestureListener {
     private ScreenManager screenManager;
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
@@ -55,7 +57,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getDialog().getWindow().getAttributes().windowAnimations=R.style.CommentDialog;
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.CommentDialog;
     }
 
     @Override
@@ -90,16 +92,16 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
     }
 
     private void initialize(View view) {
-        screenManager=ScreenManager.getInstance();
-        gestureDetector=new GestureDetector(this);
+        screenManager = ScreenManager.getInstance();
+        gestureDetector = new GestureDetector(this);
         recyclerView = view.findViewById(R.id.recycler_view_comment);
-        ibSend=view.findViewById(R.id.ib_send_comment_dialog);
-        etInput=view.findViewById(R.id.et_input_comment_dialog);
-        flSwipe=view.findViewById(R.id.fl_swipe_comment_dialog);
-        commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(),this);
+        ibSend = view.findViewById(R.id.ib_send_comment_dialog);
+        etInput = view.findViewById(R.id.et_input_comment_dialog);
+        flSwipe = view.findViewById(R.id.fl_swipe_comment_dialog);
+        commentAdapter = new CommentAdapter(getContext(), new ArrayList<PostComment>(), this);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        presenter=new CommentPresenter(getContext());
+        presenter = new CommentPresenter(getContext());
         ibSend.setOnClickListener(this);
         flSwipe.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -123,25 +125,29 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public void onFailure() {
-        CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT,CustomToast.FAILURE).show();
+        CustomToast.makeText(getContext(), "Thất bại\nVui lòng thử lại", CustomToast.LENGTH_SHORT, CustomToast.FAILURE).show();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ib_send_comment_dialog:
-                presenter.onCreate(etInput.getText().toString().trim());
-                etInput.setText("");
+                ibSend.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
+                if (!TextUtils.isEmpty(etInput.getText())) {
+                    presenter.onCreate(etInput.getText().toString().trim());
+                    etInput.setText("");
+                } else
+                    CustomToast.makeText(getContext(), "Bình luận không được trống", CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
                 break;
         }
     }
 
     @Override
     public void onEdit(PostComment postComment) {
-        SharedPreferencesUtils.savePostComment(getContext(),postComment);
-        Log.i("tag","comment commentId "+postComment.getId());
-        Log.i("tag","comment content "+postComment.getContent());
-        screenManager.openDialog(EDIT_DIALOG,null);
+        SharedPreferencesUtils.savePostComment(getContext(), postComment);
+        Log.i("tag", "comment commentId " + postComment.getId());
+        Log.i("tag", "comment content " + postComment.getContent());
+        screenManager.openDialog(EDIT_DIALOG, null);
         dismiss();
     }
 
@@ -167,7 +173,7 @@ public class CommentDialog extends DialogFragment implements ICommentView,View.O
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if(distanceY<-50)
+        if (distanceY < -50)
             dismiss();
         return true;
     }

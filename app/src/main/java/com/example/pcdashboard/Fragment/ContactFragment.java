@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
@@ -60,6 +61,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_one_contact:
+                ivOne.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
                     SharedPreferencesUtils.saveClassId(getContext(),SharedPreferencesUtils.loadSelf(getContext()).getClassId());
                     screenManager.openFeatureScreen(USER_FRAGMENT);
@@ -68,6 +70,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
                     screenManager.openFeatureScreen(CHAT_FRAGMENT);
                 break;
             case R.id.iv_two_contact:
+                ivTwo.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
                     screenManager.openFeatureScreen(USER_FRAGMENT);
                     SharedPreferencesUtils.saveClassId(getContext(),"3Y");
@@ -78,6 +81,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.iv_three_contact:
+                ivThree.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 if (SharedPreferencesUtils.loadSelf(getContext()).getRole().equals("ROLE_TEACHER")){
                     SharedPreferencesUtils.saveClassId(getContext(), "4Y");
                     screenManager.openFeatureScreen(USER_FRAGMENT);

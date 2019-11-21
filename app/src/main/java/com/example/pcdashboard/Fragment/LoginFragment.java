@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -74,9 +75,11 @@ public class LoginFragment extends Fragment implements ILoginView, View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
+                btnLogin.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etAccount.getText().toString(), etPassword.getText().toString());
                 break;
             case R.id.tv_forgot_login:
+                tvForgot.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.openLoginScreen(FORGOT_FRAGMENT);
                 break;
         }

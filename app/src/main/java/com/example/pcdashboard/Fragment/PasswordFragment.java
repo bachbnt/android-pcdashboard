@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,9 +100,11 @@ public class PasswordFragment extends Fragment implements IChangePasswordView, V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_password:
+                btnChange.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 presenter.onCheck(etOld.getText().toString(),etNew.getText().toString(),etRetype.getText().toString());
                 break;
             case R.id.ib_back_password:
+                ibBack.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveTabId(getContext(),TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;

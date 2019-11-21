@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -52,10 +53,12 @@ public class SelectClassFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_third_select:
+                ivThird.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveClassId(getContext(), "3Y");
                 screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 break;
             case R.id.iv_fourth_select:
+                ivFourth.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 SharedPreferencesUtils.saveClassId(getContext(), "4Y");
                 screenManager.openFeatureScreen(CLASS_FRAGMENT_TEACHER);
                 break;

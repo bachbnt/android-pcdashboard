@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -68,6 +69,7 @@ public class EmailDialog extends DialogFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_confirm_email_dialog:
+                btnConfirm.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
                 screenManager.closeDialog(EMAIL_DIALOG);
                 SharedPreferencesUtils.clearEmailForgot(getContext());
                 break;

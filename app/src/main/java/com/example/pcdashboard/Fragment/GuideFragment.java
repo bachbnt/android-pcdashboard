@@ -125,6 +125,7 @@ public class GuideFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ib_back_guide:
+                ibBack.startAnimation(animation);
                 SharedPreferencesUtils.saveTabId(getContext(), TAB_ACCOUNT);
                 screenManager.openFeatureScreen(DASHBOARD_FRAGMENT);
                 break;
