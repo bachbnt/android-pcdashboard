@@ -100,7 +100,8 @@ public class ChatPresenter implements ContactService.ChatListener, IChatPresente
 
     @Override
     public void onResponse(ArrayList<ChatMessage> chatMessages) {
-        view.onSuccess(chatMessages);
+        if(view!=null)
+            view.onSuccess(chatMessages);
     }
 
     @Override
