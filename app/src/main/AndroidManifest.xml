@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <service android:name=".Services.MyFirebaseMessagingService"

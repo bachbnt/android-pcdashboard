@@ -39,7 +39,8 @@ public class NotificationsUtils {
 
     public static void createNotification(Context context, String title, String name, String content, Bitmap avatar, PendingIntent pendingIntent) {
         NotificationCompat.Builder builder;
-
+        //Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+        //                            + "://" + context.getPackageName() + "/raw/sound_class.mp3")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.logo)
