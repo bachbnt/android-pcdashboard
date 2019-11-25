@@ -62,6 +62,7 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 
@@ -78,6 +79,7 @@ public class SchedulePresenter implements StudyService.ScheduleListener,ISchedul
 
     @Override
     public void onResponse(ArrayList<Schedule> schedules) {
+        if(view!=null)
         view.onSuccess(schedules);
     }
 

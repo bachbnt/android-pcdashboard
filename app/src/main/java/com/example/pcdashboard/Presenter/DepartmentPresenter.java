@@ -87,6 +87,7 @@ public class DepartmentPresenter implements IDepartmentPresenter, PostService.De
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 }

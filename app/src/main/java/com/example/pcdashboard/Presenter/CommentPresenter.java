@@ -62,11 +62,13 @@ public class CommentPresenter implements ICommentPresenter,PostService.CommentLi
 
     @Override
     public void onSuccess() {
+        if(view!=null)
         view.onSuccess();
     }
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 }

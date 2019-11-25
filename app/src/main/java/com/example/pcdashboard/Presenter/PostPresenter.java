@@ -55,6 +55,7 @@ public class PostPresenter implements IPostPresenter,PostService.PostListener {
 
     @Override
     public void onResponse() {
+        if(view!=null)
         view.onSuccess();
     }
 
@@ -65,6 +66,7 @@ public class PostPresenter implements IPostPresenter,PostService.PostListener {
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 }

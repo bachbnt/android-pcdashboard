@@ -60,11 +60,13 @@ public class EditPostPostPresenter implements IEditPostPresenter, PostService.Ed
 
     @Override
     public void onSuccess() {
+        if(view!=null)
         view.onSuccess();
     }
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 }

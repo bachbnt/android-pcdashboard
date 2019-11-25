@@ -119,6 +119,7 @@ public class ClassPresenter implements IClassPresenter, PostService.ClassListene
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 

@@ -59,11 +59,13 @@ public class EditCommentPresenter implements PostService.EditCommentListener,IEd
     }
     @Override
     public void onSuccess() {
-        view.onSuccess();
+        if(view!=null)
+            view.onSuccess();
     }
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 

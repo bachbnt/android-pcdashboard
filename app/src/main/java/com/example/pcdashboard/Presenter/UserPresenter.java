@@ -84,6 +84,7 @@ public class UserPresenter implements IUserPresenter, ContactService.UserListene
 
     @Override
     public void onResponse(ArrayList<User> users) {
+        if(view!=null)
         view.onSuccess(users);
     }
 
@@ -94,6 +95,7 @@ public class UserPresenter implements IUserPresenter, ContactService.UserListene
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 }

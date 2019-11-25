@@ -72,6 +72,7 @@ public class ExamPresenter implements IExamPresenter, StudyService.ExamListener 
 
     @Override
     public void onResponse(ArrayList<Exam> exams) {
+        if(view!=null)
         view.onSuccess(exams);
     }
 
@@ -82,6 +83,7 @@ public class ExamPresenter implements IExamPresenter, StudyService.ExamListener 
 
     @Override
     public void onFailure() {
-        view.onFailure();
+        if(view!=null)
+            view.onFailure();
     }
 }

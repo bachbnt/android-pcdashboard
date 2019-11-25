@@ -89,6 +89,7 @@ public class ChatPresenter implements ContactService.ChatListener, IChatPresente
 
     @Override
     public void onFailure() {
+        if(view!=null)
         view.onFailure();
     }
 
